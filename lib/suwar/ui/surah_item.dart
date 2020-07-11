@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 
 const _secondaryTextStyle = TextStyle(color: Colors.grey);
@@ -67,7 +69,10 @@ class SurahItem extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        BlocProvider.of<ActivePageBloc>(context)
+            .add(ActivePageTextShown(surah));
+      },
     );
   }
 }
