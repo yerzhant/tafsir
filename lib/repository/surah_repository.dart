@@ -10,15 +10,15 @@ class SurahRepository {
 
   SurahRepository(this.db);
 
-  void _insert(Surah surah) async {
+  Future<void> _insert(Surah surah) async {
     await db.insert(_tableName, surah.toMap());
   }
 
   void _insertAll(List<Surah> suwar) {
-    suwar.forEach((e) => _insert(e));
+    suwar.forEach((e) async => await _insert(e));
   }
 
-  void deleteAll() async {
+  Future<void> deleteAll() async {
     await db.delete(_tableName);
   }
 

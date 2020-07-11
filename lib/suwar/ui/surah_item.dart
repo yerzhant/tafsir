@@ -60,9 +60,14 @@ class SurahItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('${surah.ayatsCount} аятов',
-                        style: _secondaryTextStyle),
-                    Text('Джуз: ${surah.dzhuz}', style: _secondaryTextStyle),
+                    Text(
+                      '${surah.ayatsCount} аятов',
+                      style: _secondaryTextStyle,
+                    ),
+                    Text(
+                      'Джуз: ${surah.dzhuz}',
+                      style: _secondaryTextStyle,
+                    ),
                   ],
                 ),
               ),

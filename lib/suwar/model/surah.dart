@@ -6,10 +6,11 @@ class Surah {
   final String text;
   final int ayatsCount;
   final String dzhuz;
+  final String revealAt;
   final int revealOrder;
   final String image;
 
-  Surah({
+  const Surah({
     this.id,
     this.weight,
     this.title,
@@ -17,6 +18,7 @@ class Surah {
     this.text,
     this.ayatsCount,
     this.dzhuz,
+    this.revealAt,
     this.revealOrder,
     this.image,
   });
@@ -30,6 +32,7 @@ class Surah {
       text: map['text'],
       ayatsCount: map['ayats_count'],
       dzhuz: map['dzhuz'],
+      revealAt: map['reveal_at'],
       revealOrder: map['reveal_order'],
       image: map['image'],
     );
@@ -44,6 +47,7 @@ class Surah {
       'text': text,
       'ayats_count': ayatsCount,
       'dzhuz': dzhuz,
+      'reveal_at': revealAt,
       'reveal_order': revealOrder,
       'image': image,
     };

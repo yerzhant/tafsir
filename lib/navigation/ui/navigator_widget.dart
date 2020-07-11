@@ -33,7 +33,16 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Тафсир')),
-        body: _getCurrentPage(),
+        body: BlocBuilder<ActivePageBloc, ActivePageState>(
+          builder: (context, state) {
+            if (state is ActivePageSuwar)
+              return SuwarPage();
+            else if (state is ActivePageText)
+              return TextPage(surah: state.surah);
+            else
+              return null;
+          },
+        ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -56,6 +65,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
               case _suwarPageIndex:
                 event = ActivePageSuwarShown();
                 break;
+
               case _textPageIndex:
                 event = ActivePageTextShown(null);
                 break;
@@ -65,14 +75,5 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         ),
       ),
     );
-  }
-
-  Widget _getCurrentPage() {
-    if (_currentPageIndex == _suwarPageIndex)
-      return SuwarPage();
-    else if (_currentPageIndex == _textPageIndex)
-      return TextPage();
-    else
-      return null;
   }
 }
