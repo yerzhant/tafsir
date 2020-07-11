@@ -21,17 +21,31 @@ class Surah {
     this.image,
   });
 
-  factory Surah.fromJson(Map<String, dynamic> json) {
+  factory Surah.fromMap(Map<String, dynamic> map) {
     return Surah(
-      id: json['id'],
-      weight: json['weight'],
-      title: json['title'],
-      titleInRussian: json['title_in_russian'],
-      text: json['text'],
-      ayatsCount: json['ayats_count'],
-      dzhuz: json['dzhuz'],
-      revealOrder: json['reveal_order'],
-      image: json['image'],
+      id: map['id'],
+      weight: map['weight'],
+      title: map['title'],
+      titleInRussian: map['title_in_russian'],
+      text: map['text'],
+      ayatsCount: map['ayats_count'],
+      dzhuz: map['dzhuz'],
+      revealOrder: map['reveal_order'],
+      image: map['image'],
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'weight': weight,
+      'title': title,
+      'title_in_russian': titleInRussian,
+      'text': text,
+      'ayats_count': ayatsCount,
+      'dzhuz': dzhuz,
+      'reveal_order': revealOrder,
+      'image': image,
+    };
   }
 }

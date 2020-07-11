@@ -4,9 +4,9 @@ import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
 
-const _suwarPage = 0;
-const _textPage = _suwarPage + 1;
-const _bookmarksPage = _textPage + 1;
+const _suwarPageIndex = 0;
+const _textPageIndex = _suwarPageIndex + 1;
+// const _bookmarksPage = _textPage + 1;
 
 class NavigatorWidget extends StatefulWidget {
   const NavigatorWidget({Key key}) : super(key: key);
@@ -16,7 +16,7 @@ class NavigatorWidget extends StatefulWidget {
 }
 
 class _NavigatorWidgetState extends State<NavigatorWidget> {
-  int _currentPage = _suwarPage;
+  int _currentPageIndex = _suwarPageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -24,25 +24,16 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       listener: (context, state) {
         if (state is ActivePageSuwar)
           setState(() {
-            _currentPage = _suwarPage;
+            _currentPageIndex = _suwarPageIndex;
           });
         else if (state is ActivePageText)
           setState(() {
-            _currentPage = _textPage;
+            _currentPageIndex = _textPageIndex;
           });
       },
       child: Scaffold(
         appBar: AppBar(title: Text('Тафсир')),
-        body: BlocBuilder<ActivePageBloc, ActivePageState>(
-          builder: (context, state) {
-            if (state is ActivePageSuwar)
-              return SuwarPage();
-            else if (state is ActivePageText)
-              return TextPage();
-            else
-              return null;
-          },
-        ),
+        body: _getCurrentPage(),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
@@ -58,14 +49,14 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
               title: Text('Закладки'),
             ),
           ],
-          currentIndex: _currentPage,
+          currentIndex: _currentPageIndex,
           onTap: (index) {
             ActivePageEvent event;
             switch (index) {
-              case _suwarPage:
+              case _suwarPageIndex:
                 event = ActivePageSuwarShown();
                 break;
-              case _textPage:
+              case _textPageIndex:
                 event = ActivePageTextShown(null);
                 break;
             }
@@ -74,5 +65,14 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         ),
       ),
     );
+  }
+
+  Widget _getCurrentPage() {
+    if (_currentPageIndex == _suwarPageIndex)
+      return SuwarPage();
+    else if (_currentPageIndex == _textPageIndex)
+      return TextPage();
+    else
+      return null;
   }
 }
