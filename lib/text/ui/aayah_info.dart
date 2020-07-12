@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/html_text.dart';
@@ -14,6 +15,31 @@ class AayahInfo extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       child: Column(
         children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                '﴾ ',
+                style: GoogleFonts.scheherazade(
+                  fontSize: 25,
+                ),
+              ),
+              Text(
+                aayah.title,
+                style: GoogleFonts.fondamento(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                ' ﴿',
+                style: GoogleFonts.scheherazade(
+                  fontSize: 25,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
           Container(
             color: Color(0xffeef5f7),
             padding: EdgeInsets.all(15),
@@ -23,7 +49,7 @@ class AayahInfo extends StatelessWidget {
                 Expanded(
                   child: Text(
                     aayah.textOrigin.trim(),
-                    style: _aayahTextStyle,
+                    style: GoogleFonts.scheherazade(fontSize: 34),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -52,10 +78,6 @@ class AayahInfo extends StatelessWidget {
     );
   }
 }
-
-const _aayahTextStyle = TextStyle(
-  fontSize: 26,
-);
 
 const _labelStyle = TextStyle(
   color: primaryColor,
