@@ -40,7 +40,7 @@ class SurahInfo extends StatelessWidget {
         Text('«${surah.titleInRussian}»', style: _secondaryTextStyle),
         SizedBox(height: 10),
         Padding(
-          padding: EdgeInsets.all(15),
+          padding: EdgeInsets.all(padding),
           child: Column(
             children: <Widget>[
               _lineWithButton(surah.revealAt == 'Medina'
