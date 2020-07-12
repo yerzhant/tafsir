@@ -27,9 +27,10 @@ class _HtmlTextState extends State<HtmlText> {
         },
         onPageFinished: (url) async {
           var height = await _controller.getHeight();
-          setState(() {
-            _height = height;
-          });
+          if (mounted)
+            setState(() {
+              _height = height;
+            });
         },
       ),
     );
