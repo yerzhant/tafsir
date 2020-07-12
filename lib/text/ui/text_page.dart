@@ -32,6 +32,7 @@ class _TextPageState extends State<TextPage> {
       builder: (_, snapshot) {
         if (snapshot.hasData)
           return ListView.separated(
+            // key: PageStorageKey('text-list'),
             itemCount: snapshot.data.length + 1,
             itemBuilder: (_, index) => index == 0
                 ? SurahInfo(surah: widget.surah)
