@@ -32,9 +32,10 @@ class TafsirRepository {
         await db.execute('''
           create table aayah(
             id integer primary key,
-            surah_id integer not null,
-            title text not null,
             text_origin text not null,
+            surah_id integer not null,
+            weight integer not null,
+            title text not null,
             text text not null,
             tafsir text
           )

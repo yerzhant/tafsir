@@ -28,7 +28,7 @@ class AayahRepository {
       _tableName,
       where: 'surah_id = ?',
       whereArgs: [surah.id],
-      orderBy: 'title',
+      orderBy: 'weight',
     );
 
     if (list.length == 0) {
