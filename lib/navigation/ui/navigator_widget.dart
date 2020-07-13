@@ -21,7 +21,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ActivePageBloc, ActivePageState>(
-      listener: (context, state) {
+      listener: (_, state) {
         if (state is ActivePageSuwar)
           setState(() {
             _currentPageIndex = _suwarPageIndex;
@@ -32,9 +32,18 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
           });
       },
       child: Scaffold(
-        appBar: AppBar(title: Text('Тафсир')),
+        appBar: AppBar(
+          title: BlocBuilder<ActivePageBloc, ActivePageState>(
+            builder: (_, state) {
+              if (state is ActivePageText)
+                return Text(state.surah.title);
+              else
+                return Text('Тафсир');
+            },
+          ),
+        ),
         body: BlocBuilder<ActivePageBloc, ActivePageState>(
-          builder: (context, state) {
+          builder: (_, state) {
             if (state is ActivePageSuwar)
               return SuwarPage();
             else if (state is ActivePageText)
@@ -67,7 +76,9 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                 break;
 
               case _textPageIndex:
-                event = ActivePageTextShown(null);
+                final surah =
+                    BlocProvider.of<ActivePageBloc>(context).state.surah;
+                event = ActivePageTextShown(surah);
                 break;
             }
             BlocProvider.of<ActivePageBloc>(context).add(event);

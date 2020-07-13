@@ -8,12 +8,12 @@ part 'active_page_event.dart';
 part 'active_page_state.dart';
 
 class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
-  ActivePageBloc() : super(ActivePageSuwar());
+  ActivePageBloc() : super(ActivePageSuwar(null));
 
   @override
   Stream<ActivePageState> mapEventToState(ActivePageEvent event) async* {
     if (event is ActivePageSuwarShown) {
-      yield ActivePageSuwar();
+      yield ActivePageSuwar(state.surah);
     } else if (event is ActivePageTextShown) {
       yield ActivePageText(event.surah);
     }

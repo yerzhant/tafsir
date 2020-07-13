@@ -1,12 +1,16 @@
 part of 'active_page_bloc.dart';
 
 @immutable
-abstract class ActivePageState {}
-
-class ActivePageSuwar extends ActivePageState {}
-
-class ActivePageText extends ActivePageState {
+abstract class ActivePageState {
   final Surah surah;
 
-  ActivePageText(this.surah);
+  ActivePageState(this.surah);
+}
+
+class ActivePageSuwar extends ActivePageState {
+  ActivePageSuwar(Surah surah) : super(surah);
+}
+
+class ActivePageText extends ActivePageState {
+  ActivePageText(Surah surah) : super(surah);
 }
