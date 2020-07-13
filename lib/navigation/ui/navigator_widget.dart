@@ -109,6 +109,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
     if (state is ActivePageText && state.surah.isSurah())
       return <Widget>[
         IconButton(
+          tooltip: 'Перейти к аяту',
           icon: Icon(Icons.filter_1),
           onPressed: () async {
             final String aayah = await showDialog(
