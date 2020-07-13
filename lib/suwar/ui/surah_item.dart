@@ -15,11 +15,11 @@ class SurahItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final active = isActive(context);
+    final isActive = _isActive(context);
     return InkWell(
       child: Container(
         height: 70,
-        color: active ? _activeBackgroundColor : null,
+        color: isActive ? _activeBackgroundColor : null,
         child: Row(
           children: <Widget>[
             Container(
@@ -31,7 +31,7 @@ class SurahItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: active ? primaryColor : Colors.grey[700],
+                          color: isActive ? primaryColor : Colors.grey[700],
                         ),
                       ),
                     )
@@ -47,7 +47,7 @@ class SurahItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w500,
-                      color: active ? primaryColor : Colors.grey[700],
+                      color: isActive ? primaryColor : Colors.grey[700],
                     ),
                   ),
                   if (surah.titleInRussian != '')
@@ -86,7 +86,7 @@ class SurahItem extends StatelessWidget {
     );
   }
 
-  bool isActive(BuildContext context) {
+  bool _isActive(BuildContext context) {
     final currentSurah = BlocProvider.of<ActivePageBloc>(context).state.surah;
     return surah.id == currentSurah.id;
   }
