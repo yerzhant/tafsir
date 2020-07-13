@@ -71,4 +71,12 @@ class TafsirRepository {
   }
 
   BookmarkRepository get bookmarkRepository => _bookmarkRepository;
+
+  Future<Surah> getSurahById(int surahId) {
+    return _surahRepository.getSurahById(surahId);
+  }
+
+  Future<Surah> getSurahByWeight(int weight) {
+    return _surahRepository.getSurahByWeight(weight);
+  }
 }

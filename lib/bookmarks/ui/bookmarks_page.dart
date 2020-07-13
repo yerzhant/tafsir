@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir/bookmarks/model/bookmark.dart';
+import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 
 class BookmarksPage extends StatefulWidget {
@@ -36,6 +37,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
               final bookmark = bookmarks[index];
               return ListTile(
                 title: Text('${bookmark.surahTitle}, ${bookmark.aayah}'),
+                onTap: () => _showAayah(context, bookmark),
               );
             },
             separatorBuilder: (_, __) => Divider(height: 0),
@@ -45,6 +47,18 @@ class _BookmarksPageState extends State<BookmarksPage> {
         else
           return Center(child: CircularProgressIndicator());
       },
+    );
+  }
+
+  void _showAayah(BuildContext context, Bookmark bookmark) async {
+    final surah = await RepositoryProvider.of<TafsirRepository>(context)
+        .getSurahById(bookmark.surahId);
+
+    BlocProvider.of<ActivePageBloc>(context).add(
+      ActivePageTextShown(
+        surah,
+        bookmark.aayah,
+      ),
     );
   }
 }

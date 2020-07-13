@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
@@ -8,21 +9,34 @@ import 'package:tafsir/text/ui/surah_info.dart';
 
 class TextPage extends StatefulWidget {
   final Surah surah;
+  final int aayah;
 
-  const TextPage({Key key, this.surah}) : super(key: key);
+  const TextPage({Key key, this.surah, this.aayah}) : super(key: key);
 
   @override
   _TextPageState createState() => _TextPageState();
 }
 
 class _TextPageState extends State<TextPage> {
+  final ItemScrollController _itemScrollController = ItemScrollController();
+
   Future<List<Aayah>> _aayaat;
 
   @override
   void initState() {
     super.initState();
+
     _aayaat = RepositoryProvider.of<TafsirRepository>(context)
         .getAayaat(widget.surah);
+
+    if (widget.aayah != null)
+      _aayaat.whenComplete(() async {
+        await Future.delayed(Duration(milliseconds: 500));
+        _itemScrollController.scrollTo(
+          index: widget.aayah,
+          duration: Duration(seconds: 1),
+        );
+      });
   }
 
   @override
@@ -31,8 +45,9 @@ class _TextPageState extends State<TextPage> {
       future: _aayaat,
       builder: (_, snapshot) {
         if (snapshot.hasData)
-          return ListView.separated(
+          return ScrollablePositionedList.separated(
             key: PageStorageKey('text-list-${widget.surah.id}'),
+            itemScrollController: _itemScrollController,
             itemCount: snapshot.data.length + 1,
             itemBuilder: (_, index) => index == 0
                 ? SurahInfo(surah: widget.surah)

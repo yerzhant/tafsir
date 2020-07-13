@@ -10,6 +10,8 @@ import 'package:tafsir/suwar/model/surah.dart';
 part 'active_page_event.dart';
 part 'active_page_state.dart';
 
+const _preamble = -1;
+
 class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
   final TafsirRepository tafsirRepository;
 
@@ -20,9 +22,16 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
     if (event is ActivePageSuwarShown) {
       yield ActivePageSuwar(state.surah);
     } else if (event is ActivePageTextShown) {
+      var surah = event.surah;
+
+      if (surah == null) {
+        surah = await tafsirRepository.getSurahByWeight(_preamble);
+      }
+
       final bookmarks =
-          await tafsirRepository.bookmarkRepository.findBySurah(event.surah);
-      yield ActivePageText(event.surah, bookmarks);
+          await tafsirRepository.bookmarkRepository.findBySurah(surah);
+
+      yield ActivePageText(surah, bookmarks, event.aayah);
     } else if (event is ActivePageBookmarksShown) {
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
       yield ActivePageBookmarks(state.surah, bookmarks);

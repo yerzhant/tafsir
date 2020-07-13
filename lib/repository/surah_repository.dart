@@ -33,4 +33,22 @@ class SurahRepository {
 
     return list.map((e) => Surah.fromMap(e)).toList();
   }
+
+  Future<Surah> getSurahById(int surahId) async {
+    final list = await db.query(
+      _tableName,
+      where: 'id = ?',
+      whereArgs: [surahId],
+    );
+    return list.map((e) => Surah.fromMap(e)).first;
+  }
+
+  Future<Surah> getSurahByWeight(int weight) async {
+    final list = await db.query(
+      _tableName,
+      where: 'weight = ?',
+      whereArgs: [weight],
+    );
+    return list.map((e) => Surah.fromMap(e)).first;
+  }
 }

@@ -81,7 +81,7 @@ class SurahItem extends StatelessWidget {
       ),
       onTap: () {
         BlocProvider.of<ActivePageBloc>(context)
-            .add(ActivePageTextShown(surah));
+            .add(ActivePageTextShown(surah, null));
       },
     );
   }

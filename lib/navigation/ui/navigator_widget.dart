@@ -52,7 +52,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
             if (state is ActivePageSuwar)
               return SuwarPage();
             else if (state is ActivePageText)
-              return TextPage(surah: state.surah);
+              return TextPage(surah: state.surah, aayah: state.aayah);
             else if (state is ActivePageBookmarks)
               return BookmarksPage();
             else
@@ -86,7 +86,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
               case _textPageIndex:
                 final surah =
                     BlocProvider.of<ActivePageBloc>(context).state.surah;
-                event = ActivePageTextShown(surah);
+                event = ActivePageTextShown(surah, null);
                 break;
 
               case _bookmarksPageIndex:
