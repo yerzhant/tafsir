@@ -12,7 +12,12 @@ class AayahInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(padding),
+      padding: EdgeInsets.only(
+        right: padding,
+        top: 5,
+        bottom: padding,
+        left: padding,
+      ),
       child: Column(
         children: <Widget>[
           Row(
@@ -39,7 +44,7 @@ class AayahInfo extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           Container(
             color: Color(0xffeef5f7),
             padding: EdgeInsets.all(15),
@@ -56,26 +61,26 @@ class AayahInfo extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 25),
+          SizedBox(height: 20),
           Row(
             children: <Widget>[
               Text('ПЕРЕВОД:', style: _labelStyle),
             ],
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 7),
           Row(
             children: <Widget>[
               Expanded(child: HtmlText(text: aayah.text)),
             ],
           ),
-          if (aayah.tafsir.isNotEmpty) SizedBox(height: 25),
+          if (aayah.tafsir.isNotEmpty) SizedBox(height: 20),
           if (aayah.tafsir.isNotEmpty)
             Row(
               children: <Widget>[
                 Text('ТАФСИР (Толкование):', style: _labelStyle),
               ],
             ),
-          if (aayah.tafsir.isNotEmpty) SizedBox(height: 15),
+          if (aayah.tafsir.isNotEmpty) SizedBox(height: 7),
           if (aayah.tafsir.isNotEmpty) HtmlText(text: aayah.tafsir),
         ],
       ),
