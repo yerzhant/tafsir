@@ -31,7 +31,7 @@ class _TextPageState extends State<TextPage> {
 
     if (widget.aayah != null)
       _aayaat.whenComplete(() async {
-        await Future.delayed(Duration(milliseconds: 500));
+        await Future.delayed(Duration(milliseconds: 150));
         _itemScrollController.scrollTo(
           index: widget.aayah,
           duration: Duration(seconds: 1),
