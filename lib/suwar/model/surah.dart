@@ -52,4 +52,6 @@ class Surah {
       'image': image,
     };
   }
+
+  bool isSurah() => weight > 0;
 }
