@@ -18,7 +18,7 @@ class HtmlText extends StatelessWidget {
           styles.addAll(['margin', '0', 'padding', '10px 15px']);
 
         if (element.localName == 'blockquote' && element.className == 'blue')
-          styles.addAll(['background-color', '#f5f5f5']);
+          styles.addAll(['background-color', '#eef5ff']);
 
         if (element.localName == 'blockquote' && element.className == 'green')
           styles.addAll(['background-color', '#f5fffa']);
