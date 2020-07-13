@@ -54,6 +54,7 @@ class TafsirRepository {
   }
 
   Future<List<Aayah>> getAayaat(Surah surah) {
+    if (!surah.isSurah()) return Future.value([]);
     return _aayahRepository.getAll(surah);
   }
 }
