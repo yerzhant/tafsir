@@ -10,3 +10,5 @@ class ActivePageTextShown extends ActivePageEvent {
 
   ActivePageTextShown(this.surah);
 }
+
+class ActivePageBookmarksShown extends ActivePageEvent {}

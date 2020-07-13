@@ -16,3 +16,9 @@ class ActivePageText extends ActivePageState {
 
   ActivePageText(Surah surah, this.bookmarks) : super(surah);
 }
+
+class ActivePageBookmarks extends ActivePageState {
+  final List<Bookmark> bookmarks;
+
+  ActivePageBookmarks(Surah surah, this.bookmarks) : super(surah);
+}

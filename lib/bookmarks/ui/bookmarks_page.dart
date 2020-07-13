@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/bookmarks/model/bookmark.dart';
+import 'package:tafsir/repository/tafsir_repository.dart';
+
+class BookmarksPage extends StatefulWidget {
+  const BookmarksPage({Key key}) : super(key: key);
+
+  @override
+  _BookmarksPageState createState() => _BookmarksPageState();
+}
+
+class _BookmarksPageState extends State<BookmarksPage> {
+  Future<List<Bookmark>> _bookmarks;
+
+  @override
+  void initState() {
+    super.initState();
+    _bookmarks = RepositoryProvider.of<TafsirRepository>(context)
+        .bookmarkRepository
+        .getAll();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Bookmark>>(
+      future: _bookmarks,
+      builder: (_, snap) {
+        if (snap.hasData) {
+          final bookmarks = snap.data;
+
+          return ListView.separated(
+            key: PageStorageKey('bookmarks-list'),
+            itemCount: bookmarks.length,
+            itemBuilder: (_, index) {
+              final bookmark = bookmarks[index];
+              return ListTile(
+                title: Text('${bookmark.surahTitle}, ${bookmark.aayah}'),
+              );
+            },
+            separatorBuilder: (_, __) => Divider(height: 0),
+          );
+        } else if (snap.hasError)
+          return Text('Error: ${snap.error}');
+        else
+          return Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+}

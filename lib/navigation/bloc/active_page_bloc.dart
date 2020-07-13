@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 import 'package:tafsir/bookmarks/model/bookmark.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
@@ -22,6 +23,9 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
       final bookmarks =
           await tafsirRepository.bookmarkRepository.findBySurah(event.surah);
       yield ActivePageText(event.surah, bookmarks);
+    } else if (event is ActivePageBookmarksShown) {
+      final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
+      yield ActivePageBookmarks(state.surah, bookmarks);
     }
   }
 }
