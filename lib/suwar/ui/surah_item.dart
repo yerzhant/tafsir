@@ -4,9 +4,9 @@ import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 
-const _secondaryTextStyle = TextStyle(color: Colors.grey);
+const _secondaryTextStyle = TextStyle(color: textColorGrey);
 
-const _activeBackgroundColor = Color(0xff112233);
+const _activeBackgroundColor = Color(0xffe1e8ff);
 
 class SurahItem extends StatelessWidget {
   final Surah surah;
@@ -31,7 +31,7 @@ class SurahItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: isActive ? primaryColor : Colors.grey[700],
+                          color: isActive ? primaryColor : null,
                         ),
                       ),
                     )
@@ -47,7 +47,7 @@ class SurahItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w500,
-                      color: isActive ? primaryColor : Colors.grey[700],
+                      color: isActive ? primaryColor : null,
                     ),
                   ),
                   if (surah.titleInRussian != '')

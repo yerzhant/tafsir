@@ -36,7 +36,10 @@ class _BookmarksPageState extends State<BookmarksPage> {
             itemBuilder: (_, index) {
               final bookmark = bookmarks[index];
               return ListTile(
-                title: Text('${bookmark.surahTitle}, ${bookmark.aayah}'),
+                title: Text(
+                  '${bookmark.surahTitle}, ${bookmark.aayah}',
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
                 onTap: () => _showAayah(context, bookmark),
               );
             },

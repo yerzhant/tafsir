@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/navigation/ui/navigator_widget.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
@@ -23,7 +24,8 @@ class TafsirApp extends StatelessWidget {
     return MaterialApp(
       title: 'Тафсир',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primaryColor: primaryColor,
+        textTheme: TextTheme(bodyText2: TextStyle(color: textColor)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: RepositoryProvider(

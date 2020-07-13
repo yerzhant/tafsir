@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:tafsir/constants.dart';
 
 class HtmlText extends StatelessWidget {
   final String text;
@@ -34,6 +35,7 @@ class HtmlText extends StatelessWidget {
         return styles;
       },
       textStyle: TextStyle(height: 1.6),
+      hyperlinkColor: primaryColor,
     );
   }
 }

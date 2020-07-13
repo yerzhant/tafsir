@@ -9,10 +9,9 @@ const _images = '$_server/media/images/surahs';
 var _surahTitleStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.bold,
-  color: Colors.grey[800],
 );
 
-const _secondaryTextStyle = TextStyle(color: Colors.grey);
+const _secondaryTextStyle = TextStyle(color: textColorGrey);
 
 class SurahInfo extends StatelessWidget {
   final Surah surah;

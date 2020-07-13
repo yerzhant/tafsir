@@ -8,6 +8,11 @@ import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/html_text.dart';
 
+const _labelStyle = TextStyle(
+  color: primaryColor,
+  fontWeight: FontWeight.bold,
+);
+
 class AayahInfo extends StatefulWidget {
   final Aayah aayah;
 
@@ -36,9 +41,7 @@ class _AayahInfoState extends State<AayahInfo> {
               Spacer(),
               Text(
                 '﴾ ',
-                style: GoogleFonts.scheherazade(
-                  fontSize: 25,
-                ),
+                style: GoogleFonts.scheherazade(fontSize: 25),
               ),
               Text(
                 widget.aayah.title,
@@ -49,15 +52,13 @@ class _AayahInfoState extends State<AayahInfo> {
               ),
               Text(
                 ' ﴿',
-                style: GoogleFonts.scheherazade(
-                  fontSize: 25,
-                ),
+                style: GoogleFonts.scheherazade(fontSize: 25),
               ),
               Spacer(),
               IconButton(
                 icon: Icon(
                   Icons.bookmark,
-                  color: _isBookmarked(context) ? primaryColor : Colors.grey,
+                  color: _isBookmarked(context) ? primaryColor : textColorGrey,
                 ),
                 onPressed: () => _toggleBookmark(context),
               ),
@@ -139,8 +140,3 @@ class _AayahInfoState extends State<AayahInfo> {
     );
   }
 }
-
-const _labelStyle = TextStyle(
-  color: primaryColor,
-  fontWeight: FontWeight.bold,
-);
