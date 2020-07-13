@@ -17,6 +17,10 @@ class _BookmarksPageState extends State<BookmarksPage> {
   @override
   void initState() {
     super.initState();
+    _getAll();
+  }
+
+  void _getAll() {
     _bookmarks = RepositoryProvider.of<TafsirRepository>(context)
         .bookmarkRepository
         .getAll();
@@ -35,12 +39,16 @@ class _BookmarksPageState extends State<BookmarksPage> {
             itemCount: bookmarks.length,
             itemBuilder: (_, index) {
               final bookmark = bookmarks[index];
-              return ListTile(
-                title: Text(
-                  '${bookmark.surahTitle}, ${bookmark.aayah}',
-                  style: Theme.of(context).textTheme.bodyText2,
+              return Dismissible(
+                key: Key(bookmark.id.toString()),
+                child: ListTile(
+                  title: Text(
+                    '${bookmark.surahTitle}, ${bookmark.aayah}',
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  onTap: () => _showAayah(context, bookmark),
                 ),
-                onTap: () => _showAayah(context, bookmark),
+                onDismissed: (_) => _delete(context, bookmark),
               );
             },
             separatorBuilder: (_, __) => Divider(height: 1),
@@ -63,5 +71,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
         bookmark.aayah,
       ),
     );
+  }
+
+  Future<void> _delete(BuildContext context, Bookmark bookmark) async {
+    await RepositoryProvider.of<TafsirRepository>(context)
+        .bookmarkRepository
+        .delete(bookmark);
+
+    _getAll();
   }
 }
