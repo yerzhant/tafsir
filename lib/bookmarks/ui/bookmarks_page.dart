@@ -41,6 +41,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
               final bookmark = bookmarks[index];
               return Dismissible(
                 key: Key(bookmark.id.toString()),
+                background: Container(color: Colors.red[50]),
                 child: ListTile(
                   title: Text(
                     '${bookmark.surahTitle}, ${bookmark.aayah}',
