@@ -29,7 +29,7 @@ class TafsirApp extends StatelessWidget {
       home: RepositoryProvider(
         create: (context) => tafsirRepository,
         child: BlocProvider(
-          create: (context) => ActivePageBloc(),
+          create: (context) => ActivePageBloc(tafsirRepository),
           child: NavigatorWidget(),
         ),
       ),

@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tafsir/bookmarks/model/bookmark.dart';
 import 'package:tafsir/constants.dart';
+import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
+import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/html_text.dart';
 
-class AayahInfo extends StatelessWidget {
+class AayahInfo extends StatefulWidget {
   final Aayah aayah;
 
   const AayahInfo({Key key, this.aayah}) : super(key: key);
 
+  @override
+  _AayahInfoState createState() => _AayahInfoState();
+}
+
+class _AayahInfoState extends State<AayahInfo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,6 +32,8 @@ class AayahInfo extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(width: 40),
+              Spacer(),
               Text(
                 '﴾ ',
                 style: GoogleFonts.scheherazade(
@@ -30,7 +41,7 @@ class AayahInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                aayah.title,
+                widget.aayah.title,
                 style: GoogleFonts.fondamento(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -41,6 +52,14 @@ class AayahInfo extends StatelessWidget {
                 style: GoogleFonts.scheherazade(
                   fontSize: 25,
                 ),
+              ),
+              Spacer(),
+              IconButton(
+                icon: Icon(
+                  Icons.bookmark,
+                  color: _isBookmarked(context) ? primaryColor : Colors.grey,
+                ),
+                onPressed: () => _toggleBookmark(context),
               ),
             ],
           ),
@@ -53,7 +72,7 @@ class AayahInfo extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                   child: Text(
-                    aayah.textOrigin.trim(),
+                    widget.aayah.textOrigin.trim(),
                     style: GoogleFonts.scheherazade(fontSize: 34),
                     textAlign: TextAlign.center,
                   ),
@@ -70,20 +89,53 @@ class AayahInfo extends StatelessWidget {
           SizedBox(height: 7),
           Row(
             children: <Widget>[
-              Expanded(child: HtmlText(text: aayah.text)),
+              Expanded(child: HtmlText(text: widget.aayah.text)),
             ],
           ),
-          if (aayah.tafsir.isNotEmpty) SizedBox(height: 20),
-          if (aayah.tafsir.isNotEmpty)
+          if (widget.aayah.tafsir.isNotEmpty) SizedBox(height: 20),
+          if (widget.aayah.tafsir.isNotEmpty)
             Row(
               children: <Widget>[
                 Text('ТАФСИР (Толкование):', style: _labelStyle),
               ],
             ),
-          if (aayah.tafsir.isNotEmpty) SizedBox(height: 7),
-          if (aayah.tafsir.isNotEmpty) HtmlText(text: aayah.tafsir),
+          if (widget.aayah.tafsir.isNotEmpty) SizedBox(height: 7),
+          if (widget.aayah.tafsir.isNotEmpty)
+            HtmlText(text: widget.aayah.tafsir),
         ],
       ),
+    );
+  }
+
+  void _toggleBookmark(BuildContext context) async {
+    final bookmarkRepository =
+        RepositoryProvider.of<TafsirRepository>(context).bookmarkRepository;
+    final state =
+        BlocProvider.of<ActivePageBloc>(context).state as ActivePageText;
+
+    if (_isBookmarked(context)) {
+      final bookmark = state.bookmarks
+          .singleWhere((element) => element.aayah == widget.aayah.weight);
+      await bookmarkRepository.delete(bookmark);
+      state.bookmarks.remove(bookmark);
+    } else {
+      final bookmark = await bookmarkRepository.insert(
+        Bookmark.autogenerate(
+          surahId: state.surah.id,
+          surahTitle: state.surah.title,
+          aayah: widget.aayah.weight,
+        ),
+      );
+      state.bookmarks.add(bookmark);
+    }
+    setState(() {});
+  }
+
+  bool _isBookmarked(BuildContext context) {
+    final state =
+        BlocProvider.of<ActivePageBloc>(context).state as ActivePageText;
+    return state.bookmarks.any(
+      (element) => element.aayah == widget.aayah.weight,
     );
   }
 }

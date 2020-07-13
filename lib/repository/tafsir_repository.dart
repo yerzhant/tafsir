@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tafsir/repository/aayah_repository.dart';
+import 'package:tafsir/repository/bookmark_repository.dart';
 import 'package:tafsir/repository/surah_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
@@ -8,6 +9,7 @@ class TafsirRepository {
   Database _db;
   SurahRepository _surahRepository;
   AayahRepository _aayahRepository;
+  BookmarkRepository _bookmarkRepository;
 
   Future<void> init() async {
     _db = await openDatabase(
@@ -40,11 +42,21 @@ class TafsirRepository {
             tafsir text
           )
         ''');
+
+        await db.execute('''
+          create table bookmark(
+            id integer primary key autoincrement,
+            surah_id integer not null,
+            surah_title text not null,
+            aayah integer not null
+          )
+        ''');
       },
     );
 
     _surahRepository = SurahRepository(_db);
     _aayahRepository = AayahRepository(_db);
+    _bookmarkRepository = BookmarkRepository(_db);
   }
 
   Future<void> close() => _db.close();
@@ -57,4 +69,6 @@ class TafsirRepository {
     if (!surah.isSurah()) return Future.value([]);
     return _aayahRepository.getAll(surah);
   }
+
+  BookmarkRepository get bookmarkRepository => _bookmarkRepository;
 }
