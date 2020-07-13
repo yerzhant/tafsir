@@ -63,7 +63,11 @@ class AayahInfo extends StatelessWidget {
             ],
           ),
           SizedBox(height: 15),
-          HtmlText(text: aayah.text),
+          Row(
+            children: <Widget>[
+              Expanded(child: HtmlText(text: aayah.text)),
+            ],
+          ),
           if (aayah.tafsir.isNotEmpty) SizedBox(height: 25),
           if (aayah.tafsir.isNotEmpty)
             Row(
