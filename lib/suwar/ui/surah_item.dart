@@ -88,6 +88,6 @@ class SurahItem extends StatelessWidget {
 
   bool _isActive(BuildContext context) {
     final currentSurah = BlocProvider.of<ActivePageBloc>(context).state.surah;
-    return surah.id == currentSurah.id;
+    return currentSurah != null && currentSurah.id == surah.id;
   }
 }
