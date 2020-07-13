@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 
 const _secondaryTextStyle = TextStyle(color: Colors.grey);
+
+const _activeBackgroundColor = Color(0xff112233);
 
 class SurahItem extends StatelessWidget {
   final Surah surah;
@@ -12,9 +15,11 @@ class SurahItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final active = isActive(context);
     return InkWell(
       child: Container(
         height: 70,
+        color: active ? _activeBackgroundColor : null,
         child: Row(
           children: <Widget>[
             Container(
@@ -26,7 +31,7 @@ class SurahItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey[700],
+                          color: active ? primaryColor : Colors.grey[700],
                         ),
                       ),
                     )
@@ -40,9 +45,9 @@ class SurahItem extends StatelessWidget {
                   Text(
                     surah.title.toUpperCase(),
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 17,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey[700],
+                      color: active ? primaryColor : Colors.grey[700],
                     ),
                   ),
                   if (surah.titleInRussian != '')
@@ -79,5 +84,10 @@ class SurahItem extends StatelessWidget {
             .add(ActivePageTextShown(surah));
       },
     );
+  }
+
+  bool isActive(BuildContext context) {
+    final currentSurah = BlocProvider.of<ActivePageBloc>(context).state.surah;
+    return surah.id == currentSurah.id;
   }
 }
