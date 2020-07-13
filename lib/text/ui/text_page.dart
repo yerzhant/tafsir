@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
@@ -32,11 +33,15 @@ class _TextPageState extends State<TextPage> {
     if (widget.aayah != null)
       _aayaat.whenComplete(() async {
         await Future.delayed(Duration(milliseconds: 150));
-        _itemScrollController.scrollTo(
-          index: widget.aayah,
-          duration: Duration(seconds: 1),
-        );
+        _scrollTo(widget.aayah);
       });
+  }
+
+  void _scrollTo(int aayah) {
+    _itemScrollController.scrollTo(
+      index: aayah,
+      duration: Duration(seconds: 1),
+    );
   }
 
   @override
@@ -45,14 +50,19 @@ class _TextPageState extends State<TextPage> {
       future: _aayaat,
       builder: (_, snapshot) {
         if (snapshot.hasData)
-          return ScrollablePositionedList.separated(
-            key: PageStorageKey('text-list-${widget.surah.id}'),
-            itemScrollController: _itemScrollController,
-            itemCount: snapshot.data.length + 1,
-            itemBuilder: (_, index) => index == 0
-                ? SurahInfo(surah: widget.surah)
-                : AayahInfo(aayah: snapshot.data[index - 1]),
-            separatorBuilder: (_, __) => Divider(height: 1),
+          return BlocListener<ActivePageBloc, ActivePageState>(
+            listener: (_, state) {
+              if (state is ActivePageTextScrollTo) _scrollTo(state.aayah);
+            },
+            child: ScrollablePositionedList.separated(
+              key: PageStorageKey('text-list-${widget.surah.id}'),
+              itemScrollController: _itemScrollController,
+              itemCount: snapshot.data.length + 1,
+              itemBuilder: (_, index) => index == 0
+                  ? SurahInfo(surah: widget.surah)
+                  : AayahInfo(aayah: snapshot.data[index - 1]),
+              separatorBuilder: (_, __) => Divider(height: 1),
+            ),
           );
         else if (snapshot.hasError)
           return Text('Error: ${snapshot.error}');

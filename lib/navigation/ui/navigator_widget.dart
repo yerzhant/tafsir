@@ -17,6 +17,8 @@ class NavigatorWidget extends StatefulWidget {
 }
 
 class _NavigatorWidgetState extends State<NavigatorWidget> {
+  final _scrollToAayahController = TextEditingController();
+
   int _currentPageIndex = _suwarPageIndex;
 
   @override
@@ -46,6 +48,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                 return Text('Тафсир');
             },
           ),
+          actions: _getAction(context),
         ),
         body: BlocBuilder<ActivePageBloc, ActivePageState>(
           builder: (_, state) {
@@ -99,5 +102,56 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         ),
       ),
     );
+  }
+
+  List<Widget> _getAction(BuildContext context) {
+    final state = BlocProvider.of<ActivePageBloc>(context).state;
+    if (state is ActivePageText && state.surah.isSurah())
+      return <Widget>[
+        IconButton(
+          icon: Icon(Icons.filter_1),
+          onPressed: () async {
+            final String aayah = await showDialog(
+              context: context,
+              child: AlertDialog(
+                content: TextField(
+                  autofocus: true,
+                  maxLength: 3,
+                  controller: _scrollToAayahController,
+                  decoration: InputDecoration(labelText: 'Перейти к аяту'),
+                  keyboardType: TextInputType.number,
+                ),
+                actions: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(
+                        context,
+                        _scrollToAayahController.value.text,
+                      );
+                    },
+                    child: Text('OK'),
+                  ),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Отмена'),
+                  ),
+                ],
+              ),
+            );
+            if (aayah != null && aayah.isNotEmpty)
+              BlocProvider.of<ActivePageBloc>(context).add(
+                ActivePageTextScrolledTo(
+                  state.surah,
+                  state.bookmarks,
+                  int.parse(aayah),
+                ),
+              );
+          },
+        ),
+      ];
+    else
+      return null;
   }
 }

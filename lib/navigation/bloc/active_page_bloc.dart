@@ -21,6 +21,8 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
   Stream<ActivePageState> mapEventToState(ActivePageEvent event) async* {
     if (event is ActivePageSuwarShown) {
       yield ActivePageSuwar(state.surah);
+    } else if (event is ActivePageTextScrolledTo) {
+      yield ActivePageTextScrollTo(event.surah, event.bookmarks, event.aayah);
     } else if (event is ActivePageTextShown) {
       var surah = event.surah;
 

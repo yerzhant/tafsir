@@ -18,6 +18,11 @@ class ActivePageText extends ActivePageState {
   ActivePageText(Surah surah, this.bookmarks, this.aayah) : super(surah);
 }
 
+class ActivePageTextScrollTo extends ActivePageText {
+  ActivePageTextScrollTo(Surah surah, Set<Bookmark> bookmarks, int aayah)
+      : super(surah, bookmarks, aayah);
+}
+
 class ActivePageBookmarks extends ActivePageState {
   final List<Bookmark> bookmarks;
 
