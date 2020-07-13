@@ -40,7 +40,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 onTap: () => _showAayah(context, bookmark),
               );
             },
-            separatorBuilder: (_, __) => Divider(height: 0),
+            separatorBuilder: (_, __) => Divider(height: 1),
           );
         } else if (snap.hasError)
           return Text('Error: ${snap.error}');

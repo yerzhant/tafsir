@@ -52,7 +52,7 @@ class _TextPageState extends State<TextPage> {
             itemBuilder: (_, index) => index == 0
                 ? SurahInfo(surah: widget.surah)
                 : AayahInfo(aayah: snapshot.data[index - 1]),
-            separatorBuilder: (_, __) => Divider(height: 0),
+            separatorBuilder: (_, __) => Divider(height: 1),
           );
         else if (snapshot.hasError)
           return Text('Error: ${snapshot.error}');

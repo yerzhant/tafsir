@@ -40,7 +40,7 @@ class _SuwarPageState extends State<SuwarPage> {
       key: PageStorageKey('suwar-list'),
       itemCount: suwar.length,
       itemBuilder: (_, index) => SurahItem(surah: suwar[index]),
-      separatorBuilder: (_, __) => Divider(height: 0),
+      separatorBuilder: (_, __) => Divider(height: 1),
     );
   }
 }
