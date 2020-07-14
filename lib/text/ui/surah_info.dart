@@ -51,7 +51,11 @@ class SurahInfo extends StatelessWidget {
                 _lineWithButton(
                     'в порядке ниспосылания - ${surah.revealOrder}'),
               if (surah.isSurah()) Divider(height: 35),
-              HtmlText(text: surah.text),
+              Row(
+                children: <Widget>[
+                  Expanded(child: HtmlText(text: surah.text)),
+                ],
+              ),
             ],
           ),
         ),
