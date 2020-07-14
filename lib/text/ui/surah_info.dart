@@ -42,7 +42,7 @@ class SurahInfo extends StatelessWidget {
           child: Column(
             children: <Widget>[
               if (surah.isSurah())
-                _lineWithButton(surah.revealAt == 'Medina'
+                _lineWithButton(surah.revealAt == 'Madina'
                     ? 'Мединская сура'
                     : 'Мекканская сура'),
               if (surah.isSurah()) _lineWithButton('${surah.ayatsCount} аятов'),
