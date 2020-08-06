@@ -110,7 +110,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       return <Widget>[
         IconButton(
           tooltip: 'Перейти к аяту',
-          icon: Icon(Icons.filter_1),
+          icon: Icon(Icons.filter_1, size: 18),
           onPressed: () async {
             final String aayah = await showDialog(
               context: context,
