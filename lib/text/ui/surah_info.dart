@@ -72,7 +72,7 @@ class SurahInfo extends StatelessWidget {
       height: 25,
       child: Row(
         children: <Widget>[
-          Icon(Icons.stop, color: primaryColor, size: 16),
+          Icon(Icons.stop, color: primaryColor, size: 10),
           SizedBox(width: 5),
           Text(text),
         ],
