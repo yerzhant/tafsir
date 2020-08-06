@@ -6,7 +6,7 @@ import 'package:tafsir/suwar/model/surah.dart';
 
 const _secondaryTextStyle = TextStyle(color: textColorGrey);
 
-const _activeBackgroundColor = Color(0xffe1e8ff);
+const _activeBackgroundColor = Color(0xFFDBE1FF);
 
 class SurahItem extends StatelessWidget {
   final Surah surah;
