@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -64,9 +66,11 @@ class _TextPageState extends State<TextPage> {
               separatorBuilder: (_, __) => Divider(height: 1),
             ),
           );
-        else if (snapshot.hasError)
-          return Text('Error: ${snapshot.error}');
-        else
+        else if (snapshot.hasError) {
+          if (snapshot.error is SocketException)
+            return Center(child: Text('Нет соединения с сервером.'));
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else
           return Center(child: CircularProgressIndicator());
       },
     );
