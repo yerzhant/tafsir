@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:meta/meta.dart';
 import 'package:tafsir/bookmarks/model/bookmark.dart';
+import 'package:tafsir/constants.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 
@@ -11,6 +13,8 @@ part 'active_page_event.dart';
 part 'active_page_state.dart';
 
 const _preamble = -1;
+
+const _images = '$server/media/images/surahs';
 
 class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
   final TafsirRepository tafsirRepository;
@@ -37,6 +41,24 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
     } else if (event is ActivePageBookmarksShown) {
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
       yield ActivePageBookmarks(state.surah, bookmarks);
+    } else if (event is ActivePageSuwarDownloaded) {
+      yield ActivePageSuwarDownloading(null);
+
+      await tafsirRepository.clearSuwarAndAayaat();
+
+      final suwar = await tafsirRepository.getSuwar();
+
+      for (var i = 2; i < suwar.length; i++) {
+        final progress = (i - 1) / (suwar.length - 1);
+        yield ActivePageSuwarDownloading(progress);
+
+        final surah = suwar[i];
+        await tafsirRepository.getAayaat(surah);
+
+        await DefaultCacheManager().getSingleFile('$_images/${surah.image}');
+      }
+
+      yield ActivePageSuwar(null);
     }
   }
 }

@@ -70,6 +70,11 @@ class TafsirRepository {
     return _aayahRepository.getAll(surah);
   }
 
+  Future<void> clearSuwarAndAayaat() async {
+    await _aayahRepository.deleteAll();
+    await _surahRepository.deleteAll();
+  }
+
   BookmarkRepository get bookmarkRepository => _bookmarkRepository;
 
   Future<Surah> getSurahById(int surahId) {

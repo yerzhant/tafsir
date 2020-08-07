@@ -28,3 +28,9 @@ class ActivePageBookmarks extends ActivePageState {
 
   ActivePageBookmarks(Surah surah, this.bookmarks) : super(surah);
 }
+
+class ActivePageSuwarDownloading extends ActivePageState {
+  final double progress;
+
+  ActivePageSuwarDownloading(this.progress) : super(null);
+}

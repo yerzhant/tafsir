@@ -46,11 +46,19 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
             builder: (_, state) {
               if (state is ActivePageText)
                 return Text(state.surah.title);
+              else if (state is ActivePageSuwarDownloading)
+                return Text('Загрузка...');
               else
                 return Text('Тафсир');
             },
           ),
-          actions: _getAction(context),
+          actions: <Widget>[
+            BlocBuilder<ActivePageBloc, ActivePageState>(
+              builder: (context, state) {
+                return _getAction(context, state);
+              },
+            ),
+          ],
         ),
         body: BlocBuilder<ActivePageBloc, ActivePageState>(
           builder: (_, state) {
@@ -60,6 +68,19 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
               return TextPage(surah: state.surah, aayah: state.aayah);
             else if (state is ActivePageBookmarks)
               return BookmarksPage();
+            else if (state is ActivePageSuwarDownloading)
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(value: state.progress),
+                    SizedBox(height: padding),
+                    Text(
+                      '${((state.progress ?? 0) * 100).toStringAsFixed(2)} %',
+                    ),
+                  ],
+                ),
+              );
             else
               return null;
           },
@@ -106,81 +127,79 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
     );
   }
 
-  List<Widget> _getAction(BuildContext context) {
-    final state = BlocProvider.of<ActivePageBloc>(context).state;
+  Widget _getAction(BuildContext context, ActivePageState state) {
     if (state is ActivePageText && state.surah.isSurah())
-      return <Widget>[
-        IconButton(
-          tooltip: 'Перейти к аяту',
-          icon: Icon(Icons.filter_1, size: iconSize),
-          onPressed: () async {
-            final String aayah = await showDialog(
-              context: context,
-              child: AlertDialog(
-                content: TextField(
-                  autofocus: true,
-                  maxLength: 3,
-                  controller: _scrollToAayahController,
-                  decoration: InputDecoration(labelText: 'Перейти к аяту'),
-                  keyboardType: TextInputType.number,
+      return IconButton(
+        tooltip: 'Перейти к аяту',
+        icon: Icon(Icons.filter_1, size: iconSize),
+        onPressed: () async {
+          final String aayah = await showDialog(
+            context: context,
+            child: AlertDialog(
+              content: TextField(
+                autofocus: true,
+                maxLength: 3,
+                controller: _scrollToAayahController,
+                decoration: InputDecoration(labelText: 'Перейти к аяту'),
+                keyboardType: TextInputType.number,
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(
+                      context,
+                      _scrollToAayahController.value.text,
+                    );
+                  },
+                  child: Text('OK'),
                 ),
-                actions: <Widget>[
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pop(
-                        context,
-                        _scrollToAayahController.value.text,
-                      );
-                    },
-                    child: Text('OK'),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Отмена'),
-                  ),
-                ],
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('Отмена'),
+                ),
+              ],
+            ),
+          );
+          if (aayah != null && aayah.isNotEmpty)
+            BlocProvider.of<ActivePageBloc>(context).add(
+              ActivePageTextScrolledTo(
+                state.surah,
+                state.bookmarks,
+                int.parse(aayah),
               ),
             );
-            if (aayah != null && aayah.isNotEmpty)
-              BlocProvider.of<ActivePageBloc>(context).add(
-                ActivePageTextScrolledTo(
-                  state.surah,
-                  state.bookmarks,
-                  int.parse(aayah),
-                ),
-              );
-          },
-        ),
-      ];
+        },
+      );
     else if (state is ActivePageSuwar)
-      return <Widget>[
-        PopupMenuButton<_SuwarAction>(
-          itemBuilder: (_) => <PopupMenuEntry<_SuwarAction>>[
-            const PopupMenuItem(
-              child: Text('Загрузить все суры'),
-              value: _SuwarAction.downloadSuwar,
-            ),
-            const PopupMenuDivider(),
-            const PopupMenuItem(
-              child: Text('Azan.ru'),
-              value: _SuwarAction.azanRu,
-            ),
-          ],
-          onSelected: (value) async {
-            switch (value) {
-              case _SuwarAction.downloadSuwar:
-                break;
-              case _SuwarAction.azanRu:
-                await launch('https://azan.ru');
-                break;
-            }
-          },
-        ),
-      ];
+      return PopupMenuButton<_SuwarAction>(
+        itemBuilder: (_) => <PopupMenuEntry<_SuwarAction>>[
+          const PopupMenuItem(
+            child: Text('Загрузить все суры'),
+            value: _SuwarAction.downloadSuwar,
+          ),
+          const PopupMenuDivider(),
+          const PopupMenuItem(
+            child: Text('Azan.ru'),
+            value: _SuwarAction.azanRu,
+          ),
+        ],
+        onSelected: (value) async {
+          switch (value) {
+            case _SuwarAction.downloadSuwar:
+              BlocProvider.of<ActivePageBloc>(context)
+                  .add(ActivePageSuwarDownloaded());
+              break;
+
+            case _SuwarAction.azanRu:
+              await launch('https://azan.ru');
+              break;
+          }
+        },
+      );
     else
-      return null;
+      return Container();
   }
 }
 
