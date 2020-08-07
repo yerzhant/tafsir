@@ -4,8 +4,7 @@ import 'package:tafsir/constants.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/ui/html_text.dart';
 
-const _server = 'https://azan.ru';
-const _images = '$_server/media/images/surahs';
+const _images = '$server/media/images/surahs';
 
 var _surahTitleStyle = TextStyle(
   fontSize: 20,

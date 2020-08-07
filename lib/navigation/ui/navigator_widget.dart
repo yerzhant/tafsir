@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir/bookmarks/ui/bookmarks_page.dart';
+import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
@@ -110,7 +111,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       return <Widget>[
         IconButton(
           tooltip: 'Перейти к аяту',
-          icon: Icon(Icons.filter_1, size: 18),
+          icon: Icon(Icons.filter_1, size: iconSize),
           onPressed: () async {
             final String aayah = await showDialog(
               context: context,

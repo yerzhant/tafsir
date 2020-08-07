@@ -6,6 +6,7 @@ import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/text/model/aayah.dart';
+import 'package:tafsir/text/ui/aayah_player.dart';
 import 'package:tafsir/text/ui/html_text.dart';
 
 const _labelStyle = TextStyle(
@@ -37,7 +38,13 @@ class _AayahInfoState extends State<AayahInfo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(width: 40),
+                    AayahPlayer(
+                      key: Key(
+                        '${widget.aayah.surahId}:${widget.aayah.weight}',
+                      ),
+                      surah: widget.aayah.surahId.toString(),
+                      aayah: widget.aayah.weight.toString(),
+                    ),
                     Spacer(),
                     Text(
                       '﴾ ',
@@ -56,7 +63,7 @@ class _AayahInfoState extends State<AayahInfo> {
                     ),
                     Spacer(),
                     IconButton(
-                      iconSize: 20,
+                      iconSize: iconSize,
                       icon: Icon(
                         Icons.bookmark,
                         color: _isBookmarked(context)

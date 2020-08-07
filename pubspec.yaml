@@ -21,6 +21,7 @@ dependencies:
   google_fonts: ^1.1.0
   scrollable_positioned_list: ^0.1.6
   cached_network_image: ^2.2.0+1
+  audioplayer: ^0.8.1
 
 dev_dependencies:
   # flutter_test:
