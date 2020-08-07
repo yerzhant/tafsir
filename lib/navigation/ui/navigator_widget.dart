@@ -151,13 +151,13 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                       _scrollToAayahController.value.text,
                     );
                   },
-                  child: Text('OK'),
+                  child: Text('OK', style: TextStyle(color: primaryColor)),
                 ),
                 FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Отмена'),
+                  child: Text('Отмена', style: TextStyle(color: primaryColor)),
                 ),
               ],
             ),

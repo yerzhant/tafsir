@@ -25,6 +25,7 @@ class TafsirApp extends StatelessWidget {
       title: 'Тафсир',
       theme: ThemeData(
         primaryColor: primaryColor,
+        accentColor: primaryColor,
         textTheme: TextTheme(bodyText2: TextStyle(color: textColor)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
