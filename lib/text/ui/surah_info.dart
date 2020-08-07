@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/suwar/model/surah.dart';
@@ -22,7 +23,7 @@ class SurahInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Image.network('$_images/${surah.image}'),
+        CachedNetworkImage(imageUrl: '$_images/${surah.image}'),
         SizedBox(height: 35),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
