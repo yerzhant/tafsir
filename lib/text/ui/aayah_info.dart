@@ -26,56 +26,60 @@ class _AayahInfoState extends State<AayahInfo> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        right: padding,
-        top: 5,
-        bottom: padding,
-        left: padding,
-      ),
+      padding: EdgeInsets.all(padding),
       child: Column(
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(width: 40),
-              Spacer(),
-              Text(
-                '﴾ ',
-                style: GoogleFonts.scheherazade(fontSize: 25),
-              ),
-              Text(
-                widget.aayah.title,
-                style: GoogleFonts.fondamento(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                ' ﴿',
-                style: GoogleFonts.scheherazade(fontSize: 25),
-              ),
-              Spacer(),
-              IconButton(
-                icon: Icon(
-                  Icons.bookmark,
-                  color: _isBookmarked(context) ? primaryColor : textColorGrey,
-                ),
-                onPressed: () => _toggleBookmark(context),
-              ),
-            ],
-          ),
-          SizedBox(height: 5),
           Container(
             color: Color(0xffeef5f7),
-            padding: EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    widget.aayah.textOrigin.trim(),
-                    style: GoogleFonts.scheherazade(fontSize: 34),
-                    textAlign: TextAlign.center,
+            padding: EdgeInsets.all(5),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SizedBox(width: 40),
+                    Spacer(),
+                    Text(
+                      '﴾ ',
+                      style: GoogleFonts.scheherazade(fontSize: 25),
+                    ),
+                    Text(
+                      widget.aayah.title,
+                      style: GoogleFonts.fondamento(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      ' ﴿',
+                      style: GoogleFonts.scheherazade(fontSize: 25),
+                    ),
+                    Spacer(),
+                    IconButton(
+                      iconSize: 20,
+                      icon: Icon(
+                        Icons.bookmark,
+                        color: _isBookmarked(context)
+                            ? primaryColor
+                            : textColorGrey,
+                      ),
+                      onPressed: () => _toggleBookmark(context),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Expanded(
+                        child: Text(
+                          widget.aayah.textOrigin.trim(),
+                          style: GoogleFonts.scheherazade(fontSize: 34),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -97,7 +101,7 @@ class _AayahInfoState extends State<AayahInfo> {
           if (widget.aayah.tafsir.isNotEmpty)
             Row(
               children: <Widget>[
-                Text('ТАФСИР (Толкование):', style: _labelStyle),
+                Text('ТАФСИР:', style: _labelStyle),
               ],
             ),
           if (widget.aayah.tafsir.isNotEmpty) SizedBox(height: 7),
