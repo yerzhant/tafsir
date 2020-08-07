@@ -5,6 +5,7 @@ import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const _suwarPageIndex = 0;
 const _textPageIndex = _suwarPageIndex + 1;
@@ -153,7 +154,34 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
           },
         ),
       ];
+    else if (state is ActivePageSuwar)
+      return <Widget>[
+        PopupMenuButton<_SuwarAction>(
+          itemBuilder: (_) => <PopupMenuEntry<_SuwarAction>>[
+            const PopupMenuItem(
+              child: Text('Загрузить все суры'),
+              value: _SuwarAction.downloadSuwar,
+            ),
+            const PopupMenuDivider(),
+            const PopupMenuItem(
+              child: Text('Azan.ru'),
+              value: _SuwarAction.azanRu,
+            ),
+          ],
+          onSelected: (value) async {
+            switch (value) {
+              case _SuwarAction.downloadSuwar:
+                break;
+              case _SuwarAction.azanRu:
+                await launch('https://azan.ru');
+                break;
+            }
+          },
+        ),
+      ];
     else
       return null;
   }
 }
+
+enum _SuwarAction { downloadSuwar, azanRu }
