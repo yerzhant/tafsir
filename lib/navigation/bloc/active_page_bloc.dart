@@ -48,8 +48,8 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
 
       final suwar = await tafsirRepository.getSuwar();
 
-      for (var i = 2; i < suwar.length; i++) {
-        final progress = (i - 1) / (suwar.length - 1);
+      for (var i = 0; i < suwar.length; i++) {
+        final progress = i / (suwar.length - 1);
         yield ActivePageSuwarDownloading(progress);
 
         final surah = suwar[i];
