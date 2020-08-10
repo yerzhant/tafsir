@@ -62,7 +62,10 @@ class _TextPageState extends State<TextPage> {
               itemCount: snapshot.data.length + 1,
               itemBuilder: (_, index) => index == 0
                   ? SurahInfo(surah: widget.surah)
-                  : AayahInfo(aayah: snapshot.data[index - 1]),
+                  : AayahInfo(
+                      surah: widget.surah,
+                      aayah: snapshot.data[index - 1],
+                    ),
               separatorBuilder: (_, __) => Divider(height: 1),
             ),
           );

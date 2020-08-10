@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:html/parser.dart';
+import 'package:share/share.dart';
 import 'package:tafsir/bookmarks/model/bookmark.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
+import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/aayah_player.dart';
 import 'package:tafsir/text/ui/html_text.dart';
@@ -15,9 +18,10 @@ const _labelStyle = TextStyle(
 );
 
 class AayahInfo extends StatefulWidget {
+  final Surah surah;
   final Aayah aayah;
 
-  const AayahInfo({Key key, this.aayah}) : super(key: key);
+  const AayahInfo({Key key, this.surah, this.aayah}) : super(key: key);
 
   @override
   _AayahInfoState createState() => _AayahInfoState();
@@ -45,10 +49,11 @@ class _AayahInfoState extends State<AayahInfo> {
                       surah: widget.aayah.surahId.toString(),
                       aayah: widget.aayah.weight.toString(),
                     ),
+                    SizedBox(width: 45),
                     Spacer(),
                     Text(
                       '﴾ ',
-                      style: GoogleFonts.scheherazade(fontSize: 25),
+                      style: GoogleFonts.scheherazade(fontSize: 22),
                     ),
                     Text(
                       widget.aayah.title,
@@ -59,9 +64,15 @@ class _AayahInfoState extends State<AayahInfo> {
                     ),
                     Text(
                       ' ﴿',
-                      style: GoogleFonts.scheherazade(fontSize: 25),
+                      style: GoogleFonts.scheherazade(fontSize: 22),
                     ),
                     Spacer(),
+                    IconButton(
+                      iconSize: iconSize,
+                      color: primaryColor,
+                      icon: Icon(Icons.share),
+                      onPressed: _share,
+                    ),
                     IconButton(
                       iconSize: iconSize,
                       icon: Icon(
@@ -149,5 +160,27 @@ class _AayahInfoState extends State<AayahInfo> {
     return state.bookmarks.any(
       (element) => element.aayah == widget.aayah.weight,
     );
+  }
+
+  void _share() {
+    final subject = '${widget.surah.title}, ${widget.aayah.weight}';
+    var text = '$subject.\n';
+    text += '\n';
+
+    text += 'ПЕРЕВОД:\n';
+    text += _htmlToString(widget.aayah.text);
+
+    if (widget.aayah.tafsir != '') {
+      text += '\n\n';
+      text += 'ТАФСИР:\n';
+      text += _htmlToString(widget.aayah.tafsir);
+    }
+
+    Share.share(text, subject: subject);
+  }
+
+  String _htmlToString(String html) {
+    final doc = parse(html);
+    return parse(doc.body.text).documentElement.text.trim();
   }
 }
