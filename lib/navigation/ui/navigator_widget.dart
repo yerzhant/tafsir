@@ -73,7 +73,10 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircularProgressIndicator(value: state.progress),
+                    CircularProgressIndicator(
+                      value: state.progress,
+                      backgroundColor: Colors.indigo[50],
+                    ),
                     SizedBox(height: padding),
                     Text(
                       '${((state.progress ?? 0) * 100).toStringAsFixed(2)} %',
