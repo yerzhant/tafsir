@@ -11,18 +11,19 @@ void main() async {
   final tafsirRepository = TafsirRepository();
   await tafsirRepository.init();
 
-  runApp(TafsirApp(tafsirRepository));
+  runApp(TafsirApp(tafsirRepository, await ThemeBloc.create()));
 }
 
 class TafsirApp extends StatelessWidget {
   final TafsirRepository tafsirRepository;
+  final ThemeBloc themeBloc;
 
-  TafsirApp(this.tafsirRepository);
+  TafsirApp(this.tafsirRepository, this.themeBloc);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ThemeBloc>(
-      create: (context) => ThemeBloc(),
+      create: (context) => themeBloc,
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp(
