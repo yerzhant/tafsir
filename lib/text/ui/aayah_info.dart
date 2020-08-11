@@ -37,73 +37,75 @@ class _AayahInfoState extends State<AayahInfo> {
       padding: EdgeInsets.all(padding),
       child: Column(
         children: <Widget>[
-          Container(
+          Material(
             color: themeState.aayahBackgroundColor,
-            padding: EdgeInsets.all(5),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    AayahPlayer(
-                      key: Key(
-                        '${widget.aayah.surahId}:${widget.aayah.weight}',
-                      ),
-                      surah: widget.aayah.surahId.toString(),
-                      aayah: widget.aayah.weight.toString(),
-                    ),
-                    SizedBox(width: 45),
-                    Spacer(),
-                    Text(
-                      '﴾ ',
-                      style: GoogleFonts.scheherazade(fontSize: 22),
-                    ),
-                    Text(
-                      widget.aayah.title,
-                      style: GoogleFonts.fondamento(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      ' ﴿',
-                      style: GoogleFonts.scheherazade(fontSize: 22),
-                    ),
-                    Spacer(),
-                    IconButton(
-                      iconSize: iconSize,
-                      color: Theme.of(context).primaryColor,
-                      icon: Icon(Icons.share),
-                      onPressed: _share,
-                    ),
-                    IconButton(
-                      iconSize: iconSize,
-                      icon: Icon(
-                        Icons.bookmark,
-                        color: _isBookmarked(context)
-                            ? Theme.of(context).primaryColor
-                            : textColorGrey,
-                      ),
-                      onPressed: () => _toggleBookmark(context),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
+            child: Container(
+              padding: EdgeInsets.all(5),
+              child: Column(
+                children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          widget.aayah.textOrigin.trim(),
-                          style: GoogleFonts.scheherazade(fontSize: 34),
-                          textAlign: TextAlign.center,
+                      AayahPlayer(
+                        key: Key(
+                          '${widget.aayah.surahId}:${widget.aayah.weight}',
                         ),
+                        surah: widget.aayah.surahId.toString(),
+                        aayah: widget.aayah.weight.toString(),
+                      ),
+                      SizedBox(width: 45),
+                      Spacer(),
+                      Text(
+                        '﴾ ',
+                        style: GoogleFonts.scheherazade(fontSize: 22),
+                      ),
+                      Text(
+                        widget.aayah.title,
+                        style: GoogleFonts.fondamento(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        ' ﴿',
+                        style: GoogleFonts.scheherazade(fontSize: 22),
+                      ),
+                      Spacer(),
+                      IconButton(
+                        iconSize: iconSize,
+                        color: Theme.of(context).primaryColor,
+                        icon: Icon(Icons.share),
+                        onPressed: _share,
+                      ),
+                      IconButton(
+                        iconSize: iconSize,
+                        icon: Icon(
+                          Icons.bookmark,
+                          color: _isBookmarked(context)
+                              ? Theme.of(context).primaryColor
+                              : textColorGrey,
+                        ),
+                        onPressed: () => _toggleBookmark(context),
                       ),
                     ],
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            widget.aayah.textOrigin.trim(),
+                            style: GoogleFonts.scheherazade(fontSize: 34),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(height: 20),
