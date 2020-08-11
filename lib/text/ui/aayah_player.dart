@@ -34,7 +34,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
   Widget build(BuildContext context) {
     return IconButton(
       iconSize: iconSize,
-      color: primaryColor,
+      color: Theme.of(context).primaryColor,
       icon: Icon(_isPlaying ? Icons.stop : Icons.play_arrow),
       onPressed: _pressed,
     );

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:html/parser.dart';
 import 'package:share/share.dart';
+import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/bookmarks/model/bookmark.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
@@ -11,11 +12,6 @@ import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/aayah_player.dart';
 import 'package:tafsir/text/ui/html_text.dart';
-
-const _labelStyle = TextStyle(
-  color: primaryColor,
-  fontWeight: FontWeight.bold,
-);
 
 class AayahInfo extends StatefulWidget {
   final Surah surah;
@@ -30,12 +26,19 @@ class AayahInfo extends StatefulWidget {
 class _AayahInfoState extends State<AayahInfo> {
   @override
   Widget build(BuildContext context) {
+    final themeState = BlocProvider.of<ThemeBloc>(context).state;
+
+    final _labelStyle = TextStyle(
+      color: Theme.of(context).primaryColor,
+      fontWeight: FontWeight.bold,
+    );
+
     return Padding(
       padding: EdgeInsets.all(padding),
       child: Column(
         children: <Widget>[
           Container(
-            color: Color(0xffeef5f7),
+            color: themeState.aayahBackgroundColor,
             padding: EdgeInsets.all(5),
             child: Column(
               children: [
@@ -69,7 +72,7 @@ class _AayahInfoState extends State<AayahInfo> {
                     Spacer(),
                     IconButton(
                       iconSize: iconSize,
-                      color: primaryColor,
+                      color: Theme.of(context).primaryColor,
                       icon: Icon(Icons.share),
                       onPressed: _share,
                     ),
@@ -78,7 +81,7 @@ class _AayahInfoState extends State<AayahInfo> {
                       icon: Icon(
                         Icons.bookmark,
                         color: _isBookmarked(context)
-                            ? primaryColor
+                            ? Theme.of(context).primaryColor
                             : textColorGrey,
                       ),
                       onPressed: () => _toggleBookmark(context),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tafsir/constants.dart';
+import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/navigation/ui/navigator_widget.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
@@ -21,20 +21,22 @@ class TafsirApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Тафсир',
-      theme: ThemeData(
-        primaryColor: primaryColor,
-        accentColor: primaryColor,
-        textTheme: TextTheme(bodyText2: TextStyle(color: textColor)),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: RepositoryProvider(
-        create: (context) => tafsirRepository,
-        child: BlocProvider(
-          create: (context) => ActivePageBloc(tafsirRepository),
-          child: NavigatorWidget(),
-        ),
+    return BlocProvider<ThemeBloc>(
+      create: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Тафсир',
+            theme: state.themeData,
+            home: RepositoryProvider(
+              create: (context) => tafsirRepository,
+              child: BlocProvider<ActivePageBloc>(
+                create: (context) => ActivePageBloc(tafsirRepository),
+                child: NavigatorWidget(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

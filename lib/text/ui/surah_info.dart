@@ -42,14 +42,27 @@ class SurahInfo extends StatelessWidget {
           child: Column(
             children: <Widget>[
               if (surah.isSurah())
-                _lineWithButton(surah.revealAt == 'Madina'
-                    ? 'Мединская сура'
-                    : 'Мекканская сура'),
-              if (surah.isSurah()) _lineWithButton('${surah.ayatsCount} аятов'),
-              if (surah.isSurah()) _lineWithButton('${surah.dzhuz} джуз'),
+                _lineWithButton(
+                  surah.revealAt == 'Madina'
+                      ? 'Мединская сура'
+                      : 'Мекканская сура',
+                  context,
+                ),
               if (surah.isSurah())
                 _lineWithButton(
-                    'в порядке ниспосылания - ${surah.revealOrder}'),
+                  '${surah.ayatsCount} аятов',
+                  context,
+                ),
+              if (surah.isSurah())
+                _lineWithButton(
+                  '${surah.dzhuz} джуз',
+                  context,
+                ),
+              if (surah.isSurah())
+                _lineWithButton(
+                  'в порядке ниспосылания - ${surah.revealOrder}',
+                  context,
+                ),
               if (surah.isSurah()) Divider(height: 35),
               Row(
                 children: <Widget>[
@@ -67,12 +80,12 @@ class SurahInfo extends StatelessWidget {
       ? 'Сура «${surah.title.toUpperCase()}»'
       : surah.title.toUpperCase();
 
-  Widget _lineWithButton(String text) {
+  Widget _lineWithButton(String text, BuildContext context) {
     return Container(
       height: 25,
       child: Row(
         children: <Widget>[
-          Icon(Icons.stop, color: primaryColor, size: 10),
+          Icon(Icons.stop, color: Theme.of(context).primaryColor, size: 10),
           SizedBox(width: 5),
           Text(text),
         ],

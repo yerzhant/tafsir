@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/bookmarks/ui/bookmarks_page.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
@@ -164,13 +165,19 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                       _scrollToAayahController.value.text,
                     );
                   },
-                  child: Text('OK', style: TextStyle(color: primaryColor)),
+                  child: Text(
+                    'OK',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
                 ),
                 FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Отмена', style: TextStyle(color: primaryColor)),
+                  child: Text(
+                    'Отмена',
+                    style: TextStyle(color: Theme.of(context).primaryColor),
+                  ),
                 ),
               ],
             ),
@@ -185,16 +192,22 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
             );
         },
       );
-    else if (state is ActivePageSuwar)
+    else if (state is ActivePageSuwar) {
+      final isDarkMode = BlocProvider.of<ThemeBloc>(context).state is ThemeDark;
+
       return PopupMenuButton<_SuwarAction>(
         itemBuilder: (_) => <PopupMenuEntry<_SuwarAction>>[
           const PopupMenuItem(
-            child: Text('Загрузить все суры'),
+            child: const Text('Загрузить все суры'),
             value: _SuwarAction.downloadSuwar,
+          ),
+          PopupMenuItem(
+            child: isDarkMode ? Text('Светлый режим') : Text('Темный режим'),
+            value: _SuwarAction.switchDarkMode,
           ),
           const PopupMenuDivider(),
           const PopupMenuItem(
-            child: Text('Azan.ru'),
+            child: const Text('Azan.ru'),
             value: _SuwarAction.azanRu,
           ),
         ],
@@ -205,15 +218,20 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                   .add(ActivePageSuwarDownloaded());
               break;
 
+            case _SuwarAction.switchDarkMode:
+              BlocProvider.of<ThemeBloc>(context)
+                  .add(isDarkMode ? ThemeLightSelected() : ThemeDarkSelected());
+              break;
+
             case _SuwarAction.azanRu:
               await launch('https://azan.ru');
               break;
           }
         },
       );
-    else
+    } else
       return Container();
   }
 }
 
-enum _SuwarAction { downloadSuwar, azanRu }
+enum _SuwarAction { downloadSuwar, switchDarkMode, azanRu }

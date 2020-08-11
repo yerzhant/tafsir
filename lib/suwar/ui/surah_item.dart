@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 
 const _secondaryTextStyle = TextStyle(color: textColorGrey);
-
-const _activeBackgroundColor = Color(0xFFDBE1FF);
 
 class SurahItem extends StatelessWidget {
   final Surah surah;
@@ -15,11 +14,13 @@ class SurahItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeState = BlocProvider.of<ThemeBloc>(context).state;
+
     final isActive = _isActive(context);
     return InkWell(
       child: Container(
         height: 70,
-        color: isActive ? _activeBackgroundColor : null,
+        color: isActive ? themeState.activeSurahItemBackgroundColor : null,
         child: Row(
           children: <Widget>[
             Container(
@@ -31,7 +32,8 @@ class SurahItem extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: isActive ? primaryColor : null,
+                          color:
+                              isActive ? Theme.of(context).primaryColor : null,
                         ),
                       ),
                     )
@@ -47,7 +49,7 @@ class SurahItem extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.w500,
-                      color: isActive ? primaryColor : null,
+                      color: isActive ? Theme.of(context).primaryColor : null,
                     ),
                   ),
                   if (surah.titleInRussian != '')
