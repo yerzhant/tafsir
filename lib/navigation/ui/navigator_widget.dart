@@ -134,9 +134,13 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircularProgressIndicator(
-              value: state.progress,
-              backgroundColor: Colors.indigo[50],
+            BlocBuilder<ThemeBloc, ThemeState>(
+              builder: (context, themeState) {
+                return CircularProgressIndicator(
+                  value: state.progress,
+                  backgroundColor: themeState.suwarProgressBg,
+                );
+              },
             ),
             SizedBox(height: padding),
             Text(

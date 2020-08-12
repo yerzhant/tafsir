@@ -3,6 +3,9 @@ part of 'theme_bloc.dart';
 var _primaryColorLight = Colors.indigoAccent;
 var _primaryColorDark = Colors.indigo[600];
 
+var _suwarProgressBgLight = Colors.indigo[50];
+var _suwarProgressBgDark = Color(0xff1e1f29);
+
 const _textColorLight = const Color(0xFF414141);
 const _textColorDark = const Color(0xFFE0E0E0);
 
@@ -30,6 +33,7 @@ const _aayahSpecDivBgDark = '#282828';
 @immutable
 abstract class ThemeState {
   final ThemeData themeData;
+  final Color suwarProgressBg;
   final Color activeSurahItemBackgroundColor;
   final Color aayahBackgroundColor;
   final Color htmlTextColor;
@@ -40,6 +44,7 @@ abstract class ThemeState {
 
   ThemeState(
     this.themeData,
+    this.suwarProgressBg,
     this.activeSurahItemBackgroundColor,
     this.aayahBackgroundColor,
     this.htmlTextColor,
@@ -65,6 +70,7 @@ class ThemeLight extends ThemeState {
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          _suwarProgressBgLight,
           _activeSurahItemBackgroundColorLight,
           _aayahBackgroundColorLight,
           _htmlTextColorLight,
@@ -90,6 +96,7 @@ class ThemeDark extends ThemeState {
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          _suwarProgressBgDark,
           _activeSurahItemBackgroundColorDark,
           _aayahBackgroundColorDark,
           _htmlTextColorDark,
