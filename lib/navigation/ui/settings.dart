@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/constants.dart';
-import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/text/bloc/settings_bloc.dart';
 
 class Settings extends StatelessWidget {
@@ -18,18 +17,19 @@ class Settings extends StatelessWidget {
           context: context,
           child: _Dialog(
             fontSize: BlocProvider.of<SettingsBloc>(context).state.fontSize,
+            showTranslation:
+                BlocProvider.of<SettingsBloc>(context).state.showTranslation,
+            showTafsir: BlocProvider.of<SettingsBloc>(context).state.showTafsir,
             themeState: BlocProvider.of<ThemeBloc>(context).state,
           ),
         );
 
         if (settings != null) {
-          BlocProvider.of<SettingsBloc>(context)
-              .add(SettingsFontSizeChanged(settings.fontSize));
-
-          BlocProvider.of<ActivePageBloc>(context).add(
-            ActivePageTextShown(
-              BlocProvider.of<ActivePageBloc>(context).state.surah,
-              null,
+          BlocProvider.of<SettingsBloc>(context).add(
+            SettingsChanged(
+              settings.fontSize,
+              settings.showTranslation,
+              settings.showTafsir,
             ),
           );
         }
@@ -40,11 +40,15 @@ class Settings extends StatelessWidget {
 
 class _Dialog extends StatefulWidget {
   final double fontSize;
+  final bool showTranslation;
+  final bool showTafsir;
   final ThemeState themeState;
 
   const _Dialog({
     Key key,
     this.fontSize,
+    this.showTranslation,
+    this.showTafsir,
     this.themeState,
   }) : super(key: key);
 
@@ -54,11 +58,15 @@ class _Dialog extends StatefulWidget {
 
 class _DialogState extends State<_Dialog> {
   double _fontSize;
+  bool _showTranslation;
+  bool _showTafsir;
 
   @override
   void initState() {
     super.initState();
     _fontSize = widget.fontSize;
+    _showTranslation = widget.showTranslation;
+    _showTafsir = widget.showTafsir;
   }
 
   @override
@@ -89,12 +97,39 @@ class _DialogState extends State<_Dialog> {
               });
             },
           ),
+          CheckboxListTile(
+            controlAffinity: ListTileControlAffinity.leading,
+            title: Text('Перевод'),
+            value: _showTranslation,
+            onChanged: (value) {
+              setState(() {
+                _showTranslation = value;
+              });
+            },
+          ),
+          CheckboxListTile(
+            controlAffinity: ListTileControlAffinity.leading,
+            title: Text('Тафсир'),
+            value: _showTafsir,
+            onChanged: (value) {
+              setState(() {
+                _showTafsir = value;
+              });
+            },
+          ),
         ],
       ),
       actions: <Widget>[
         FlatButton(
           onPressed: () {
-            Navigator.pop(context, SettingsState(_fontSize));
+            Navigator.pop(
+              context,
+              SettingsState(
+                _fontSize,
+                _showTranslation,
+                _showTafsir,
+              ),
+            );
           },
           child: Text(
             'OK',

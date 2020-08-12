@@ -3,8 +3,10 @@ part of 'settings_bloc.dart';
 @immutable
 abstract class SettingsEvent {}
 
-class SettingsFontSizeChanged extends SettingsEvent {
+class SettingsChanged extends SettingsEvent {
   final double fontSize;
+  final bool showTranslation;
+  final bool showTafsir;
 
-  SettingsFontSizeChanged(this.fontSize);
+  SettingsChanged(this.fontSize, this.showTranslation, this.showTafsir);
 }

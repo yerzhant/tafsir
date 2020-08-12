@@ -63,6 +63,7 @@ class ThemeLight extends ThemeState {
             primaryColor: _primaryColorLight,
             accentColor: _primaryColorLight,
             textTheme: TextTheme(bodyText2: TextStyle(color: _textColorLight)),
+            toggleableActiveColor: _primaryColorLight,
             sliderTheme: SliderThemeData(
               activeTrackColor: Colors.indigoAccent[700],
               inactiveTrackColor: Colors.indigoAccent[100],
@@ -89,6 +90,7 @@ class ThemeDark extends ThemeState {
             primaryColor: _primaryColorDark,
             accentColor: _primaryColorDark,
             textTheme: TextTheme(bodyText2: TextStyle(color: _textColorDark)),
+            toggleableActiveColor: _primaryColorDark,
             sliderTheme: SliderThemeData(
               activeTrackColor: Colors.indigo[400],
               inactiveTrackColor: Colors.indigo[800],

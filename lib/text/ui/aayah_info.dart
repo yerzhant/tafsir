@@ -42,8 +42,9 @@ class _AayahInfoState extends State<AayahInfo> {
           return Column(
             children: <Widget>[
               _aayah(themeState, context),
-              ..._translation(_labelStyle),
-              if (widget.aayah.tafsir.isNotEmpty) ..._tafsir(_labelStyle),
+              if (state.showTranslation) ..._translation(_labelStyle),
+              if (state.showTafsir && widget.aayah.tafsir.isNotEmpty)
+                ..._tafsir(_labelStyle),
             ],
           );
         },

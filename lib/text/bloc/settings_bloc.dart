@@ -12,6 +12,9 @@ const _defaultFontSize = 16.0;
 
 const _textFontSizeKey = 'text-font-size';
 
+const _showTranslationKey = 'show-translation';
+const _showTafsirKey = 'show-tafsir';
+
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc._(SettingsState state) : super(state);
 
@@ -19,9 +22,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
     final prefs = await SharedPreferences.getInstance();
 
-    if (event is SettingsFontSizeChanged) {
+    if (event is SettingsChanged) {
       prefs.setDouble(_textFontSizeKey, event.fontSize);
-      yield SettingsState(event.fontSize);
+      prefs.setBool(_showTranslationKey, event.showTranslation);
+      prefs.setBool(_showTafsirKey, event.showTafsir);
+
+      yield SettingsState(
+        event.fontSize,
+        event.showTranslation,
+        event.showTafsir,
+      );
     }
   }
 
@@ -31,9 +41,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final fontSize = prefs.getDouble(_textFontSizeKey);
 
     if (fontSize == null) {
-      return SettingsBloc._(SettingsState(_defaultFontSize));
+      return SettingsBloc._(SettingsState(_defaultFontSize, true, true));
     }
 
-    return SettingsBloc._(SettingsState(fontSize));
+    final showTranslation = prefs.getBool(_showTranslationKey);
+    final showTafsir = prefs.getBool(_showTafsirKey);
+
+    return SettingsBloc._(SettingsState(fontSize, showTranslation, showTafsir));
   }
 }
