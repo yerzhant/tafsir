@@ -9,6 +9,7 @@ import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
+import 'package:tafsir/text/bloc/settings_bloc.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/aayah_player.dart';
 import 'package:tafsir/text/ui/html_text.dart';
@@ -28,111 +29,130 @@ class _AayahInfoState extends State<AayahInfo> {
   Widget build(BuildContext context) {
     final themeState = BlocProvider.of<ThemeBloc>(context).state;
 
-    final _labelStyle = TextStyle(
-      color: Theme.of(context).primaryColor,
-      fontWeight: FontWeight.bold,
-    );
-
     return Padding(
       padding: EdgeInsets.all(padding),
-      child: Column(
-        children: <Widget>[
-          Material(
-            color: themeState.aayahBackgroundColor,
-            child: Container(
-              padding: EdgeInsets.all(5),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      AayahPlayer(
-                        key: Key(
-                          '${widget.aayah.surahId}:${widget.aayah.weight}',
-                        ),
-                        surah: widget.aayah.surahId.toString(),
-                        aayah: widget.aayah.weight.toString(),
-                      ),
-                      SizedBox(width: 45),
-                      Spacer(),
-                      Text(
-                        '﴾ ',
-                        style: GoogleFonts.scheherazade(fontSize: 22),
-                      ),
-                      Text(
-                        widget.aayah.title,
-                        style: GoogleFonts.fondamento(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        ' ﴿',
-                        style: GoogleFonts.scheherazade(fontSize: 22),
-                      ),
-                      Spacer(),
-                      IconButton(
-                        iconSize: iconSize,
-                        color: Theme.of(context).primaryColor,
-                        icon: Icon(Icons.share),
-                        onPressed: _share,
-                      ),
-                      IconButton(
-                        iconSize: iconSize,
-                        icon: Icon(
-                          Icons.bookmark,
-                          color: _isBookmarked(context)
-                              ? Theme.of(context).primaryColor
-                              : textColorGrey,
-                        ),
-                        onPressed: () => _toggleBookmark(context),
-                      ),
-                    ],
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          final _labelStyle = TextStyle(
+            color: Theme.of(context).primaryColor,
+            fontWeight: FontWeight.w500,
+            fontSize: state.fontSize,
+          );
+
+          return Column(
+            children: <Widget>[
+              _aayah(themeState, context),
+              ..._translation(_labelStyle),
+              if (widget.aayah.tafsir.isNotEmpty) ..._tafsir(_labelStyle),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Material _aayah(ThemeState themeState, BuildContext context) {
+    return Material(
+      color: themeState.aayahBackgroundColor,
+      child: Container(
+        padding: EdgeInsets.all(5),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                AayahPlayer(
+                  key: Key(
+                    '${widget.aayah.surahId}:${widget.aayah.weight}',
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Expanded(
-                          child: Text(
-                            widget.aayah.textOrigin.trim(),
-                            style: GoogleFonts.scheherazade(fontSize: 34),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
+                  surah: widget.aayah.surahId.toString(),
+                  aayah: widget.aayah.weight.toString(),
+                ),
+                SizedBox(width: 45),
+                Spacer(),
+                Text(
+                  '﴾ ',
+                  style: GoogleFonts.scheherazade(fontSize: 22),
+                ),
+                Text(
+                  widget.aayah.title,
+                  style: GoogleFonts.fondamento(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  ' ﴿',
+                  style: GoogleFonts.scheherazade(fontSize: 22),
+                ),
+                Spacer(),
+                IconButton(
+                  iconSize: iconSize,
+                  color: Theme.of(context).primaryColor,
+                  icon: Icon(Icons.share),
+                  onPressed: _share,
+                ),
+                IconButton(
+                  iconSize: iconSize,
+                  icon: Icon(
+                    Icons.bookmark,
+                    color: _isBookmarked(context)
+                        ? Theme.of(context).primaryColor
+                        : textColorGrey,
+                  ),
+                  onPressed: () => _toggleBookmark(context),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: Text(
+                      widget.aayah.textOrigin.trim(),
+                      style: GoogleFonts.scheherazade(fontSize: 34),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          SizedBox(height: 20),
-          Row(
-            children: <Widget>[
-              Text('ПЕРЕВОД:', style: _labelStyle),
-            ],
-          ),
-          SizedBox(height: 7),
-          Row(
-            children: <Widget>[
-              Expanded(child: HtmlText(text: widget.aayah.text)),
-            ],
-          ),
-          if (widget.aayah.tafsir.isNotEmpty) SizedBox(height: 20),
-          if (widget.aayah.tafsir.isNotEmpty)
-            Row(
-              children: <Widget>[
-                Text('ТАФСИР:', style: _labelStyle),
-              ],
-            ),
-          if (widget.aayah.tafsir.isNotEmpty) SizedBox(height: 7),
-          if (widget.aayah.tafsir.isNotEmpty)
-            HtmlText(text: widget.aayah.tafsir),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  List<Widget> _translation(TextStyle labelStyle) {
+    return [
+      SizedBox(height: 20),
+      Row(
+        children: <Widget>[
+          Text('ПЕРЕВОД:', style: labelStyle),
+        ],
+      ),
+      SizedBox(height: 7),
+      Row(
+        children: <Widget>[
+          Expanded(child: HtmlText(text: widget.aayah.text)),
+        ],
+      ),
+    ];
+  }
+
+  List<Widget> _tafsir(TextStyle labelStyle) {
+    return [
+      SizedBox(height: 20),
+      Row(
+        children: <Widget>[
+          Text('ТАФСИР:', style: labelStyle),
+        ],
+      ),
+      SizedBox(height: 7),
+      HtmlText(text: widget.aayah.tafsir),
+    ];
   }
 
   void _toggleBookmark(BuildContext context) async {

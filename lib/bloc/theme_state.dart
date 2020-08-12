@@ -1,16 +1,19 @@
 part of 'theme_bloc.dart';
 
-const _primaryColorLight = const Color(0xFF536DFE);
-const _primaryColorDark = const Color(0xFF3949AB);
+var _primaryColorLight = Colors.indigoAccent;
+var _primaryColorDark = Colors.indigo[600];
 
 const _textColorLight = const Color(0xFF414141);
 const _textColorDark = const Color(0xFFE0E0E0);
 
+const _htmlTextColorLight = const Color(0xFF414141);
+const _htmlTextColorDark = const Color(0xFFB0B0B0);
+
 const _activeSurahItemBackgroundColorLight = const Color(0xFFDBE1FF);
 const _activeSurahItemBackgroundColorDark = const Color(0xFF202020);
 
-const _aayahBackgroundColorLight = const Color(0xffeef5f7);
-const _aayahBackgroundColorDark = const Color(0xff272c30);
+const _aayahBackgroundColorLight = const Color(0XFFEEF5F7);
+const _aayahBackgroundColorDark = const Color(0XFF272C30);
 
 const _aayahBlockquoteBlueBgLight = '#eef5ff';
 const _aayahBlockquoteBlueBgDark = '#29343d';
@@ -29,6 +32,7 @@ abstract class ThemeState {
   final ThemeData themeData;
   final Color activeSurahItemBackgroundColor;
   final Color aayahBackgroundColor;
+  final Color htmlTextColor;
   final String aayahBlockquoteBlueBg;
   final String aayahBlockquoteGreenBg;
   final String aayahFootnoteBg;
@@ -38,6 +42,7 @@ abstract class ThemeState {
     this.themeData,
     this.activeSurahItemBackgroundColor,
     this.aayahBackgroundColor,
+    this.htmlTextColor,
     this.aayahBlockquoteBlueBg,
     this.aayahBlockquoteGreenBg,
     this.aayahFootnoteBg,
@@ -53,10 +58,16 @@ class ThemeLight extends ThemeState {
             primaryColor: _primaryColorLight,
             accentColor: _primaryColorLight,
             textTheme: TextTheme(bodyText2: TextStyle(color: _textColorLight)),
+            sliderTheme: SliderThemeData(
+              activeTrackColor: Colors.indigoAccent[700],
+              inactiveTrackColor: Colors.indigoAccent[100],
+              thumbColor: Colors.indigoAccent,
+            ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           _activeSurahItemBackgroundColorLight,
           _aayahBackgroundColorLight,
+          _htmlTextColorLight,
           _aayahBlockquoteBlueBgLight,
           _aayahBlockquoteGreenBgLight,
           _aayahFootnoteBgLight,
@@ -72,10 +83,16 @@ class ThemeDark extends ThemeState {
             primaryColor: _primaryColorDark,
             accentColor: _primaryColorDark,
             textTheme: TextTheme(bodyText2: TextStyle(color: _textColorDark)),
+            sliderTheme: SliderThemeData(
+              activeTrackColor: Colors.indigo[400],
+              inactiveTrackColor: Colors.indigo[800],
+              thumbColor: Color(0xFF3949AB),
+            ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           _activeSurahItemBackgroundColorDark,
           _aayahBackgroundColorDark,
+          _htmlTextColorDark,
           _aayahBlockquoteBlueBgDark,
           _aayahBlockquoteGreenBgDark,
           _aayahFootnoteBgDark,

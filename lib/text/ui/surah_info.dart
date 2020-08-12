@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/suwar/model/surah.dart';
+import 'package:tafsir/text/bloc/settings_bloc.dart';
 import 'package:tafsir/text/ui/html_text.dart';
 
 const _images = '$server/media/images/surahs';
@@ -87,7 +90,19 @@ class SurahInfo extends StatelessWidget {
         children: <Widget>[
           Icon(Icons.stop, color: Theme.of(context).primaryColor, size: 10),
           SizedBox(width: 5),
-          Text(text),
+          BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, themState) {
+              return BlocBuilder<SettingsBloc, SettingsState>(
+                builder: (context, state) {
+                  final _textStyle = TextStyle(
+                    fontSize: state.fontSize,
+                    color: themState.htmlTextColor,
+                  );
+                  return Text(text, style: _textStyle);
+                },
+              );
+            },
+          ),
         ],
       ),
     );
