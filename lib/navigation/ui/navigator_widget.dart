@@ -4,6 +4,7 @@ import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/bookmarks/ui/bookmarks_page.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
+import 'package:tafsir/navigation/ui/go_to_aayah.dart';
 import 'package:tafsir/navigation/ui/settings.dart';
 import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
@@ -21,8 +22,6 @@ class NavigatorWidget extends StatefulWidget {
 }
 
 class _NavigatorWidgetState extends State<NavigatorWidget> {
-  final _scrollToAayahController = TextEditingController();
-
   int _currentPageIndex = _suwarPageIndex;
 
   @override
@@ -77,7 +76,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
   List<Widget> _getAction(BuildContext context, ActivePageState state) {
     if (state is ActivePageText && state.surah.isSurah())
       return [
-        _gotoAayah(context, state),
+        GoToAayah(activePageText: state),
         Settings(),
       ];
     else if (state is ActivePageSuwar) {
@@ -121,58 +120,6 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       ];
     } else
       return [];
-  }
-
-  IconButton _gotoAayah(BuildContext context, ActivePageText state) {
-    return IconButton(
-      tooltip: 'Перейти к аяту',
-      icon: Icon(Icons.filter_1, size: iconSize),
-      onPressed: () async {
-        final String aayah = await showDialog(
-          context: context,
-          child: AlertDialog(
-            content: TextField(
-              autofocus: true,
-              maxLength: 3,
-              controller: _scrollToAayahController,
-              decoration: InputDecoration(labelText: 'Перейти к аяту'),
-              keyboardType: TextInputType.number,
-            ),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(
-                    context,
-                    _scrollToAayahController.value.text,
-                  );
-                },
-                child: Text(
-                  'OK',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-              ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Отмена',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-              ),
-            ],
-          ),
-        );
-        if (aayah != null && aayah.isNotEmpty)
-          BlocProvider.of<ActivePageBloc>(context).add(
-            ActivePageTextScrolledTo(
-              state.surah,
-              state.bookmarks,
-              int.parse(aayah),
-            ),
-          );
-      },
-    );
   }
 
   Widget _getBody(ActivePageState state) {
