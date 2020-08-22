@@ -12,22 +12,30 @@ void main() async {
   final tafsirRepository = TafsirRepository();
   await tafsirRepository.init();
 
-  runApp(TafsirApp(
-    tafsirRepository,
-    await ThemeBloc.create(),
-    await SettingsBloc.create(),
-  ));
+  runApp(
+    TafsirApp(
+      tafsirRepository,
+      await ActivePageBloc.create(tafsirRepository),
+      await ThemeBloc.create(),
+      await SettingsBloc.create(),
+      await tafsirRepository.getActivePageIndex(),
+    ),
+  );
 }
 
 class TafsirApp extends StatelessWidget {
   final TafsirRepository tafsirRepository;
+  final ActivePageBloc activePageBloc;
   final ThemeBloc themeBloc;
   final SettingsBloc settingsBloc;
+  final int initialPageIndex;
 
   TafsirApp(
     this.tafsirRepository,
+    this.activePageBloc,
     this.themeBloc,
     this.settingsBloc,
+    this.initialPageIndex,
   );
 
   @override
@@ -44,13 +52,13 @@ class TafsirApp extends StatelessWidget {
               child: MultiBlocProvider(
                 providers: [
                   BlocProvider<ActivePageBloc>(
-                    create: (context) => ActivePageBloc(tafsirRepository),
+                    create: (context) => activePageBloc,
                   ),
                   BlocProvider<SettingsBloc>(
                     create: (context) => settingsBloc,
                   ),
                 ],
-                child: NavigatorWidget(),
+                child: NavigatorWidget(initialPageIndex: initialPageIndex),
               ),
             ),
           );

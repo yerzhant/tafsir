@@ -6,6 +6,8 @@ import 'package:tafsir/repository/surah_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
 
+const _activePageIndexKey = 'active-page-index';
+
 const _textPositionSurahKey = 'text-position-surah';
 const _textPositionIndexKey = 'text-position-index';
 const _textPositionLeadingEdgeKey = 'text-position-leading-edge';
@@ -111,6 +113,16 @@ class TafsirRepository {
       prefs.getInt(_textPositionIndexKey) ?? 0,
       prefs.getDouble(_textPositionLeadingEdgeKey) ?? 0,
     );
+  }
+
+  Future<void> saveActivePageIndex(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt(_activePageIndexKey, index);
+  }
+
+  Future<int> getActivePageIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_activePageIndexKey) ?? 0;
   }
 }
 

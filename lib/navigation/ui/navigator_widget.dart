@@ -10,19 +10,27 @@ import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const _suwarPageIndex = 0;
-const _textPageIndex = _suwarPageIndex + 1;
-const _bookmarksPageIndex = _textPageIndex + 1;
+const suwarPageIndex = 0;
+const textPageIndex = suwarPageIndex + 1;
+const bookmarksPageIndex = textPageIndex + 1;
 
 class NavigatorWidget extends StatefulWidget {
-  const NavigatorWidget({Key key}) : super(key: key);
+  final int initialPageIndex;
+  const NavigatorWidget({Key key, @required this.initialPageIndex})
+      : super(key: key);
 
   @override
   _NavigatorWidgetState createState() => _NavigatorWidgetState();
 }
 
 class _NavigatorWidgetState extends State<NavigatorWidget> {
-  int _currentPageIndex = _suwarPageIndex;
+  int _currentPageIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentPageIndex = widget.initialPageIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +47,25 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         listener: (_, state) {
           if (state is ActivePageSuwar)
             setState(() {
-              _currentPageIndex = _suwarPageIndex;
+              _currentPageIndex = suwarPageIndex;
             });
           else if (state is ActivePageText)
             setState(() {
-              _currentPageIndex = _textPageIndex;
+              _currentPageIndex = textPageIndex;
             });
           else if (state is ActivePageBookmarks)
             setState(() {
-              _currentPageIndex = _bookmarksPageIndex;
+              _currentPageIndex = bookmarksPageIndex;
             });
         },
         builder: (context, state) {
           return BlocBuilder<ThemeBloc, ThemeState>(
-            builder: (context, themState) {
+            builder: (context, themeState) {
               return Scaffold(
                 appBar: AppBar(
                   title: _getTitle(state),
                   actions: _getAction(context, state),
-                  backgroundColor: themState.appBarBgColor,
+                  backgroundColor: themeState.appBarBgColor,
                 ),
                 body: _getBody(state),
                 bottomNavigationBar: buildBottomNavigationBar(context),
@@ -179,16 +187,16 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         ActivePageEvent event;
 
         switch (index) {
-          case _suwarPageIndex:
+          case suwarPageIndex:
             event = ActivePageSuwarShown();
             break;
 
-          case _textPageIndex:
+          case textPageIndex:
             final surah = BlocProvider.of<ActivePageBloc>(context).state.surah;
             event = ActivePageTextShown(surah, null);
             break;
 
-          case _bookmarksPageIndex:
+          case bookmarksPageIndex:
             event = ActivePageBookmarksShown();
             break;
         }

@@ -6,6 +6,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:meta/meta.dart';
 import 'package:tafsir/bookmarks/model/bookmark.dart';
 import 'package:tafsir/constants.dart';
+import 'package:tafsir/navigation/ui/navigator_widget.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 
@@ -17,15 +18,57 @@ const _images = '$server/media/images/surahs';
 class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
   final TafsirRepository tafsirRepository;
 
-  ActivePageBloc(this.tafsirRepository) : super(ActivePageSuwar(null));
+  ActivePageBloc._(ActivePageState state, this.tafsirRepository) : super(state);
+
+  static Future<ActivePageBloc> create(TafsirRepository repository) async {
+    final activePageIndex = await repository.getActivePageIndex();
+
+    switch (activePageIndex) {
+      case textPageIndex:
+        final initialTextPosition = await repository.getInitialTextPosition();
+        final surah =
+            await repository.getSurahByWeight(initialTextPosition.surahWeight);
+        final bookmarks =
+            await repository.bookmarkRepository.findBySurah(surah);
+
+        return ActivePageBloc._(
+          ActivePageText(
+            surah,
+            bookmarks,
+            null,
+            initialTextPosition.index,
+            initialTextPosition.leadingEdge,
+          ),
+          repository,
+        );
+
+      case bookmarksPageIndex:
+        final initialTextPosition = await repository.getInitialTextPosition();
+        final surah =
+            await repository.getSurahByWeight(initialTextPosition.surahWeight);
+        final bookmarks = await repository.bookmarkRepository.getAll();
+
+        return ActivePageBloc._(
+          ActivePageBookmarks(surah, bookmarks),
+          repository,
+        );
+
+      default:
+        return ActivePageBloc._(ActivePageSuwar(null), repository);
+    }
+  }
 
   @override
   Stream<ActivePageState> mapEventToState(ActivePageEvent event) async* {
     if (event is ActivePageSuwarShown) {
+      tafsirRepository.saveActivePageIndex(suwarPageIndex);
       yield ActivePageSuwar(state.surah);
     } else if (event is ActivePageTextScrolledTo) {
+      tafsirRepository.saveActivePageIndex(textPageIndex);
       yield ActivePageTextScrollTo(event.surah, event.bookmarks, event.aayah);
     } else if (event is ActivePageTextShown) {
+      tafsirRepository.saveActivePageIndex(textPageIndex);
+
       var surah = event.surah;
 
       int initialIndex = 0;
@@ -51,6 +94,8 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         initialLeadingEdge,
       );
     } else if (event is ActivePageBookmarksShown) {
+      tafsirRepository.saveActivePageIndex(bookmarksPageIndex);
+
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
       yield ActivePageBookmarks(state.surah, bookmarks);
     } else if (event is ActivePageSuwarDownloaded) {
