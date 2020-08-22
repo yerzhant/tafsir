@@ -1,9 +1,16 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:tafsir/repository/aayah_repository.dart';
 import 'package:tafsir/repository/bookmark_repository.dart';
 import 'package:tafsir/repository/surah_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
+
+const _textPositionSurahKey = 'text-position-surah';
+const _textPositionIndexKey = 'text-position-index';
+const _textPositionLeadingEdgeKey = 'text-position-leading-edge';
+
+const _preamble = -1;
 
 class TafsirRepository {
   Database _db;
@@ -84,4 +91,33 @@ class TafsirRepository {
   Future<Surah> getSurahByWeight(int weight) {
     return _surahRepository.getSurahByWeight(weight);
   }
+
+  Future<void> saveInitialTextPosition(
+    InitialTextPosition initialTextPosition,
+  ) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    prefs.setInt(_textPositionSurahKey, initialTextPosition.surahWeight);
+    prefs.setInt(_textPositionIndexKey, initialTextPosition.index);
+    prefs.setDouble(
+        _textPositionLeadingEdgeKey, initialTextPosition.leadingEdge);
+  }
+
+  Future<InitialTextPosition> getInitialTextPosition() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return InitialTextPosition(
+      prefs.getInt(_textPositionSurahKey) ?? _preamble,
+      prefs.getInt(_textPositionIndexKey) ?? 0,
+      prefs.getDouble(_textPositionLeadingEdgeKey) ?? 0,
+    );
+  }
+}
+
+class InitialTextPosition {
+  final int surahWeight;
+  final int index;
+  final double leadingEdge;
+
+  const InitialTextPosition(this.surahWeight, this.index, this.leadingEdge);
 }

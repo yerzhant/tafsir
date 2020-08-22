@@ -22,6 +22,8 @@ class TextPage extends StatefulWidget {
 
 class _TextPageState extends State<TextPage> {
   final ItemScrollController _itemScrollController = ItemScrollController();
+  final ItemPositionsListener _itemPositionsListener =
+      ItemPositionsListener.create();
 
   Future<List<Aayah>> _aayaat;
 
@@ -37,6 +39,18 @@ class _TextPageState extends State<TextPage> {
         await Future.delayed(Duration(milliseconds: 150));
         _scrollTo(widget.aayah);
       });
+
+    _itemPositionsListener.itemPositions.addListener(() {
+      final item = _itemPositionsListener.itemPositions.value.first;
+      final InitialTextPosition initialTextPosition = InitialTextPosition(
+        widget.surah.weight,
+        item.index,
+        item.itemLeadingEdge,
+      );
+
+      RepositoryProvider.of<TafsirRepository>(context)
+          .saveInitialTextPosition(initialTextPosition);
+    });
   }
 
   void _scrollTo(int aayah) {
@@ -52,22 +66,30 @@ class _TextPageState extends State<TextPage> {
       future: _aayaat,
       builder: (_, snapshot) {
         if (snapshot.hasData)
-          return BlocListener<ActivePageBloc, ActivePageState>(
+          return BlocConsumer<ActivePageBloc, ActivePageState>(
             listener: (_, state) {
               if (state is ActivePageTextScrollTo) _scrollTo(state.aayah);
             },
-            child: ScrollablePositionedList.separated(
-              key: PageStorageKey('text-list-${widget.surah.id}'),
-              itemScrollController: _itemScrollController,
-              itemCount: snapshot.data.length + 1,
-              itemBuilder: (_, index) => index == 0
-                  ? SurahInfo(surah: widget.surah)
-                  : AayahInfo(
-                      surah: widget.surah,
-                      aayah: snapshot.data[index - 1],
-                    ),
-              separatorBuilder: (_, __) => Divider(height: 1),
-            ),
+            builder: (_, state) {
+              if (state is ActivePageText)
+                return ScrollablePositionedList.separated(
+                  key: PageStorageKey('text-list-${widget.surah.id}'),
+                  itemScrollController: _itemScrollController,
+                  itemPositionsListener: _itemPositionsListener,
+                  initialScrollIndex: state.initialIndex,
+                  initialAlignment: state.initialLeadingEdge,
+                  itemCount: snapshot.data.length + 1,
+                  itemBuilder: (_, index) => index == 0
+                      ? SurahInfo(surah: widget.surah)
+                      : AayahInfo(
+                          surah: widget.surah,
+                          aayah: snapshot.data[index - 1],
+                        ),
+                  separatorBuilder: (_, __) => Divider(height: 1),
+                );
+              else
+                return Center(child: CircularProgressIndicator());
+            },
           );
         else if (snapshot.hasError) {
           if (snapshot.error is SocketException)

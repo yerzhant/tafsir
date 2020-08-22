@@ -12,8 +12,6 @@ import 'package:tafsir/suwar/model/surah.dart';
 part 'active_page_event.dart';
 part 'active_page_state.dart';
 
-const _preamble = -1;
-
 const _images = '$server/media/images/surahs';
 
 class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
@@ -30,14 +28,28 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
     } else if (event is ActivePageTextShown) {
       var surah = event.surah;
 
+      int initialIndex = 0;
+      double initialLeadingEdge = 0;
+
       if (surah == null) {
-        surah = await tafsirRepository.getSurahByWeight(_preamble);
+        final initialTextPosition =
+            await tafsirRepository.getInitialTextPosition();
+        surah = await tafsirRepository
+            .getSurahByWeight(initialTextPosition.surahWeight);
+        initialIndex = initialTextPosition.index;
+        initialLeadingEdge = initialTextPosition.leadingEdge;
       }
 
       final bookmarks =
           await tafsirRepository.bookmarkRepository.findBySurah(surah);
 
-      yield ActivePageText(surah, bookmarks, event.aayah);
+      yield ActivePageText(
+        surah,
+        bookmarks,
+        event.aayah,
+        initialIndex,
+        initialLeadingEdge,
+      );
     } else if (event is ActivePageBookmarksShown) {
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
       yield ActivePageBookmarks(state.surah, bookmarks);
