@@ -41,6 +41,8 @@ class _TextPageState extends State<TextPage> {
       });
 
     _itemPositionsListener.itemPositions.addListener(() {
+      if (_itemPositionsListener.itemPositions.value.length == 0) return;
+
       final item = _itemPositionsListener.itemPositions.value.first;
       final InitialTextPosition initialTextPosition = InitialTextPosition(
         widget.surah.weight,
