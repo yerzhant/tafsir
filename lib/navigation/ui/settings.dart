@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/text/bloc/settings_bloc.dart';
@@ -16,6 +17,8 @@ class Settings extends StatelessWidget {
         final settings = await showDialog<SettingsState>(
           context: context,
           child: _Dialog(
+            aayahFontSize:
+                BlocProvider.of<SettingsBloc>(context).state.aayahFontSize,
             fontSize: BlocProvider.of<SettingsBloc>(context).state.fontSize,
             showTranslation:
                 BlocProvider.of<SettingsBloc>(context).state.showTranslation,
@@ -27,6 +30,7 @@ class Settings extends StatelessWidget {
         if (settings != null) {
           BlocProvider.of<SettingsBloc>(context).add(
             SettingsChanged(
+              settings.aayahFontSize,
               settings.fontSize,
               settings.showTranslation,
               settings.showTafsir,
@@ -39,6 +43,7 @@ class Settings extends StatelessWidget {
 }
 
 class _Dialog extends StatefulWidget {
+  final double aayahFontSize;
   final double fontSize;
   final bool showTranslation;
   final bool showTafsir;
@@ -46,6 +51,7 @@ class _Dialog extends StatefulWidget {
 
   const _Dialog({
     Key key,
+    this.aayahFontSize,
     this.fontSize,
     this.showTranslation,
     this.showTafsir,
@@ -57,6 +63,7 @@ class _Dialog extends StatefulWidget {
 }
 
 class _DialogState extends State<_Dialog> {
+  double _aayahFontSize;
   double _fontSize;
   bool _showTranslation;
   bool _showTafsir;
@@ -64,6 +71,7 @@ class _DialogState extends State<_Dialog> {
   @override
   void initState() {
     super.initState();
+    _aayahFontSize = widget.aayahFontSize;
     _fontSize = widget.fontSize;
     _showTranslation = widget.showTranslation;
     _showTafsir = widget.showTafsir;
@@ -76,6 +84,26 @@ class _DialogState extends State<_Dialog> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          SizedBox(
+            height: 48,
+            child: Center(
+              child: Text(
+                'الله أكبر',
+                style: GoogleFonts.scheherazade(fontSize: _aayahFontSize),
+              ),
+            ),
+          ),
+          Slider(
+            min: 30,
+            max: 40,
+            value: _aayahFontSize,
+            onChanged: (value) {
+              setState(() {
+                _aayahFontSize = value;
+              });
+            },
+          ),
+          SizedBox(height: 10),
           SizedBox(
             height: 24,
             child: Center(
@@ -135,6 +163,7 @@ class _DialogState extends State<_Dialog> {
             Navigator.pop(
               context,
               SettingsState(
+                _aayahFontSize,
                 _fontSize,
                 _showTranslation,
                 _showTafsir,

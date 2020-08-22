@@ -41,7 +41,7 @@ class _AayahInfoState extends State<AayahInfo> {
 
           return Column(
             children: <Widget>[
-              _aayah(themeState, context),
+              _aayah(context, state, themeState),
               if (state.showTranslation) ..._translation(_labelStyle),
               if (state.showTafsir && widget.aayah.tafsir.isNotEmpty)
                 ..._tafsir(_labelStyle),
@@ -52,7 +52,11 @@ class _AayahInfoState extends State<AayahInfo> {
     );
   }
 
-  Material _aayah(ThemeState themeState, BuildContext context) {
+  Material _aayah(
+    BuildContext context,
+    SettingsState settingsState,
+    ThemeState themeState,
+  ) {
     return Material(
       color: themeState.aayahBackgroundColor,
       child: Container(
@@ -113,7 +117,9 @@ class _AayahInfoState extends State<AayahInfo> {
                   Expanded(
                     child: Text(
                       widget.aayah.textOrigin.trim(),
-                      style: GoogleFonts.scheherazade(fontSize: 34),
+                      style: GoogleFonts.scheherazade(
+                        fontSize: settingsState.aayahFontSize,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
