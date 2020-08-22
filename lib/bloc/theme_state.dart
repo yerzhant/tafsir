@@ -1,7 +1,10 @@
 part of 'theme_bloc.dart';
 
 var _primaryColorLight = Colors.indigoAccent;
-var _primaryColorDark = Colors.indigo[600];
+var _primaryColorDark = Colors.indigoAccent[200];
+
+var _appBarBgColorLight = _primaryColorLight;
+var _appBarBgColorDark = Colors.indigo[600];
 
 var _suwarProgressBgLight = Colors.indigo[50];
 var _suwarProgressBgDark = Color(0xff1e1f29);
@@ -16,23 +19,24 @@ const _activeSurahItemBackgroundColorLight = const Color(0xFFDBE1FF);
 const _activeSurahItemBackgroundColorDark = const Color(0xFF202020);
 
 const _aayahBackgroundColorLight = const Color(0XFFEEF5F7);
-const _aayahBackgroundColorDark = const Color(0XFF272C30);
+const _aayahBackgroundColorDark = const Color(0XFF463D5F);
 
-const _aayahBlockquoteBlueBgLight = '#eef5ff';
-const _aayahBlockquoteBlueBgDark = '#29343d';
+const _aayahBlockquoteBlueBgLight = '#EEF5FF';
+const _aayahBlockquoteBlueBgDark = '#434A88';
 
-const _aayahBlockquoteGreenBgLight = '#f5fffa';
-const _aayahBlockquoteGreenBgDark = '#2c362b';
+const _aayahBlockquoteGreenBgLight = '#F5FFFA';
+const _aayahBlockquoteGreenBgDark = '#335E2F';
 
-const _aayahFootnoteBgLight = '#eef5f7';
-const _aayahFootnoteBgDark = '#26251f';
+const _aayahSpecDivBgLight = '#F5F5F5';
+const _aayahSpecDivBgDark = '#444444';
 
-const _aayahSpecDivBgLight = '#f5f5f5';
-const _aayahSpecDivBgDark = '#282828';
+const _aayahFootnoteBgLight = '#EEF5F7';
+const _aayahFootnoteBgDark = '#344163';
 
 @immutable
 abstract class ThemeState {
   final ThemeData themeData;
+  final Color appBarBgColor;
   final Color suwarProgressBg;
   final Color activeSurahItemBackgroundColor;
   final Color aayahBackgroundColor;
@@ -44,6 +48,7 @@ abstract class ThemeState {
 
   ThemeState(
     this.themeData,
+    this.appBarBgColor,
     this.suwarProgressBg,
     this.activeSurahItemBackgroundColor,
     this.aayahBackgroundColor,
@@ -71,6 +76,7 @@ class ThemeLight extends ThemeState {
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          _appBarBgColorLight,
           _suwarProgressBgLight,
           _activeSurahItemBackgroundColorLight,
           _aayahBackgroundColorLight,
@@ -98,6 +104,7 @@ class ThemeDark extends ThemeState {
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
+          _appBarBgColorDark,
           _suwarProgressBgDark,
           _activeSurahItemBackgroundColorDark,
           _aayahBackgroundColorDark,

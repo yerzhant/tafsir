@@ -72,6 +72,7 @@ class _DialogState extends State<_Dialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      title: Text('Настройки'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -122,6 +123,15 @@ class _DialogState extends State<_Dialog> {
       actions: <Widget>[
         FlatButton(
           onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text(
+            'ОТМЕНА',
+            style: TextStyle(color: Theme.of(context).primaryColor),
+          ),
+        ),
+        FlatButton(
+          onPressed: () {
             Navigator.pop(
               context,
               SettingsState(
@@ -132,16 +142,7 @@ class _DialogState extends State<_Dialog> {
             );
           },
           child: Text(
-            'OK',
-            style: TextStyle(color: Theme.of(context).primaryColor),
-          ),
-        ),
-        FlatButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text(
-            'Отмена',
+            'ПРИМЕНИТЬ',
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
         ),

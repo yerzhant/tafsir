@@ -51,13 +51,18 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
             });
         },
         builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: _getTitle(state),
-              actions: _getAction(context, state),
-            ),
-            body: _getBody(state),
-            bottomNavigationBar: buildBottomNavigationBar(context),
+          return BlocBuilder<ThemeBloc, ThemeState>(
+            builder: (context, themState) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: _getTitle(state),
+                  actions: _getAction(context, state),
+                  backgroundColor: themState.appBarBgColor,
+                ),
+                body: _getBody(state),
+                bottomNavigationBar: buildBottomNavigationBar(context),
+              );
+            },
           );
         },
       ),

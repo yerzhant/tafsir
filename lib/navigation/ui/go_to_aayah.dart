@@ -24,14 +24,24 @@ class _GoToAayahState extends State<GoToAayah> {
         final String aayah = await showDialog(
           context: context,
           child: AlertDialog(
+            title: Text('Перейти к аяту'),
             content: TextField(
-              autofocus: true,
+              // autofocus: true,
               maxLength: 3,
               controller: _scrollToAayahController,
-              decoration: InputDecoration(labelText: 'Перейти к аяту'),
+              decoration: InputDecoration(labelText: 'Введите номер аята'),
               keyboardType: TextInputType.number,
             ),
             actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'ОТМЕНА',
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                ),
+              ),
               FlatButton(
                 onPressed: () {
                   Navigator.pop(
@@ -40,16 +50,7 @@ class _GoToAayahState extends State<GoToAayah> {
                   );
                 },
                 child: Text(
-                  'OK',
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-              ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'Отмена',
+                  'ПЕРЕЙТИ',
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
