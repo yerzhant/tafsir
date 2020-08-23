@@ -87,7 +87,7 @@ class HtmlText extends StatelessWidget {
         if (surah == null) {
           _badLinkNotification(context);
         } else {
-          final aayah = int.parse(firstMatch[2]);
+          final aayah = int.parse(firstMatch[2] ?? '0');
           final textPosition = await repository.getInitialTextPosition();
           final textHistory =
               BlocProvider.of<ActivePageBloc>(context).state.textHistory;
@@ -106,7 +106,15 @@ class HtmlText extends StatelessWidget {
     Scaffold.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          'Битая ссылка. Пожалуйста, попробуйте Перезагрузить данную суру через меню в верхнем правом углу. Если это непоможет, то оставьте отзыв об этом в Play Маркете.',
+          'Битая ссылка. Пожалуйста, попробуйте перезагрузить все суры.',
+        ),
+        duration: Duration(seconds: 7),
+        action: SnackBarAction(
+          label: 'Перезагрузить',
+          onPressed: () {
+            BlocProvider.of<ActivePageBloc>(context)
+                .add(ActivePageSuwarDownloaded());
+          },
         ),
       ),
     );
