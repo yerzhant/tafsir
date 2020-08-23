@@ -35,13 +35,12 @@ class _TextPageState extends State<TextPage> {
         .getAayaat(widget.surah);
 
     if (widget.aayah != null)
-      _aayaat.whenComplete(() async {
-        await Future.delayed(Duration(milliseconds: 150));
+      _aayaat.whenComplete(() {
         _scrollTo(widget.aayah);
       });
 
     _itemPositionsListener.itemPositions.addListener(() {
-      if (_itemPositionsListener.itemPositions.value.length == 0) return;
+      if (_itemPositionsListener.itemPositions.value.isEmpty) return;
 
       final item = _itemPositionsListener.itemPositions.value.first;
       final InitialTextPosition initialTextPosition = InitialTextPosition(
@@ -55,7 +54,8 @@ class _TextPageState extends State<TextPage> {
     });
   }
 
-  void _scrollTo(int aayah) {
+  void _scrollTo(int aayah) async {
+    await Future.delayed(Duration(milliseconds: 250));
     _itemScrollController.scrollTo(
       index: aayah,
       duration: Duration(seconds: 1),

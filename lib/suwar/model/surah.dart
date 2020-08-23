@@ -9,6 +9,7 @@ class Surah {
   final String revealAt;
   final int revealOrder;
   final String image;
+  final String slug;
 
   const Surah({
     this.id,
@@ -21,6 +22,7 @@ class Surah {
     this.revealAt,
     this.revealOrder,
     this.image,
+    this.slug,
   });
 
   factory Surah.fromMap(Map<String, dynamic> map) {
@@ -35,6 +37,7 @@ class Surah {
       revealAt: map['reveal_at'],
       revealOrder: map['reveal_order'],
       image: map['image'],
+      slug: map['slug'],
     );
   }
 
@@ -50,6 +53,7 @@ class Surah {
       'reveal_at': revealAt,
       'reveal_order': revealOrder,
       'image': image,
+      'slug': slug,
     };
   }
 

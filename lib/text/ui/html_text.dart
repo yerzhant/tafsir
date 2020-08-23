@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:tafsir/bloc/theme_bloc.dart';
+import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
+import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/text/bloc/settings_bloc.dart';
 
 class HtmlText extends StatelessWidget {
@@ -63,8 +65,45 @@ class HtmlText extends StatelessWidget {
             color: themeState.htmlTextColor,
           ),
           hyperlinkColor: Theme.of(context).primaryColor,
+          onTapUrl: (url) => _goto(context, url),
         );
       },
+    );
+  }
+
+  void _goto(BuildContext context, String url) async {
+    final prefix = 'https://azan.ru/tafsir/';
+
+    if (url.startsWith(prefix)) {
+      final suffix = url.replaceAll(prefix, '');
+
+      final regExp = RegExp(r'^([^/]+)(?:/\d+-\d+/(\d+))?$');
+      final firstMatch = regExp.firstMatch(suffix);
+
+      if (firstMatch != null) {
+        final repository = RepositoryProvider.of<TafsirRepository>(context);
+        final surah = await repository.getSurahBySlug(firstMatch[1]);
+
+        if (surah == null) {
+          _badLinkNotification(context);
+        } else {
+          final aayah = int.parse(firstMatch[2]);
+          BlocProvider.of<ActivePageBloc>(context)
+              .add(ActivePageTextShown(surah, aayah));
+        }
+      } else {
+        _badLinkNotification(context);
+      }
+    }
+  }
+
+  void _badLinkNotification(BuildContext context) {
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Битая ссылка. Пожалуйста, попробуйте Перезагрузить данную суру через меню в верхнем правом углу. Если это непоможет, то оставьте отзыв об этом в Play Маркете.',
+        ),
+      ),
     );
   }
 }

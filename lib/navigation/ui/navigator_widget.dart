@@ -139,7 +139,11 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
     if (state is ActivePageSuwar)
       return SuwarPage();
     else if (state is ActivePageText)
-      return TextPage(surah: state.surah, aayah: state.aayah);
+      return TextPage(
+        key: Key(state.surah.slug),
+        surah: state.surah,
+        aayah: state.aayah,
+      );
     else if (state is ActivePageBookmarks)
       return BookmarksPage();
     else if (state is ActivePageSuwarDownloading)

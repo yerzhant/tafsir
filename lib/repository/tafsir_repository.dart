@@ -23,7 +23,7 @@ class TafsirRepository {
   Future<void> init() async {
     _db = await openDatabase(
       'app.db',
-      version: 1,
+      version: 2,
       onCreate: (db, _) async {
         await db.execute('''
           create table surah(
@@ -36,7 +36,8 @@ class TafsirRepository {
             dzhuz text,
             reveal_at text,
             reveal_order integer,
-            image text
+            image text,
+            slug text
           )
         ''');
 
@@ -60,6 +61,12 @@ class TafsirRepository {
             aayah integer not null
           )
         ''');
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion == 1) {
+          await db.execute('alter table surah add slug text');
+          await db.delete('surah');
+        }
       },
     );
 
@@ -124,6 +131,8 @@ class TafsirRepository {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getInt(_activePageIndexKey) ?? 0;
   }
+
+  Future<Surah> getSurahBySlug(String slug) => _surahRepository.getBySlug(slug);
 }
 
 class InitialTextPosition {

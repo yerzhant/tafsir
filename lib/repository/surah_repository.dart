@@ -51,4 +51,13 @@ class SurahRepository {
     );
     return list.map((e) => Surah.fromMap(e)).first;
   }
+
+  Future<Surah> getBySlug(String slug) async {
+    final list = await db.query(
+      _tableName,
+      where: 'slug = ?',
+      whereArgs: [slug],
+    );
+    return list.map((e) => Surah.fromMap(e)).first;
+  }
 }
