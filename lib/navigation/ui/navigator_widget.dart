@@ -6,6 +6,7 @@ import 'package:tafsir/constants.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/navigation/ui/go_to_aayah.dart';
 import 'package:tafsir/navigation/ui/settings.dart';
+import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -37,6 +38,24 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
     return WillPopScope(
       onWillPop: () async {
         final state = BlocProvider.of<ActivePageBloc>(context).state;
+
+        if (state.textHistory.isNotEmpty) {
+          final textPosition = state.textHistory.removeLast();
+          final surah = await RepositoryProvider.of<TafsirRepository>(context)
+              .getSurahByWeight(textPosition.surahWeight);
+
+          BlocProvider.of<ActivePageBloc>(context).add(
+            ActivePageTextShown(
+              surah,
+              state.textHistory,
+              null,
+              initialIndex: textPosition.index,
+              initialLeadingEdge: textPosition.leadingEdge,
+            ),
+          );
+
+          return false;
+        }
 
         if (state is ActivePageSuwar) return true;
 
@@ -197,7 +216,11 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
 
           case textPageIndex:
             final surah = BlocProvider.of<ActivePageBloc>(context).state.surah;
-            event = ActivePageTextShown(surah, null);
+            event = ActivePageTextShown(
+              surah,
+              BlocProvider.of<ActivePageBloc>(context).state.textHistory,
+              null,
+            );
             break;
 
           case bookmarksPageIndex:

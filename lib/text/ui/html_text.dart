@@ -88,8 +88,13 @@ class HtmlText extends StatelessWidget {
           _badLinkNotification(context);
         } else {
           final aayah = int.parse(firstMatch[2]);
+          final textPosition = await repository.getInitialTextPosition();
+          final textHistory =
+              BlocProvider.of<ActivePageBloc>(context).state.textHistory;
+          textHistory.add(textPosition);
+
           BlocProvider.of<ActivePageBloc>(context)
-              .add(ActivePageTextShown(surah, aayah));
+              .add(ActivePageTextShown(surah, textHistory, aayah));
         }
       } else {
         _badLinkNotification(context);

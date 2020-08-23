@@ -69,6 +69,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     BlocProvider.of<ActivePageBloc>(context).add(
       ActivePageTextShown(
         surah,
+        BlocProvider.of<ActivePageBloc>(context).state.textHistory,
         bookmark.aayah,
       ),
     );

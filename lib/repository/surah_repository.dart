@@ -58,6 +58,7 @@ class SurahRepository {
       where: 'slug = ?',
       whereArgs: [slug],
     );
+    if (list.isEmpty) return null;
     return list.map((e) => Surah.fromMap(e)).first;
   }
 }

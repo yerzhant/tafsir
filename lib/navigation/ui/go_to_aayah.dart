@@ -61,6 +61,7 @@ class _GoToAayahState extends State<GoToAayah> {
           BlocProvider.of<ActivePageBloc>(context).add(
             ActivePageTextScrolledTo(
               widget.activePageText.surah,
+              BlocProvider.of<ActivePageBloc>(context).state.textHistory,
               widget.activePageText.bookmarks,
               int.parse(aayah),
             ),

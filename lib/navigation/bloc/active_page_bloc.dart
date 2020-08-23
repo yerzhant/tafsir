@@ -34,6 +34,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         return ActivePageBloc._(
           ActivePageText(
             surah,
+            [],
             bookmarks,
             null,
             initialTextPosition.index,
@@ -49,12 +50,12 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         final bookmarks = await repository.bookmarkRepository.getAll();
 
         return ActivePageBloc._(
-          ActivePageBookmarks(surah, bookmarks),
+          ActivePageBookmarks(surah, [], bookmarks),
           repository,
         );
 
       default:
-        return ActivePageBloc._(ActivePageSuwar(null), repository);
+        return ActivePageBloc._(ActivePageSuwar(null, []), repository);
     }
   }
 
@@ -62,17 +63,22 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
   Stream<ActivePageState> mapEventToState(ActivePageEvent event) async* {
     if (event is ActivePageSuwarShown) {
       tafsirRepository.saveActivePageIndex(suwarPageIndex);
-      yield ActivePageSuwar(state.surah);
+      yield ActivePageSuwar(state.surah, state.textHistory);
     } else if (event is ActivePageTextScrolledTo) {
       tafsirRepository.saveActivePageIndex(textPageIndex);
-      yield ActivePageTextScrollTo(event.surah, event.bookmarks, event.aayah);
+      yield ActivePageTextScrollTo(
+        event.surah,
+        state.textHistory,
+        event.bookmarks,
+        event.aayah,
+      );
     } else if (event is ActivePageTextShown) {
       tafsirRepository.saveActivePageIndex(textPageIndex);
 
       var surah = event.surah;
 
-      int initialIndex = 0;
-      double initialLeadingEdge = 0;
+      int initialIndex = event.initialIndex;
+      double initialLeadingEdge = event.initialLeadingEdge;
 
       if (surah == null) {
         final initialTextPosition =
@@ -88,6 +94,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
 
       yield ActivePageText(
         surah,
+        state.textHistory,
         bookmarks,
         event.aayah,
         initialIndex,
@@ -97,7 +104,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
       tafsirRepository.saveActivePageIndex(bookmarksPageIndex);
 
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
-      yield ActivePageBookmarks(state.surah, bookmarks);
+      yield ActivePageBookmarks(state.surah, state.textHistory, bookmarks);
     } else if (event is ActivePageSuwarDownloaded) {
       yield ActivePageSuwarDownloading(null);
 
@@ -115,7 +122,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         await DefaultCacheManager().getSingleFile('$_images/${surah.image}');
       }
 
-      yield ActivePageSuwar(null);
+      yield ActivePageSuwar(null, []);
     }
   }
 }
