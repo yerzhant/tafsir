@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share/share.dart';
 import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/bookmarks/ui/bookmarks_page.dart';
 import 'package:tafsir/constants.dart';
@@ -127,6 +128,10 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
             ),
             const PopupMenuDivider(),
             const PopupMenuItem(
+              child: const Text('Поделиться приложением'),
+              value: _SuwarAction.shareApp,
+            ),
+            const PopupMenuItem(
               child: const Text('Azan.ru'),
               value: _SuwarAction.azanRu,
             ),
@@ -141,6 +146,13 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
               case _SuwarAction.switchDarkMode:
                 BlocProvider.of<ThemeBloc>(context).add(
                     isDarkMode ? ThemeLightSelected() : ThemeDarkSelected());
+                break;
+
+              case _SuwarAction.shareApp:
+                var text = 'Тафсир Azan.ru\n\n';
+                text +=
+                    'https://play.google.com/store/apps/details?id=ru.azan.tafsir';
+                Share.share(text, subject: 'Тафсир Azan.ru');
                 break;
 
               case _SuwarAction.azanRu:
@@ -234,4 +246,4 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
   }
 }
 
-enum _SuwarAction { downloadSuwar, switchDarkMode, azanRu }
+enum _SuwarAction { downloadSuwar, switchDarkMode, shareApp, azanRu }
