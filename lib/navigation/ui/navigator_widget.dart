@@ -149,10 +149,10 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                 break;
 
               case _SuwarAction.shareApp:
-                var text = 'Тафсир Azan.ru\n\n';
+                var text = 'Тафсир Корана\n\n';
                 text +=
                     'https://play.google.com/store/apps/details?id=ru.azan.tafsir';
-                Share.share(text, subject: 'Тафсир Azan.ru');
+                Share.share(text, subject: 'Тафсир Корана');
                 break;
 
               case _SuwarAction.azanRu:
