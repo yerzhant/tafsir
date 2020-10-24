@@ -34,7 +34,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
         if (snap.hasData) {
           final bookmarks = snap.data;
 
-          return ListView.separated(
+          return ListView.builder(
             key: PageStorageKey('bookmarks-list'),
             itemCount: bookmarks.length,
             itemBuilder: (_, index) {
@@ -52,7 +52,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 onDismissed: (_) => _delete(context, bookmark),
               );
             },
-            separatorBuilder: (_, __) => Divider(height: 1),
           );
         } else if (snap.hasError)
           return Text('Error: ${snap.error}');
