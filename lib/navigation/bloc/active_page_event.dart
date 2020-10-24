@@ -34,4 +34,6 @@ class ActivePageTextScrolledTo extends ActivePageTextShown {
 
 class ActivePageBookmarksShown extends ActivePageEvent {}
 
+class ActivePageSearchShown extends ActivePageEvent {}
+
 class ActivePageSuwarDownloaded extends ActivePageEvent {}

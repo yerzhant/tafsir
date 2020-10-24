@@ -48,6 +48,13 @@ class ActivePageBookmarks extends ActivePageState {
   ) : super(surah, textHistory);
 }
 
+class ActivePageSearch extends ActivePageState {
+  ActivePageSearch(
+    Surah surah,
+    List<InitialTextPosition> textHistory,
+  ) : super(surah, textHistory);
+}
+
 class ActivePageSuwarDownloading extends ActivePageState {
   final double progress;
 

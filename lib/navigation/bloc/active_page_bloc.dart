@@ -54,6 +54,16 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
           repository,
         );
 
+      case searchPageIndex:
+        final initialTextPosition = await repository.getInitialTextPosition();
+        final surah =
+            await repository.getSurahByWeight(initialTextPosition.surahWeight);
+
+        return ActivePageBloc._(
+          ActivePageSearch(surah, []),
+          repository,
+        );
+
       default:
         return ActivePageBloc._(ActivePageSuwar(null, []), repository);
     }
@@ -105,6 +115,9 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
 
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
       yield ActivePageBookmarks(state.surah, state.textHistory, bookmarks);
+    } else if (event is ActivePageSearchShown) {
+      tafsirRepository.saveActivePageIndex(searchPageIndex);
+      yield ActivePageSearch(state.surah, state.textHistory);
     } else if (event is ActivePageSuwarDownloaded) {
       yield ActivePageSuwarDownloading(null);
 

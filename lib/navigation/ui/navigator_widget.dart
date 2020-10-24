@@ -8,6 +8,7 @@ import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/navigation/ui/go_to_aayah.dart';
 import 'package:tafsir/navigation/ui/settings.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
+import 'package:tafsir/search/ui/search_page.dart';
 import 'package:tafsir/suwar/ui/suwar_page.dart';
 import 'package:tafsir/text/ui/text_page.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,9 +16,11 @@ import 'package:url_launcher/url_launcher.dart';
 const suwarPageIndex = 0;
 const textPageIndex = suwarPageIndex + 1;
 const bookmarksPageIndex = textPageIndex + 1;
+const searchPageIndex = bookmarksPageIndex + 1;
 
 class NavigatorWidget extends StatefulWidget {
   final int initialPageIndex;
+
   const NavigatorWidget({Key key, @required this.initialPageIndex})
       : super(key: key);
 
@@ -76,6 +79,10 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
           else if (state is ActivePageBookmarks)
             setState(() {
               _currentPageIndex = bookmarksPageIndex;
+            });
+          else if (state is ActivePageSearch)
+            setState(() {
+              _currentPageIndex = searchPageIndex;
             });
         },
         builder: (context, state) {
@@ -177,6 +184,8 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       );
     else if (state is ActivePageBookmarks)
       return BookmarksPage();
+    else if (state is ActivePageSearch)
+      return SearchPage();
     else if (state is ActivePageSuwarDownloading)
       return Center(
         child: Column(
@@ -216,6 +225,10 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
           icon: Icon(Icons.collections_bookmark),
           label: 'Закладки',
         ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.search),
+          label: 'Поиск',
+        ),
       ],
       currentIndex: _currentPageIndex,
       onTap: (index) {
@@ -237,6 +250,10 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
 
           case bookmarksPageIndex:
             event = ActivePageBookmarksShown();
+            break;
+
+          case searchPageIndex:
+            event = ActivePageSearchShown();
             break;
         }
 

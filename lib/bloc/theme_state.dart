@@ -74,6 +74,10 @@ class ThemeLight extends ThemeState {
               inactiveTrackColor: Colors.indigoAccent[100],
               thumbColor: Colors.indigoAccent,
             ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              selectedItemColor: _primaryColorLight,
+              unselectedItemColor: Colors.grey[700],
+            ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
           _appBarBgColorLight,
@@ -101,6 +105,10 @@ class ThemeDark extends ThemeState {
               activeTrackColor: Colors.indigo[400],
               inactiveTrackColor: Colors.indigo[800],
               thumbColor: Color(0xFF3949AB),
+            ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              selectedItemColor: _primaryColorLight,
+              unselectedItemColor: Colors.grey,
             ),
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),

@@ -42,4 +42,34 @@ class AayahRepository {
 
     return list.map((e) => Aayah.fromMap(e)).toList();
   }
+
+  Future<Set<Aayah>> findInAayaat(String phrase) async {
+    final list = await db.query(
+      _tableName,
+      where: 'text_origin like ?',
+      whereArgs: ['%$phrase%'],
+    );
+
+    return list.map((e) => Aayah.fromMap(e)).toSet();
+  }
+
+  Future<Set<Aayah>> findInTranslation(String phrase) async {
+    final list = await db.query(
+      _tableName,
+      where: 'text like ?',
+      whereArgs: ['%$phrase%'],
+    );
+
+    return list.map((e) => Aayah.fromMap(e)).toSet();
+  }
+
+  Future<Set<Aayah>> findInTafsir(String phrase) async {
+    final list = await db.query(
+      _tableName,
+      where: 'tafsir like ?',
+      whereArgs: ['%$phrase%'],
+    );
+
+    return list.map((e) => Aayah.fromMap(e)).toSet();
+  }
 }

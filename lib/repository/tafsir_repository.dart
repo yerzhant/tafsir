@@ -77,6 +77,9 @@ class TafsirRepository {
 
   Future<void> close() => _db.close();
 
+  AayahRepository get aayahRepository => _aayahRepository;
+  BookmarkRepository get bookmarkRepository => _bookmarkRepository;
+
   Future<List<Surah>> getSuwar() {
     return _surahRepository.getAll();
   }
@@ -90,8 +93,6 @@ class TafsirRepository {
     await _aayahRepository.deleteAll();
     await _surahRepository.deleteAll();
   }
-
-  BookmarkRepository get bookmarkRepository => _bookmarkRepository;
 
   Future<Surah> getSurahById(int surahId) {
     return _surahRepository.getSurahById(surahId);

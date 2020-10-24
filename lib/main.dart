@@ -4,6 +4,7 @@ import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/navigation/bloc/active_page_bloc.dart';
 import 'package:tafsir/navigation/ui/navigator_widget.dart';
 import 'package:tafsir/repository/tafsir_repository.dart';
+import 'package:tafsir/search/bloc/search_bloc.dart';
 import 'package:tafsir/text/bloc/settings_bloc.dart';
 
 void main() async {
@@ -47,6 +48,12 @@ class TafsirApp extends StatelessWidget {
           return MaterialApp(
             title: 'Тафсир',
             theme: state.themeData,
+            // theme: ThemeData(
+            //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            //     selectedItemColor: Colors.red,
+            //     unselectedItemColor: Colors.black,
+            //   ),
+            // ),
             home: RepositoryProvider(
               create: (context) => tafsirRepository,
               child: MultiBlocProvider(
@@ -57,6 +64,9 @@ class TafsirApp extends StatelessWidget {
                   BlocProvider<SettingsBloc>(
                     create: (context) => settingsBloc,
                   ),
+                  BlocProvider<SearchBloc>(
+                    create: (context) => SearchBloc(tafsirRepository),
+                  )
                 ],
                 child: NavigatorWidget(initialPageIndex: initialPageIndex),
               ),
