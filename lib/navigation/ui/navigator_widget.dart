@@ -206,15 +206,15 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.list),
-          title: Text('Суры'),
+          label: 'Суры',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.subject),
-          title: Text('Текст'),
+          label: 'Текст',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.collections_bookmark),
-          title: Text('Закладки'),
+          label: 'Закладки',
         ),
       ],
       currentIndex: _currentPageIndex,
