@@ -13,25 +13,25 @@ const _textColorLight = const Color(0xFF414141);
 const _textColorDark = const Color(0xFFE0E0E0);
 
 const _htmlTextColorLight = const Color(0xFF414141);
-const _htmlTextColorDark = const Color(0xFFB0B0B0);
+const _htmlTextColorDark = const Color(0xFFCCCCCC);
 
 const _activeSurahItemBackgroundColorLight = const Color(0xFFDBE1FF);
 const _activeSurahItemBackgroundColorDark = const Color(0xFF202020);
 
 const _aayahBackgroundColorLight = const Color(0XFFEEF5F7);
-const _aayahBackgroundColorDark = const Color(0XFF463D5F);
+const _aayahBackgroundColorDark = const Color(0XFF2E3B5B);
 
 const _aayahBlockquoteBlueBgLight = '#EEF5FF';
-const _aayahBlockquoteBlueBgDark = '#434A88';
+const _aayahBlockquoteBlueBgDark = '#2A3065';
 
 const _aayahBlockquoteGreenBgLight = '#F5FFFA';
-const _aayahBlockquoteGreenBgDark = '#335E2F';
+const _aayahBlockquoteGreenBgDark = '#243D22';
 
 const _aayahSpecDivBgLight = '#F5F5F5';
-const _aayahSpecDivBgDark = '#444444';
+const _aayahSpecDivBgDark = '#3A3A3A';
 
 const _aayahFootnoteBgLight = '#EEF5F7';
-const _aayahFootnoteBgDark = '#344163';
+const _aayahFootnoteBgDark = '#2E3B5B';
 
 @immutable
 abstract class ThemeState {
