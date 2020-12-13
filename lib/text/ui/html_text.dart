@@ -21,41 +21,37 @@ class HtmlText extends StatelessWidget {
           text,
           enableCaching: false,
           customStylesBuilder: (element) {
-            final styles = <String>[];
+            final styles = <String, String>{};
 
             if (element.localName == 'blockquote')
-              styles.addAll(['margin', '0', 'padding', '10px 15px']);
+              styles.addAll({'margin': '0', 'padding': '10px 15px'});
 
             if (element.localName == 'blockquote' &&
                 element.className == 'blue')
               styles.addAll(
-                ['background-color', themeState.aayahBlockquoteBlueBg],
+                {'background-color': themeState.aayahBlockquoteBlueBg},
               );
 
             if (element.localName == 'blockquote' &&
                 element.className == 'green')
               styles.addAll(
-                ['background-color', themeState.aayahBlockquoteGreenBg],
+                {'background-color': themeState.aayahBlockquoteGreenBg},
               );
 
             if (element.localName == 'ul' || element.localName == 'ol')
-              styles.addAll(['margin-left', '16px', 'padding', '0']);
+              styles.addAll({'margin-left': '16px', 'padding': '0'});
 
             if (element.className == 'snoski')
-              styles.addAll([
-                'padding',
-                '10px',
-                'background-color',
-                themeState.aayahFootnoteBg,
-              ]);
+              styles.addAll({
+                'padding': '10px',
+                'background-color': themeState.aayahFootnoteBg,
+              });
 
             if (element.className == 'specdiv')
-              styles.addAll([
-                'padding',
-                '10px',
-                'background-color',
-                themeState.aayahSpecDivBg,
-              ]);
+              styles.addAll({
+                'padding': '10px',
+                'background-color': themeState.aayahSpecDivBg,
+              });
 
             return styles;
           },

@@ -1,13 +1,13 @@
 part of 'theme_bloc.dart';
 
-var _primaryColorLight = Colors.indigoAccent;
-var _primaryColorDark = Colors.indigoAccent[200];
+const _primaryColorLight = Colors.indigoAccent;
+final _primaryColorDark = Colors.indigoAccent[200];
 
-var _appBarBgColorLight = _primaryColorLight;
-var _appBarBgColorDark = Colors.indigo[600];
+final _appBarBgColorLight = _primaryColorLight;
+final _appBarBgColorDark = Colors.indigo[600];
 
-var _suwarProgressBgLight = Colors.indigo[50];
-var _suwarProgressBgDark = Color(0xff1e1f29);
+final _suwarProgressBgLight = Colors.indigo[50];
+const _suwarProgressBgDark = Color(0xff1e1f29);
 
 const _textColorLight = const Color(0xFF414141);
 const _textColorDark = const Color(0xFFE0E0E0);
