@@ -199,6 +199,8 @@ class _AayahInfoState extends State<AayahInfo> {
     var text = '$subject.\n';
     text += '\n';
 
+    text += '${widget.aayah.textOrigin}\n\n';
+
     text += 'ПЕРЕВОД:\n';
     text += _htmlToString(widget.aayah.text);
 
