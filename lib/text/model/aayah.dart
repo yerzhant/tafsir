@@ -19,13 +19,13 @@ class Aayah {
 
   factory Aayah.fromMap(Map<String, dynamic> map) {
     return Aayah(
-      id: map['id'],
-      surahId: map['surah_id'],
-      weight: map['weight'],
-      title: map['title'],
-      textOrigin: map['text_origin'],
-      text: map['text'],
-      tafsir: map['tafsir'],
+      id: map['id'] as int,
+      surahId: map['surah_id'] as int,
+      weight: map['weight'] as int,
+      title: map['title'] as String,
+      textOrigin: map['text_origin'] as String,
+      text: map['text'] as String,
+      tafsir: map['tafsir'] as String,
     );
   }
 

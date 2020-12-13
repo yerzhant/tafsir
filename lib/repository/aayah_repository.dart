@@ -16,7 +16,9 @@ class AayahRepository {
   }
 
   void _insertAll(List<Aayah> aayaat) {
-    aayaat.forEach((e) async => await _insert(e));
+    for (final a in aayaat) {
+      _insert(a);
+    }
   }
 
   Future<void> deleteAll() async {

@@ -15,7 +15,9 @@ class SurahRepository {
   }
 
   void _insertAll(List<Surah> suwar) {
-    suwar.forEach((e) async => await _insert(e));
+    for (final s in suwar) {
+      _insert(s);
+    }
   }
 
   Future<void> deleteAll() async {

@@ -11,7 +11,7 @@ import 'package:tafsir/text/ui/html_text.dart';
 
 const _images = '$server/media/images/surahs';
 
-var _surahTitleStyle = TextStyle(
+var _surahTitleStyle = const TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.bold,
 );
@@ -21,38 +21,38 @@ const _secondaryTextStyle = TextStyle(color: textColorGrey);
 class SurahInfo extends StatelessWidget {
   final Surah surah;
 
-  SurahInfo({Key key, this.surah}) : super(key: key);
+  const SurahInfo({Key key, this.surah}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         CachedNetworkImage(imageUrl: '$_images/${surah.image}'),
-        SizedBox(height: 15),
+        const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(width: 45),
-            Spacer(),
+            const SizedBox(width: 45),
+            const Spacer(),
             if (surah.isSurah())
               Text(surah.weight.toString(), style: _surahTitleStyle),
-            if (surah.isSurah()) SizedBox(width: 10),
+            if (surah.isSurah()) const SizedBox(width: 10),
             Text(_getTitle(), style: _surahTitleStyle),
-            Spacer(),
+            const Spacer(),
             IconButton(
               iconSize: iconSize,
               color: Theme.of(context).primaryColor,
-              icon: Icon(Icons.share),
+              icon: const Icon(Icons.share),
               onPressed: _share,
             ),
           ],
         ),
-        if (surah.isSurah()) SizedBox(height: 7),
+        if (surah.isSurah()) const SizedBox(height: 7),
         if (surah.titleInRussian.isNotEmpty)
           Text('«${surah.titleInRussian}»', style: _secondaryTextStyle),
-        if (surah.titleInRussian.isNotEmpty) SizedBox(height: 10),
+        if (surah.titleInRussian.isNotEmpty) const SizedBox(height: 10),
         Padding(
-          padding: EdgeInsets.all(padding),
+          padding: const EdgeInsets.all(padding),
           child: Column(
             children: <Widget>[
               if (surah.isSurah())
@@ -77,7 +77,7 @@ class SurahInfo extends StatelessWidget {
                   'в порядке ниспосылания - ${surah.revealOrder}',
                   context,
                 ),
-              if (surah.isSurah()) Divider(height: 35),
+              if (surah.isSurah()) const Divider(height: 35),
               Row(
                 children: <Widget>[
                   Expanded(child: HtmlText(text: surah.text)),
@@ -95,12 +95,12 @@ class SurahInfo extends StatelessWidget {
       : surah.title.toUpperCase();
 
   Widget _lineWithButton(String text, BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 25,
       child: Row(
         children: <Widget>[
           Icon(Icons.stop, color: Theme.of(context).primaryColor, size: 10),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           BlocBuilder<ThemeBloc, ThemeState>(
             builder: (context, themState) {
               return BlocBuilder<SettingsBloc, SettingsState>(

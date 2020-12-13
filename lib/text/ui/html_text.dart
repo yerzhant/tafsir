@@ -73,8 +73,8 @@ class HtmlText extends StatelessWidget {
     );
   }
 
-  void _goto(BuildContext context, String url) async {
-    final prefix = 'https://azan.ru/tafsir/';
+  Future<void> _goto(BuildContext context, String url) async {
+    const prefix = 'https://azan.ru/tafsir/';
 
     if (url.startsWith(prefix)) {
       final suffix = url.replaceAll(prefix, '');
@@ -107,10 +107,10 @@ class HtmlText extends StatelessWidget {
   void _badLinkNotification(BuildContext context) {
     Scaffold.of(context).showSnackBar(
       SnackBar(
-        content: Text(
+        content: const Text(
           'Битая ссылка. Пожалуйста, попробуйте перезагрузить все суры.',
         ),
-        duration: Duration(seconds: 7),
+        duration: const Duration(seconds: 7),
         action: SnackBarAction(
           label: 'Перезагрузить',
           onPressed: () {

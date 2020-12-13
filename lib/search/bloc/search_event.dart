@@ -10,9 +10,9 @@ class SearchActionTapped extends SearchEvent {
   final bool isInTafsir;
 
   SearchActionTapped(
-    this.phrase,
+    this.phrase, {
     this.isInAayaat,
     this.isInTranslation,
     this.isInTafsir,
-  );
+  });
 }

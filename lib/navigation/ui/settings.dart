@@ -12,7 +12,7 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       tooltip: 'Настройки',
-      icon: Icon(Icons.settings, size: iconSize),
+      icon: const Icon(Icons.settings, size: iconSize),
       onPressed: () async {
         final settingsState = BlocProvider.of<SettingsBloc>(context).state;
         final settings = await showDialog<SettingsState>(
@@ -32,9 +32,9 @@ class Settings extends StatelessWidget {
             SettingsChanged(
               settings.aayahFontSize,
               settings.fontSize,
-              settings.showTranslation,
-              settings.showTafsir,
-              settings.isDisplayAlwaysOn,
+              showTranslation: settings.showTranslation,
+              showTafsir: settings.showTafsir,
+              isDisplayAlwaysOn: settings.isDisplayAlwaysOn,
             ),
           );
         }
@@ -85,7 +85,7 @@ class _DialogState extends State<_Dialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Настройки'),
+      title: const Text('Настройки'),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -109,7 +109,7 @@ class _DialogState extends State<_Dialog> {
                 });
               },
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             SizedBox(
               height: 24,
               child: Center(
@@ -134,7 +134,7 @@ class _DialogState extends State<_Dialog> {
             ),
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
-              title: Text('Перевод'),
+              title: const Text('Перевод'),
               value: _showTranslation,
               onChanged: (value) {
                 setState(() {
@@ -144,7 +144,7 @@ class _DialogState extends State<_Dialog> {
             ),
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
-              title: Text('Тафсир'),
+              title: const Text('Тафсир'),
               value: _showTafsir,
               onChanged: (value) {
                 setState(() {
@@ -154,7 +154,7 @@ class _DialogState extends State<_Dialog> {
             ),
             CheckboxListTile(
               controlAffinity: ListTileControlAffinity.leading,
-              title: Text('Не выключать экран'),
+              title: const Text('Не выключать экран'),
               value: _isDisplayAlwaysOn,
               onChanged: (value) {
                 setState(() {
@@ -182,9 +182,9 @@ class _DialogState extends State<_Dialog> {
               SettingsState(
                 _aayahFontSize,
                 _fontSize,
-                _showTranslation,
-                _showTafsir,
-                _isDisplayAlwaysOn,
+                showTranslation: _showTranslation,
+                showTafsir: _showTafsir,
+                isDisplayAlwaysOn: _isDisplayAlwaysOn,
               ),
             );
           },

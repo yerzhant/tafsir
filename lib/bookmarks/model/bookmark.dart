@@ -18,10 +18,10 @@ class Bookmark {
   }) : id = null;
 
   Bookmark.fromMap(Map<String, dynamic> map)
-      : id = map['id'],
-        surahId = map['surah_id'],
-        surahTitle = map['surah_title'],
-        aayah = map['aayah'];
+      : id = map['id'] as int,
+        surahId = map['surah_id'] as int,
+        surahTitle = map['surah_title'] as String,
+        aayah = map['aayah'] as int;
 
   Map<String, dynamic> toMap() {
     final fields = <String, dynamic>{

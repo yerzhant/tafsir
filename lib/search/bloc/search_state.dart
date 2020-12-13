@@ -8,29 +8,34 @@ abstract class SearchState {
   final bool isInTafsir;
 
   const SearchState(
-    this.phrase,
-    this.isInAayaat,
-    this.isInTranslation,
-    this.isInTafsir,
-  );
+    this.phrase, {
+    this.isInAayaat = true,
+    this.isInTranslation = true,
+    this.isInTafsir = true,
+  });
 }
 
 class SearchInitial extends SearchState {
-  SearchInitial() : super('', true, true, true);
+  const SearchInitial() : super('');
 }
 
 class SearchInProgress extends SearchState {
-  SearchInProgress() : super('', true, true, true);
+  const SearchInProgress() : super('');
 }
 
 class SearchSuccess extends SearchState {
   final Set<SearchItem> items;
 
-  SearchSuccess(
+  const SearchSuccess(
     this.items,
-    String phrase,
-    bool isInAayaat,
-    bool isInTranslation,
-    bool isInTafsir,
-  ) : super(phrase, isInAayaat, isInTranslation, isInTafsir);
+    String phrase, {
+    bool isInAayaat = true,
+    bool isInTranslation = true,
+    bool isInTafsir = true,
+  }) : super(
+          phrase,
+          isInAayaat: isInAayaat,
+          isInTranslation: isInTranslation,
+          isInTafsir: isInTafsir,
+        );
 }

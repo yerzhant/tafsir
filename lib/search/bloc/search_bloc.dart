@@ -13,19 +13,19 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final TafsirRepository tafsirRepository;
 
-  SearchBloc(this.tafsirRepository) : super(SearchInitial());
+  SearchBloc(this.tafsirRepository) : super(const SearchInitial());
 
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
     if (event is SearchActionTapped) {
-      yield SearchInProgress();
+      yield const SearchInProgress();
       final aayaat = await _findAayaat(event);
       yield SearchSuccess(
         aayaat,
         event.phrase,
-        event.isInAayaat,
-        event.isInTranslation,
-        event.isInTafsir,
+        isInAayaat: event.isInAayaat,
+        isInTranslation: event.isInTranslation,
+        isInTafsir: event.isInTafsir,
       );
     }
   }

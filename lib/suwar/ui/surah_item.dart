@@ -18,12 +18,21 @@ class SurahItem extends StatelessWidget {
 
     final isActive = _isActive(context);
     return InkWell(
+      onTap: () {
+        BlocProvider.of<ActivePageBloc>(context).add(
+          ActivePageTextShown(
+            surah,
+            BlocProvider.of<ActivePageBloc>(context).state.textHistory,
+            null,
+          ),
+        );
+      },
       child: Container(
         height: 70,
         color: isActive ? themeState.activeSurahItemBackgroundColor : null,
         child: Row(
           children: <Widget>[
-            Container(
+            SizedBox(
               width: 70,
               child: surah.weight > 0
                   ? Center(
@@ -61,7 +70,7 @@ class SurahItem extends StatelessWidget {
               ),
             ),
             if (surah.weight > 0)
-              Container(
+              SizedBox(
                 width: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -81,15 +90,6 @@ class SurahItem extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {
-        BlocProvider.of<ActivePageBloc>(context).add(
-          ActivePageTextShown(
-            surah,
-            BlocProvider.of<ActivePageBloc>(context).state.textHistory,
-            null,
-          ),
-        );
-      },
     );
   }
 

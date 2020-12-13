@@ -3,7 +3,7 @@ part of 'theme_bloc.dart';
 const _primaryColorLight = Colors.indigoAccent;
 final _primaryColorDark = Colors.indigoAccent[200];
 
-final _appBarBgColorLight = _primaryColorLight;
+const _appBarBgColorLight = _primaryColorLight;
 final _appBarBgColorDark = Colors.indigo[600];
 
 final _suwarProgressBgLight = Colors.indigo[50];
@@ -18,8 +18,8 @@ const _htmlTextColorDark = Color(0xFFCCCCCC);
 const _activeSurahItemBackgroundColorLight = Color(0xFFDBE1FF);
 const _activeSurahItemBackgroundColorDark = Color(0xFF202020);
 
-const _aayahBackgroundColorLight = Color(0XFFEEF5F7);
-const _aayahBackgroundColorDark = Color(0XFF2E3B5B);
+const _aayahBackgroundColorLight = Color(0xFFEEF5F7);
+const _aayahBackgroundColorDark = Color(0xFF2E3B5B);
 
 const _aayahBlockquoteBlueBgLight = '#EEF5FF';
 const _aayahBlockquoteBlueBgDark = '#2A3065';
@@ -46,7 +46,7 @@ abstract class ThemeState {
   final String aayahFootnoteBg;
   final String aayahSpecDivBg;
 
-  ThemeState(
+  const ThemeState(
     this.themeData,
     this.appBarBgColor,
     this.suwarProgressBg,
@@ -67,7 +67,8 @@ class ThemeLight extends ThemeState {
             brightness: Brightness.light,
             primaryColor: _primaryColorLight,
             accentColor: _primaryColorLight,
-            textTheme: TextTheme(bodyText2: TextStyle(color: _textColorLight)),
+            textTheme:
+                const TextTheme(bodyText2: TextStyle(color: _textColorLight)),
             toggleableActiveColor: _primaryColorLight,
             sliderTheme: SliderThemeData(
               activeTrackColor: Colors.indigoAccent[700],
@@ -99,14 +100,15 @@ class ThemeDark extends ThemeState {
             brightness: Brightness.dark,
             primaryColor: _primaryColorDark,
             accentColor: _primaryColorDark,
-            textTheme: TextTheme(bodyText2: TextStyle(color: _textColorDark)),
+            textTheme:
+                const TextTheme(bodyText2: TextStyle(color: _textColorDark)),
             toggleableActiveColor: _primaryColorDark,
             sliderTheme: SliderThemeData(
               activeTrackColor: Colors.indigo[400],
               inactiveTrackColor: Colors.indigo[800],
-              thumbColor: Color(0xFF3949AB),
+              thumbColor: const Color(0xFF3949AB),
             ),
-            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               selectedItemColor: _primaryColorLight,
               unselectedItemColor: Colors.grey,
             ),

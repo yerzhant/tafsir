@@ -8,11 +8,11 @@ class SettingsState {
   final bool showTafsir;
   final bool isDisplayAlwaysOn;
 
-  SettingsState(
+  const SettingsState(
     this.aayahFontSize,
-    this.fontSize,
+    this.fontSize, {
     this.showTranslation,
     this.showTafsir,
     this.isDisplayAlwaysOn,
-  );
+  });
 }

@@ -34,7 +34,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         return ActivePageBloc._(
           ActivePageText(
             surah,
-            [],
+            const [],
             bookmarks,
             null,
             initialTextPosition.index,
@@ -50,7 +50,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         final bookmarks = await repository.bookmarkRepository.getAll();
 
         return ActivePageBloc._(
-          ActivePageBookmarks(surah, [], bookmarks),
+          ActivePageBookmarks(surah, const [], bookmarks),
           repository,
         );
 
@@ -60,12 +60,12 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
             await repository.getSurahByWeight(initialTextPosition.surahWeight);
 
         return ActivePageBloc._(
-          ActivePageSearch(surah, []),
+          ActivePageSearch(surah, const []),
           repository,
         );
 
       default:
-        return ActivePageBloc._(ActivePageSuwar(null, []), repository);
+        return ActivePageBloc._(const ActivePageSuwar(null, []), repository);
     }
   }
 
@@ -119,7 +119,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
       await tafsirRepository.saveActivePageIndex(searchPageIndex);
       yield ActivePageSearch(state.surah, state.textHistory);
     } else if (event is ActivePageSuwarDownloaded) {
-      yield ActivePageSuwarDownloading(null);
+      yield const ActivePageSuwarDownloading(null);
 
       await tafsirRepository.clearSuwarAndAayaat();
 
@@ -135,7 +135,7 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         await DefaultCacheManager().getSingleFile('$_images/${surah.image}');
       }
 
-      yield ActivePageSuwar(null, []);
+      yield const ActivePageSuwar(null, []);
     }
   }
 }

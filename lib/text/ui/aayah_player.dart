@@ -40,7 +40,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
     );
   }
 
-  void _pressed() async {
+  Future<void> _pressed() async {
     await _player.stop();
 
     if (_isPlaying) {

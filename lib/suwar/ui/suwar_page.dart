@@ -30,7 +30,7 @@ class _SuwarPageState extends State<SuwarPage> {
         } else if (snap.hasError) {
           return Text('Error: ${snap.error}');
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
@@ -38,10 +38,10 @@ class _SuwarPageState extends State<SuwarPage> {
 
   Widget _buildList(List<Surah> suwar) {
     return ListView.separated(
-      key: PageStorageKey('suwar-list'),
+      key: const PageStorageKey('suwar-list'),
       itemCount: suwar.length,
       itemBuilder: (_, index) => SurahItem(surah: suwar[index]),
-      separatorBuilder: (_, __) => Divider(height: 1),
+      separatorBuilder: (_, __) => const Divider(height: 1),
     );
   }
 }

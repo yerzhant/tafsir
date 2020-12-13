@@ -109,9 +109,9 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
     if (state is ActivePageText) {
       return Text(state.surah.title);
     } else if (state is ActivePageSuwarDownloading) {
-      return Text('Загрузка...');
+      return const Text('Загрузка...');
     } else {
-      return Text('Тафсир');
+      return const Text('Тафсир');
     }
   }
 
@@ -119,7 +119,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
     if (state is ActivePageText && state.surah.isSurah()) {
       return [
         GoToAayah(activePageText: state),
-        Settings(),
+        const Settings(),
       ];
     } else if (state is ActivePageSuwar) {
       final isDarkMode = BlocProvider.of<ThemeBloc>(context).state is ThemeDark;
@@ -128,21 +128,23 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         PopupMenuButton<_SuwarAction>(
           itemBuilder: (_) => <PopupMenuEntry<_SuwarAction>>[
             const PopupMenuItem(
-              child: Text('Загрузить все суры'),
               value: _SuwarAction.downloadSuwar,
+              child: Text('Загрузить все суры'),
             ),
             PopupMenuItem(
-              child: isDarkMode ? Text('Светлый режим') : Text('Темный режим'),
               value: _SuwarAction.switchDarkMode,
+              child: isDarkMode
+                  ? const Text('Светлый режим')
+                  : const Text('Темный режим'),
             ),
             const PopupMenuDivider(),
             const PopupMenuItem(
-              child: Text('Поделиться приложением'),
               value: _SuwarAction.shareApp,
+              child: Text('Поделиться приложением'),
             ),
             const PopupMenuItem(
-              child: Text('Azan.ru'),
               value: _SuwarAction.azanRu,
+              child: Text('Azan.ru'),
             ),
           ],
           onSelected: (value) async {
@@ -178,7 +180,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
 
   Widget _getBody(ActivePageState state) {
     if (state is ActivePageSuwar) {
-      return SuwarPage();
+      return const SuwarPage();
     } else if (state is ActivePageText) {
       return TextPage(
         key: Key(state.surah.slug),
@@ -186,9 +188,9 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
         aayah: state.aayah,
       );
     } else if (state is ActivePageBookmarks) {
-      return BookmarksPage();
+      return const BookmarksPage();
     } else if (state is ActivePageSearch) {
-      return SearchPage();
+      return const SearchPage();
     } else if (state is ActivePageSuwarDownloading) {
       return Center(
         child: Column(
@@ -202,7 +204,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                 );
               },
             ),
-            SizedBox(height: padding),
+            const SizedBox(height: padding),
             Text(
               '${((state.progress ?? 0) * 100).toStringAsFixed(2)} %',
             ),

@@ -42,9 +42,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       yield SettingsState(
         event.aayahFontSize,
         event.fontSize,
-        event.showTranslation,
-        event.showTafsir,
-        event.isDisplayAlwaysOn,
+        showTranslation: event.showTranslation,
+        showTafsir: event.showTafsir,
+        isDisplayAlwaysOn: event.isDisplayAlwaysOn,
       );
     }
   }
@@ -65,9 +65,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       SettingsState(
         aayahfontSize,
         fontSize,
-        showTranslation,
-        showTafsir,
-        isDisplayAlwaysOn,
+        showTranslation: showTranslation,
+        showTafsir: showTafsir,
+        isDisplayAlwaysOn: isDisplayAlwaysOn,
       ),
     );
   }

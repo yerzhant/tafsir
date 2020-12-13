@@ -11,7 +11,8 @@ Future<List<T>> apiGet<T>(
   final response = await http.get('$_server/$endpoint');
 
   if (response.statusCode == 200) {
-    final parsed = json.decode(response.body).cast<Map<String, dynamic>>();
+    final parsed = json.decode(response.body).cast<Map<String, dynamic>>()
+        as List<Map<String, dynamic>>;
     return parsed.map<T>((json) => fromJson(json)).toList();
   } else {
     throw Exception('API GET Error: $response');

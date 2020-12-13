@@ -55,11 +55,11 @@ class _TextPageState extends State<TextPage> {
     });
   }
 
-  void _scrollTo(int aayah) async {
-    await Future.delayed(Duration(milliseconds: 250));
+  Future<void> _scrollTo(int aayah) async {
+    await Future.delayed(const Duration(milliseconds: 250));
     await _itemScrollController.scrollTo(
       index: aayah,
-      duration: Duration(seconds: 1),
+      duration: const Duration(seconds: 1),
     );
   }
 
@@ -88,20 +88,20 @@ class _TextPageState extends State<TextPage> {
                           surah: widget.surah,
                           aayah: snapshot.data[index - 1],
                         ),
-                  separatorBuilder: (_, __) => Divider(height: 1),
+                  separatorBuilder: (_, __) => const Divider(height: 1),
                 );
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
             },
           );
         } else if (snapshot.hasError) {
           if (snapshot.error is SocketException) {
-            return Center(child: Text('Нет соединения с сервером.'));
+            return const Center(child: Text('Нет соединения с сервером.'));
           }
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );

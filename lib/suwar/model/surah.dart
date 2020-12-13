@@ -27,17 +27,17 @@ class Surah {
 
   factory Surah.fromMap(Map<String, dynamic> map) {
     return Surah(
-      id: map['id'],
-      weight: map['weight'],
-      title: map['title'],
-      titleInRussian: map['title_in_russian'],
-      text: map['text'],
-      ayatsCount: map['ayats_count'],
-      dzhuz: map['dzhuz'],
-      revealAt: map['reveal_at'],
-      revealOrder: map['reveal_order'],
-      image: map['image'],
-      slug: map['slug'],
+      id: map['id'] as int,
+      weight: map['weight'] as int,
+      title: map['title'] as String,
+      titleInRussian: map['title_in_russian'] as String,
+      text: map['text'] as String,
+      ayatsCount: map['ayats_count'] as int,
+      dzhuz: map['dzhuz'] as String,
+      revealAt: map['reveal_at'] as String,
+      revealOrder: map['reveal_order'] as int,
+      image: map['image'] as String,
+      slug: map['slug'] as String,
     );
   }
 

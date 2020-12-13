@@ -12,9 +12,9 @@ class SettingsChanged extends SettingsEvent {
 
   SettingsChanged(
     this.aayahFontSize,
-    this.fontSize,
+    this.fontSize, {
     this.showTranslation,
     this.showTafsir,
     this.isDisplayAlwaysOn,
-  );
+  });
 }

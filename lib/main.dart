@@ -7,7 +7,7 @@ import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/search/bloc/search_bloc.dart';
 import 'package:tafsir/text/bloc/settings_bloc.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final tafsirRepository = TafsirRepository();
@@ -31,7 +31,7 @@ class TafsirApp extends StatelessWidget {
   final SettingsBloc settingsBloc;
   final int initialPageIndex;
 
-  TafsirApp(
+  const TafsirApp(
     this.tafsirRepository,
     this.activePageBloc,
     this.themeBloc,

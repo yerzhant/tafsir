@@ -30,7 +30,7 @@ class _AayahInfoState extends State<AayahInfo> {
     final themeState = BlocProvider.of<ThemeBloc>(context).state;
 
     return Padding(
-      padding: EdgeInsets.all(padding),
+      padding: const EdgeInsets.all(padding),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {
           final _labelStyle = TextStyle(
@@ -60,7 +60,7 @@ class _AayahInfoState extends State<AayahInfo> {
     return Material(
       color: themeState.aayahBackgroundColor,
       child: Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           children: [
             Row(
@@ -73,8 +73,8 @@ class _AayahInfoState extends State<AayahInfo> {
                   surah: widget.aayah.surahId.toString(),
                   aayah: widget.aayah.weight.toString(),
                 ),
-                SizedBox(width: 45),
-                Spacer(),
+                const SizedBox(width: 45),
+                const Spacer(),
                 Text(
                   '﴾ ',
                   style: GoogleFonts.scheherazade(fontSize: 22),
@@ -90,11 +90,11 @@ class _AayahInfoState extends State<AayahInfo> {
                   ' ﴿',
                   style: GoogleFonts.scheherazade(fontSize: 22),
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
                   iconSize: iconSize,
                   color: Theme.of(context).primaryColor,
-                  icon: Icon(Icons.share),
+                  icon: const Icon(Icons.share),
                   onPressed: _share,
                 ),
                 IconButton(
@@ -134,13 +134,13 @@ class _AayahInfoState extends State<AayahInfo> {
 
   List<Widget> _translation(TextStyle labelStyle) {
     return [
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
       Row(
         children: <Widget>[
           Text('ПЕРЕВОД:', style: labelStyle),
         ],
       ),
-      SizedBox(height: 7),
+      const SizedBox(height: 7),
       Row(
         children: <Widget>[
           Expanded(child: HtmlText(text: widget.aayah.text)),
@@ -151,18 +151,18 @@ class _AayahInfoState extends State<AayahInfo> {
 
   List<Widget> _tafsir(TextStyle labelStyle) {
     return [
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
       Row(
         children: <Widget>[
           Text('ТАФСИР:', style: labelStyle),
         ],
       ),
-      SizedBox(height: 7),
+      const SizedBox(height: 7),
       HtmlText(text: widget.aayah.tafsir),
     ];
   }
 
-  void _toggleBookmark(BuildContext context) async {
+  Future<void> _toggleBookmark(BuildContext context) async {
     final bookmarkRepository =
         RepositoryProvider.of<TafsirRepository>(context).bookmarkRepository;
     final state =

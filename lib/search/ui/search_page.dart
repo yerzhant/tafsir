@@ -48,9 +48,10 @@ class _SearchPageState extends State<SearchPage> {
         _buildPhraseField(context),
         CheckboxListTile(
           dense: true,
-          contentPadding: EdgeInsets.symmetric(horizontal: checkboxPadding),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: checkboxPadding),
           controlAffinity: ListTileControlAffinity.leading,
-          title: Text('в аятах'),
+          title: const Text('в аятах'),
           value: _isInAayaat,
           onChanged: (value) {
             setState(() {
@@ -60,9 +61,10 @@ class _SearchPageState extends State<SearchPage> {
         ),
         CheckboxListTile(
           dense: true,
-          contentPadding: EdgeInsets.symmetric(horizontal: checkboxPadding),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: checkboxPadding),
           controlAffinity: ListTileControlAffinity.leading,
-          title: Text('в переводе'),
+          title: const Text('в переводе'),
           value: _isInTranslation,
           onChanged: (value) {
             setState(() {
@@ -72,9 +74,10 @@ class _SearchPageState extends State<SearchPage> {
         ),
         CheckboxListTile(
           dense: true,
-          contentPadding: EdgeInsets.symmetric(horizontal: checkboxPadding),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: checkboxPadding),
           controlAffinity: ListTileControlAffinity.leading,
-          title: Text('в тафсире'),
+          title: const Text('в тафсире'),
           value: _isInTafsir,
           onChanged: (value) {
             setState(() {
@@ -82,14 +85,14 @@ class _SearchPageState extends State<SearchPage> {
             });
           },
         ),
-        Divider(height: 1),
+        const Divider(height: 1),
         Expanded(
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
               if (state is SearchSuccess) {
                 return _buildFoundItems(state, context);
               } else if (state is SearchInProgress) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else {
                 return Container();
               }
@@ -102,14 +105,14 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget _buildPhraseField(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: padding),
+      padding: const EdgeInsets.only(left: padding),
       child: Row(
         children: <Widget>[
           Expanded(
             child: TextField(
               controller: controller,
               textInputAction: TextInputAction.search,
-              decoration: InputDecoration.collapsed(
+              decoration: const InputDecoration.collapsed(
                 hintText: 'Введите искомую фразу',
               ),
               onChanged: (value) => _phrase = value,
@@ -132,7 +135,7 @@ class _SearchPageState extends State<SearchPage> {
 
   Widget _buildFoundItems(SearchSuccess state, BuildContext context) {
     return ListView.builder(
-      key: PageStorageKey('search-list'),
+      key: const PageStorageKey('search-list'),
       itemCount: state.items.length,
       itemBuilder: (_, index) {
         final item = state.items.elementAt(index);
@@ -147,7 +150,7 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  void _showAayah(BuildContext context, SearchItem item) async {
+  Future<void> _showAayah(BuildContext context, SearchItem item) async {
     BlocProvider.of<ActivePageBloc>(context).add(
       ActivePageTextShown(
         item.surah,
@@ -163,9 +166,9 @@ class _SearchPageState extends State<SearchPage> {
     BlocProvider.of<SearchBloc>(context).add(
       SearchActionTapped(
         _phrase.trim(),
-        _isInAayaat,
-        _isInTranslation,
-        _isInTafsir,
+        isInAayaat: _isInAayaat,
+        isInTranslation: _isInTranslation,
+        isInTafsir: _isInTafsir,
       ),
     );
   }

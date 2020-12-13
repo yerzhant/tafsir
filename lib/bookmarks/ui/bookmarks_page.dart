@@ -35,13 +35,14 @@ class _BookmarksPageState extends State<BookmarksPage> {
           final bookmarks = snap.data;
 
           return ListView.builder(
-            key: PageStorageKey('bookmarks-list'),
+            key: const PageStorageKey('bookmarks-list'),
             itemCount: bookmarks.length,
             itemBuilder: (_, index) {
               final bookmark = bookmarks[index];
               return Dismissible(
                 key: Key(bookmark.id.toString()),
                 background: Container(color: Colors.red[50]),
+                onDismissed: (_) => _delete(context, bookmark),
                 child: ListTile(
                   title: Text(
                     '${bookmark.surahTitle}, ${bookmark.aayah}',
@@ -49,20 +50,19 @@ class _BookmarksPageState extends State<BookmarksPage> {
                   ),
                   onTap: () => _showAayah(context, bookmark),
                 ),
-                onDismissed: (_) => _delete(context, bookmark),
               );
             },
           );
         } else if (snap.hasError) {
           return Text('Error: ${snap.error}');
         } else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
       },
     );
   }
 
-  void _showAayah(BuildContext context, Bookmark bookmark) async {
+  Future<void> _showAayah(BuildContext context, Bookmark bookmark) async {
     final surah = await RepositoryProvider.of<TafsirRepository>(context)
         .getSurahById(bookmark.surahId);
 

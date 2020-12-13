@@ -5,11 +5,11 @@ abstract class ActivePageState {
   final Surah surah;
   final List<InitialTextPosition> textHistory;
 
-  ActivePageState(this.surah, this.textHistory);
+  const ActivePageState(this.surah, this.textHistory);
 }
 
 class ActivePageSuwar extends ActivePageState {
-  ActivePageSuwar(Surah surah, List<InitialTextPosition> textHistory)
+  const ActivePageSuwar(Surah surah, List<InitialTextPosition> textHistory)
       : super(surah, textHistory);
 }
 
@@ -19,7 +19,7 @@ class ActivePageText extends ActivePageState {
   final int initialIndex;
   final double initialLeadingEdge;
 
-  ActivePageText(
+  const ActivePageText(
     Surah surah,
     List<InitialTextPosition> textHistory,
     this.bookmarks,
@@ -30,7 +30,7 @@ class ActivePageText extends ActivePageState {
 }
 
 class ActivePageTextScrollTo extends ActivePageText {
-  ActivePageTextScrollTo(
+  const ActivePageTextScrollTo(
     Surah surah,
     List<InitialTextPosition> textHistory,
     Set<Bookmark> bookmarks,
@@ -41,7 +41,7 @@ class ActivePageTextScrollTo extends ActivePageText {
 class ActivePageBookmarks extends ActivePageState {
   final List<Bookmark> bookmarks;
 
-  ActivePageBookmarks(
+  const ActivePageBookmarks(
     Surah surah,
     List<InitialTextPosition> textHistory,
     this.bookmarks,
@@ -49,7 +49,7 @@ class ActivePageBookmarks extends ActivePageState {
 }
 
 class ActivePageSearch extends ActivePageState {
-  ActivePageSearch(
+  const ActivePageSearch(
     Surah surah,
     List<InitialTextPosition> textHistory,
   ) : super(surah, textHistory);
@@ -58,5 +58,5 @@ class ActivePageSearch extends ActivePageState {
 class ActivePageSuwarDownloading extends ActivePageState {
   final double progress;
 
-  ActivePageSuwarDownloading(this.progress) : super(null, null);
+  const ActivePageSuwarDownloading(this.progress) : super(null, null);
 }

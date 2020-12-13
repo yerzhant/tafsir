@@ -19,17 +19,18 @@ class _GoToAayahState extends State<GoToAayah> {
   Widget build(BuildContext context) {
     return IconButton(
       tooltip: 'Перейти к аяту',
-      icon: Icon(Icons.filter_1, size: iconSize),
+      icon: const Icon(Icons.filter_1, size: iconSize),
       onPressed: () async {
-        final aayah = await showDialog(
+        final aayah = await showDialog<String>(
           context: context,
           child: AlertDialog(
-            title: Text('Перейти к аяту'),
+            title: const Text('Перейти к аяту'),
             content: TextField(
               // autofocus: true,
               maxLength: 3,
               controller: _scrollToAayahController,
-              decoration: InputDecoration(labelText: 'Введите номер аята'),
+              decoration:
+                  const InputDecoration(labelText: 'Введите номер аята'),
               keyboardType: TextInputType.number,
             ),
             actions: <Widget>[
