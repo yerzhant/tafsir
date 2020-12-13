@@ -68,22 +68,23 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
       },
       child: BlocConsumer<ActivePageBloc, ActivePageState>(
         listener: (_, state) {
-          if (state is ActivePageSuwar)
+          if (state is ActivePageSuwar) {
             setState(() {
               _currentPageIndex = suwarPageIndex;
             });
-          else if (state is ActivePageText)
+          } else if (state is ActivePageText) {
             setState(() {
               _currentPageIndex = textPageIndex;
             });
-          else if (state is ActivePageBookmarks)
+          } else if (state is ActivePageBookmarks) {
             setState(() {
               _currentPageIndex = bookmarksPageIndex;
             });
-          else if (state is ActivePageSearch)
+          } else if (state is ActivePageSearch) {
             setState(() {
               _currentPageIndex = searchPageIndex;
             });
+          }
         },
         builder: (context, state) {
           return BlocBuilder<ThemeBloc, ThemeState>(
@@ -105,28 +106,29 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
   }
 
   Widget _getTitle(ActivePageState state) {
-    if (state is ActivePageText)
+    if (state is ActivePageText) {
       return Text(state.surah.title);
-    else if (state is ActivePageSuwarDownloading)
+    } else if (state is ActivePageSuwarDownloading) {
       return Text('Загрузка...');
-    else
+    } else {
       return Text('Тафсир');
+    }
   }
 
   List<Widget> _getAction(BuildContext context, ActivePageState state) {
-    if (state is ActivePageText && state.surah.isSurah())
+    if (state is ActivePageText && state.surah.isSurah()) {
       return [
         GoToAayah(activePageText: state),
         Settings(),
       ];
-    else if (state is ActivePageSuwar) {
+    } else if (state is ActivePageSuwar) {
       final isDarkMode = BlocProvider.of<ThemeBloc>(context).state is ThemeDark;
 
       return [
         PopupMenuButton<_SuwarAction>(
           itemBuilder: (_) => <PopupMenuEntry<_SuwarAction>>[
             const PopupMenuItem(
-              child: const Text('Загрузить все суры'),
+              child: Text('Загрузить все суры'),
               value: _SuwarAction.downloadSuwar,
             ),
             PopupMenuItem(
@@ -135,11 +137,11 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
             ),
             const PopupMenuDivider(),
             const PopupMenuItem(
-              child: const Text('Поделиться приложением'),
+              child: Text('Поделиться приложением'),
               value: _SuwarAction.shareApp,
             ),
             const PopupMenuItem(
-              child: const Text('Azan.ru'),
+              child: Text('Azan.ru'),
               value: _SuwarAction.azanRu,
             ),
           ],
@@ -159,7 +161,7 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
                 var text = 'Тафсир Корана\n\n';
                 text +=
                     'https://play.google.com/store/apps/details?id=ru.azan.tafsir';
-                Share.share(text, subject: 'Тафсир Корана');
+                await Share.share(text, subject: 'Тафсир Корана');
                 break;
 
               case _SuwarAction.azanRu:
@@ -169,24 +171,25 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
           },
         ),
       ];
-    } else
+    } else {
       return [];
+    }
   }
 
   Widget _getBody(ActivePageState state) {
-    if (state is ActivePageSuwar)
+    if (state is ActivePageSuwar) {
       return SuwarPage();
-    else if (state is ActivePageText)
+    } else if (state is ActivePageText) {
       return TextPage(
         key: Key(state.surah.slug),
         surah: state.surah,
         aayah: state.aayah,
       );
-    else if (state is ActivePageBookmarks)
+    } else if (state is ActivePageBookmarks) {
       return BookmarksPage();
-    else if (state is ActivePageSearch)
+    } else if (state is ActivePageSearch) {
       return SearchPage();
-    else if (state is ActivePageSuwarDownloading)
+    } else if (state is ActivePageSuwarDownloading) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -206,8 +209,9 @@ class _NavigatorWidgetState extends State<NavigatorWidget> {
           ],
         ),
       );
-    else
+    } else {
       return null;
+    }
   }
 
   BottomNavigationBar buildBottomNavigationBar(BuildContext context) {

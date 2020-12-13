@@ -18,10 +18,11 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
 
     final isDarkThemeMode = prefs.getBool(_isDarkThemeModeKey);
 
-    if (isDarkThemeMode != null && isDarkThemeMode)
+    if (isDarkThemeMode != null && isDarkThemeMode) {
       return ThemeBloc._(ThemeDark());
-    else
+    } else {
       return ThemeBloc._(ThemeLight());
+    }
   }
 
   @override
@@ -29,10 +30,10 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     final prefs = await SharedPreferences.getInstance();
 
     if (event is ThemeLightSelected) {
-      prefs.setBool(_isDarkThemeModeKey, false);
+      await prefs.setBool(_isDarkThemeModeKey, false);
       yield ThemeLight();
     } else if (event is ThemeDarkSelected) {
-      prefs.setBool(_isDarkThemeModeKey, true);
+      await prefs.setBool(_isDarkThemeModeKey, true);
       yield ThemeDark();
     }
   }

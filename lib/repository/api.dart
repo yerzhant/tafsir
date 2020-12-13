@@ -6,7 +6,7 @@ const _server = 'https://azan.ru/api/tafsir';
 
 Future<List<T>> apiGet<T>(
   String endpoint,
-  T fromJson(Map<String, dynamic> json),
+  T Function(Map<String, dynamic> json) fromJson,
 ) async {
   final response = await http.get('$_server/$endpoint');
 

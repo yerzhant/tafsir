@@ -86,12 +86,13 @@ class _SearchPageState extends State<SearchPage> {
         Expanded(
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
-              if (state is SearchSuccess)
+              if (state is SearchSuccess) {
                 return _buildFoundItems(state, context);
-              else if (state is SearchInProgress)
+              } else if (state is SearchInProgress) {
                 return Center(child: CircularProgressIndicator());
-              else
+              } else {
                 return Container();
+              }
             },
           ),
         ),

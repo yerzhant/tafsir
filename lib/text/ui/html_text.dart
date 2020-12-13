@@ -23,35 +23,41 @@ class HtmlText extends StatelessWidget {
           customStylesBuilder: (element) {
             final styles = <String, String>{};
 
-            if (element.localName == 'blockquote')
+            if (element.localName == 'blockquote') {
               styles.addAll({'margin': '0', 'padding': '10px 15px'});
+            }
 
             if (element.localName == 'blockquote' &&
-                element.className == 'blue')
+                element.className == 'blue') {
               styles.addAll(
                 {'background-color': themeState.aayahBlockquoteBlueBg},
               );
+            }
 
             if (element.localName == 'blockquote' &&
-                element.className == 'green')
+                element.className == 'green') {
               styles.addAll(
                 {'background-color': themeState.aayahBlockquoteGreenBg},
               );
+            }
 
-            if (element.localName == 'ul' || element.localName == 'ol')
+            if (element.localName == 'ul' || element.localName == 'ol') {
               styles.addAll({'margin-left': '16px', 'padding': '0'});
+            }
 
-            if (element.className == 'snoski')
+            if (element.className == 'snoski') {
               styles.addAll({
                 'padding': '10px',
                 'background-color': themeState.aayahFootnoteBg,
               });
+            }
 
-            if (element.className == 'specdiv')
+            if (element.className == 'specdiv') {
               styles.addAll({
                 'padding': '10px',
                 'background-color': themeState.aayahSpecDivBg,
               });
+            }
 
             return styles;
           },

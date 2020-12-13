@@ -25,7 +25,7 @@ class SurahRepository {
   Future<List<Surah>> getAll() async {
     final list = await db.query(_tableName, orderBy: 'weight');
 
-    if (list.length == 0) {
+    if (list.isEmpty) {
       final suwar = await apiGet('suwar', (map) => Surah.fromMap(map));
       _insertAll(suwar);
       return suwar;

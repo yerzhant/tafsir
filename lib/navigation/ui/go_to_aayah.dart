@@ -21,7 +21,7 @@ class _GoToAayahState extends State<GoToAayah> {
       tooltip: 'Перейти к аяту',
       icon: Icon(Icons.filter_1, size: iconSize),
       onPressed: () async {
-        final String aayah = await showDialog(
+        final aayah = await showDialog(
           context: context,
           child: AlertDialog(
             title: Text('Перейти к аяту'),
@@ -57,7 +57,7 @@ class _GoToAayahState extends State<GoToAayah> {
             ],
           ),
         );
-        if (aayah != null && aayah.isNotEmpty)
+        if (aayah != null && aayah.isNotEmpty) {
           BlocProvider.of<ActivePageBloc>(context).add(
             ActivePageTextScrolledTo(
               widget.activePageText.surah,
@@ -66,6 +66,7 @@ class _GoToAayahState extends State<GoToAayah> {
               int.parse(aayah),
             ),
           );
+        }
       },
     );
   }

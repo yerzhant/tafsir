@@ -9,17 +9,17 @@ final _appBarBgColorDark = Colors.indigo[600];
 final _suwarProgressBgLight = Colors.indigo[50];
 const _suwarProgressBgDark = Color(0xff1e1f29);
 
-const _textColorLight = const Color(0xFF414141);
-const _textColorDark = const Color(0xFFE0E0E0);
+const _textColorLight = Color(0xFF414141);
+const _textColorDark = Color(0xFFE0E0E0);
 
-const _htmlTextColorLight = const Color(0xFF414141);
-const _htmlTextColorDark = const Color(0xFFCCCCCC);
+const _htmlTextColorLight = Color(0xFF414141);
+const _htmlTextColorDark = Color(0xFFCCCCCC);
 
-const _activeSurahItemBackgroundColorLight = const Color(0xFFDBE1FF);
-const _activeSurahItemBackgroundColorDark = const Color(0xFF202020);
+const _activeSurahItemBackgroundColorLight = Color(0xFFDBE1FF);
+const _activeSurahItemBackgroundColorDark = Color(0xFF202020);
 
-const _aayahBackgroundColorLight = const Color(0XFFEEF5F7);
-const _aayahBackgroundColorDark = const Color(0XFF2E3B5B);
+const _aayahBackgroundColorLight = Color(0XFFEEF5F7);
+const _aayahBackgroundColorDark = Color(0XFF2E3B5B);
 
 const _aayahBlockquoteBlueBgLight = '#EEF5FF';
 const _aayahBlockquoteBlueBgDark = '#2A3065';

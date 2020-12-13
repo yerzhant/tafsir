@@ -25,12 +25,13 @@ class _SuwarPageState extends State<SuwarPage> {
     return FutureBuilder<List<Surah>>(
       future: _suwar,
       builder: (_, snap) {
-        if (snap.hasData)
+        if (snap.hasData) {
           return _buildList(snap.data);
-        else if (snap.hasError)
+        } else if (snap.hasError) {
           return Text('Error: ${snap.error}');
-        else
+        } else {
           return Center(child: CircularProgressIndicator());
+        }
       },
     );
   }

@@ -72,10 +72,10 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
   @override
   Stream<ActivePageState> mapEventToState(ActivePageEvent event) async* {
     if (event is ActivePageSuwarShown) {
-      tafsirRepository.saveActivePageIndex(suwarPageIndex);
+      await tafsirRepository.saveActivePageIndex(suwarPageIndex);
       yield ActivePageSuwar(state.surah, state.textHistory);
     } else if (event is ActivePageTextScrolledTo) {
-      tafsirRepository.saveActivePageIndex(textPageIndex);
+      await tafsirRepository.saveActivePageIndex(textPageIndex);
       yield ActivePageTextScrollTo(
         event.surah,
         state.textHistory,
@@ -83,12 +83,12 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         event.aayah,
       );
     } else if (event is ActivePageTextShown) {
-      tafsirRepository.saveActivePageIndex(textPageIndex);
+      await tafsirRepository.saveActivePageIndex(textPageIndex);
 
       var surah = event.surah;
 
-      int initialIndex = event.initialIndex;
-      double initialLeadingEdge = event.initialLeadingEdge;
+      var initialIndex = event.initialIndex;
+      var initialLeadingEdge = event.initialLeadingEdge;
 
       if (surah == null) {
         final initialTextPosition =
@@ -111,12 +111,12 @@ class ActivePageBloc extends Bloc<ActivePageEvent, ActivePageState> {
         initialLeadingEdge,
       );
     } else if (event is ActivePageBookmarksShown) {
-      tafsirRepository.saveActivePageIndex(bookmarksPageIndex);
+      await tafsirRepository.saveActivePageIndex(bookmarksPageIndex);
 
       final bookmarks = await tafsirRepository.bookmarkRepository.getAll();
       yield ActivePageBookmarks(state.surah, state.textHistory, bookmarks);
     } else if (event is ActivePageSearchShown) {
-      tafsirRepository.saveActivePageIndex(searchPageIndex);
+      await tafsirRepository.saveActivePageIndex(searchPageIndex);
       yield ActivePageSearch(state.surah, state.textHistory);
     } else if (event is ActivePageSuwarDownloaded) {
       yield ActivePageSuwarDownloading(null);

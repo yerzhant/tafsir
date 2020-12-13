@@ -10,6 +10,6 @@ class SettingsRepository {
 
   Future<void> setIsDisplayAlwaysOn(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(_isDisplayAlwaysOnKey, value);
+    await prefs.setBool(_isDisplayAlwaysOnKey, value);
   }
 }

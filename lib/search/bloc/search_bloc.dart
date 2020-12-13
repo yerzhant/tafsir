@@ -59,8 +59,9 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     }));
 
     items.sort((i1, i2) {
-      if (i1.surah.weight == i2.surah.weight)
+      if (i1.surah.weight == i2.surah.weight) {
         return i1.aayah.weight - i2.aayah.weight;
+      }
       return i1.surah.weight - i2.surah.weight;
     });
 

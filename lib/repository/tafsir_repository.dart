@@ -107,9 +107,9 @@ class TafsirRepository {
   ) async {
     final prefs = await SharedPreferences.getInstance();
 
-    prefs.setInt(_textPositionSurahKey, initialTextPosition.surahWeight);
-    prefs.setInt(_textPositionIndexKey, initialTextPosition.index);
-    prefs.setDouble(
+    await prefs.setInt(_textPositionSurahKey, initialTextPosition.surahWeight);
+    await prefs.setInt(_textPositionIndexKey, initialTextPosition.index);
+    await prefs.setDouble(
         _textPositionLeadingEdgeKey, initialTextPosition.leadingEdge);
   }
 
@@ -125,7 +125,7 @@ class TafsirRepository {
 
   Future<void> saveActivePageIndex(int index) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setInt(_activePageIndexKey, index);
+    await prefs.setInt(_activePageIndexKey, index);
   }
 
   Future<int> getActivePageIndex() async {

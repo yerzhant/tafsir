@@ -127,8 +127,9 @@ class SurahInfo extends StatelessWidget {
     var text = '$subject\n';
 
     if (surah.isSurah()) {
-      if (surah.titleInRussian.isNotEmpty)
+      if (surah.titleInRussian.isNotEmpty) {
         text += '«${surah.titleInRussian}»\n';
+      }
 
       text += '\n';
       text += '• ';

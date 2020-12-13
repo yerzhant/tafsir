@@ -31,7 +31,7 @@ class AayahRepository {
       orderBy: 'weight',
     );
 
-    if (list.length == 0) {
+    if (list.isEmpty) {
       final aayaat = await apiGet(
         'aayaat?surah=${surah.id}',
         (map) => Aayah.fromMap(map),

@@ -34,16 +34,17 @@ class _TextPageState extends State<TextPage> {
     _aayaat = RepositoryProvider.of<TafsirRepository>(context)
         .getAayaat(widget.surah);
 
-    if (widget.aayah != null)
+    if (widget.aayah != null) {
       _aayaat.whenComplete(() {
         _scrollTo(widget.aayah);
       });
+    }
 
     _itemPositionsListener.itemPositions.addListener(() {
       if (_itemPositionsListener.itemPositions.value.isEmpty) return;
 
       final item = _itemPositionsListener.itemPositions.value.first;
-      final InitialTextPosition initialTextPosition = InitialTextPosition(
+      final initialTextPosition = InitialTextPosition(
         widget.surah.weight,
         item.index,
         item.itemLeadingEdge,
@@ -56,7 +57,7 @@ class _TextPageState extends State<TextPage> {
 
   void _scrollTo(int aayah) async {
     await Future.delayed(Duration(milliseconds: 250));
-    _itemScrollController.scrollTo(
+    await _itemScrollController.scrollTo(
       index: aayah,
       duration: Duration(seconds: 1),
     );
@@ -67,13 +68,13 @@ class _TextPageState extends State<TextPage> {
     return FutureBuilder<List<Aayah>>(
       future: _aayaat,
       builder: (_, snapshot) {
-        if (snapshot.hasData)
+        if (snapshot.hasData) {
           return BlocConsumer<ActivePageBloc, ActivePageState>(
             listener: (_, state) {
               if (state is ActivePageTextScrollTo) _scrollTo(state.aayah);
             },
             builder: (_, state) {
-              if (state is ActivePageText)
+              if (state is ActivePageText) {
                 return ScrollablePositionedList.separated(
                   key: PageStorageKey('text-list-${widget.surah.id}'),
                   itemScrollController: _itemScrollController,
@@ -89,16 +90,19 @@ class _TextPageState extends State<TextPage> {
                         ),
                   separatorBuilder: (_, __) => Divider(height: 1),
                 );
-              else
+              } else {
                 return Center(child: CircularProgressIndicator());
+              }
             },
           );
-        else if (snapshot.hasError) {
-          if (snapshot.error is SocketException)
+        } else if (snapshot.hasError) {
+          if (snapshot.error is SocketException) {
             return Center(child: Text('Нет соединения с сервером.'));
+          }
           return Center(child: Text('Error: ${snapshot.error}'));
-        } else
+        } else {
           return Center(child: CircularProgressIndicator());
+        }
       },
     );
   }

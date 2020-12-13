@@ -53,10 +53,11 @@ class _BookmarksPageState extends State<BookmarksPage> {
               );
             },
           );
-        } else if (snap.hasError)
+        } else if (snap.hasError) {
           return Text('Error: ${snap.error}');
-        else
+        } else {
           return Center(child: CircularProgressIndicator());
+        }
       },
     );
   }

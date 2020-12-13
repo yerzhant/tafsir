@@ -27,16 +27,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final prefs = await SharedPreferences.getInstance();
 
     if (event is SettingsChanged) {
-      prefs.setDouble(_aayahFontSizeKey, event.aayahFontSize);
-      prefs.setDouble(_textFontSizeKey, event.fontSize);
-      prefs.setBool(_showTranslationKey, event.showTranslation);
-      prefs.setBool(_showTafsirKey, event.showTafsir);
-      prefs.setBool(_isDisplayAlwaysOnKey, event.isDisplayAlwaysOn);
+      await prefs.setDouble(_aayahFontSizeKey, event.aayahFontSize);
+      await prefs.setDouble(_textFontSizeKey, event.fontSize);
+      await prefs.setBool(_showTranslationKey, event.showTranslation);
+      await prefs.setBool(_showTafsirKey, event.showTafsir);
+      await prefs.setBool(_isDisplayAlwaysOnKey, event.isDisplayAlwaysOn);
 
-      if (event.isDisplayAlwaysOn)
+      if (event.isDisplayAlwaysOn) {
         await Wakelock.enable();
-      else
+      } else {
         await Wakelock.disable();
+      }
 
       yield SettingsState(
         event.aayahFontSize,
