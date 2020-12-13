@@ -6,11 +6,13 @@ class SettingsState {
   final double fontSize;
   final bool showTranslation;
   final bool showTafsir;
+  final bool isDisplayAlwaysOn;
 
   SettingsState(
     this.aayahFontSize,
     this.fontSize,
     this.showTranslation,
     this.showTafsir,
+    this.isDisplayAlwaysOn,
   );
 }

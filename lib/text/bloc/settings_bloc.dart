@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wakelock/wakelock.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
@@ -16,6 +17,7 @@ const _textFontSizeKey = 'text-font-size';
 
 const _showTranslationKey = 'show-translation';
 const _showTafsirKey = 'show-tafsir';
+const _isDisplayAlwaysOnKey = 'is-display-always-on';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc._(SettingsState state) : super(state);
@@ -29,12 +31,19 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       prefs.setDouble(_textFontSizeKey, event.fontSize);
       prefs.setBool(_showTranslationKey, event.showTranslation);
       prefs.setBool(_showTafsirKey, event.showTafsir);
+      prefs.setBool(_isDisplayAlwaysOnKey, event.isDisplayAlwaysOn);
+
+      if (event.isDisplayAlwaysOn)
+        await Wakelock.enable();
+      else
+        await Wakelock.disable();
 
       yield SettingsState(
         event.aayahFontSize,
         event.fontSize,
         event.showTranslation,
         event.showTafsir,
+        event.isDisplayAlwaysOn,
       );
     }
   }
@@ -47,6 +56,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final fontSize = prefs.getDouble(_textFontSizeKey) ?? _defaultFontSize;
     final showTranslation = prefs.getBool(_showTranslationKey) ?? true;
     final showTafsir = prefs.getBool(_showTafsirKey) ?? true;
+    final isDisplayAlwaysOn = prefs.getBool(_isDisplayAlwaysOnKey) ?? false;
+
+    if (isDisplayAlwaysOn) await Wakelock.enable();
 
     return SettingsBloc._(
       SettingsState(
@@ -54,6 +66,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         fontSize,
         showTranslation,
         showTafsir,
+        isDisplayAlwaysOn,
       ),
     );
   }

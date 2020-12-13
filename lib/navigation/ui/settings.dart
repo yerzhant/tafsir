@@ -14,15 +14,15 @@ class Settings extends StatelessWidget {
       tooltip: 'Настройки',
       icon: Icon(Icons.settings, size: iconSize),
       onPressed: () async {
+        final settingsState = BlocProvider.of<SettingsBloc>(context).state;
         final settings = await showDialog<SettingsState>(
           context: context,
           child: _Dialog(
-            aayahFontSize:
-                BlocProvider.of<SettingsBloc>(context).state.aayahFontSize,
-            fontSize: BlocProvider.of<SettingsBloc>(context).state.fontSize,
-            showTranslation:
-                BlocProvider.of<SettingsBloc>(context).state.showTranslation,
-            showTafsir: BlocProvider.of<SettingsBloc>(context).state.showTafsir,
+            aayahFontSize: settingsState.aayahFontSize,
+            fontSize: settingsState.fontSize,
+            showTranslation: settingsState.showTranslation,
+            showTafsir: settingsState.showTafsir,
+            isDisplayAlwaysOn: settingsState.isDisplayAlwaysOn,
             themeState: BlocProvider.of<ThemeBloc>(context).state,
           ),
         );
@@ -34,6 +34,7 @@ class Settings extends StatelessWidget {
               settings.fontSize,
               settings.showTranslation,
               settings.showTafsir,
+              settings.isDisplayAlwaysOn,
             ),
           );
         }
@@ -47,6 +48,7 @@ class _Dialog extends StatefulWidget {
   final double fontSize;
   final bool showTranslation;
   final bool showTafsir;
+  final bool isDisplayAlwaysOn;
   final ThemeState themeState;
 
   const _Dialog({
@@ -55,6 +57,7 @@ class _Dialog extends StatefulWidget {
     this.fontSize,
     this.showTranslation,
     this.showTafsir,
+    this.isDisplayAlwaysOn,
     this.themeState,
   }) : super(key: key);
 
@@ -67,6 +70,7 @@ class _DialogState extends State<_Dialog> {
   double _fontSize;
   bool _showTranslation;
   bool _showTafsir;
+  bool _isDisplayAlwaysOn;
 
   @override
   void initState() {
@@ -75,78 +79,91 @@ class _DialogState extends State<_Dialog> {
     _fontSize = widget.fontSize;
     _showTranslation = widget.showTranslation;
     _showTafsir = widget.showTafsir;
+    _isDisplayAlwaysOn = widget.isDisplayAlwaysOn;
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text('Настройки'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 48,
-            child: Center(
-              child: Text(
-                'الله أكبر',
-                style: GoogleFonts.scheherazade(fontSize: _aayahFontSize),
-              ),
-            ),
-          ),
-          Slider(
-            min: 30,
-            max: 40,
-            value: _aayahFontSize,
-            onChanged: (value) {
-              setState(() {
-                _aayahFontSize = value;
-              });
-            },
-          ),
-          SizedBox(height: 10),
-          SizedBox(
-            height: 24,
-            child: Center(
-              child: Text(
-                'Размер шрифта',
-                style: TextStyle(
-                  fontSize: _fontSize,
-                  color: widget.themeState.htmlTextColor,
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 48,
+              child: Center(
+                child: Text(
+                  'الله أكبر',
+                  style: GoogleFonts.scheherazade(fontSize: _aayahFontSize),
                 ),
               ),
             ),
-          ),
-          Slider(
-            min: 14,
-            max: 20,
-            value: _fontSize,
-            onChanged: (value) {
-              setState(() {
-                _fontSize = value;
-              });
-            },
-          ),
-          CheckboxListTile(
-            controlAffinity: ListTileControlAffinity.leading,
-            title: Text('Перевод'),
-            value: _showTranslation,
-            onChanged: (value) {
-              setState(() {
-                _showTranslation = value;
-              });
-            },
-          ),
-          CheckboxListTile(
-            controlAffinity: ListTileControlAffinity.leading,
-            title: Text('Тафсир'),
-            value: _showTafsir,
-            onChanged: (value) {
-              setState(() {
-                _showTafsir = value;
-              });
-            },
-          ),
-        ],
+            Slider(
+              min: 30,
+              max: 40,
+              value: _aayahFontSize,
+              onChanged: (value) {
+                setState(() {
+                  _aayahFontSize = value;
+                });
+              },
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              height: 24,
+              child: Center(
+                child: Text(
+                  'Размер шрифта',
+                  style: TextStyle(
+                    fontSize: _fontSize,
+                    color: widget.themeState.htmlTextColor,
+                  ),
+                ),
+              ),
+            ),
+            Slider(
+              min: 14,
+              max: 20,
+              value: _fontSize,
+              onChanged: (value) {
+                setState(() {
+                  _fontSize = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text('Перевод'),
+              value: _showTranslation,
+              onChanged: (value) {
+                setState(() {
+                  _showTranslation = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text('Тафсир'),
+              value: _showTafsir,
+              onChanged: (value) {
+                setState(() {
+                  _showTafsir = value;
+                });
+              },
+            ),
+            CheckboxListTile(
+              controlAffinity: ListTileControlAffinity.leading,
+              title: Text('Не выключать экран'),
+              value: _isDisplayAlwaysOn,
+              onChanged: (value) {
+                setState(() {
+                  _isDisplayAlwaysOn = value;
+                });
+              },
+            ),
+          ],
+        ),
       ),
       actions: <Widget>[
         FlatButton(
@@ -167,6 +184,7 @@ class _DialogState extends State<_Dialog> {
                 _fontSize,
                 _showTranslation,
                 _showTafsir,
+                _isDisplayAlwaysOn,
               ),
             );
           },
