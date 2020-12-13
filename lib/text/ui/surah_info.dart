@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:html/parser.dart';
+import 'package:share/share.dart';
 import 'package:tafsir/bloc/theme_bloc.dart';
 import 'package:tafsir/constants.dart';
 import 'package:tafsir/suwar/model/surah.dart';
@@ -26,14 +28,23 @@ class SurahInfo extends StatelessWidget {
     return Column(
       children: <Widget>[
         CachedNetworkImage(imageUrl: '$_images/${surah.image}'),
-        SizedBox(height: 35),
+        SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            SizedBox(width: 45),
+            Spacer(),
             if (surah.isSurah())
               Text(surah.weight.toString(), style: _surahTitleStyle),
             if (surah.isSurah()) SizedBox(width: 10),
-            Text(getTitle(), style: _surahTitleStyle),
+            Text(_getTitle(), style: _surahTitleStyle),
+            Spacer(),
+            IconButton(
+              iconSize: iconSize,
+              color: Theme.of(context).primaryColor,
+              icon: Icon(Icons.share),
+              onPressed: _share,
+            ),
           ],
         ),
         if (surah.isSurah()) SizedBox(height: 7),
@@ -79,7 +90,7 @@ class SurahInfo extends StatelessWidget {
     );
   }
 
-  String getTitle() => surah.isSurah()
+  String _getTitle() => surah.isSurah()
       ? 'Сура «${surah.title.toUpperCase()}»'
       : surah.title.toUpperCase();
 
@@ -106,5 +117,36 @@ class SurahInfo extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _share() {
+    var subject = '';
+    if (surah.isSurah()) subject = '${surah.weight} ';
+    subject += _getTitle();
+
+    var text = '$subject\n';
+
+    if (surah.isSurah()) {
+      if (surah.titleInRussian.isNotEmpty)
+        text += '«${surah.titleInRussian}»\n';
+
+      text += '\n';
+      text += '• ';
+      text += surah.revealAt == 'Madina' ? 'Мединская сура' : 'Мекканская сура';
+      text += '\n';
+      text += '• ${surah.ayatsCount} аятов\n';
+      text += '• ${surah.dzhuz} джуз\n';
+      text += '• в порядке ниспосылания - ${surah.revealOrder}\n';
+    }
+
+    text += '\n';
+    text += _htmlToString(surah.text);
+
+    Share.share(text, subject: subject);
+  }
+
+  String _htmlToString(String html) {
+    final doc = parse(html);
+    return parse(doc.body.text).documentElement.text.trim();
   }
 }
