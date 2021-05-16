@@ -48,12 +48,6 @@ class TafsirApp extends StatelessWidget {
           return MaterialApp(
             title: 'Тафсир',
             theme: state.themeData,
-            // theme: ThemeData(
-            //   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            //     selectedItemColor: Colors.red,
-            //     unselectedItemColor: Colors.black,
-            //   ),
-            // ),
             home: RepositoryProvider(
               create: (context) => tafsirRepository,
               child: MultiBlocProvider(

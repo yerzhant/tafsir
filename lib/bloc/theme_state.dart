@@ -19,19 +19,19 @@ const _activeSurahItemBackgroundColorLight = Color(0xFFDBE1FF);
 const _activeSurahItemBackgroundColorDark = Color(0xFF202020);
 
 const _aayahBackgroundColorLight = Color(0xFFEEF5F7);
-const _aayahBackgroundColorDark = Color(0xFF2E3B5B);
+const _aayahBackgroundColorDark = Color(0xFF2F323A);
 
 const _aayahBlockquoteBlueBgLight = '#EEF5FF';
-const _aayahBlockquoteBlueBgDark = '#2A3065';
+const _aayahBlockquoteBlueBgDark = '#282A36';
 
 const _aayahBlockquoteGreenBgLight = '#F5FFFA';
 const _aayahBlockquoteGreenBgDark = '#243D22';
 
-const _aayahSpecDivBgLight = '#F5F5F5';
-const _aayahSpecDivBgDark = '#3A3A3A';
+const _aayahSpecDivBgLight = '#E7EEF8';
+const _aayahSpecDivBgDark = '#2A2C36';
 
 const _aayahFootnoteBgLight = '#EEF5F7';
-const _aayahFootnoteBgDark = '#2E3B5B';
+const _aayahFootnoteBgDark = '#2F323A';
 
 @immutable
 abstract class ThemeState {
