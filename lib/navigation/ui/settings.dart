@@ -91,7 +91,7 @@ class _DialogState extends State<_Dialog> {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: 48,
+              height: 80,
               child: Center(
                 child: Text(
                   'الله أكبر',
@@ -101,7 +101,7 @@ class _DialogState extends State<_Dialog> {
             ),
             Slider(
               min: 30,
-              max: 40,
+              max: 60,
               value: _aayahFontSize,
               onChanged: (value) {
                 setState(() {
@@ -111,10 +111,10 @@ class _DialogState extends State<_Dialog> {
             ),
             const SizedBox(height: 10),
             SizedBox(
-              height: 24,
+              height: 30,
               child: Center(
                 child: Text(
-                  'Размер шрифта',
+                  'Текст',
                   style: TextStyle(
                     fontSize: _fontSize,
                     color: widget.themeState.htmlTextColor,
@@ -124,7 +124,7 @@ class _DialogState extends State<_Dialog> {
             ),
             Slider(
               min: 14,
-              max: 20,
+              max: 30,
               value: _fontSize,
               onChanged: (value) {
                 setState(() {
