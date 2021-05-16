@@ -6,9 +6,6 @@ import 'package:tafsir/constants.dart';
 
 const _audioBaseUrl = '$server/upload/Quran/abu-bakr-al-shatri';
 
-final _player = AudioPlayer();
-StreamSubscription _stopListener;
-
 class AayahPlayer extends StatefulWidget {
   final String surah;
   final String aayah;
@@ -18,6 +15,9 @@ class AayahPlayer extends StatefulWidget {
   @override
   _AayahPlayerState createState() => _AayahPlayerState();
 }
+
+final _player = AudioPlayer();
+StreamSubscription _stopListener;
 
 class _AayahPlayerState extends State<AayahPlayer> {
   var _isPlaying = false;
@@ -41,11 +41,11 @@ class _AayahPlayerState extends State<AayahPlayer> {
   }
 
   Future<void> _pressed() async {
-    await _player.stop();
-
     if (_isPlaying) {
+      await _player.stop();
       _isPlaying = false;
     } else {
+      await _player.stop();
       await _player.play(_url);
       _isPlaying = true;
 
