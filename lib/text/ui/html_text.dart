@@ -105,7 +105,7 @@ class HtmlText extends StatelessWidget {
   }
 
   void _badLinkNotification(BuildContext context) {
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text(
           'Битая ссылка. Пожалуйста, попробуйте перезагрузить все суры.',

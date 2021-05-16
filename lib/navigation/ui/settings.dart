@@ -17,7 +17,7 @@ class Settings extends StatelessWidget {
         final settingsState = BlocProvider.of<SettingsBloc>(context).state;
         final settings = await showDialog<SettingsState>(
           context: context,
-          child: _Dialog(
+          builder: (context) => _Dialog(
             aayahFontSize: settingsState.aayahFontSize,
             fontSize: settingsState.fontSize,
             showTranslation: settingsState.showTranslation,
@@ -166,7 +166,7 @@ class _DialogState extends State<_Dialog> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(context);
           },
@@ -175,7 +175,7 @@ class _DialogState extends State<_Dialog> {
             style: TextStyle(color: Theme.of(context).primaryColor),
           ),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.pop(
               context,

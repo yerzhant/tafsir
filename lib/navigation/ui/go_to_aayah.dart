@@ -23,7 +23,7 @@ class _GoToAayahState extends State<GoToAayah> {
       onPressed: () async {
         final aayah = await showDialog<String>(
           context: context,
-          child: AlertDialog(
+          builder: (context) => AlertDialog(
             title: const Text('Перейти к аяту'),
             content: TextField(
               // autofocus: true,
@@ -34,7 +34,7 @@ class _GoToAayahState extends State<GoToAayah> {
               keyboardType: TextInputType.number,
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -43,7 +43,7 @@ class _GoToAayahState extends State<GoToAayah> {
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(
                     context,
