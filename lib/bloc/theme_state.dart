@@ -25,7 +25,7 @@ const _aayahBlockquoteBlueBgLight = '#EEF5FF';
 const _aayahBlockquoteBlueBgDark = '#282A36';
 
 const _aayahBlockquoteGreenBgLight = '#F5FFFA';
-const _aayahBlockquoteGreenBgDark = '#243D22';
+const _aayahBlockquoteGreenBgDark = '#2F342F';
 
 const _aayahSpecDivBgLight = '#E7EEF8';
 const _aayahSpecDivBgDark = '#2A2C36';
