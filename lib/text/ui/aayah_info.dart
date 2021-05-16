@@ -137,12 +137,6 @@ class _AayahInfoState extends State<AayahInfo> {
       const SizedBox(height: 20),
       Row(
         children: <Widget>[
-          Text('ПЕРЕВОД:', style: labelStyle),
-        ],
-      ),
-      const SizedBox(height: 7),
-      Row(
-        children: <Widget>[
           Expanded(child: HtmlText(text: widget.aayah.text)),
         ],
       ),
@@ -151,13 +145,8 @@ class _AayahInfoState extends State<AayahInfo> {
 
   List<Widget> _tafsir(TextStyle labelStyle) {
     return [
-      const SizedBox(height: 20),
-      Row(
-        children: <Widget>[
-          Text('ТАФСИР:', style: labelStyle),
-        ],
-      ),
-      const SizedBox(height: 7),
+      const SizedBox(height: 5),
+      const Divider(height: 20),
       HtmlText(text: widget.aayah.tafsir),
     ];
   }
