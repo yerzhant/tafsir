@@ -27,6 +27,8 @@ class _TextPageState extends State<TextPage> {
 
   Future<List<Aayah>> _aayaat;
 
+  var _position = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -40,7 +42,7 @@ class _TextPageState extends State<TextPage> {
       });
     }
 
-    _itemPositionsListener.itemPositions.addListener(() {
+    _itemPositionsListener.itemPositions.addListener(() async {
       if (_itemPositionsListener.itemPositions.value.isEmpty) return;
 
       final item = _itemPositionsListener.itemPositions.value.first;
@@ -52,6 +54,9 @@ class _TextPageState extends State<TextPage> {
 
       RepositoryProvider.of<TafsirRepository>(context)
           .saveInitialTextPosition(initialTextPosition);
+
+      _position = item.index / (await _aayaat).length;
+      setState(() {});
     });
   }
 
@@ -75,20 +80,27 @@ class _TextPageState extends State<TextPage> {
             },
             builder: (_, state) {
               if (state is ActivePageText) {
-                return ScrollablePositionedList.separated(
-                  key: PageStorageKey('text-list-${widget.surah.id}'),
-                  itemScrollController: _itemScrollController,
-                  itemPositionsListener: _itemPositionsListener,
-                  initialScrollIndex: state.initialIndex,
-                  initialAlignment: state.initialLeadingEdge,
-                  itemCount: snapshot.data.length + 1,
-                  itemBuilder: (_, index) => index == 0
-                      ? SurahInfo(surah: widget.surah)
-                      : AayahInfo(
-                          surah: widget.surah,
-                          aayah: snapshot.data[index - 1],
-                        ),
-                  separatorBuilder: (_, __) => const Divider(height: 1),
+                return Column(
+                  children: [
+                    LinearProgressIndicator(value: _position),
+                    Expanded(
+                      child: ScrollablePositionedList.separated(
+                        key: PageStorageKey('text-list-${widget.surah.id}'),
+                        itemScrollController: _itemScrollController,
+                        itemPositionsListener: _itemPositionsListener,
+                        initialScrollIndex: state.initialIndex,
+                        initialAlignment: state.initialLeadingEdge,
+                        itemCount: snapshot.data.length + 1,
+                        itemBuilder: (_, index) => index == 0
+                            ? SurahInfo(surah: widget.surah)
+                            : AayahInfo(
+                                surah: widget.surah,
+                                aayah: snapshot.data[index - 1],
+                              ),
+                        separatorBuilder: (_, __) => const Divider(height: 1),
+                      ),
+                    ),
+                  ],
                 );
               } else {
                 return const Center(child: CircularProgressIndicator());
