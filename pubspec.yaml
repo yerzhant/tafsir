@@ -3,7 +3,7 @@ description: Tafsir.
 
 publish_to: 'none'
 
-version: 1.8.0+10
+version: 1.8.1+11
 
 environment:
   sdk: '>=2.7.0 <3.0.0'
