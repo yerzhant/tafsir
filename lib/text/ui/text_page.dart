@@ -8,6 +8,7 @@ import 'package:tafsir/repository/tafsir_repository.dart';
 import 'package:tafsir/suwar/model/surah.dart';
 import 'package:tafsir/text/model/aayah.dart';
 import 'package:tafsir/text/ui/aayah_info.dart';
+import 'package:tafsir/text/ui/progress_widget.dart';
 import 'package:tafsir/text/ui/surah_info.dart';
 
 class TextPage extends StatefulWidget {
@@ -27,8 +28,6 @@ class _TextPageState extends State<TextPage> {
 
   Future<List<Aayah>> _aayaat;
 
-  var _position = 0.0;
-
   @override
   void initState() {
     super.initState();
@@ -42,7 +41,7 @@ class _TextPageState extends State<TextPage> {
       });
     }
 
-    _itemPositionsListener.itemPositions.addListener(() async {
+    _itemPositionsListener.itemPositions.addListener(() {
       if (_itemPositionsListener.itemPositions.value.isEmpty) return;
 
       final item = _itemPositionsListener.itemPositions.value.first;
@@ -54,9 +53,6 @@ class _TextPageState extends State<TextPage> {
 
       RepositoryProvider.of<TafsirRepository>(context)
           .saveInitialTextPosition(initialTextPosition);
-
-      _position = item.index / (await _aayaat).length;
-      setState(() {});
     });
   }
 
@@ -82,7 +78,10 @@ class _TextPageState extends State<TextPage> {
               if (state is ActivePageText) {
                 return Column(
                   children: [
-                    LinearProgressIndicator(value: _position),
+                    ProgressWidget(
+                      snapshot.data.length,
+                      _itemPositionsListener,
+                    ),
                     Expanded(
                       child: ScrollablePositionedList.separated(
                         key: PageStorageKey('text-list-${widget.surah.id}'),
