@@ -78,10 +78,11 @@ class _TextPageState extends State<TextPage> {
               if (state is ActivePageText) {
                 return Column(
                   children: [
-                    ProgressWidget(
-                      snapshot.data.length,
-                      _itemPositionsListener,
-                    ),
+                    if (widget.surah.isSurah())
+                      ProgressWidget(
+                        snapshot.data.length,
+                        _itemPositionsListener,
+                      ),
                     Expanded(
                       child: ScrollablePositionedList.separated(
                         key: PageStorageKey('text-list-${widget.surah.id}'),
