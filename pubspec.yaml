@@ -13,9 +13,11 @@ dependencies:
     sdk: flutter
   audioplayer: ^0.8.1
   cupertino_icons: ^1.0.3
+  dartz: ^0.10.0-nullsafety.2
   flutter_bloc: ^7.0.1
   flutter_widget_from_html_core: ^0.6.1+1
   freezed: ^0.14.2
+  freezed_annotation: ^0.14.2
   google_fonts: ^2.1.0
   http: ^0.13.3
   scrollable_positioned_list: ^0.1.10
