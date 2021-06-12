@@ -15,6 +15,7 @@ dependencies:
   cupertino_icons: ^1.0.3
   dartz: ^0.10.0-nullsafety.2
   flutter_bloc: ^7.0.1
+  flutter_modular: ^3.2.2+1
   flutter_widget_from_html_core: ^0.6.1+1
   freezed: ^0.14.2
   freezed_annotation: ^0.14.2
