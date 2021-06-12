@@ -19,11 +19,23 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
-              Tab(text: 'Suwar'),
-              Tab(text: 'Bookmarks'),
+              Tab(text: 'Суры'),
+              Tab(text: 'Закладки'),
             ],
           ),
-          title: Text('xxx'),
+          title: Row(
+            children: [
+              Image.asset(
+                'assets/images/logo.png',
+                width: 57,
+                height: 50,
+              ),
+              const Text('Тафсир Azan.ru'),
+              const Spacer(),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+            ],
+          ),
         ),
         body: TabBarView(
           children: [
