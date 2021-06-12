@@ -9,19 +9,19 @@ class SuwarDataSource implements SuwarRepo {
   final TafsirDB db;
   final Api api;
 
-  SuwarDataSource(this.db, this.api);
+  const SuwarDataSource(this.db, this.api);
 
   @override
   Future<Either<Rejection, List<Surah>>> getAll() async {
-    final list = await db.getAllSuwar();
+    final list = await db.getSuwar();
 
     if (list.isEmpty) {
-      final suwar = await api.getList('suwar', (map) => Surah.fromMap(map));
+      final result = await api.getList('suwar', (map) => Surah.fromMap(map));
 
-      return suwar.fold(
+      return result.fold(
         (l) => left(l),
-        (r) {
-          db.insertAll(r);
+        (r) async {
+          await db.insertSuwar(r);
           return right(r);
         },
       );

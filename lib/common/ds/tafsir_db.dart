@@ -1,22 +1,38 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
+import 'package:tafsir/text/domain/model/text_item.dart';
 
 const _surahTableName = 'surah';
+const _textTableName = 'aayah';
 
 class TafsirDB {
   late Database _db;
 
-  Future<List<Map<String, dynamic>>> getAllSuwar() {
-    return _db.query(_surahTableName, orderBy: 'weight');
+  Future<List<Map<String, dynamic>>> getSuwar() =>
+      _db.query(_surahTableName, orderBy: 'weight');
+
+  Future<List<Map<String, dynamic>>> getTextItems(Surah surah) => _db.query(
+        _textTableName,
+        where: 'surah_id = ?',
+        whereArgs: [surah.id],
+        orderBy: 'weight',
+      );
+
+  Future<void> _insertSurah(Surah surah) =>
+      _db.insert(_surahTableName, surah.toMap());
+
+  Future<void> insertSuwar(List<Surah> suwar) async {
+    for (final surah in suwar) {
+      await _insertSurah(surah);
+    }
   }
 
-  Future<void> _insert(Surah surah) async {
-    await _db.insert(_surahTableName, surah.toMap());
-  }
+  Future<void> _insertTextItem(TextItem item) =>
+      _db.insert(_textTableName, item.toMap());
 
-  void insertAll(List<Surah> suwar) {
-    for (final s in suwar) {
-      _insert(s);
+  Future<void> insertTextItems(List<TextItem> items) async {
+    for (final item in items) {
+      await _insertTextItem(item);
     }
   }
 
