@@ -33,7 +33,14 @@ class SuwarList extends StatelessWidget {
       key: const PageStorageKey('suwar-list'),
       itemCount: suwar.length,
       itemBuilder: (_, index) => SurahItem(suwar[index]),
-      separatorBuilder: (_, __) => const Divider(height: 1),
+      separatorBuilder: (_, __) => const Divider(
+        height: 1,
+        color: Color(0x4dBDBDC2),
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 8,
+        vertical: 16,
+      ),
     );
   }
 }

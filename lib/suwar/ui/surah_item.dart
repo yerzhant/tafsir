@@ -11,38 +11,50 @@ class SurahItem extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: SizedBox(
-        height: 70,
+        height: 74,
         child: Row(
           children: <Widget>[
-            SizedBox(
-              width: 70,
+            Container(
+              width: 50,
+              height: 50,
+              decoration: surah.weight > 0
+                  ? BoxDecoration(
+                      border: Border.all(color: const Color(0x4dBDBDC2)),
+                      borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    )
+                  : null,
               child: surah.weight > 0
                   ? Center(
                       child: Text(
                         surah.weight.toString(),
                         style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xff0088C7),
                         ),
                       ),
                     )
                   : null,
             ),
+            const SizedBox(width: 9),
             Expanded(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    surah.title.toUpperCase(),
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    surah.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                   if (surah.titleInRussian != '')
-                    Text(
-                      surah.titleInRussian,
+                    Column(
+                      children: [
+                        const SizedBox(height: 4),
+                        Text(
+                          surah.titleInRussian,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                      ],
                     ),
                 ],
               ),
@@ -52,13 +64,16 @@ class SurahItem extends StatelessWidget {
                 width: 100,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
                     Text(
                       '${surah.ayatsCount} аятов',
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
+                    const SizedBox(height: 4),
                     Text(
                       'Джуз: ${surah.dzhuz}',
+                      style: Theme.of(context).textTheme.subtitle2,
                     ),
                   ],
                 ),

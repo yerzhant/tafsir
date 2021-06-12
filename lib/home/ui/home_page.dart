@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
         body: TabBarView(
           children: [
             SuwarList(bloc: suwarBloc),
-            const Text('bookmarks'),
+            const Placeholder(),
           ],
         ),
       ),

@@ -8,8 +8,24 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
+        textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+          headline6: GoogleFonts.poppins(
+            fontSize: 16,
+            letterSpacing: -.2,
+            fontWeight: FontWeight.w600,
+            color: const Color(0xff0a0a0a),
+          ),
+          subtitle1: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w300,
+            color: const Color(0xffbdbdc2),
+          ),
+          subtitle2: GoogleFonts.poppins(
+            fontSize: 12,
+            letterSpacing: .2,
+            fontWeight: FontWeight.w400,
+            color: const Color(0x4d0a0a0a),
+          ),
         ),
         tabBarTheme: TabBarTheme(
           labelStyle: GoogleFonts.poppins(
