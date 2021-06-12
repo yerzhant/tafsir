@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
 class SurahItem extends StatelessWidget {
@@ -9,7 +10,9 @@ class SurahItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Modular.to.pushNamed('/text', arguments: surah);
+      },
       child: SizedBox(
         height: 74,
         child: Row(

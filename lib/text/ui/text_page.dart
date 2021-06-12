@@ -14,12 +14,14 @@ class TextPage extends StatefulWidget {
   final Surah surah;
   final int? itemNumber;
 
-  const TextPage({
+  TextPage({
     Key? key,
     required this.bloc,
     required this.surah,
     this.itemNumber,
-  }) : super(key: key);
+  }) : super(key: key) {
+    bloc.add(TextEvent.load(surah));
+  }
 
   @override
   _TextPageState createState() => _TextPageState();

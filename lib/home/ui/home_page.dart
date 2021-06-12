@@ -6,10 +6,12 @@ import 'package:tafsir/suwar/ui/suwar_list.dart';
 class HomePage extends StatelessWidget {
   final SuwarBloc suwarBloc;
 
-  const HomePage({
+  HomePage({
     Key? key,
     required this.suwarBloc,
-  }) : super(key: key);
+  }) : super(key: key) {
+    suwarBloc.add(const SuwarEvent.load());
+  }
 
   @override
   Widget build(BuildContext context) {

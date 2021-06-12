@@ -1,6 +1,9 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:http/http.dart';
+import 'package:tafsir/common/ds/api.dart';
 import 'package:tafsir/common/ds/tafsir_db.dart';
 import 'package:tafsir/home/home_module.dart';
+import 'package:tafsir/text/text_module.dart';
 
 class AppModule extends Module {
   final TafsirDB db = TafsirDB();
@@ -10,11 +13,13 @@ class AppModule extends Module {
   @override
   List<Bind> get binds => [
         Bind.singleton((i) => db),
+        Bind.singleton((i) => Api(Client())),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ModuleRoute('/', module: HomeModule()),
+        ModuleRoute('/text', module: TextModule()),
       ];
 
   Future<void> dispose() async => db.close();
