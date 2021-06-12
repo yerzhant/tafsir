@@ -429,6 +429,8 @@ abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
       __$ErrorCopyWithImpl<$Res>;
   $Res call({Rejection rejection});
+
+  $RejectionCopyWith<$Res> get rejection;
 }
 
 /// @nodoc
@@ -450,6 +452,13 @@ class __$ErrorCopyWithImpl<$Res> extends _$SuwarStateCopyWithImpl<$Res>
           : rejection // ignore: cast_nullable_to_non_nullable
               as Rejection,
     ));
+  }
+
+  @override
+  $RejectionCopyWith<$Res> get rejection {
+    return $RejectionCopyWith<$Res>(_value.rejection, (value) {
+      return _then(_value.copyWith(rejection: value));
+    });
   }
 }
 
