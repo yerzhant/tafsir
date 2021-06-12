@@ -4,10 +4,10 @@ class Surah {
   final String title;
   final String titleInRussian;
   final String text;
-  final int ayatsCount;
+  final int? ayatsCount;
   final String dzhuz;
   final String revealAt;
-  final int revealOrder;
+  final int? revealOrder;
   final String image;
   final String slug;
 
@@ -17,10 +17,10 @@ class Surah {
     required this.title,
     required this.titleInRussian,
     required this.text,
-    required this.ayatsCount,
+    this.ayatsCount,
     required this.dzhuz,
     required this.revealAt,
-    required this.revealOrder,
+    this.revealOrder,
     required this.image,
     required this.slug,
   });
@@ -32,10 +32,10 @@ class Surah {
       title: map['title'] as String,
       titleInRussian: map['title_in_russian'] as String,
       text: map['text'] as String,
-      ayatsCount: map['ayats_count'] as int,
+      ayatsCount: map['ayats_count'] as int?,
       dzhuz: map['dzhuz'] as String,
       revealAt: map['reveal_at'] as String,
-      revealOrder: map['reveal_order'] as int,
+      revealOrder: map['reveal_order'] as int?,
       image: map['image'] as String,
       slug: map['slug'] as String,
     );

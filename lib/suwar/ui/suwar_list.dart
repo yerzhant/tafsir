@@ -7,11 +7,14 @@ import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/suwar/ui/surah_item.dart';
 
 class SuwarList extends StatelessWidget {
-  const SuwarList({Key? key}) : super(key: key);
+  final SuwarBloc bloc;
+
+  const SuwarList({Key? key, required this.bloc}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SuwarBloc, SuwarState>(
+      bloc: bloc,
       builder: (context, state) {
         return state.when(
           (suwar) => _buildList(suwar),

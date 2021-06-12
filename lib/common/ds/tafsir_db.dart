@@ -4,14 +4,14 @@ import 'package:tafsir/suwar/domain/model/surah.dart';
 const _surahTableName = 'surah';
 
 class TafsirDB {
-  late Database db;
+  late Database _db;
 
   Future<List<Map<String, dynamic>>> getAllSuwar() {
-    return db.query(_surahTableName, orderBy: 'weight');
+    return _db.query(_surahTableName, orderBy: 'weight');
   }
 
   Future<void> _insert(Surah surah) async {
-    await db.insert(_surahTableName, surah.toMap());
+    await _db.insert(_surahTableName, surah.toMap());
   }
 
   void insertAll(List<Surah> suwar) {
@@ -21,7 +21,7 @@ class TafsirDB {
   }
 
   Future<void> init() async {
-    db = await openDatabase(
+    _db = await openDatabase(
       'app.db',
       version: 2,
       onCreate: (db, _) async {
@@ -71,5 +71,5 @@ class TafsirDB {
     );
   }
 
-  Future<void> close() => db.close();
+  Future<void> close() => _db.close();
 }
