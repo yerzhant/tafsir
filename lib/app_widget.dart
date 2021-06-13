@@ -9,6 +9,7 @@ class AppWidget extends StatelessWidget {
       initialRoute: '/',
       theme: ThemeData(
         primaryColor: const Color(0xff0088c7),
+        accentColor: const Color(0xff0088c7),
         textTheme: GoogleFonts.poppinsTextTheme().copyWith(
           headline6: GoogleFonts.poppins(
             fontSize: 16,
