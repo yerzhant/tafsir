@@ -54,7 +54,7 @@ class _TextPageState extends State<TextPage> {
                 ),
             ],
           ),
-          inProgress: () => const CircularProgress(),
+          inProgress: () => const Center(child: CircularProgress()),
           error: (rejection) => RejectionWidget(
             rejection: rejection,
             onRefresh: () {},
