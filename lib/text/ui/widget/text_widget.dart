@@ -25,6 +25,7 @@ class _TextWidgetState extends State<TextWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
+        const SizedBox(height: 5),
         _divider(),
         Text(
           widget.textItem.textOrigin.trim(),
@@ -58,6 +59,7 @@ class _TextWidgetState extends State<TextWidget> {
               widget.textItem.title,
               style: GoogleFonts.lato(
                 fontSize: 13,
+                height: 1,
                 fontWeight: FontWeight.w800,
                 color: Theme.of(context).primaryColor,
               ),
