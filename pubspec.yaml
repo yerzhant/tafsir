@@ -41,5 +41,10 @@ flutter_icons:
 flutter:
   uses-material-design: true
 
+  fonts:
+    - family: AppIcons
+      fonts:
+        - asset: assets/fonts/app-icons.ttf
+
   assets:
     - assets/images/
