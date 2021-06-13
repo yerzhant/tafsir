@@ -29,11 +29,12 @@ class _ProgressWidgetState extends State<ProgressWidget> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return LinearProgressIndicator(
-      value: _position,
-      valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
-      backgroundColor: const Color(0x33bdbdc2),
-    );
-  }
+  Widget build(BuildContext context) => ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: LinearProgressIndicator(
+          value: _position,
+          valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
+          backgroundColor: const Color(0x33bdbdc2),
+        ),
+      );
 }

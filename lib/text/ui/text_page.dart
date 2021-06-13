@@ -48,7 +48,7 @@ class _TextPageState extends State<TextPage> {
                   left: 8,
                   bottom: 14,
                   child: ProgressWidget(
-                    items.length + 1,
+                    items.length,
                     _itemPositionsListener,
                   ),
                 ),
