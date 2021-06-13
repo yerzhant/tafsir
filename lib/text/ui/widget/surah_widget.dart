@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
+
+import 'html_text_widget.dart';
 
 class SurahWidget extends StatelessWidget {
   final Surah surah;
@@ -11,7 +12,8 @@ class SurahWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        HtmlWidget(surah.text),
+        HtmlTextWidget(surah.text),
+        const SizedBox(height: 10),
       ],
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
+
+import 'html_text_widget.dart';
 
 class TextWidget extends StatefulWidget {
   final Surah surah;
@@ -74,30 +75,14 @@ class _TextWidgetState extends State<TextWidget> {
         child: Container(
           padding: const EdgeInsets.all(10),
           color: const Color(0x33bdbdc2),
-          child: HtmlWidget(
-            widget.textItem.text,
-            textStyle: GoogleFonts.montserrat(
-              fontSize: 14,
-              height: 1.5,
-              color: const Color(0xff060d1b),
-            ),
-            customStylesBuilder: (e) => {'text-align': 'right'},
-          ),
+          child: HtmlTextWidget(widget.textItem.text),
         ),
       );
 
   List<Widget> _tafsir() {
     return [
       const SizedBox(height: 12),
-      HtmlWidget(
-        widget.textItem.tafsir,
-        textStyle: GoogleFonts.montserrat(
-          fontSize: 14,
-          height: 1.5,
-          color: const Color(0xff060d1b),
-        ),
-        customStylesBuilder: (e) => {'text-align': 'right'},
-      ),
+      HtmlTextWidget(widget.textItem.tafsir),
     ];
   }
 }
