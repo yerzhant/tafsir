@@ -12,6 +12,7 @@ class SurahWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        const SizedBox(height: 30),
         HtmlTextWidget(surah.text),
         const SizedBox(height: 10),
       ],
