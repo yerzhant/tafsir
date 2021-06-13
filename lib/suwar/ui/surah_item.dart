@@ -55,7 +55,7 @@ class SurahItem extends StatelessWidget {
                   if (surah.titleInRussian != '')
                     Column(
                       children: [
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 2),
                         Text(
                           surah.titleInRussian,
                           style: Theme.of(context).textTheme.subtitle1,
@@ -66,23 +66,20 @@ class SurahItem extends StatelessWidget {
               ),
             ),
             if (surah.weight > 0)
-              SizedBox(
-                width: 100,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: <Widget>[
-                    Text(
-                      '${surah.ayatsCount} аятов',
-                      style: Theme.of(context).textTheme.subtitle2,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Джуз: ${surah.dzhuz}',
-                      style: Theme.of(context).textTheme.subtitle2,
-                    ),
-                  ],
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Text(
+                    '${surah.ayatsCount} аятов',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Джуз: ${surah.dzhuz}',
+                    style: Theme.of(context).textTheme.subtitle2,
+                  ),
+                ],
               ),
           ],
         ),
