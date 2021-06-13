@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
 class SurahItem extends StatelessWidget {
@@ -30,10 +31,10 @@ class SurahItem extends StatelessWidget {
                   ? Center(
                       child: Text(
                         surah.weight.toString(),
-                        style: const TextStyle(
+                        style: GoogleFonts.lato(
                           fontSize: 22,
                           fontWeight: FontWeight.w800,
-                          color: Color(0xff0088C7),
+                          color: const Color(0xff0088C7),
                         ),
                       ),
                     )

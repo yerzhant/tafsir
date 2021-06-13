@@ -8,6 +8,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       theme: ThemeData(
+        primaryColor: const Color(0xff0088c7),
         textTheme: GoogleFonts.poppinsTextTheme().copyWith(
           headline6: GoogleFonts.poppins(
             fontSize: 16,
@@ -20,7 +21,7 @@ class AppWidget extends StatelessWidget {
             fontWeight: FontWeight.w300,
             color: const Color(0xffbdbdc2),
           ),
-          subtitle2: GoogleFonts.poppins(
+          subtitle2: GoogleFonts.lato(
             fontSize: 12,
             letterSpacing: .2,
             fontWeight: FontWeight.w400,
