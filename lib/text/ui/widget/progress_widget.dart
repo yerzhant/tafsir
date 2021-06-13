@@ -32,7 +32,8 @@ class _ProgressWidgetState extends State<ProgressWidget> {
   Widget build(BuildContext context) {
     return LinearProgressIndicator(
       value: _position,
-      valueColor: AlwaysStoppedAnimation(Theme.of(context).primaryColor),
+      color: Theme.of(context).primaryColor,
+      backgroundColor: const Color(0x33bdbdc2),
     );
   }
 }

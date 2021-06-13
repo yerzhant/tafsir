@@ -5,6 +5,7 @@ import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/bloc/text_bloc.dart';
+import 'package:tafsir/text/domain/model/text_item.dart';
 import 'package:tafsir/text/ui/widget/progress_widget.dart';
 import 'package:tafsir/text/ui/widget/surah_widget.dart';
 import 'package:tafsir/text/ui/widget/text_widget.dart';
@@ -34,36 +35,48 @@ class _TextPageState extends State<TextPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TextBloc, TextState>(
-      bloc: widget.bloc,
-      builder: (_, state) => state.when(
-        (items) => Column(
-          children: [
-            if (widget.surah.isSurah())
-              ProgressWidget(items.length + 1, _itemPositionsListener),
-            Expanded(
-              child: ScrollablePositionedList.separated(
-                key: PageStorageKey('text-list-${widget.surah.id}'),
-                itemScrollController: _itemScrollController,
-                itemPositionsListener: _itemPositionsListener,
-                itemCount: items.length + 1,
-                itemBuilder: (_, index) => index == 0
-                    ? SurahWidget(widget.surah)
-                    : TextWidget(
-                        surah: widget.surah,
-                        textItem: items[index - 1],
-                      ),
-                separatorBuilder: (_, __) => const Divider(height: 1),
-              ),
-            ),
-          ],
-        ),
-        inProgress: () => const CircularProgress(),
-        error: (rejection) => RejectionWidget(
-          rejection: rejection,
-          onRefresh: () {},
+    return Scaffold(
+      body: BlocBuilder<TextBloc, TextState>(
+        bloc: widget.bloc,
+        builder: (_, state) => state.when(
+          (items) => Stack(
+            children: [
+              _items(items),
+              if (widget.surah.isSurah())
+                Positioned(
+                  right: 8,
+                  left: 8,
+                  bottom: 14,
+                  child: ProgressWidget(
+                    items.length + 1,
+                    _itemPositionsListener,
+                  ),
+                ),
+            ],
+          ),
+          inProgress: () => const CircularProgress(),
+          error: (rejection) => RejectionWidget(
+            rejection: rejection,
+            onRefresh: () {},
+          ),
         ),
       ),
+    );
+  }
+
+  ScrollablePositionedList _items(List<TextItem> items) {
+    return ScrollablePositionedList.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+      key: PageStorageKey('text-list-${widget.surah.id}'),
+      itemScrollController: _itemScrollController,
+      itemPositionsListener: _itemPositionsListener,
+      itemCount: items.length + 1,
+      itemBuilder: (_, index) => index == 0
+          ? SurahWidget(widget.surah)
+          : TextWidget(
+              surah: widget.surah,
+              textItem: items[index - 1],
+            ),
     );
   }
 }
