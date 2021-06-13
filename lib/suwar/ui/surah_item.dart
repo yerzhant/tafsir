@@ -34,6 +34,7 @@ class SurahItem extends StatelessWidget {
                         style: GoogleFonts.lato(
                           fontSize: 22,
                           height: 1,
+                          letterSpacing: -1,
                           fontWeight: FontWeight.w800,
                           color: const Color(0xff0088C7),
                         ),
