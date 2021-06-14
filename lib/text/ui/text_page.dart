@@ -10,6 +10,7 @@ import 'package:tafsir/text/ui/widget/progress_widget.dart';
 import 'package:tafsir/text/ui/widget/surah_widget.dart';
 import 'package:tafsir/text/ui/widget/text_header.dart';
 import 'package:tafsir/text/ui/widget/text_widget.dart';
+import 'package:tafsir/text/ui/widget/tool/text_tools.dart';
 
 class TextPage extends StatefulWidget {
   final TextBloc bloc;
@@ -55,6 +56,12 @@ class _TextPageState extends State<TextPage> {
                       _itemPositionsListener,
                     ),
                   ),
+                const Positioned(
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                  child: TextTools(),
+                ),
               ],
             ),
           ),

@@ -11,6 +11,12 @@ class AppWidget extends StatelessWidget {
         primaryColor: const Color(0xff0088c7),
         accentColor: const Color(0xff0088c7),
         textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+          headline5: GoogleFonts.poppins(
+            fontSize: 14,
+            letterSpacing: -.2,
+            fontWeight: FontWeight.w300,
+            color: const Color(0x7f0a0a0a),
+          ),
           headline6: GoogleFonts.poppins(
             fontSize: 16,
             height: 1.3,
