@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
 
 class MoreTextTool extends StatelessWidget {
@@ -23,23 +24,28 @@ class MoreTextTool extends StatelessWidget {
     );
   }
 
-  SizedBox _arabicFont(BuildContext context) {
-    return SizedBox(
-      height: 45,
-      child: Row(
-        children: [
-          Text(
-            'Шрифт',
-            style: Theme.of(context).textTheme.headline6,
-          ),
-          const Spacer(),
-          Text(
-            'Scheherazade',
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          const SizedBox(width: 40),
-          SvgPicture.asset('assets/icons/shevron-right.svg'),
-        ],
+  InkWell _arabicFont(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        theFeatureIsPlanned.asSnackBar(context);
+      },
+      child: SizedBox(
+        height: 45,
+        child: Row(
+          children: [
+            Text(
+              'Шрифт',
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            const Spacer(),
+            Text(
+              'Scheherazade',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            const SizedBox(width: 40),
+            SvgPicture.asset('assets/icons/shevron-right.svg'),
+          ],
+        ),
       ),
     );
   }

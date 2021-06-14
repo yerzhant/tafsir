@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -44,6 +45,9 @@ class AppWidget extends StatelessWidget {
           unselectedLabelStyle: GoogleFonts.poppins(
             fontWeight: FontWeight.normal,
           ),
+        ),
+        snackBarTheme: const SnackBarThemeData(
+          backgroundColor: primaryColorLight,
         ),
       ),
     ).modular();
