@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/text/ui/widget/tool/more_text_tool.dart';
+import 'package:tafsir/text/ui/widget/tool/theme_tool.dart';
 
 class TextTools extends StatefulWidget {
   const TextTools({Key? key}) : super(key: key);
@@ -88,6 +89,8 @@ class _TextToolsState extends State<TextTools> {
     switch (_active) {
       case _Tools.more:
         return const MoreTextTool();
+      case _Tools.theme:
+        return const ThemeTool();
       default:
         return Container();
     }
