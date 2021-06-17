@@ -18,7 +18,10 @@ class MoreTextTool extends StatelessWidget {
             height: 1,
             color: grey30ColorLight,
           ),
-          const _Buttons(),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 14),
+            child: _Buttons(),
+          ),
         ],
       ),
     );
@@ -61,7 +64,6 @@ class _Buttons extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 14),
         Text(
           'Показать',
           style: Theme.of(context).textTheme.headline6,
@@ -92,7 +94,6 @@ class _Buttons extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: 18),
       ],
     );
   }
