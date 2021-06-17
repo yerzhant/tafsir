@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:tafsir/text/ui/widget/tool/font_size_tool.dart';
 import 'package:tafsir/text/ui/widget/tool/more_text_tool.dart';
 import 'package:tafsir/text/ui/widget/tool/theme_tool.dart';
 
@@ -91,6 +92,8 @@ class _TextToolsState extends State<TextTools> {
         return const MoreTextTool();
       case _Tools.theme:
         return const ThemeTool();
+      case _Tools.fontSize:
+        return const FontSizeTool();
       default:
         return Container();
     }
