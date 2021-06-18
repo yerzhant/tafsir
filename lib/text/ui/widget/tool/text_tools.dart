@@ -8,7 +8,8 @@ import 'package:tafsir/text/ui/widget/tool/theme_tool.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class TextTools extends StatefulWidget {
-  const TextTools({Key? key}) : super(key: key);
+  final AnimationController animationController;
+  const TextTools(this.animationController, {Key? key}) : super(key: key);
 
   @override
   _TextToolsState createState() => _TextToolsState();
@@ -46,7 +47,9 @@ class _TextToolsState extends State<TextTools> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              widget.animationController.forward();
+            },
             icon: SvgPicture.asset(
               'assets/icons/close.svg',
               color: state.listItemSubtitle,

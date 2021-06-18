@@ -30,10 +30,45 @@ class TextPage extends StatefulWidget {
   _TextPageState createState() => _TextPageState();
 }
 
-class _TextPageState extends State<TextPage> {
+class _TextPageState extends State<TextPage>
+    with SingleTickerProviderStateMixin {
   final ItemScrollController _itemScrollController = ItemScrollController();
   final ItemPositionsListener _itemPositionsListener =
       ItemPositionsListener.create();
+
+  late final _animationController = AnimationController(
+    duration: const Duration(milliseconds: 200),
+    vsync: this,
+  );
+  late final _headerOffset = Tween(
+    begin: Offset.zero,
+    end: const Offset(0, -2),
+  ).animate(CurvedAnimation(
+    parent: _animationController,
+    curve: Curves.easeIn,
+  ));
+  late final _toolsOffset = Tween(
+    begin: Offset.zero,
+    end: const Offset(0, 1),
+  ).animate(CurvedAnimation(
+    parent: _animationController,
+    curve: Curves.easeIn,
+  ));
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(
+      const Duration(seconds: 1),
+      () => _animationController.forward(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,8 +79,21 @@ class _TextPageState extends State<TextPage> {
           (items) => SafeArea(
             child: Stack(
               children: [
-                _items(items),
-                // TextHeader(widget.surah),
+                GestureDetector(
+                  onTap: () {
+                    if (_animationController.status ==
+                        AnimationStatus.completed) {
+                      _animationController.reverse();
+                    } else {
+                      _animationController.forward();
+                    }
+                  },
+                  child: _items(items),
+                ),
+                SlideTransition(
+                  position: _headerOffset,
+                  child: TextHeader(widget.surah),
+                ),
                 if (widget.surah.isSurah())
                   Positioned(
                     right: 8,
@@ -56,12 +104,15 @@ class _TextPageState extends State<TextPage> {
                       _itemPositionsListener,
                     ),
                   ),
-                // const Positioned(
-                //   right: 0,
-                //   left: 0,
-                //   bottom: 0,
-                //   child: TextTools(),
-                // ),
+                Positioned(
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                  child: SlideTransition(
+                    position: _toolsOffset,
+                    child: TextTools(_animationController),
+                  ),
+                ),
               ],
             ),
           ),
