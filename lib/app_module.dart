@@ -4,6 +4,7 @@ import 'package:tafsir/common/ds/api.dart';
 import 'package:tafsir/common/ds/tafsir_db.dart';
 import 'package:tafsir/home/home_module.dart';
 import 'package:tafsir/text/text_module.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class AppModule extends Module {
   final TafsirDB db = TafsirDB();
@@ -14,6 +15,7 @@ class AppModule extends Module {
   List<Bind> get binds => [
         Bind.singleton((i) => db),
         Bind.singleton((i) => Api(Client())),
+        Bind.singleton((i) => ThemeCubit()),
       ];
 
   @override

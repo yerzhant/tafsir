@@ -1,55 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/',
-      theme: ThemeData(
-        primaryColor: const Color(0xff0088c7),
-        accentColor: const Color(0xff0088c7),
-        textTheme: GoogleFonts.poppinsTextTheme().copyWith(
-          headline5: GoogleFonts.poppins(
-            fontSize: 14,
-            letterSpacing: -.2,
-            fontWeight: FontWeight.w300,
-            color: const Color(0x7f0a0a0a),
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      bloc: Modular.get(),
+      builder: (context, theme) {
+        return MaterialApp(
+          initialRoute: '/',
+          theme: _theme(theme, context),
+        ).modular();
+      },
+    );
+  }
+
+  ThemeData _theme(ThemeState theme, BuildContext context) {
+    return ThemeData(
+      brightness: theme.brightness,
+      primaryColor: theme.primary,
+      accentColor: theme.primary,
+      textTheme: Theme.of(context).textTheme.copyWith(
+            headline5: TextStyle(
+              fontSize: 16,
+              letterSpacing: -.2,
+              fontWeight: FontWeight.bold,
+              color: theme.listItemTitle,
+            ),
+            headline6: TextStyle(
+              fontSize: 14,
+              letterSpacing: -.2,
+              fontWeight: FontWeight.bold,
+              color: theme.listItemTitle,
+            ),
+            subtitle1: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w300,
+              color: theme.listItemSubtitle,
+            ),
           ),
-          headline6: GoogleFonts.poppins(
-            fontSize: 16,
-            height: 1.3,
-            letterSpacing: -.2,
-            fontWeight: FontWeight.w600,
-            color: const Color(0xff0a0a0a),
-          ),
-          subtitle1: GoogleFonts.poppins(
-            fontSize: 14,
-            fontWeight: FontWeight.w300,
-            color: const Color(0xffbdbdc2),
-          ),
-          subtitle2: GoogleFonts.lato(
-            fontSize: 12,
-            letterSpacing: .2,
-            fontWeight: FontWeight.w400,
-            color: const Color(0x4d0a0a0a),
-          ),
+      tabBarTheme: const TabBarTheme(
+        labelStyle: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
         ),
-        tabBarTheme: TabBarTheme(
-          labelStyle: GoogleFonts.poppins(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-          unselectedLabelStyle: GoogleFonts.poppins(
-            fontWeight: FontWeight.normal,
-          ),
-        ),
-        snackBarTheme: const SnackBarThemeData(
-          backgroundColor: primaryColorLight,
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.normal,
         ),
       ),
-    ).modular();
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: theme.primary,
+      ),
+    );
   }
 }

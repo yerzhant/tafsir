@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class FontSizeTool extends StatelessWidget {
   const FontSizeTool({Key? key}) : super(key: key);
@@ -8,20 +10,25 @@ class FontSizeTool extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: const [
-          _FontSize('Коран'),
-          Divider(
-            height: 1,
-            color: grey30ColorLight,
-          ),
-          _FontSize('Перевод'),
-          Divider(
-            height: 1,
-            color: grey30ColorLight,
-          ),
-          _FontSize('Тафсир'),
-        ],
+      child: BlocBuilder<ThemeCubit, ThemeState>(
+        bloc: Modular.get(),
+        builder: (context, state) {
+          return Column(
+            children: [
+              const _FontSize('Коран'),
+              Divider(
+                height: 1,
+                color: state.listItemDivider,
+              ),
+              const _FontSize('Перевод'),
+              Divider(
+                height: 1,
+                color: state.listItemDivider,
+              ),
+              const _FontSize('Тафсир'),
+            ],
+          );
+        },
       ),
     );
   }

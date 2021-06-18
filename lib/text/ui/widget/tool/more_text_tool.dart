@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class MoreTextTool extends StatelessWidget {
   const MoreTextTool({Key? key}) : super(key: key);
@@ -14,9 +16,14 @@ class MoreTextTool extends StatelessWidget {
       child: Column(
         children: [
           _arabicFont(context),
-          const Divider(
-            height: 1,
-            color: grey30ColorLight,
+          BlocBuilder<ThemeCubit, ThemeState>(
+            bloc: Modular.get(),
+            builder: (context, state) {
+              return Divider(
+                height: 1,
+                color: state.listItemDivider,
+              );
+            },
           ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
@@ -121,16 +128,16 @@ class _Button extends StatelessWidget {
           height: 50,
           decoration: BoxDecoration(
             color: isActive ? Theme.of(context).primaryColor : null,
-            border: !isActive ? Border.all(color: greyColorLight) : null,
+            border: !isActive ? Border.all(color: greyColor) : null,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
             child: Text(
               text,
-              style: GoogleFonts.roboto(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
-                color: isActive ? Colors.white : greyColorLight,
+                color: isActive ? Colors.white : greyColor,
               ),
             ),
           ),

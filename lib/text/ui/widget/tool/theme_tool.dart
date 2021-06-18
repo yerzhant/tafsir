@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class ThemeTool extends StatelessWidget {
   const ThemeTool({Key? key}) : super(key: key);
@@ -15,9 +16,14 @@ class ThemeTool extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 14),
             child: _Buttons(),
           ),
-          const Divider(
-            height: 1,
-            color: grey30ColorLight,
+          BlocBuilder<ThemeCubit, ThemeState>(
+            bloc: Modular.get(),
+            builder: (context, state) {
+              return Divider(
+                height: 1,
+                color: state.listItemDivider,
+              );
+            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,20 +59,32 @@ class _Buttons extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(height: 12),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            _Button(
-              'Светлая',
-              onTap: () {},
-            ),
-            const SizedBox(width: 10),
-            _Button(
-              'Тёмная',
-              isBlack: true,
-              onTap: () {},
-            ),
-          ],
+        BlocBuilder<ThemeCubit, ThemeState>(
+          bloc: Modular.get(),
+          builder: (context, state) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _Button(
+                  'Светлая',
+                  isActive: true,
+                  textColor: state.lightThemeButtonText,
+                  onTap: () {
+                    Modular.get<ThemeCubit>().light();
+                  },
+                ),
+                const SizedBox(width: 10),
+                _Button(
+                  'Тёмная',
+                  isBlack: true,
+                  textColor: state.dartThemeButtonText,
+                  onTap: () {
+                    Modular.get<ThemeCubit>().dark();
+                  },
+                ),
+              ],
+            );
+          },
         ),
       ],
     );
@@ -75,14 +93,18 @@ class _Buttons extends StatelessWidget {
 
 class _Button extends StatelessWidget {
   final String text;
+  final bool isActive;
   final bool isBlack;
+  final Color textColor;
   final GestureTapCallback onTap;
 
   const _Button(
     this.text, {
     Key? key,
-    this.isBlack = false,
+    required this.textColor,
     required this.onTap,
+    this.isActive = false,
+    this.isBlack = false,
   }) : super(key: key);
 
   @override
@@ -94,19 +116,19 @@ class _Button extends StatelessWidget {
         child: Container(
           height: 50,
           decoration: BoxDecoration(
-            color: isBlack ? black2ColorLight : null,
-            border: !isBlack
-                ? Border.all(color: primaryColorLight, width: 2)
+            color: isBlack ? const Color(0xff12222c) : null,
+            border: isActive
+                ? Border.all(color: Theme.of(context).primaryColor, width: 2)
                 : null,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Center(
             child: Text(
               text,
-              style: GoogleFonts.roboto(
+              style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w300,
-                color: isBlack ? const Color(0x7fffffff) : black3ColorLight,
+                color: textColor,
               ),
             ),
           ),
