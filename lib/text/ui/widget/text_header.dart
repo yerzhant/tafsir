@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
 class TextHeader extends StatelessWidget {
@@ -20,26 +19,33 @@ class TextHeader extends StatelessWidget {
             Container(
               width: 50,
               height: 50,
-              decoration: surah.weight > 0
-                  ? BoxDecoration(
-                      border: Border.all(color: Colors.white30),
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    )
-                  : null,
-              child: surah.weight > 0
-                  ? Center(
-                      child: Text(
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0x4dbdbdc2)),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Center(
+                child: surah.isSurah()
+                    ? Text(
                         surah.weight.toString(),
-                        style: GoogleFonts.lato(
+                        style: const TextStyle(
                           fontSize: 22,
                           height: 1,
                           letterSpacing: -1,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w900,
                           color: Colors.white,
                         ),
+                      )
+                    : Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryVariant,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(1),
+                          ),
+                        ),
                       ),
-                    )
-                  : null,
+              ),
             ),
             const SizedBox(width: 9),
             Expanded(
@@ -48,8 +54,8 @@ class TextHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    surah.title,
-                    style: Theme.of(context).textTheme.headline6?.copyWith(
+                    surah.isSurah() ? surah.title : surah.title.toUpperCase(),
+                    style: Theme.of(context).textTheme.headline5?.copyWith(
                           color: Colors.white,
                         ),
                   ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
 class SurahItem extends StatelessWidget {
@@ -21,26 +20,33 @@ class SurahItem extends StatelessWidget {
             Container(
               width: 50,
               height: 50,
-              decoration: surah.weight > 0
-                  ? BoxDecoration(
-                      border: Border.all(color: const Color(0x4dBDBDC2)),
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    )
-                  : null,
-              child: surah.weight > 0
-                  ? Center(
-                      child: Text(
+              decoration: BoxDecoration(
+                border: Border.all(color: const Color(0x4dbdbdc2)),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
+              ),
+              child: Center(
+                child: surah.isSurah()
+                    ? Text(
                         surah.weight.toString(),
-                        style: GoogleFonts.lato(
+                        style: TextStyle(
                           fontSize: 22,
                           height: 1,
                           letterSpacing: -1,
-                          fontWeight: FontWeight.w800,
-                          color: const Color(0xff0088C7),
+                          fontWeight: FontWeight.w900,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      )
+                    : Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(1),
+                          ),
                         ),
                       ),
-                    )
-                  : null,
+              ),
             ),
             const SizedBox(width: 9),
             Expanded(
@@ -49,8 +55,8 @@ class SurahItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    surah.title,
-                    style: Theme.of(context).textTheme.headline6,
+                    surah.isSurah() ? surah.title : surah.title.toUpperCase(),
+                    style: Theme.of(context).textTheme.headline5,
                   ),
                   if (surah.titleInRussian != '')
                     Column(
@@ -65,19 +71,19 @@ class SurahItem extends StatelessWidget {
                 ],
               ),
             ),
-            if (surah.weight > 0)
+            if (surah.isSurah())
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
                     '${surah.ayatsCount} аятов',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                   const SizedBox(height: 2),
                   Text(
                     'Джуз: ${surah.dzhuz}',
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.subtitle1,
                   ),
                 ],
               ),

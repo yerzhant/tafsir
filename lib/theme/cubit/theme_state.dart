@@ -4,6 +4,7 @@ class ThemeState {
   final Brightness brightness;
   final Color text;
   final Color primary;
+  final Color primaryVariant;
   final Color divider;
   final Color listItemTitle;
   final Color listItemSubtitle;
@@ -17,6 +18,7 @@ class ThemeState {
     required this.brightness,
     required this.text,
     required this.primary,
+    required this.primaryVariant,
     required this.divider,
     required this.listItemTitle,
     required this.listItemSubtitle,
@@ -31,6 +33,7 @@ class ThemeState {
     brightness: Brightness.light,
     text: const Color(0xff060d1b),
     primary: const Color(0xff0088c7),
+    primaryVariant: const Color(0xffc9e6f3),
     divider: const Color(0x4dbdbdc2),
     listItemTitle: const Color(0xff0a0a0a),
     listItemSubtitle: const Color(0xffbdbdc2),
@@ -45,6 +48,7 @@ class ThemeState {
     brightness: Brightness.dark,
     text: const Color(0xffffffff),
     primary: const Color(0xff0088c7),
+    primaryVariant: const Color(0xffc9e6f3),
     divider: const Color(0x17bdbdc2),
     listItemTitle: const Color(0xffffffff),
     listItemSubtitle: const Color(0x4dffffff),

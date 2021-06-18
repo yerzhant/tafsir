@@ -50,7 +50,7 @@ class AppWidget extends StatelessWidget {
       ),
       colorScheme: ColorScheme(
         primary: theme.primary,
-        primaryVariant: Colors.red,
+        primaryVariant: theme.primaryVariant,
         secondary: Colors.red,
         secondaryVariant: Colors.red,
         surface: Colors.red,
