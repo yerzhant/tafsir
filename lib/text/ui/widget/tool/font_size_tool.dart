@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class FontSizeTool extends StatelessWidget {
   const FontSizeTool({Key? key}) : super(key: key);
@@ -39,7 +36,7 @@ class _FontSize extends StatelessWidget {
         const SizedBox(height: 14),
         Text(
           label,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline5,
         ),
         const SizedBox(height: 8),
         Slider(

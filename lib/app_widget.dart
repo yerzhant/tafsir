@@ -19,9 +19,7 @@ class AppWidget extends StatelessWidget {
 
   ThemeData _theme(ThemeState theme, BuildContext context) {
     return ThemeData(
-      brightness: theme.brightness,
       primaryColor: theme.primary,
-      accentColor: theme.primary,
       textTheme: Theme.of(context).textTheme.copyWith(
             headline5: TextStyle(
               fontSize: 16,
@@ -50,8 +48,24 @@ class AppWidget extends StatelessWidget {
           fontWeight: FontWeight.normal,
         ),
       ),
+      colorScheme: ColorScheme(
+        primary: theme.primary,
+        primaryVariant: Colors.red,
+        secondary: Colors.red,
+        secondaryVariant: Colors.red,
+        surface: Colors.red,
+        background: Colors.red,
+        error: Colors.red,
+        onPrimary: Colors.red,
+        onSecondary: Colors.red,
+        onSurface: Colors.red,
+        onBackground: Colors.red,
+        onError: Colors.red,
+        brightness: theme.brightness,
+      ),
       toggleableActiveColor: theme.primary,
       dividerColor: theme.divider,
+      indicatorColor: Colors.white,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: theme.primary,
       ),

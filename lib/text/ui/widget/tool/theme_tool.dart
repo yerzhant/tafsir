@@ -22,7 +22,7 @@ class ThemeTool extends StatelessWidget {
             children: [
               Text(
                 'Не выключать экран',
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline5,
               ),
               Switch(
                 value: true,
@@ -48,7 +48,7 @@ class _Buttons extends StatelessWidget {
       children: [
         Text(
           'Тема',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline5,
         ),
         const SizedBox(height: 12),
         BlocBuilder<ThemeCubit, ThemeState>(
