@@ -45,7 +45,7 @@ class _TextPageState extends State<TextPage> {
             child: Stack(
               children: [
                 _items(items),
-                TextHeader(widget.surah),
+                // TextHeader(widget.surah),
                 if (widget.surah.isSurah())
                   Positioned(
                     right: 8,
@@ -56,12 +56,12 @@ class _TextPageState extends State<TextPage> {
                       _itemPositionsListener,
                     ),
                   ),
-                const Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  child: TextTools(),
-                ),
+                // const Positioned(
+                //   right: 0,
+                //   left: 0,
+                //   bottom: 0,
+                //   child: TextTools(),
+                // ),
               ],
             ),
           ),

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 import 'html_text_widget.dart';
 
-class TextWidget extends StatefulWidget {
+class TextWidget extends StatelessWidget {
   final Surah surah;
   final TextItem textItem;
 
@@ -16,19 +19,14 @@ class TextWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _TextWidgetState createState() => _TextWidgetState();
-}
-
-class _TextWidgetState extends State<TextWidget> {
-  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         const SizedBox(height: 5),
-        _divider(),
+        _divider(context),
         Text(
-          widget.textItem.textOrigin.trim(),
+          textItem.textOrigin.trim(),
           textAlign: TextAlign.start,
           textDirection: TextDirection.rtl,
           style: GoogleFonts.scheherazade(
@@ -39,12 +37,12 @@ class _TextWidgetState extends State<TextWidget> {
         ),
         const SizedBox(height: 7),
         _translation(),
-        if (widget.textItem.tafsir.isNotEmpty) ..._tafsir(),
+        if (textItem.tafsir.isNotEmpty) ..._tafsir(),
       ],
     );
   }
 
-  Row _divider() {
+  Row _divider(BuildContext context) {
     return Row(
       children: [
         Container(
@@ -56,11 +54,12 @@ class _TextWidgetState extends State<TextWidget> {
           ),
           child: Center(
             child: Text(
-              widget.textItem.title,
-              style: GoogleFonts.lato(
+              textItem.title,
+              style: TextStyle(
                 fontSize: 13,
                 height: 1,
-                fontWeight: FontWeight.w800,
+                letterSpacing: -1,
+                fontWeight: FontWeight.w900,
                 color: Theme.of(context).primaryColor,
               ),
             ),
@@ -74,17 +73,22 @@ class _TextWidgetState extends State<TextWidget> {
 
   Widget _translation() => ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          color: const Color(0x33bdbdc2),
-          child: HtmlTextWidget(widget.textItem.text),
+        child: BlocBuilder<ThemeCubit, ThemeState>(
+          bloc: Modular.get(),
+          builder: (context, state) {
+            return Container(
+              padding: const EdgeInsets.all(10),
+              color: state.translationBackground,
+              child: HtmlTextWidget(textItem.text),
+            );
+          },
         ),
       );
 
   List<Widget> _tafsir() {
     return [
       const SizedBox(height: 12),
-      HtmlTextWidget(widget.textItem.tafsir),
+      HtmlTextWidget(textItem.tafsir),
     ];
   }
 }

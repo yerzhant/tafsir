@@ -53,7 +53,9 @@ class _TextToolsState extends State<TextTools> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Modular.to.pop();
+            },
             icon: SvgPicture.asset(
               'assets/icons/home.svg',
               color: state.listItemSubtitle,

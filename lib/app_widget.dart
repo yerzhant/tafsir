@@ -64,6 +64,7 @@ class AppWidget extends StatelessWidget {
         brightness: theme.brightness,
       ),
       toggleableActiveColor: theme.primary,
+      canvasColor: theme.background,
       dividerColor: theme.divider,
       indicatorColor: Colors.white,
       snackBarTheme: SnackBarThemeData(

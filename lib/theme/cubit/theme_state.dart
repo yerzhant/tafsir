@@ -5,6 +5,7 @@ class ThemeState {
   final Color text;
   final Color primary;
   final Color primaryVariant;
+  final Color background;
   final Color divider;
   final Color listItemTitle;
   final Color listItemSubtitle;
@@ -13,12 +14,14 @@ class ThemeState {
   final Color dartThemeButtonText;
   final Color toolsBackground;
   final Color toolControlsBackground;
+  final Color translationBackground;
 
   ThemeState({
     required this.brightness,
     required this.text,
     required this.primary,
     required this.primaryVariant,
+    required this.background,
     required this.divider,
     required this.listItemTitle,
     required this.listItemSubtitle,
@@ -27,6 +30,7 @@ class ThemeState {
     required this.dartThemeButtonText,
     required this.toolsBackground,
     required this.toolControlsBackground,
+    required this.translationBackground,
   });
 
   static final light = ThemeState(
@@ -34,6 +38,7 @@ class ThemeState {
     text: const Color(0xff060d1b),
     primary: const Color(0xff0088c7),
     primaryVariant: const Color(0xffc9e6f3),
+    background: const Color(0xffffffff),
     divider: const Color(0x4dbdbdc2),
     listItemTitle: const Color(0xff0a0a0a),
     listItemSubtitle: const Color(0xffbdbdc2),
@@ -42,6 +47,7 @@ class ThemeState {
     dartThemeButtonText: const Color(0x80ffffff),
     toolsBackground: const Color(0xffffffff),
     toolControlsBackground: const Color(0x7fe5e5e5),
+    translationBackground: const Color(0x33bdbdc2),
   );
 
   static final dark = ThemeState(
@@ -49,6 +55,7 @@ class ThemeState {
     text: const Color(0xffffffff),
     primary: const Color(0xff0088c7),
     primaryVariant: const Color(0xffc9e6f3),
+    background: const Color(0xff131f29),
     divider: const Color(0x17bdbdc2),
     listItemTitle: const Color(0xffffffff),
     listItemSubtitle: const Color(0x4dffffff),
@@ -57,5 +64,6 @@ class ThemeState {
     dartThemeButtonText: const Color(0xffffffff),
     toolsBackground: const Color(0xff25303a),
     toolControlsBackground: const Color(0xff1a232a),
+    translationBackground: const Color(0x1affffff),
   );
 }
