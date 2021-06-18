@@ -50,6 +50,8 @@ class AppWidget extends StatelessWidget {
           fontWeight: FontWeight.normal,
         ),
       ),
+      toggleableActiveColor: theme.primary,
+      dividerColor: theme.divider,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: theme.primary,
       ),

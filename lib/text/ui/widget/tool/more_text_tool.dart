@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
-import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class MoreTextTool extends StatelessWidget {
   const MoreTextTool({Key? key}) : super(key: key);
@@ -16,15 +13,7 @@ class MoreTextTool extends StatelessWidget {
       child: Column(
         children: [
           _arabicFont(context),
-          BlocBuilder<ThemeCubit, ThemeState>(
-            bloc: Modular.get(),
-            builder: (context, state) {
-              return Divider(
-                height: 1,
-                color: state.listItemDivider,
-              );
-            },
-          ),
+          const Divider(height: 1),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 14),
             child: _Buttons(),

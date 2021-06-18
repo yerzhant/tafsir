@@ -16,15 +16,7 @@ class ThemeTool extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 14),
             child: _Buttons(),
           ),
-          BlocBuilder<ThemeCubit, ThemeState>(
-            bloc: Modular.get(),
-            builder: (context, state) {
-              return Divider(
-                height: 1,
-                color: state.listItemDivider,
-              );
-            },
-          ),
+          const Divider(height: 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -67,7 +59,7 @@ class _Buttons extends StatelessWidget {
               children: [
                 _Button(
                   'Светлая',
-                  isActive: true,
+                  isActive: Theme.of(context).brightness == Brightness.light,
                   textColor: state.lightThemeButtonText,
                   onTap: () {
                     Modular.get<ThemeCubit>().light();
@@ -77,6 +69,7 @@ class _Buttons extends StatelessWidget {
                 _Button(
                   'Тёмная',
                   isBlack: true,
+                  isActive: Theme.of(context).brightness == Brightness.dark,
                   textColor: state.dartThemeButtonText,
                   onTap: () {
                     Modular.get<ThemeCubit>().dark();
@@ -116,7 +109,7 @@ class _Button extends StatelessWidget {
         child: Container(
           height: 50,
           decoration: BoxDecoration(
-            color: isBlack ? const Color(0xff12222c) : null,
+            color: isBlack ? const Color(0xff12222c) : Colors.white,
             border: isActive
                 ? Border.all(color: Theme.of(context).primaryColor, width: 2)
                 : null,

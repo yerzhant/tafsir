@@ -29,7 +29,7 @@ class _TextToolsState extends State<TextTools> {
             child: Column(
               children: [
                 _buildTool(),
-                _controls(context),
+                _controls(context, state),
               ],
             ),
           );
@@ -38,20 +38,26 @@ class _TextToolsState extends State<TextTools> {
     );
   }
 
-  Container _controls(BuildContext context) {
+  Container _controls(BuildContext context, ThemeState state) {
     return Container(
       height: 54,
-      color: const Color(0x7fe5e5e5),
+      color: state.toolControlsBackground,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/close.svg'),
+            icon: SvgPicture.asset(
+              'assets/icons/close.svg',
+              color: state.listItemSubtitle,
+            ),
           ),
           IconButton(
             onPressed: () {},
-            icon: SvgPicture.asset('assets/icons/home.svg'),
+            icon: SvgPicture.asset(
+              'assets/icons/home.svg',
+              color: state.listItemSubtitle,
+            ),
           ),
           IconButton(
             onPressed: () {
@@ -63,7 +69,7 @@ class _TextToolsState extends State<TextTools> {
               'assets/icons/theme.svg',
               color: _active == _Tools.theme
                   ? Theme.of(context).primaryColor
-                  : null,
+                  : state.listItemSubtitle,
             ),
           ),
           IconButton(
@@ -76,7 +82,7 @@ class _TextToolsState extends State<TextTools> {
               'assets/icons/font-size.svg',
               color: _active == _Tools.fontSize
                   ? Theme.of(context).primaryColor
-                  : null,
+                  : state.listItemSubtitle,
             ),
           ),
           IconButton(
@@ -89,7 +95,7 @@ class _TextToolsState extends State<TextTools> {
               'assets/icons/more-horizontal.svg',
               color: _active == _Tools.more
                   ? Theme.of(context).primaryColor
-                  : null,
+                  : state.listItemSubtitle,
             ),
           ),
         ],

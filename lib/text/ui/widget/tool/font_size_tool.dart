@@ -10,25 +10,14 @@ class FontSizeTool extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        bloc: Modular.get(),
-        builder: (context, state) {
-          return Column(
-            children: [
-              const _FontSize('Коран'),
-              Divider(
-                height: 1,
-                color: state.listItemDivider,
-              ),
-              const _FontSize('Перевод'),
-              Divider(
-                height: 1,
-                color: state.listItemDivider,
-              ),
-              const _FontSize('Тафсир'),
-            ],
-          );
-        },
+      child: Column(
+        children: const [
+          _FontSize('Коран'),
+          Divider(height: 1),
+          _FontSize('Перевод'),
+          Divider(height: 1),
+          _FontSize('Тафсир'),
+        ],
       ),
     );
   }
