@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share/share.dart';
+import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
@@ -95,5 +97,20 @@ class TextWidget extends StatelessWidget {
       const SizedBox(height: 12),
       HtmlTextWidget(textItem.tafsir),
     ];
+  }
+
+  void share() {
+    final subject = '${surah.title}, ${textItem.weight} аят.';
+
+    var text = '$subject\n\n';
+    text += '${textItem.textOrigin}\n\n';
+    text += textItem.text.parseHtml();
+
+    if (textItem.tafsir.isNotEmpty) {
+      text += '\n\n';
+      text += textItem.tafsir.parseHtml();
+    }
+
+    Share.share(text, subject: subject);
   }
 }

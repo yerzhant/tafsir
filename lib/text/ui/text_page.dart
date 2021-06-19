@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
@@ -45,53 +46,55 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     duration: _duration,
     vsync: this,
   );
-  late final _surahAnimationController = AnimationController(
+  late final _surahMenuAnimationController = AnimationController(
     duration: _duration,
     vsync: this,
   );
-  late final _textAnimationController = AnimationController(
+  late final _textMenuAnimationController = AnimationController(
     duration: _duration,
     vsync: this,
   );
   late final _headerOffset = Tween(
-    begin: Offset.zero,
-    end: const Offset(0, -2),
+    begin: const Offset(0, -2),
+    end: Offset.zero,
   ).animate(CurvedAnimation(
     parent: _toolsAnimationController,
     curve: Curves.easeIn,
   ));
   late final _toolsOffset = Tween(
-    begin: Offset.zero,
-    end: const Offset(0, 2),
+    begin: const Offset(0, 2),
+    end: Offset.zero,
   ).animate(CurvedAnimation(
     parent: _toolsAnimationController,
     curve: Curves.easeIn,
   ));
-  late final _surahOffset = Tween(
+  late final _surahMenuOffset = Tween(
     begin: const Offset(0, 2),
     end: Offset.zero,
   ).animate(CurvedAnimation(
-    parent: _surahAnimationController,
+    parent: _surahMenuAnimationController,
     curve: Curves.easeIn,
   ));
-  late final _textOffset = Tween(
+  late final _textMenuOffset = Tween(
     begin: const Offset(0, 2),
     end: Offset.zero,
   ).animate(CurvedAnimation(
-    parent: _textAnimationController,
+    parent: _textMenuAnimationController,
     curve: Curves.easeIn,
   ));
 
   late SurahWidget _surahWidget;
-  TextWidget? _textWidget;
+  final SelectedTextWidget _selectedTextWidget = SelectedTextWidget();
 
   @override
   void initState() {
     super.initState();
 
+    _toolsAnimationController.forward();
+
     Future.delayed(
       const Duration(seconds: 1),
-      () => _toolsAnimationController.forward(),
+      () => _toolsAnimationController.reverse(),
     );
 
     _itemPositionsListener.itemPositions.addListener(_positionsListener);
@@ -101,9 +104,24 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     _itemPosition = _itemPositionsListener.itemPositions.value.first;
   }
 
+  void _slideOutEverything() {
+    if (_surahMenuAnimationController.status == AnimationStatus.completed) {
+      _surahMenuAnimationController.reverse();
+    } else if (_textMenuAnimationController.status ==
+        AnimationStatus.completed) {
+      _textMenuAnimationController.reverse();
+    } else if (_toolsAnimationController.status == AnimationStatus.completed) {
+      _toolsAnimationController.reverse();
+    } else {
+      _toolsAnimationController.forward();
+    }
+  }
+
   @override
   void dispose() {
     _toolsAnimationController.dispose();
+    _surahMenuAnimationController.dispose();
+    _textMenuAnimationController.dispose();
     super.dispose();
   }
 
@@ -118,9 +136,12 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (_surahAnimationController.status ==
+                    if (_surahMenuAnimationController.status ==
                         AnimationStatus.completed) {
-                      _surahAnimationController.reverse();
+                      _surahMenuAnimationController.reverse();
+                    } else if (_textMenuAnimationController.status ==
+                        AnimationStatus.completed) {
+                      _textMenuAnimationController.reverse();
                     } else if (_toolsAnimationController.status ==
                         AnimationStatus.completed) {
                       _toolsAnimationController.reverse();
@@ -149,20 +170,22 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
                   left: 0,
                   bottom: 0,
                   child: SlideTransition(
-                    position: _surahOffset,
+                    position: _surahMenuOffset,
                     child: SurahContextMenu(widget.surah, _shareSurah),
                   ),
                 ),
-                // Positioned(
-                //   right: 0,
-                //   left: 0,
-                //   bottom: 0,
-                //   // child: SlideTransition(
-                //   //   position: _toolsOffset,
-                //   //   child: TextTools(_animationController),
-                //   // ),
-                //   child: TextContextMenu(widget.surah),
-                // ),
+                Positioned(
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                  child: SlideTransition(
+                    position: _textMenuOffset,
+                    child: ChangeNotifierProvider(
+                      create: (_) => _selectedTextWidget,
+                      child: TextContextMenu(widget.surah),
+                    ),
+                  ),
+                ),
                 Positioned(
                   right: 0,
                   left: 0,
@@ -205,25 +228,34 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   void _toggleSurahContextMenu(SurahWidget surahWidget) {
     _surahWidget = surahWidget;
 
-    if (_surahAnimationController.status == AnimationStatus.dismissed) {
-      _surahAnimationController.forward();
+    if (_surahMenuAnimationController.status == AnimationStatus.dismissed) {
+      _surahMenuAnimationController.forward();
     } else {
-      _surahAnimationController.reverse();
+      _surahMenuAnimationController.reverse();
     }
   }
 
   void _toggleTextContextMenu(TextWidget textWidget) {
-    _textWidget = textWidget;
+    _selectedTextWidget.select(textWidget);
 
-    if (_textAnimationController.status == AnimationStatus.dismissed) {
-      _textAnimationController.forward();
+    if (_textMenuAnimationController.status == AnimationStatus.dismissed) {
+      _textMenuAnimationController.forward();
     } else {
-      _textAnimationController.reverse();
+      _textMenuAnimationController.reverse();
     }
   }
 
   void _shareSurah() {
     _surahWidget.share();
     _toggleSurahContextMenu(_surahWidget);
+  }
+}
+
+class SelectedTextWidget extends ChangeNotifier {
+  TextWidget? widget;
+
+  void select(TextWidget widget) {
+    this.widget = widget;
+    notifyListeners();
   }
 }

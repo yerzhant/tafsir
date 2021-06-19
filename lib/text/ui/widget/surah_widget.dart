@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
 import 'package:share/share.dart';
+import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
 import 'html_text_widget.dart';
@@ -27,16 +27,9 @@ class SurahWidget extends StatelessWidget {
   void share() {
     final subject = surah.title;
 
-    var text = '$subject\n';
-
-    text += '\n';
-    text += _htmlToString(surah.text) ?? '';
+    var text = '$subject\n\n';
+    text += surah.text.parseHtml();
 
     Share.share(text, subject: subject);
-  }
-
-  String? _htmlToString(String html) {
-    final doc = parse(html);
-    return parse(doc.body?.text).documentElement?.text.trim();
   }
 }

@@ -48,7 +48,7 @@ class _TextToolsState extends State<TextTools> {
         children: [
           IconButton(
             onPressed: () {
-              widget.animationController.forward();
+              widget.animationController.reverse();
             },
             icon: SvgPicture.asset(
               'assets/icons/close.svg',
