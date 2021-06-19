@@ -8,6 +8,7 @@ import 'package:tafsir/text/bloc/text_bloc.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
 import 'package:tafsir/text/ui/widget/progress_widget.dart';
 import 'package:tafsir/text/ui/widget/surah_widget.dart';
+import 'package:tafsir/text/ui/widget/surah_context_menu.dart';
 import 'package:tafsir/text/ui/widget/text_header.dart';
 import 'package:tafsir/text/ui/widget/text_widget.dart';
 import 'package:tafsir/text/ui/widget/tool/text_tools.dart';
@@ -36,6 +37,8 @@ class _TextPageState extends State<TextPage>
   final ItemPositionsListener _itemPositionsListener =
       ItemPositionsListener.create();
 
+  late ItemPosition _itemPosition;
+
   late final _animationController = AnimationController(
     duration: const Duration(milliseconds: 200),
     vsync: this,
@@ -49,7 +52,7 @@ class _TextPageState extends State<TextPage>
   ));
   late final _toolsOffset = Tween(
     begin: Offset.zero,
-    end: const Offset(0, 1),
+    end: const Offset(0, 1.2),
   ).animate(CurvedAnimation(
     parent: _animationController,
     curve: Curves.easeIn,
@@ -58,10 +61,17 @@ class _TextPageState extends State<TextPage>
   @override
   void initState() {
     super.initState();
+
     Future.delayed(
       const Duration(seconds: 1),
       () => _animationController.forward(),
     );
+
+    _itemPositionsListener.itemPositions.addListener(_positionsListener);
+  }
+
+  void _positionsListener() {
+    _itemPosition = _itemPositionsListener.itemPositions.value.first;
   }
 
   @override
@@ -104,6 +114,16 @@ class _TextPageState extends State<TextPage>
                       _itemPositionsListener,
                     ),
                   ),
+                Positioned(
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                  // child: SlideTransition(
+                  //   position: _toolsOffset,
+                  //   child: TextTools(_animationController),
+                  // ),
+                  child: SurahContextMenu(widget.surah),
+                ),
                 Positioned(
                   right: 0,
                   left: 0,
