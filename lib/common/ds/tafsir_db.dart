@@ -29,6 +29,15 @@ class TafsirDB {
     return list.map((e) => Surah.fromMap(e)).first;
   }
 
+  Future<Surah> getSurahByWeight(int weight) async {
+    final list = await _db.query(
+      _surahTableName,
+      where: 'weight = ?',
+      whereArgs: [weight],
+    );
+    return list.map((e) => Surah.fromMap(e)).first;
+  }
+
   Future<void> _insertSurah(Surah surah) =>
       _db.insert(_surahTableName, surah.toMap());
 

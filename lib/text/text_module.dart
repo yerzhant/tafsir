@@ -14,11 +14,13 @@ class TextModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
-          '/:id',
+          '/:id/:index/:offset',
           child: (_, args) => TextPage(
             bloc: Modular.get(),
             surah: args.data as Surah,
             index: int.parse(args.params['id'] as String),
+            initialIndex: int.parse(args.params['index'] as String),
+            initialOffset: double.parse(args.params['offset'] as String),
           ),
         ),
       ];
