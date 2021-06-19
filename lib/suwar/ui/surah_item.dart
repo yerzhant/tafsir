@@ -11,7 +11,7 @@ class SurahItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Modular.to.pushNamed('/text', arguments: surah);
+        Modular.to.pushNamed('/text/0', arguments: surah);
       },
       child: SizedBox(
         height: 74,

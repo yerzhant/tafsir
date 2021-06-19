@@ -18,13 +18,13 @@ import 'package:tafsir/text/ui/widget/tool/text_tools.dart';
 class TextPage extends StatefulWidget {
   final TextBloc bloc;
   final Surah surah;
-  final int? itemNumber;
+  final int index;
 
   TextPage({
     Key? key,
     required this.bloc,
     required this.surah,
-    this.itemNumber,
+    required this.index,
   }) : super(key: key) {
     bloc.add(TextEvent.load(surah));
   }
@@ -39,8 +39,6 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   final ItemScrollController _itemScrollController = ItemScrollController();
   final ItemPositionsListener _itemPositionsListener =
       ItemPositionsListener.create();
-
-  late ItemPosition _itemPosition;
 
   late final _toolsAnimationController = AnimationController(
     duration: _duration,
@@ -97,8 +95,22 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       () => _toolsAnimationController.reverse(),
     );
 
+    if (widget.index != 0) {
+      _scrollTo(widget.index);
+    }
+
     _itemPositionsListener.itemPositions.addListener(_positionsListener);
   }
+
+  Future<void> _scrollTo(int index) async {
+    await Future.delayed(const Duration(milliseconds: 250));
+    await _itemScrollController.scrollTo(
+      index: index,
+      duration: const Duration(seconds: 1),
+    );
+  }
+
+  late ItemPosition _itemPosition;
 
   void _positionsListener() {
     _slideOutEverything();
@@ -213,8 +225,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     return ScrollablePositionedList.builder(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
       key: PageStorageKey('text-list-${widget.surah.id}'),
-      itemScrollController: _itemScrollController,
-      itemPositionsListener: _itemPositionsListener,
+      // itemScrollController: _itemScrollController,
+      // itemPositionsListener: _itemPositionsListener,
       itemCount: items.length + 1,
       itemBuilder: (_, index) => index == 0
           ? SurahWidget(widget.surah, _toggleSurahContextMenu)
