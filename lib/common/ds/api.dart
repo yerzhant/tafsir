@@ -4,7 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:http/http.dart';
 import 'package:tafsir/common/domain/model/rejection.dart';
 
-const _server = 'https://azan.ru/api/tafsir';
+const server = 'https://azan.ru';
+
+const _apiUrl = '$server/api/tafsir';
 
 class Api {
   final Client client;
@@ -16,7 +18,7 @@ class Api {
     T Function(Map<String, dynamic> json) fromJson,
   ) async {
     try {
-      final response = await client.get(Uri.parse('$_server/$endpoint'));
+      final response = await client.get(Uri.parse('$_apiUrl/$endpoint'));
 
       if (response.statusCode == 200) {
         final parsed = json.decode(response.body).cast<Map<String, dynamic>>()

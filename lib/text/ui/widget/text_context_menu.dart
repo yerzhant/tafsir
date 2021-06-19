@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/ui/text_page.dart';
+import 'package:tafsir/text/ui/widget/aayah_player.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class TextContextMenu extends StatelessWidget {
@@ -26,7 +27,7 @@ class TextContextMenu extends StatelessWidget {
             child: Column(
               children: [
                 Consumer<SelectedTextWidget>(
-                  builder: (BuildContext context, value, Widget? child) {
+                  builder: (_, value, __) {
                     return Text(
                       '${surah.title}: ${value.widget?.textItem.title} аят',
                       style: Theme.of(context).textTheme.headline5,
@@ -34,17 +35,15 @@ class TextContextMenu extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 24, left: 16),
-                      child: SvgPicture.asset('assets/icons/play.svg'),
-                    ),
-                    Text(
-                      'Воспроизвести',
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                  ],
+                Consumer<SelectedTextWidget>(
+                  builder: (_, value, __) {
+                    if (value.widget == null) {
+                      return Container();
+                    } else {
+                      return AayahPlayer(value.widget!.textItem.surahId,
+                          value.widget!.textItem.weight);
+                    }
+                  },
                 ),
                 const Divider(height: 27),
                 Row(
