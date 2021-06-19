@@ -32,30 +32,53 @@ class TextPage extends StatefulWidget {
   _TextPageState createState() => _TextPageState();
 }
 
-class _TextPageState extends State<TextPage>
-    with SingleTickerProviderStateMixin {
+const _duration = Duration(milliseconds: 200);
+
+class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   final ItemScrollController _itemScrollController = ItemScrollController();
   final ItemPositionsListener _itemPositionsListener =
       ItemPositionsListener.create();
 
   late ItemPosition _itemPosition;
 
-  late final _animationController = AnimationController(
-    duration: const Duration(milliseconds: 200),
+  late final _toolsAnimationController = AnimationController(
+    duration: _duration,
+    vsync: this,
+  );
+  late final _surahAnimationController = AnimationController(
+    duration: _duration,
+    vsync: this,
+  );
+  late final _textAnimationController = AnimationController(
+    duration: _duration,
     vsync: this,
   );
   late final _headerOffset = Tween(
     begin: Offset.zero,
     end: const Offset(0, -2),
   ).animate(CurvedAnimation(
-    parent: _animationController,
+    parent: _toolsAnimationController,
     curve: Curves.easeIn,
   ));
   late final _toolsOffset = Tween(
     begin: Offset.zero,
-    end: const Offset(0, 1.2),
+    end: const Offset(0, 2),
   ).animate(CurvedAnimation(
-    parent: _animationController,
+    parent: _toolsAnimationController,
+    curve: Curves.easeIn,
+  ));
+  late final _surahOffset = Tween(
+    begin: const Offset(0, 2),
+    end: Offset.zero,
+  ).animate(CurvedAnimation(
+    parent: _surahAnimationController,
+    curve: Curves.easeIn,
+  ));
+  late final _textOffset = Tween(
+    begin: const Offset(0, 2),
+    end: Offset.zero,
+  ).animate(CurvedAnimation(
+    parent: _textAnimationController,
     curve: Curves.easeIn,
   ));
 
@@ -67,7 +90,7 @@ class _TextPageState extends State<TextPage>
 
     Future.delayed(
       const Duration(seconds: 1),
-      () => _animationController.forward(),
+      () => _toolsAnimationController.forward(),
     );
 
     _itemPositionsListener.itemPositions.addListener(_positionsListener);
@@ -79,7 +102,7 @@ class _TextPageState extends State<TextPage>
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _toolsAnimationController.dispose();
     super.dispose();
   }
 
@@ -94,11 +117,14 @@ class _TextPageState extends State<TextPage>
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (_animationController.status ==
+                    if (_surahAnimationController.status ==
                         AnimationStatus.completed) {
-                      _animationController.reverse();
+                      _surahAnimationController.reverse();
+                    } else if (_toolsAnimationController.status ==
+                        AnimationStatus.completed) {
+                      _toolsAnimationController.reverse();
                     } else {
-                      _animationController.forward();
+                      _toolsAnimationController.forward();
                     }
                   },
                   child: _items(items),
@@ -121,30 +147,29 @@ class _TextPageState extends State<TextPage>
                   right: 0,
                   left: 0,
                   bottom: 0,
-                  // child: SlideTransition(
-                  //   position: _toolsOffset,
-                  //   child: TextTools(_animationController),
-                  // ),
-                  child: SurahContextMenu(widget.surah),
+                  child: SlideTransition(
+                    position: _surahOffset,
+                    child: SurahContextMenu(widget.surah),
+                  ),
                 ),
-                // if (textItem != null)
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  // child: SlideTransition(
-                  //   position: _toolsOffset,
-                  //   child: TextTools(_animationController),
-                  // ),
-                  child: TextContextMenu(widget.surah, items.first),
-                ),
+                if (textItem != null)
+                  Positioned(
+                    right: 0,
+                    left: 0,
+                    bottom: 0,
+                    // child: SlideTransition(
+                    //   position: _toolsOffset,
+                    //   child: TextTools(_animationController),
+                    // ),
+                    child: TextContextMenu(widget.surah, textItem!),
+                  ),
                 Positioned(
                   right: 0,
                   left: 0,
                   bottom: 0,
                   child: SlideTransition(
                     position: _toolsOffset,
-                    child: TextTools(_animationController),
+                    child: TextTools(_toolsAnimationController),
                   ),
                 ),
               ],
@@ -168,11 +193,19 @@ class _TextPageState extends State<TextPage>
       itemPositionsListener: _itemPositionsListener,
       itemCount: items.length + 1,
       itemBuilder: (_, index) => index == 0
-          ? SurahWidget(widget.surah)
+          ? SurahWidget(widget.surah, _toggleSurahContextMenu)
           : TextWidget(
               surah: widget.surah,
               textItem: items[index - 1],
             ),
     );
+  }
+
+  void _toggleSurahContextMenu() {
+    if (_surahAnimationController.status == AnimationStatus.dismissed) {
+      _surahAnimationController.forward();
+    } else {
+      _surahAnimationController.reverse();
+    }
   }
 }
