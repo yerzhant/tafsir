@@ -9,15 +9,21 @@ import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class AppModule extends Module {
   final TafsirDB db = TafsirDB();
+  final settings = SettingsRepo();
 
-  Future<void> init() async => db.init();
+  late final ThemeCubit theme;
+
+  Future<void> init() async {
+    theme = await ThemeCubit.create(settings);
+    await db.init();
+  }
 
   @override
   List<Bind> get binds => [
         Bind.singleton((i) => db),
+        Bind.singleton((i) => theme),
+        Bind.singleton((i) => settings),
         Bind.singleton((i) => Api(Client())),
-        Bind.singleton((i) => ThemeCubit()),
-        Bind.singleton((i) => SettingsRepo()),
       ];
 
   @override

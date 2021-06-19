@@ -4,6 +4,8 @@ const _savedPositionSurahKey = 'saved-position-surah';
 const _savedPositionIndexKey = 'saved-position-index';
 const _savedPositionLeadingEdgeKey = 'saved-position-leading-edge';
 
+const _isDarkThemeModeKey = 'isDarkThemeMode';
+
 class SettingsRepo {
   Future<void> saveTextPosition(SavedTextPosition textPosition) async {
     final prefs = await SharedPreferences.getInstance();
@@ -28,6 +30,16 @@ class SettingsRepo {
       prefs.getInt(_savedPositionIndexKey) ?? 0,
       prefs.getDouble(_savedPositionLeadingEdgeKey) ?? 0,
     );
+  }
+
+  Future<void> saveIsDarkTheme({bool isDark = true}) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_isDarkThemeModeKey, isDark);
+  }
+
+  Future<bool> isDarkTheme() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_isDarkThemeModeKey) ?? false;
   }
 }
 
