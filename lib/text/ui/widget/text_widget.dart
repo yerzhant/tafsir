@@ -11,34 +11,39 @@ import 'html_text_widget.dart';
 class TextWidget extends StatelessWidget {
   final Surah surah;
   final TextItem textItem;
+  final void Function(TextWidget) toggleMenu;
 
   const TextWidget({
     Key? key,
     required this.surah,
     required this.textItem,
+    required this.toggleMenu,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        const SizedBox(height: 5),
-        _divider(context),
-        Text(
-          textItem.textOrigin.trim(),
-          textAlign: TextAlign.start,
-          textDirection: TextDirection.rtl,
-          style: GoogleFonts.scheherazade(
-            fontSize: 30,
-            height: 1.3,
-            color: Theme.of(context).primaryColor,
+    return GestureDetector(
+      onLongPress: () => toggleMenu(this),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          const SizedBox(height: 5),
+          _divider(context),
+          Text(
+            textItem.textOrigin.trim(),
+            textAlign: TextAlign.start,
+            textDirection: TextDirection.rtl,
+            style: GoogleFonts.scheherazade(
+              fontSize: 30,
+              height: 1.3,
+              color: Theme.of(context).primaryColor,
+            ),
           ),
-        ),
-        const SizedBox(height: 7),
-        _translation(),
-        if (textItem.tafsir.isNotEmpty) ..._tafsir(),
-      ],
+          const SizedBox(height: 7),
+          _translation(),
+          if (textItem.tafsir.isNotEmpty) ..._tafsir(),
+        ],
+      ),
     );
   }
 

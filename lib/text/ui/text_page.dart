@@ -82,7 +82,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     curve: Curves.easeIn,
   ));
 
-  TextItem? textItem;
+  late SurahWidget _surahWidget;
+  TextWidget? _textWidget;
 
   @override
   void initState() {
@@ -149,20 +150,19 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
                   bottom: 0,
                   child: SlideTransition(
                     position: _surahOffset,
-                    child: SurahContextMenu(widget.surah),
+                    child: SurahContextMenu(widget.surah, _shareSurah),
                   ),
                 ),
-                if (textItem != null)
-                  Positioned(
-                    right: 0,
-                    left: 0,
-                    bottom: 0,
-                    // child: SlideTransition(
-                    //   position: _toolsOffset,
-                    //   child: TextTools(_animationController),
-                    // ),
-                    child: TextContextMenu(widget.surah, textItem!),
-                  ),
+                // Positioned(
+                //   right: 0,
+                //   left: 0,
+                //   bottom: 0,
+                //   // child: SlideTransition(
+                //   //   position: _toolsOffset,
+                //   //   child: TextTools(_animationController),
+                //   // ),
+                //   child: TextContextMenu(widget.surah),
+                // ),
                 Positioned(
                   right: 0,
                   left: 0,
@@ -197,15 +197,33 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
           : TextWidget(
               surah: widget.surah,
               textItem: items[index - 1],
+              toggleMenu: _toggleTextContextMenu,
             ),
     );
   }
 
-  void _toggleSurahContextMenu() {
+  void _toggleSurahContextMenu(SurahWidget surahWidget) {
+    _surahWidget = surahWidget;
+
     if (_surahAnimationController.status == AnimationStatus.dismissed) {
       _surahAnimationController.forward();
     } else {
       _surahAnimationController.reverse();
     }
+  }
+
+  void _toggleTextContextMenu(TextWidget textWidget) {
+    _textWidget = textWidget;
+
+    if (_textAnimationController.status == AnimationStatus.dismissed) {
+      _textAnimationController.forward();
+    } else {
+      _textAnimationController.reverse();
+    }
+  }
+
+  void _shareSurah() {
+    _surahWidget.share();
+    _toggleSurahContextMenu(_surahWidget);
   }
 }

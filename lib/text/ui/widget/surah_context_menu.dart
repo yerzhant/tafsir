@@ -8,8 +8,13 @@ import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class SurahContextMenu extends StatelessWidget {
   final Surah surah;
+  final void Function() shareCallback;
 
-  const SurahContextMenu(this.surah, {Key? key}) : super(key: key);
+  const SurahContextMenu(
+    this.surah,
+    this.shareCallback, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,17 +33,22 @@ class SurahContextMenu extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(right: 24, left: 16),
-                      child: SvgPicture.asset('assets/icons/share.svg'),
-                    ),
-                    Text(
-                      'Поделиться',
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
-                  ],
+                InkWell(
+                  onTap: () {
+                    return shareCallback();
+                  },
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 24, left: 16),
+                        child: SvgPicture.asset('assets/icons/share.svg'),
+                      ),
+                      Text(
+                        'Поделиться',
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
