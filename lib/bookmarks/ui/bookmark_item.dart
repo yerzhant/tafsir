@@ -67,6 +67,6 @@ class BookmarkItem extends StatelessWidget {
   Future<void> _show() async {
     final db = Modular.get<TafsirDB>();
     final surah = await db.getSurahById(bookmark.surahId);
-    Modular.to.pushNamed('/text/${bookmark.aayah}', arguments: surah);
+    Modular.to.pushNamed('/text/${bookmark.aayah}/0/0', arguments: surah);
   }
 }
