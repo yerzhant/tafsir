@@ -1,9 +1,11 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:tafsir/bookmarks/domain/model/bookmark.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
 
 const _surahTableName = 'surah';
 const _textTableName = 'aayah';
+const _bookmarkTableName = 'bookmark';
 
 class TafsirDB {
   late Database _db;
@@ -34,6 +36,31 @@ class TafsirDB {
     for (final item in items) {
       await _insertTextItem(item);
     }
+  }
+
+  Future<Bookmark> insertBookmark(Bookmark bookmark) async {
+    final id = await _db.insert(_bookmarkTableName, bookmark.toMap());
+
+    return Bookmark(
+      id: id,
+      surahId: bookmark.surahId,
+      surahTitle: bookmark.surahTitle,
+      aayah: bookmark.aayah,
+    );
+  }
+
+  Future<void> deleteBookmark(Bookmark bookmark) async {
+    await _db.delete(
+      _bookmarkTableName,
+      where: 'id = ?',
+      whereArgs: [bookmark.id],
+    );
+  }
+
+  Future<List<Bookmark>> getAllBookmarks() async {
+    final list = await _db.query(_bookmarkTableName, orderBy: 'id desc');
+
+    return list.map((e) => Bookmark.fromMap(e)).toList();
   }
 
   Future<void> init() async {

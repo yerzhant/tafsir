@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'text_bloc.dart';
+part of 'bookmarks_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,155 +13,134 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$TextEventTearOff {
-  const _$TextEventTearOff();
+class _$BookmarksEventTearOff {
+  const _$BookmarksEventTearOff();
 
-  _Load load(Surah surah) {
-    return _Load(
-      surah,
+  _Load load() {
+    return const _Load();
+  }
+
+  _Add add(Bookmark bookmark) {
+    return _Add(
+      bookmark,
+    );
+  }
+
+  _Remove remove(Bookmark bookmark) {
+    return _Remove(
+      bookmark,
     );
   }
 }
 
 /// @nodoc
-const $TextEvent = _$TextEventTearOff();
+const $BookmarksEvent = _$BookmarksEventTearOff();
 
 /// @nodoc
-mixin _$TextEvent {
-  Surah get surah => throw _privateConstructorUsedError;
-
+mixin _$BookmarksEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Surah surah) load,
+    required TResult Function() load,
+    required TResult Function(Bookmark bookmark) add,
+    required TResult Function(Bookmark bookmark) remove,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Surah surah)? load,
+    TResult Function()? load,
+    TResult Function(Bookmark bookmark)? add,
+    TResult Function(Bookmark bookmark)? remove,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Remove value) remove,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
+    TResult Function(_Add value)? add,
+    TResult Function(_Remove value)? remove,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $TextEventCopyWith<TextEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TextEventCopyWith<$Res> {
-  factory $TextEventCopyWith(TextEvent value, $Res Function(TextEvent) then) =
-      _$TextEventCopyWithImpl<$Res>;
-  $Res call({Surah surah});
+abstract class $BookmarksEventCopyWith<$Res> {
+  factory $BookmarksEventCopyWith(
+          BookmarksEvent value, $Res Function(BookmarksEvent) then) =
+      _$BookmarksEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$TextEventCopyWithImpl<$Res> implements $TextEventCopyWith<$Res> {
-  _$TextEventCopyWithImpl(this._value, this._then);
+class _$BookmarksEventCopyWithImpl<$Res>
+    implements $BookmarksEventCopyWith<$Res> {
+  _$BookmarksEventCopyWithImpl(this._value, this._then);
 
-  final TextEvent _value;
+  final BookmarksEvent _value;
   // ignore: unused_field
-  final $Res Function(TextEvent) _then;
-
-  @override
-  $Res call({
-    Object? surah = freezed,
-  }) {
-    return _then(_value.copyWith(
-      surah: surah == freezed
-          ? _value.surah
-          : surah // ignore: cast_nullable_to_non_nullable
-              as Surah,
-    ));
-  }
+  final $Res Function(BookmarksEvent) _then;
 }
 
 /// @nodoc
-abstract class _$LoadCopyWith<$Res> implements $TextEventCopyWith<$Res> {
+abstract class _$LoadCopyWith<$Res> {
   factory _$LoadCopyWith(_Load value, $Res Function(_Load) then) =
       __$LoadCopyWithImpl<$Res>;
-  @override
-  $Res call({Surah surah});
 }
 
 /// @nodoc
-class __$LoadCopyWithImpl<$Res> extends _$TextEventCopyWithImpl<$Res>
+class __$LoadCopyWithImpl<$Res> extends _$BookmarksEventCopyWithImpl<$Res>
     implements _$LoadCopyWith<$Res> {
   __$LoadCopyWithImpl(_Load _value, $Res Function(_Load) _then)
       : super(_value, (v) => _then(v as _Load));
 
   @override
   _Load get _value => super._value as _Load;
-
-  @override
-  $Res call({
-    Object? surah = freezed,
-  }) {
-    return _then(_Load(
-      surah == freezed
-          ? _value.surah
-          : surah // ignore: cast_nullable_to_non_nullable
-              as Surah,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_Load implements _Load {
-  const _$_Load(this.surah);
-
-  @override
-  final Surah surah;
+  const _$_Load();
 
   @override
   String toString() {
-    return 'TextEvent.load(surah: $surah)';
+    return 'BookmarksEvent.load()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Load &&
-            (identical(other.surah, surah) ||
-                const DeepCollectionEquality().equals(other.surah, surah)));
+    return identical(this, other) || (other is _Load);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(surah);
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadCopyWith<_Load> get copyWith =>
-      __$LoadCopyWithImpl<_Load>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Surah surah) load,
+    required TResult Function() load,
+    required TResult Function(Bookmark bookmark) add,
+    required TResult Function(Bookmark bookmark) remove,
   }) {
-    return load(surah);
+    return load();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Surah surah)? load,
+    TResult Function()? load,
+    TResult Function(Bookmark bookmark)? add,
+    TResult Function(Bookmark bookmark)? remove,
     required TResult orElse(),
   }) {
     if (load != null) {
-      return load(surah);
+      return load();
     }
     return orElse();
   }
@@ -170,6 +149,8 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Remove value) remove,
   }) {
     return load(this);
   }
@@ -178,6 +159,8 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
+    TResult Function(_Add value)? add,
+    TResult Function(_Remove value)? remove,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -187,21 +170,249 @@ class _$_Load implements _Load {
   }
 }
 
-abstract class _Load implements TextEvent {
-  const factory _Load(Surah surah) = _$_Load;
-
-  @override
-  Surah get surah => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$LoadCopyWith<_Load> get copyWith => throw _privateConstructorUsedError;
+abstract class _Load implements BookmarksEvent {
+  const factory _Load() = _$_Load;
 }
 
 /// @nodoc
-class _$TextStateTearOff {
-  const _$TextStateTearOff();
+abstract class _$AddCopyWith<$Res> {
+  factory _$AddCopyWith(_Add value, $Res Function(_Add) then) =
+      __$AddCopyWithImpl<$Res>;
+  $Res call({Bookmark bookmark});
+}
 
-  _State call(List<TextItem> items) {
+/// @nodoc
+class __$AddCopyWithImpl<$Res> extends _$BookmarksEventCopyWithImpl<$Res>
+    implements _$AddCopyWith<$Res> {
+  __$AddCopyWithImpl(_Add _value, $Res Function(_Add) _then)
+      : super(_value, (v) => _then(v as _Add));
+
+  @override
+  _Add get _value => super._value as _Add;
+
+  @override
+  $Res call({
+    Object? bookmark = freezed,
+  }) {
+    return _then(_Add(
+      bookmark == freezed
+          ? _value.bookmark
+          : bookmark // ignore: cast_nullable_to_non_nullable
+              as Bookmark,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Add implements _Add {
+  const _$_Add(this.bookmark);
+
+  @override
+  final Bookmark bookmark;
+
+  @override
+  String toString() {
+    return 'BookmarksEvent.add(bookmark: $bookmark)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Add &&
+            (identical(other.bookmark, bookmark) ||
+                const DeepCollectionEquality()
+                    .equals(other.bookmark, bookmark)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(bookmark);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AddCopyWith<_Add> get copyWith =>
+      __$AddCopyWithImpl<_Add>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(Bookmark bookmark) add,
+    required TResult Function(Bookmark bookmark) remove,
+  }) {
+    return add(bookmark);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(Bookmark bookmark)? add,
+    TResult Function(Bookmark bookmark)? remove,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(bookmark);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Remove value) remove,
+  }) {
+    return add(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_Add value)? add,
+    TResult Function(_Remove value)? remove,
+    required TResult orElse(),
+  }) {
+    if (add != null) {
+      return add(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Add implements BookmarksEvent {
+  const factory _Add(Bookmark bookmark) = _$_Add;
+
+  Bookmark get bookmark => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$AddCopyWith<_Add> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$RemoveCopyWith<$Res> {
+  factory _$RemoveCopyWith(_Remove value, $Res Function(_Remove) then) =
+      __$RemoveCopyWithImpl<$Res>;
+  $Res call({Bookmark bookmark});
+}
+
+/// @nodoc
+class __$RemoveCopyWithImpl<$Res> extends _$BookmarksEventCopyWithImpl<$Res>
+    implements _$RemoveCopyWith<$Res> {
+  __$RemoveCopyWithImpl(_Remove _value, $Res Function(_Remove) _then)
+      : super(_value, (v) => _then(v as _Remove));
+
+  @override
+  _Remove get _value => super._value as _Remove;
+
+  @override
+  $Res call({
+    Object? bookmark = freezed,
+  }) {
+    return _then(_Remove(
+      bookmark == freezed
+          ? _value.bookmark
+          : bookmark // ignore: cast_nullable_to_non_nullable
+              as Bookmark,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Remove implements _Remove {
+  const _$_Remove(this.bookmark);
+
+  @override
+  final Bookmark bookmark;
+
+  @override
+  String toString() {
+    return 'BookmarksEvent.remove(bookmark: $bookmark)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Remove &&
+            (identical(other.bookmark, bookmark) ||
+                const DeepCollectionEquality()
+                    .equals(other.bookmark, bookmark)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(bookmark);
+
+  @JsonKey(ignore: true)
+  @override
+  _$RemoveCopyWith<_Remove> get copyWith =>
+      __$RemoveCopyWithImpl<_Remove>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(Bookmark bookmark) add,
+    required TResult Function(Bookmark bookmark) remove,
+  }) {
+    return remove(bookmark);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(Bookmark bookmark)? add,
+    TResult Function(Bookmark bookmark)? remove,
+    required TResult orElse(),
+  }) {
+    if (remove != null) {
+      return remove(bookmark);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_Add value) add,
+    required TResult Function(_Remove value) remove,
+  }) {
+    return remove(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_Add value)? add,
+    TResult Function(_Remove value)? remove,
+    required TResult orElse(),
+  }) {
+    if (remove != null) {
+      return remove(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Remove implements BookmarksEvent {
+  const factory _Remove(Bookmark bookmark) = _$_Remove;
+
+  Bookmark get bookmark => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$RemoveCopyWith<_Remove> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$BookmarksStateTearOff {
+  const _$BookmarksStateTearOff();
+
+  _State call(List<Bookmark> items) {
     return _State(
       items,
     );
@@ -219,20 +430,20 @@ class _$TextStateTearOff {
 }
 
 /// @nodoc
-const $TextState = _$TextStateTearOff();
+const $BookmarksState = _$BookmarksStateTearOff();
 
 /// @nodoc
-mixin _$TextState {
+mixin _$BookmarksState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<TextItem> items) $default, {
+    TResult Function(List<Bookmark> items) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<TextItem> items)? $default, {
+    TResult Function(List<Bookmark> items)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
@@ -256,29 +467,31 @@ mixin _$TextState {
 }
 
 /// @nodoc
-abstract class $TextStateCopyWith<$Res> {
-  factory $TextStateCopyWith(TextState value, $Res Function(TextState) then) =
-      _$TextStateCopyWithImpl<$Res>;
+abstract class $BookmarksStateCopyWith<$Res> {
+  factory $BookmarksStateCopyWith(
+          BookmarksState value, $Res Function(BookmarksState) then) =
+      _$BookmarksStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$TextStateCopyWithImpl<$Res> implements $TextStateCopyWith<$Res> {
-  _$TextStateCopyWithImpl(this._value, this._then);
+class _$BookmarksStateCopyWithImpl<$Res>
+    implements $BookmarksStateCopyWith<$Res> {
+  _$BookmarksStateCopyWithImpl(this._value, this._then);
 
-  final TextState _value;
+  final BookmarksState _value;
   // ignore: unused_field
-  final $Res Function(TextState) _then;
+  final $Res Function(BookmarksState) _then;
 }
 
 /// @nodoc
 abstract class _$StateCopyWith<$Res> {
   factory _$StateCopyWith(_State value, $Res Function(_State) then) =
       __$StateCopyWithImpl<$Res>;
-  $Res call({List<TextItem> items});
+  $Res call({List<Bookmark> items});
 }
 
 /// @nodoc
-class __$StateCopyWithImpl<$Res> extends _$TextStateCopyWithImpl<$Res>
+class __$StateCopyWithImpl<$Res> extends _$BookmarksStateCopyWithImpl<$Res>
     implements _$StateCopyWith<$Res> {
   __$StateCopyWithImpl(_State _value, $Res Function(_State) _then)
       : super(_value, (v) => _then(v as _State));
@@ -294,7 +507,7 @@ class __$StateCopyWithImpl<$Res> extends _$TextStateCopyWithImpl<$Res>
       items == freezed
           ? _value.items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<TextItem>,
+              as List<Bookmark>,
     ));
   }
 }
@@ -305,11 +518,11 @@ class _$_State implements _State {
   const _$_State(this.items);
 
   @override
-  final List<TextItem> items;
+  final List<Bookmark> items;
 
   @override
   String toString() {
-    return 'TextState(items: $items)';
+    return 'BookmarksState(items: $items)';
   }
 
   @override
@@ -332,7 +545,7 @@ class _$_State implements _State {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<TextItem> items) $default, {
+    TResult Function(List<Bookmark> items) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) {
@@ -342,7 +555,7 @@ class _$_State implements _State {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<TextItem> items)? $default, {
+    TResult Function(List<Bookmark> items)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
@@ -378,10 +591,10 @@ class _$_State implements _State {
   }
 }
 
-abstract class _State implements TextState {
-  const factory _State(List<TextItem> items) = _$_State;
+abstract class _State implements BookmarksState {
+  const factory _State(List<Bookmark> items) = _$_State;
 
-  List<TextItem> get items => throw _privateConstructorUsedError;
+  List<Bookmark> get items => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$StateCopyWith<_State> get copyWith => throw _privateConstructorUsedError;
 }
@@ -394,7 +607,7 @@ abstract class _$InProgressCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InProgressCopyWithImpl<$Res> extends _$TextStateCopyWithImpl<$Res>
+class __$InProgressCopyWithImpl<$Res> extends _$BookmarksStateCopyWithImpl<$Res>
     implements _$InProgressCopyWith<$Res> {
   __$InProgressCopyWithImpl(
       _InProgress _value, $Res Function(_InProgress) _then)
@@ -411,7 +624,7 @@ class _$_InProgress implements _InProgress {
 
   @override
   String toString() {
-    return 'TextState.inProgress()';
+    return 'BookmarksState.inProgress()';
   }
 
   @override
@@ -425,7 +638,7 @@ class _$_InProgress implements _InProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<TextItem> items) $default, {
+    TResult Function(List<Bookmark> items) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) {
@@ -435,7 +648,7 @@ class _$_InProgress implements _InProgress {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<TextItem> items)? $default, {
+    TResult Function(List<Bookmark> items)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
@@ -471,7 +684,7 @@ class _$_InProgress implements _InProgress {
   }
 }
 
-abstract class _InProgress implements TextState {
+abstract class _InProgress implements BookmarksState {
   const factory _InProgress() = _$_InProgress;
 }
 
@@ -485,7 +698,7 @@ abstract class _$ErrorCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$TextStateCopyWithImpl<$Res>
+class __$ErrorCopyWithImpl<$Res> extends _$BookmarksStateCopyWithImpl<$Res>
     implements _$ErrorCopyWith<$Res> {
   __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
       : super(_value, (v) => _then(v as _Error));
@@ -523,7 +736,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'TextState.error(rejection: $rejection)';
+    return 'BookmarksState.error(rejection: $rejection)';
   }
 
   @override
@@ -547,7 +760,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<TextItem> items) $default, {
+    TResult Function(List<Bookmark> items) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) {
@@ -557,7 +770,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<TextItem> items)? $default, {
+    TResult Function(List<Bookmark> items)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
@@ -593,7 +806,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements TextState {
+abstract class _Error implements BookmarksState {
   const factory _Error(Rejection rejection) = _$_Error;
 
   Rejection get rejection => throw _privateConstructorUsedError;

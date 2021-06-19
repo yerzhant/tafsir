@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:tafsir/bookmarks/ui/bookmarks_list.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_list.dart';
 
 class HomePage extends StatelessWidget {
-  final SuwarBloc suwarBloc;
-
-  HomePage({
-    Key? key,
-    required this.suwarBloc,
-  }) : super(key: key) {
-    suwarBloc.add(const SuwarEvent.load());
+  HomePage({Key? key}) : super(key: key) {
+    Modular.get<SuwarBloc>().add(const SuwarEvent.load());
+    Modular.get<BookmarksBloc>().add(const BookmarksEvent.load());
   }
 
   @override
@@ -39,10 +38,10 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            SuwarList(bloc: suwarBloc),
-            const Placeholder(),
+            SuwarList(),
+            BookmarksList(),
           ],
         ),
       ),

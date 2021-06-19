@@ -1,38 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
+import 'package:tafsir/bookmarks/domain/model/bookmark.dart';
+import 'package:tafsir/bookmarks/ui/bookmark_item.dart';
 import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
-import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
-import 'package:tafsir/suwar/domain/model/surah.dart';
-import 'package:tafsir/suwar/ui/surah_item.dart';
 
-class SuwarList extends StatelessWidget {
-  const SuwarList({Key? key}) : super(key: key);
+class BookmarksList extends StatelessWidget {
+  const BookmarksList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SuwarBloc, SuwarState>(
+    return BlocBuilder<BookmarksBloc, BookmarksState>(
       bloc: Modular.get(),
-      builder: (context, state) {
+      builder: (_, state) {
         return state.when(
-          (suwar) => _buildList(suwar),
+          (bookmarks) => _list(bookmarks, context),
           inProgress: () => const CircularProgress(),
           error: (rejection) => RejectionWidget(
             rejection: rejection,
-            onRefresh: () {},
+            onRefresh: () =>
+                context.read<BookmarksBloc>().add(const BookmarksEvent.load()),
           ),
         );
       },
     );
   }
 
-  Widget _buildList(List<Surah> suwar) {
+  ListView _list(List<Bookmark> bookmarks, BuildContext context) {
     return ListView.separated(
-      key: const PageStorageKey('suwar-list'),
-      itemCount: suwar.length,
-      itemBuilder: (_, index) => SurahItem(suwar[index]),
+      key: const PageStorageKey('bookmarks-list'),
+      itemCount: bookmarks.length,
       separatorBuilder: (_, __) => const Divider(height: 1),
+      itemBuilder: (_, index) => BookmarkItem(bookmarks[index]),
       padding: const EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 16,
