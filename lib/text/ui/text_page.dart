@@ -101,19 +101,20 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   void _positionsListener() {
+    _slideOutEverything();
+
     _itemPosition = _itemPositionsListener.itemPositions.value.first;
   }
 
   void _slideOutEverything() {
     if (_surahMenuAnimationController.status == AnimationStatus.completed) {
       _surahMenuAnimationController.reverse();
-    } else if (_textMenuAnimationController.status ==
-        AnimationStatus.completed) {
+    }
+    if (_textMenuAnimationController.status == AnimationStatus.completed) {
       _textMenuAnimationController.reverse();
-    } else if (_toolsAnimationController.status == AnimationStatus.completed) {
+    }
+    if (_toolsAnimationController.status == AnimationStatus.completed) {
       _toolsAnimationController.reverse();
-    } else {
-      _toolsAnimationController.forward();
     }
   }
 
