@@ -19,7 +19,7 @@ class BookmarkItem extends StatelessWidget {
         key: Key(bookmark.id.toString()),
         background: Container(color: Theme.of(context).primaryColor),
         onDismissed: (_) =>
-            context.read<BookmarksBloc>().add(BookmarksEvent.remove(bookmark)),
+            Modular.get<BookmarksBloc>().add(BookmarksEvent.remove(bookmark)),
         child: SizedBox(
           height: 74,
           child: Row(
