@@ -19,6 +19,12 @@ class _$SuwarEventTearOff {
   _Load load() {
     return const _Load();
   }
+
+  _UpdateActiveSurah updateActiveSurah(Surah surah) {
+    return _UpdateActiveSurah(
+      surah,
+    );
+  }
 }
 
 /// @nodoc
@@ -29,22 +35,26 @@ mixin _$SuwarEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(Surah surah) updateActiveSurah,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(Surah surah)? updateActiveSurah,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
+    required TResult Function(_UpdateActiveSurah value) updateActiveSurah,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
+    TResult Function(_UpdateActiveSurah value)? updateActiveSurah,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -104,6 +114,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() load,
+    required TResult Function(Surah surah) updateActiveSurah,
   }) {
     return load();
   }
@@ -112,6 +123,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? load,
+    TResult Function(Surah surah)? updateActiveSurah,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -124,6 +136,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Load value) load,
+    required TResult Function(_UpdateActiveSurah value) updateActiveSurah,
   }) {
     return load(this);
   }
@@ -132,6 +145,7 @@ class _$_Load implements _Load {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Load value)? load,
+    TResult Function(_UpdateActiveSurah value)? updateActiveSurah,
     required TResult orElse(),
   }) {
     if (load != null) {
@@ -146,12 +160,129 @@ abstract class _Load implements SuwarEvent {
 }
 
 /// @nodoc
+abstract class _$UpdateActiveSurahCopyWith<$Res> {
+  factory _$UpdateActiveSurahCopyWith(
+          _UpdateActiveSurah value, $Res Function(_UpdateActiveSurah) then) =
+      __$UpdateActiveSurahCopyWithImpl<$Res>;
+  $Res call({Surah surah});
+}
+
+/// @nodoc
+class __$UpdateActiveSurahCopyWithImpl<$Res>
+    extends _$SuwarEventCopyWithImpl<$Res>
+    implements _$UpdateActiveSurahCopyWith<$Res> {
+  __$UpdateActiveSurahCopyWithImpl(
+      _UpdateActiveSurah _value, $Res Function(_UpdateActiveSurah) _then)
+      : super(_value, (v) => _then(v as _UpdateActiveSurah));
+
+  @override
+  _UpdateActiveSurah get _value => super._value as _UpdateActiveSurah;
+
+  @override
+  $Res call({
+    Object? surah = freezed,
+  }) {
+    return _then(_UpdateActiveSurah(
+      surah == freezed
+          ? _value.surah
+          : surah // ignore: cast_nullable_to_non_nullable
+              as Surah,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UpdateActiveSurah implements _UpdateActiveSurah {
+  const _$_UpdateActiveSurah(this.surah);
+
+  @override
+  final Surah surah;
+
+  @override
+  String toString() {
+    return 'SuwarEvent.updateActiveSurah(surah: $surah)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _UpdateActiveSurah &&
+            (identical(other.surah, surah) ||
+                const DeepCollectionEquality().equals(other.surah, surah)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(surah);
+
+  @JsonKey(ignore: true)
+  @override
+  _$UpdateActiveSurahCopyWith<_UpdateActiveSurah> get copyWith =>
+      __$UpdateActiveSurahCopyWithImpl<_UpdateActiveSurah>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() load,
+    required TResult Function(Surah surah) updateActiveSurah,
+  }) {
+    return updateActiveSurah(surah);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? load,
+    TResult Function(Surah surah)? updateActiveSurah,
+    required TResult orElse(),
+  }) {
+    if (updateActiveSurah != null) {
+      return updateActiveSurah(surah);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Load value) load,
+    required TResult Function(_UpdateActiveSurah value) updateActiveSurah,
+  }) {
+    return updateActiveSurah(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Load value)? load,
+    TResult Function(_UpdateActiveSurah value)? updateActiveSurah,
+    required TResult orElse(),
+  }) {
+    if (updateActiveSurah != null) {
+      return updateActiveSurah(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateActiveSurah implements SuwarEvent {
+  const factory _UpdateActiveSurah(Surah surah) = _$_UpdateActiveSurah;
+
+  Surah get surah => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$UpdateActiveSurahCopyWith<_UpdateActiveSurah> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$SuwarStateTearOff {
   const _$SuwarStateTearOff();
 
-  _State call(List<Surah> suwar) {
+  _State call(List<Surah> suwar, Surah? active) {
     return _State(
       suwar,
+      active,
     );
   }
 
@@ -173,14 +304,14 @@ const $SuwarState = _$SuwarStateTearOff();
 mixin _$SuwarState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<Surah> suwar) $default, {
+    TResult Function(List<Surah> suwar, Surah? active) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<Surah> suwar)? $default, {
+    TResult Function(List<Surah> suwar, Surah? active)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
@@ -223,7 +354,7 @@ class _$SuwarStateCopyWithImpl<$Res> implements $SuwarStateCopyWith<$Res> {
 abstract class _$StateCopyWith<$Res> {
   factory _$StateCopyWith(_State value, $Res Function(_State) then) =
       __$StateCopyWithImpl<$Res>;
-  $Res call({List<Surah> suwar});
+  $Res call({List<Surah> suwar, Surah? active});
 }
 
 /// @nodoc
@@ -238,12 +369,17 @@ class __$StateCopyWithImpl<$Res> extends _$SuwarStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? suwar = freezed,
+    Object? active = freezed,
   }) {
     return _then(_State(
       suwar == freezed
           ? _value.suwar
           : suwar // ignore: cast_nullable_to_non_nullable
               as List<Surah>,
+      active == freezed
+          ? _value.active
+          : active // ignore: cast_nullable_to_non_nullable
+              as Surah?,
     ));
   }
 }
@@ -251,14 +387,16 @@ class __$StateCopyWithImpl<$Res> extends _$SuwarStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_State implements _State {
-  const _$_State(this.suwar);
+  const _$_State(this.suwar, this.active);
 
   @override
   final List<Surah> suwar;
+  @override
+  final Surah? active;
 
   @override
   String toString() {
-    return 'SuwarState(suwar: $suwar)';
+    return 'SuwarState(suwar: $suwar, active: $active)';
   }
 
   @override
@@ -266,12 +404,16 @@ class _$_State implements _State {
     return identical(this, other) ||
         (other is _State &&
             (identical(other.suwar, suwar) ||
-                const DeepCollectionEquality().equals(other.suwar, suwar)));
+                const DeepCollectionEquality().equals(other.suwar, suwar)) &&
+            (identical(other.active, active) ||
+                const DeepCollectionEquality().equals(other.active, active)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(suwar);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(suwar) ^
+      const DeepCollectionEquality().hash(active);
 
   @JsonKey(ignore: true)
   @override
@@ -281,23 +423,23 @@ class _$_State implements _State {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<Surah> suwar) $default, {
+    TResult Function(List<Surah> suwar, Surah? active) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) {
-    return $default(suwar);
+    return $default(suwar, active);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<Surah> suwar)? $default, {
+    TResult Function(List<Surah> suwar, Surah? active)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default(suwar);
+      return $default(suwar, active);
     }
     return orElse();
   }
@@ -328,9 +470,10 @@ class _$_State implements _State {
 }
 
 abstract class _State implements SuwarState {
-  const factory _State(List<Surah> suwar) = _$_State;
+  const factory _State(List<Surah> suwar, Surah? active) = _$_State;
 
   List<Surah> get suwar => throw _privateConstructorUsedError;
+  Surah? get active => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$StateCopyWith<_State> get copyWith => throw _privateConstructorUsedError;
 }
@@ -374,7 +517,7 @@ class _$_InProgress implements _InProgress {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<Surah> suwar) $default, {
+    TResult Function(List<Surah> suwar, Surah? active) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) {
@@ -384,7 +527,7 @@ class _$_InProgress implements _InProgress {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<Surah> suwar)? $default, {
+    TResult Function(List<Surah> suwar, Surah? active)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),
@@ -496,7 +639,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(List<Surah> suwar) $default, {
+    TResult Function(List<Surah> suwar, Surah? active) $default, {
     required TResult Function() inProgress,
     required TResult Function(Rejection rejection) error,
   }) {
@@ -506,7 +649,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(List<Surah> suwar)? $default, {
+    TResult Function(List<Surah> suwar, Surah? active)? $default, {
     TResult Function()? inProgress,
     TResult Function(Rejection rejection)? error,
     required TResult orElse(),

@@ -16,29 +16,27 @@ class SuwarList extends StatelessWidget {
 
     return BlocBuilder<SuwarBloc, SuwarState>(
       bloc: bloc,
-      builder: (context, state) {
-        return state.when(
-          (suwar) => _buildList(suwar),
-          inProgress: () => const CircularProgress(),
-          error: (rejection) => RejectionWidget(
-            rejection: rejection,
-            onRefresh: () => bloc.add(const SuwarEvent.load()),
-          ),
-        );
-      },
+      builder: (context, state) => state.when(
+        (suwar, active) => _buildList(suwar, active),
+        inProgress: () => const CircularProgress(),
+        error: (rejection) => RejectionWidget(
+          rejection: rejection,
+          onRefresh: () => bloc.add(const SuwarEvent.load()),
+        ),
+      ),
     );
   }
 
-  Widget _buildList(List<Surah> suwar) {
+  Widget _buildList(List<Surah> suwar, Surah? active) {
     return ListView.separated(
       key: const PageStorageKey('suwar-list'),
       itemCount: suwar.length,
-      itemBuilder: (_, index) => SurahItem(suwar[index]),
-      separatorBuilder: (_, __) => const Divider(height: 1),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 16,
+      itemBuilder: (_, index) => SurahItem(
+        suwar[index],
+        isActive: suwar[index].id == active?.id,
       ),
+      separatorBuilder: (_, __) => const Divider(height: 1),
+      padding: const EdgeInsets.symmetric(vertical: 16),
     );
   }
 }

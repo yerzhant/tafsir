@@ -9,7 +9,7 @@ class HomeModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind.singleton((i) => SuwarDataSource(i(), i())),
-        Bind.singleton((i) => SuwarBloc(i())),
+        Bind.singleton((i) => SuwarBloc(i(), i(), i())),
         Bind.singleton((i) => BookmarkRepository(i())),
         Bind.singleton((i) => BookmarksBloc(i())),
       ];

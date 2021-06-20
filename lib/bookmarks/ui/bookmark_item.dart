@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:tafsir/bookmarks/domain/model/bookmark.dart';
 import 'package:tafsir/common/ds/tafsir_db.dart';
+import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 
 class BookmarkItem extends StatelessWidget {
   final Bookmark bookmark;
@@ -68,5 +68,6 @@ class BookmarkItem extends StatelessWidget {
     final db = Modular.get<TafsirDB>();
     final surah = await db.getSurahById(bookmark.surahId);
     Modular.to.pushNamed('/text/${bookmark.aayah}/0/0', arguments: surah);
+    Modular.get<SuwarBloc>().add(SuwarEvent.updateActiveSurah(surah));
   }
 }
