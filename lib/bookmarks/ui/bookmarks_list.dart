@@ -12,16 +12,17 @@ class BookmarksList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Modular.get<BookmarksBloc>();
+
     return BlocBuilder<BookmarksBloc, BookmarksState>(
-      bloc: Modular.get(),
+      bloc: bloc,
       builder: (_, state) {
         return state.when(
           (bookmarks) => _list(bookmarks, context),
           inProgress: () => const CircularProgress(),
           error: (rejection) => RejectionWidget(
             rejection: rejection,
-            onRefresh: () =>
-                context.read<BookmarksBloc>().add(const BookmarksEvent.load()),
+            onRefresh: () => bloc.add(const BookmarksEvent.load()),
           ),
         );
       },

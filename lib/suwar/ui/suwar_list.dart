@@ -12,15 +12,17 @@ class SuwarList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = Modular.get<SuwarBloc>();
+
     return BlocBuilder<SuwarBloc, SuwarState>(
-      bloc: Modular.get(),
+      bloc: bloc,
       builder: (context, state) {
         return state.when(
           (suwar) => _buildList(suwar),
           inProgress: () => const CircularProgress(),
           error: (rejection) => RejectionWidget(
             rejection: rejection,
-            onRefresh: () {},
+            onRefresh: () => bloc.add(const SuwarEvent.load()),
           ),
         );
       },

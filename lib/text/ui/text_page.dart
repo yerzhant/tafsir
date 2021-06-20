@@ -226,7 +226,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
           inProgress: () => const Center(child: CircularProgress()),
           error: (rejection) => RejectionWidget(
             rejection: rejection,
-            onRefresh: () {},
+            onRefresh: () => widget.bloc.add(TextEvent.load(widget.surah)),
           ),
         ),
       ),
