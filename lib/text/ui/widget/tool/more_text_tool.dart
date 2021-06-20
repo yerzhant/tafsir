@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class MoreTextTool extends StatelessWidget {
@@ -15,14 +16,14 @@ class MoreTextTool extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: BlocBuilder<ThemeCubit, ThemeState>(
         bloc: Modular.get(),
-        builder: (context, state) {
+        builder: (context, theme) {
           return Column(
             children: [
-              _arabicFont(context, state),
+              _arabicFont(context, theme),
               const Divider(height: 1),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                child: _Buttons(state),
+                child: _Buttons(theme),
               ),
             ],
           );
@@ -31,7 +32,7 @@ class MoreTextTool extends StatelessWidget {
     );
   }
 
-  InkWell _arabicFont(BuildContext context, ThemeState state) {
+  InkWell _arabicFont(BuildContext context, ThemeState theme) {
     return InkWell(
       onTap: () {
         theFeatureIsPlanned.asSnackBar(context);
@@ -48,13 +49,13 @@ class MoreTextTool extends StatelessWidget {
             Text(
               'Scheherazade',
               style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    color: state.listItemSubtitle,
+                    color: theme.listItemSubtitle,
                   ),
             ),
             const SizedBox(width: 40),
             SvgPicture.asset(
               'assets/icons/shevron-right.svg',
-              color: state.listItemSubtitle,
+              color: theme.listItemSubtitle,
             ),
           ],
         ),
@@ -64,10 +65,10 @@ class MoreTextTool extends StatelessWidget {
 }
 
 class _Buttons extends StatelessWidget {
-  final ThemeState state;
+  final ThemeState theme;
 
   const _Buttons(
-    this.state, {
+    this.theme, {
     Key? key,
   }) : super(key: key);
 
@@ -81,36 +82,58 @@ class _Buttons extends StatelessWidget {
           style: Theme.of(context).textTheme.headline5,
         ),
         const SizedBox(height: 12),
-        Row(
+        _buttons(),
+      ],
+    );
+  }
+
+  Widget _buttons() {
+    final settings = Modular.get<SettingsBloc>();
+
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      bloc: settings,
+      builder: (context, state) {
+        return Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             _Button(
               'العربية',
-              color: state.listItemSubtitle,
-              onTap: () {},
+              isActive: state.showAayaat,
+              color: theme.listItemSubtitle,
+              onTap: () {
+                settings.add(const SettingsEvent.toggleShowAayaat());
+              },
             ),
             const SizedBox(width: 10),
             _Button(
               'Перевод',
-              color: state.listItemSubtitle,
-              onTap: () {},
+              isActive: state.showTranslation,
+              color: theme.listItemSubtitle,
+              onTap: () {
+                settings.add(const SettingsEvent.toggleShowTranslation());
+              },
             ),
             const SizedBox(width: 10),
             _Button(
               'Тафсир',
-              isActive: true,
-              color: state.listItemSubtitle,
-              onTap: () {},
+              isActive: state.showTafsir,
+              color: theme.listItemSubtitle,
+              onTap: () {
+                settings.add(const SettingsEvent.toggleShowTafsir());
+              },
             ),
             const SizedBox(width: 10),
             _Button(
               'Сноски',
-              color: state.listItemSubtitle,
-              onTap: () {},
+              isActive: state.showFootnotes,
+              color: theme.listItemSubtitle,
+              onTap: () {
+                settings.add(const SettingsEvent.toggleShowFootnotes());
+              },
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

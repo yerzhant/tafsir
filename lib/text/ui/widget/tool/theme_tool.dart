@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class ThemeTool extends StatelessWidget {
@@ -24,9 +25,18 @@ class ThemeTool extends StatelessWidget {
                 'Не выключать экран',
                 style: Theme.of(context).textTheme.headline5,
               ),
-              Switch(
-                value: true,
-                onChanged: (value) {},
+              BlocBuilder<SettingsBloc, SettingsState>(
+                bloc: Modular.get(),
+                builder: (context, state) {
+                  return Switch(
+                    value: state.isDisplayAlwaysOn,
+                    onChanged: (value) {
+                      Modular.get<SettingsBloc>().add(
+                        const SettingsEvent.toggleIsDisplayAlwaysOn(),
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),

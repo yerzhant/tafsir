@@ -6,14 +6,14 @@ import 'package:tafsir/settings/repo/settings_repo.dart';
 part 'theme_state.dart';
 
 class ThemeCubit extends Cubit<ThemeState> {
-  ThemeCubit(ThemeState theme) : super(theme);
+  ThemeCubit._(ThemeState theme) : super(theme);
 
   static Future<ThemeCubit> create(SettingsRepo settings) async {
     final isDark = await settings.isDarkTheme();
     if (isDark) {
-      return ThemeCubit(ThemeState.dark);
+      return ThemeCubit._(ThemeState.dark);
     } else {
-      return ThemeCubit(ThemeState.light);
+      return ThemeCubit._(ThemeState.light);
     }
   }
 
