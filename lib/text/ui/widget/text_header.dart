@@ -29,7 +29,6 @@ class TextHeader extends StatelessWidget {
                         surah.weight.toString(),
                         style: const TextStyle(
                           fontSize: 22,
-                          height: 1,
                           letterSpacing: -1,
                           fontWeight: FontWeight.w900,
                           color: Colors.white,

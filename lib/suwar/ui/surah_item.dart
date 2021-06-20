@@ -52,7 +52,6 @@ class SurahItem extends StatelessWidget {
                 surah.weight.toString(),
                 style: TextStyle(
                   fontSize: 22,
-                  height: 1,
                   letterSpacing: -1,
                   fontWeight: FontWeight.w900,
                   color: Theme.of(context).primaryColor,

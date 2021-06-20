@@ -75,7 +75,6 @@ class TextWidget extends StatelessWidget {
                   textItem.title,
                   style: TextStyle(
                     fontSize: 13,
-                    height: 1,
                     letterSpacing: -1,
                     fontWeight: FontWeight.w900,
                     color: Theme.of(context).primaryColor,
