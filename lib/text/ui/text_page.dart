@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
+import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/bloc/text_bloc.dart';
@@ -241,13 +242,30 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       initialScrollIndex: widget.initialIndex,
       initialAlignment: widget.initialOffset,
       itemCount: items.length + 1,
-      itemBuilder: (_, index) => index == 0
-          ? SurahWidget(widget.surah, _toggleSurahContextMenu)
-          : TextWidget(
+      itemBuilder: (_, index) => index == 0 ? _surah() : _text(items, index),
+    );
+  }
+
+  Widget _surah() => BlocBuilder<SettingsBloc, SettingsState>(
+        bloc: Modular.get(),
+        builder: (context, state) {
+          if (state.showTafsir) {
+            return SurahWidget(
               surah: widget.surah,
-              textItem: items[index - 1],
-              toggleMenu: _toggleTextContextMenu,
-            ),
+              settings: state,
+              toggleMenu: _toggleSurahContextMenu,
+            );
+          } else {
+            return Container();
+          }
+        },
+      );
+
+  TextWidget _text(List<TextItem> items, int index) {
+    return TextWidget(
+      surah: widget.surah,
+      textItem: items[index - 1],
+      toggleMenu: _toggleTextContextMenu,
     );
   }
 
