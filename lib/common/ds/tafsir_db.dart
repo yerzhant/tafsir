@@ -56,6 +56,11 @@ class TafsirDB {
     }
   }
 
+  Future<void> deleteTafsir() async {
+    await _db.delete(_surahTableName);
+    await _db.delete(_textTableName);
+  }
+
   Future<Bookmark> insertBookmark(Bookmark bookmark) async {
     final id = await _db.insert(_bookmarkTableName, bookmark.toMap());
 

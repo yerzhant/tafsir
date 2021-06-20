@@ -11,6 +11,7 @@ import 'package:tafsir/bookmarks/ui/bookmarks_list.dart';
 import 'package:tafsir/common/ds/tafsir_db.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:tafsir/offline/bloc/offline_bloc.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_list.dart';
@@ -21,7 +22,7 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key) {
     Modular.get<SuwarBloc>().add(const SuwarEvent.load());
     Modular.get<BookmarksBloc>().add(const BookmarksEvent.load());
-    // _openSavedPosition();
+    _openSavedPosition();
   }
 
   @override
@@ -140,10 +141,15 @@ class HomePage extends StatelessWidget {
               onSelected: (action) {
                 switch (action) {
                   case _Actions.offline:
+                    Modular.get<OfflineBloc>()
+                        .add(const OfflineEvent.download());
+                    Modular.to.pushNamed('offline');
                     break;
+
                   case _Actions.share:
                     _share();
                     break;
+
                   case _Actions.azanRu:
                     launch('https://azan.ru');
                     break;
