@@ -12,6 +12,7 @@ class ThemeState {
   final Color listItemNumberBox;
   final Color lightThemeButtonText;
   final Color dartThemeButtonText;
+  final Color appMenuIcon;
   final Color appBarBackground;
   final Color toolsBackground;
   final Color toolControlsBackground;
@@ -29,6 +30,7 @@ class ThemeState {
     required this.listItemNumberBox,
     required this.lightThemeButtonText,
     required this.dartThemeButtonText,
+    required this.appMenuIcon,
     required this.appBarBackground,
     required this.toolsBackground,
     required this.toolControlsBackground,
@@ -47,6 +49,7 @@ class ThemeState {
     listItemNumberBox: const Color(0xffbdbdc2),
     lightThemeButtonText: const Color(0xff060d1b),
     dartThemeButtonText: const Color(0x80ffffff),
+    appMenuIcon: const Color(0xffbdbdc2),
     appBarBackground: const Color(0xff0088c7),
     toolsBackground: const Color(0xffffffff),
     toolControlsBackground: const Color(0x7fe5e5e5),
@@ -65,6 +68,7 @@ class ThemeState {
     listItemNumberBox: const Color(0x4dbdbdc2),
     lightThemeButtonText: const Color(0xffbdbdc2),
     dartThemeButtonText: const Color(0xffffffff),
+    appMenuIcon: const Color(0xffffffff),
     appBarBackground: const Color(0xff25303a),
     toolsBackground: const Color(0xff25303a),
     toolControlsBackground: const Color(0xff1a232a),

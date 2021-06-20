@@ -38,8 +38,14 @@ class AppWidget extends StatelessWidget {
               fontWeight: FontWeight.w300,
               color: theme.listItemSubtitle,
             ),
+            subtitle2: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: theme.listItemTitle,
+            ),
           ),
       appBarTheme: AppBarTheme(color: theme.appBarBackground),
+      popupMenuTheme: PopupMenuThemeData(color: theme.background),
       tabBarTheme: const TabBarTheme(
         labelStyle: TextStyle(
           fontSize: 16,

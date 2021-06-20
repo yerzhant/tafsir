@@ -64,15 +64,16 @@ class _AayahPlayerState extends State<AayahPlayer> {
   }
 
   void _pressed() {
-    if (_isPlaying) {
-      _player.stop();
-      _isPlaying = false;
-    } else {
-      // _player.play();
-      _player.seek(Duration.zero);
-      _isPlaying = true;
-    }
-    setState(() {});
+    setState(() {
+      if (_isPlaying) {
+        _player.stop();
+        _isPlaying = false;
+      } else {
+        _player.play();
+        _player.seek(Duration.zero);
+        _isPlaying = true;
+      }
+    });
   }
 
   Future<void> _setUrl() async {
