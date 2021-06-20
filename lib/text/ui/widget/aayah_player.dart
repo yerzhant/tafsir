@@ -51,7 +51,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
           Padding(
             padding: const EdgeInsets.only(right: 24, left: 16),
             child: _isPlaying
-                ? SvgPicture.asset('assets/icons/share.svg')
+                ? SvgPicture.asset('assets/icons/playing.svg')
                 : SvgPicture.asset('assets/icons/play.svg'),
           ),
           Text(
@@ -68,7 +68,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
       _player.stop();
       _isPlaying = false;
     } else {
-      _player.play();
+      // _player.play();
       _player.seek(Duration.zero);
       _isPlaying = true;
     }
