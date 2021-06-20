@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.azan.tafsir">
    <application
-        android:label="tafsir"
+        android:label="Тафсир"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
