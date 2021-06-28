@@ -167,7 +167,9 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
                     } else if (_textMenuAnimationController.status ==
                         AnimationStatus.completed) {
                       _textMenuAnimationController.reverse();
-                    } else if (_toolsAnimationController.status ==
+                    }
+
+                    if (_toolsAnimationController.status ==
                         AnimationStatus.completed) {
                       _toolsAnimationController.reverse();
                     } else {
@@ -272,6 +274,10 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   void _toggleSurahContextMenu(SurahWidget surahWidget) {
     _surahWidget = surahWidget;
 
+    if (_toolsAnimationController.status == AnimationStatus.completed) {
+      _toolsAnimationController.reverse();
+    }
+
     if (_surahMenuAnimationController.status == AnimationStatus.dismissed) {
       _surahMenuAnimationController.forward();
     } else {
@@ -281,6 +287,10 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
   void _toggleTextContextMenu(TextWidget textWidget) {
     _selectedTextWidget.select(textWidget);
+
+    if (_toolsAnimationController.status == AnimationStatus.completed) {
+      _toolsAnimationController.reverse();
+    }
 
     if (_textMenuAnimationController.status == AnimationStatus.dismissed) {
       _textMenuAnimationController.forward();
