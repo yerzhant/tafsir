@@ -25,7 +25,6 @@ class _AayahPlayerState extends State<AayahPlayer> {
   @override
   void initState() {
     super.initState();
-    _setUrl();
 
     _player.processingStateStream.listen((state) {
       if (state == ProcessingState.completed) {
@@ -69,6 +68,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
         _player.stop();
         _isPlaying = false;
       } else {
+        _setUrl();
         _player.play();
         _player.seek(Duration.zero);
         _isPlaying = true;
