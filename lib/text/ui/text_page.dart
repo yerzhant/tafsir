@@ -40,7 +40,7 @@ class TextPage extends StatefulWidget {
   _TextPageState createState() => _TextPageState();
 }
 
-const _duration = Duration(milliseconds: 200);
+const _duration = Duration(milliseconds: 400);
 
 class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   final ItemScrollController _itemScrollController = ItemScrollController();
@@ -60,18 +60,18 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     vsync: this,
   );
   late final _headerOffset = Tween(
-    begin: const Offset(0, -2),
+    begin: const Offset(0, -1.8),
     end: Offset.zero,
   ).animate(CurvedAnimation(
     parent: _toolsAnimationController,
-    curve: Curves.easeIn,
+    curve: Curves.easeOut,
   ));
   late final _toolsOffset = Tween(
-    begin: const Offset(0, 2),
+    begin: const Offset(0, 1.2),
     end: Offset.zero,
   ).animate(CurvedAnimation(
     parent: _toolsAnimationController,
-    curve: Curves.easeIn,
+    curve: Curves.easeOut,
   ));
   late final _surahMenuOffset = Tween(
     begin: const Offset(0, 2),
