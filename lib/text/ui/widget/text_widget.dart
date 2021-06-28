@@ -27,6 +27,7 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => toggleMenu(this),
+      behavior: HitTestBehavior.translucent,
       child: BlocBuilder<SettingsBloc, SettingsState>(
         bloc: Modular.get(),
         builder: (context, state) {
