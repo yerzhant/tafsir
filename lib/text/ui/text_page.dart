@@ -74,18 +74,18 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     curve: Curves.easeOut,
   ));
   late final _surahMenuOffset = Tween(
-    begin: const Offset(0, 2),
+    begin: const Offset(0, 1.3),
     end: Offset.zero,
   ).animate(CurvedAnimation(
     parent: _surahMenuAnimationController,
-    curve: Curves.easeIn,
+    curve: Curves.easeOut,
   ));
   late final _textMenuOffset = Tween(
-    begin: const Offset(0, 2),
+    begin: const Offset(0, 1.2),
     end: Offset.zero,
   ).animate(CurvedAnimation(
     parent: _textMenuAnimationController,
-    curve: Curves.easeIn,
+    curve: Curves.easeOut,
   ));
 
   late SurahWidget _surahWidget;
@@ -160,7 +160,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 GestureDetector(
-                  onTap: () {
+                  onLongPress: () {
                     if (_surahMenuAnimationController.status ==
                         AnimationStatus.completed) {
                       _surahMenuAnimationController.reverse();

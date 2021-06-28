@@ -21,7 +21,7 @@ class SurahWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () => toggleMenu(this),
+      onTap: () => toggleMenu(this),
       child: Column(
         children: <Widget>[
           HtmlTextWidget(

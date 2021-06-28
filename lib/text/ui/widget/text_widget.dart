@@ -26,7 +26,7 @@ class TextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () => toggleMenu(this),
+      onTap: () => toggleMenu(this),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         bloc: Modular.get(),
         builder: (context, state) {
