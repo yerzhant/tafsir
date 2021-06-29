@@ -4,6 +4,7 @@ import 'package:tafsir/bookmarks/repo/bookmark_repo.dart';
 import 'package:tafsir/home/ui/home_page.dart';
 import 'package:tafsir/offline/bloc/offline_bloc.dart';
 import 'package:tafsir/offline/ui/offline_page.dart';
+import 'package:tafsir/search/bloc/search_bloc.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/ds/suwar_ds.dart';
 
@@ -15,6 +16,7 @@ class HomeModule extends Module {
         Bind.singleton((i) => OfflineBloc(i(), i(), i())),
         Bind.singleton((i) => BookmarkRepository(i())),
         Bind.singleton((i) => BookmarksBloc(i())),
+        Bind.singleton((i) => SearchBloc(i())),
       ];
 
   @override

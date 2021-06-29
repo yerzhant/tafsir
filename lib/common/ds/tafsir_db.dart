@@ -86,6 +86,30 @@ class TafsirDB {
     return list.map((e) => Bookmark.fromMap(e)).toList();
   }
 
+  Future<Set<TextItem>> find(String phrase) async {
+    // final list = await _db.query(
+    //   _textTableName,
+    //   where: '''
+    //       text_origin like '%?%' or
+    //       lower(text) like '%?%' or
+    //       lower(tafsir) like '%?%'
+    //       ''',
+    //   whereArgs: [phrase.toLowerCase()],
+    // );
+
+    final lowerPhrase = phrase.toLowerCase().trim();
+
+    final all = await _db.query(_textTableName);
+
+    return all
+        .map((e) => TextItem.fromMap(e))
+        .where((i) =>
+            i.textOrigin.contains(phrase) ||
+            i.tafsir.toLowerCase().contains(lowerPhrase) ||
+            i.text.toLowerCase().contains(lowerPhrase))
+        .toSet();
+  }
+
   Future<void> init() async {
     _db = await openDatabase(
       'app.db',

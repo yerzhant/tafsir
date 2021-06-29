@@ -9,9 +9,8 @@ import 'package:share/share.dart';
 import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:tafsir/bookmarks/ui/bookmarks_list.dart';
 import 'package:tafsir/common/ds/tafsir_db.dart';
-import 'package:tafsir/common/ext/string_ext.dart';
-import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/offline/bloc/offline_bloc.dart';
+import 'package:tafsir/search/ui/search_dialog.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_list.dart';
@@ -78,7 +77,12 @@ class HomePage extends StatelessWidget {
 
   List<Widget> _actions(BuildContext context) => [
         IconButton(
-          onPressed: () => theFeatureIsPlanned.asSnackBar(context),
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (_) => SearchDialog(Modular.get()),
+            );
+          },
           icon: const Icon(Icons.search),
         ),
         BlocBuilder<ThemeCubit, ThemeState>(
