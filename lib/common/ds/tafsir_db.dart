@@ -87,16 +87,6 @@ class TafsirDB {
   }
 
   Future<Set<TextItem>> find(String phrase) async {
-    // final list = await _db.query(
-    //   _textTableName,
-    //   where: '''
-    //       text_origin like '%?%' or
-    //       lower(text) like '%?%' or
-    //       lower(tafsir) like '%?%'
-    //       ''',
-    //   whereArgs: [phrase.toLowerCase()],
-    // );
-
     final lowerPhrase = phrase.toLowerCase().trim();
 
     final all = await _db.query(_textTableName);
