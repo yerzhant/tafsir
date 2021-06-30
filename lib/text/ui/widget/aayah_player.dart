@@ -64,13 +64,13 @@ class _AayahPlayerState extends State<AayahPlayer> {
   void _pressed() {
     setState(() {
       if (_isPlaying) {
-        _player.stop();
         _isPlaying = false;
+        _player.stop();
       } else {
+        _isPlaying = true;
         _setUrl();
         _player.play();
         _player.seek(Duration.zero);
-        _isPlaying = true;
       }
     });
   }
