@@ -276,6 +276,9 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
     if (_toolsAnimationController.status == AnimationStatus.completed) {
       _toolsAnimationController.reverse();
+    } else if (_textMenuAnimationController.status ==
+        AnimationStatus.completed) {
+      _textMenuAnimationController.reverse();
     } else if (_surahMenuAnimationController.status ==
         AnimationStatus.dismissed) {
       _surahMenuAnimationController.forward();
@@ -289,6 +292,9 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
     if (_toolsAnimationController.status == AnimationStatus.completed) {
       _toolsAnimationController.reverse();
+    } else if (_surahMenuAnimationController.status ==
+        AnimationStatus.completed) {
+      _surahMenuAnimationController.reverse();
     } else if (_textMenuAnimationController.status ==
         AnimationStatus.dismissed) {
       _textMenuAnimationController.forward();
