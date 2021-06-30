@@ -70,7 +70,6 @@ class _AayahPlayerState extends State<AayahPlayer> {
         _isPlaying = true;
         _setUrl();
         _player.play();
-        _player.seek(Duration.zero);
       }
     });
   }
