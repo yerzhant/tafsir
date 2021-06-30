@@ -23,13 +23,11 @@ class AppWidget extends StatelessWidget {
       textTheme: Theme.of(context).textTheme.copyWith(
             headline5: TextStyle(
               fontSize: 16,
-              letterSpacing: -.2,
               fontWeight: FontWeight.bold,
               color: theme.listItemTitle,
             ),
             headline6: TextStyle(
               fontSize: 14,
-              letterSpacing: -.2,
               fontWeight: FontWeight.bold,
               color: theme.listItemTitle,
             ),
