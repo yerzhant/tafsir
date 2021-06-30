@@ -17,9 +17,8 @@ class AayahPlayer extends StatefulWidget {
   _AayahPlayerState createState() => _AayahPlayerState();
 }
 
-final _player = AudioPlayer();
-
 class _AayahPlayerState extends State<AayahPlayer> {
+  final _player = AudioPlayer();
   var _isPlaying = false;
 
   @override
