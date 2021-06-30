@@ -9,6 +9,7 @@ import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/search/bloc/search_bloc.dart';
 import 'package:tafsir/search/model/found_item.dart';
 import 'package:tafsir/search/ui/found_item_widget.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class SearchDialog extends StatefulWidget {
   final SearchBloc bloc;
@@ -19,7 +20,17 @@ class SearchDialog extends StatefulWidget {
 }
 
 class _SearchDialogState extends State<SearchDialog> {
+  final _phraseController = TextEditingController();
   Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _phraseController.text = Modular.get<SearchBloc>().state.maybeWhen(
+          results: (phrase, _) => phrase,
+          orElse: () => '',
+        );
+  }
 
   @override
   void dispose() {
@@ -37,49 +48,70 @@ class _SearchDialogState extends State<SearchDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      insetPadding: const EdgeInsets.all(7),
-      child: Column(
-        children: [
-          Row(
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      bloc: Modular.get(),
+      builder: (context, theme) {
+        return Dialog(
+          backgroundColor: theme.toolsBackground,
+          insetPadding: const EdgeInsets.all(7),
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 15,
-                      vertical: 25,
-                    ),
-                    border: InputBorder.none,
-                    hintText: 'Введите фразу',
-                  ),
-                  onChanged: _find,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Modular.to.pop();
-                },
-                icon: SvgPicture.asset('assets/icons/close.svg'),
-              ),
+              _searchField(context),
+              const Divider(height: 1),
+              _results(),
             ],
           ),
-          const Divider(height: 1),
-          Expanded(
-            child: BlocBuilder<SearchBloc, SearchState>(
-              bloc: widget.bloc,
-              builder: (context, state) {
-                return state.when(
-                  results: (_, items) => _items(items),
-                  inProgress: () => const CircularProgress(),
-                  notFound: () =>
-                      const Center(child: Text('Ничего не найдено.')),
-                );
-              },
-            ),
-          ),
-        ],
+        );
+      },
+    );
+  }
+
+  Expanded _results() {
+    return Expanded(
+      child: BlocBuilder<SearchBloc, SearchState>(
+        bloc: widget.bloc,
+        builder: (context, state) {
+          return state.when(
+            results: (_, items) => _items(items),
+            inProgress: () => const CircularProgress(),
+            notFound: () => Center(
+                child: Text(
+              'Ничего не найдено.',
+              style: Theme.of(context).textTheme.subtitle1,
+            )),
+          );
+        },
       ),
+    );
+  }
+
+  Row _searchField(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: _phraseController,
+            decoration: const InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 25,
+              ),
+              border: InputBorder.none,
+              hintText: 'Введите фразу',
+            ),
+            style: Theme.of(context).textTheme.headline5?.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
+            onChanged: _find,
+          ),
+        ),
+        IconButton(
+          onPressed: () {
+            Modular.to.pop();
+          },
+          icon: SvgPicture.asset('assets/icons/close.svg'),
+        ),
+      ],
     );
   }
 

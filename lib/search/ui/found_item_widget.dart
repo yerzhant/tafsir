@@ -21,7 +21,7 @@ class FoundItemWidget extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.only(right: 10, top: 8, bottom: 8),
               child: _text(context),
             ),
           ),
