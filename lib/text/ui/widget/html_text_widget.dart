@@ -57,6 +57,7 @@ class HtmlTextWidget extends StatelessWidget {
 
         if (e.localName == 'blockquote') {
           styles.addAll({
+            'margin': '0',
             'padding': '10px',
             'border': '1px solid #ebebee',
             'border-left': '2px solid #0088c7',
