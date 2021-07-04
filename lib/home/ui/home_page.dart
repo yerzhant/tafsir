@@ -70,7 +70,7 @@ class HomePage extends StatelessWidget {
               builder: (_) => SearchDialog(Modular.get()),
             );
           },
-          icon: const Icon(Icons.search),
+          icon: SvgPicture.asset('assets/icons/search.svg'),
         ),
         BlocBuilder<ThemeCubit, ThemeState>(
           bloc: Modular.get(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/search/model/found_item.dart';
@@ -17,7 +18,7 @@ class FoundItemWidget extends StatelessWidget {
       child: Row(
         children: <Widget>[
           const SizedBox(width: 10),
-          const Icon(Icons.search, color: greyColor),
+          SvgPicture.asset('assets/icons/search.svg', color: greyColor),
           const SizedBox(width: 10),
           Expanded(
             child: Padding(
