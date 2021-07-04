@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
@@ -95,6 +96,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
 
+    _hideSystemUIOverlays();
+
     _toolsAnimationController.forward();
 
     Future.delayed(
@@ -133,20 +136,26 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   void _slideOutEverything() {
     if (_surahMenuAnimationController.status == AnimationStatus.completed) {
       _surahMenuAnimationController.reverse();
+      _hideSystemUIOverlays();
     }
     if (_textMenuAnimationController.status == AnimationStatus.completed) {
       _textMenuAnimationController.reverse();
+      _hideSystemUIOverlays();
     }
     if (_toolsAnimationController.status == AnimationStatus.completed) {
       _toolsAnimationController.reverse();
+      _hideSystemUIOverlays();
     }
   }
 
   @override
   void dispose() {
+    _showSystemUIOverlays();
+
     _toolsAnimationController.dispose();
     _surahMenuAnimationController.dispose();
     _textMenuAnimationController.dispose();
+
     super.dispose();
   }
 
@@ -164,16 +173,20 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
                     if (_surahMenuAnimationController.status ==
                         AnimationStatus.completed) {
                       _surahMenuAnimationController.reverse();
+                      _hideSystemUIOverlays();
                     } else if (_textMenuAnimationController.status ==
                         AnimationStatus.completed) {
                       _textMenuAnimationController.reverse();
+                      _hideSystemUIOverlays();
                     }
 
                     if (_toolsAnimationController.status ==
                         AnimationStatus.completed) {
                       _toolsAnimationController.reverse();
+                      _hideSystemUIOverlays();
                     } else {
                       _toolsAnimationController.forward();
+                      _showSystemUIOverlays();
                     }
                   },
                   child: _items(items),
@@ -276,14 +289,18 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
     if (_toolsAnimationController.status == AnimationStatus.completed) {
       _toolsAnimationController.reverse();
+      _hideSystemUIOverlays();
     } else if (_textMenuAnimationController.status ==
         AnimationStatus.completed) {
       _textMenuAnimationController.reverse();
+      _hideSystemUIOverlays();
     } else if (_surahMenuAnimationController.status ==
         AnimationStatus.dismissed) {
+      _showSystemUIOverlays();
       _surahMenuAnimationController.forward();
     } else {
       _surahMenuAnimationController.reverse();
+      _hideSystemUIOverlays();
     }
   }
 
@@ -292,20 +309,32 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
     if (_toolsAnimationController.status == AnimationStatus.completed) {
       _toolsAnimationController.reverse();
+      _hideSystemUIOverlays();
     } else if (_surahMenuAnimationController.status ==
         AnimationStatus.completed) {
       _surahMenuAnimationController.reverse();
+      _hideSystemUIOverlays();
     } else if (_textMenuAnimationController.status ==
         AnimationStatus.dismissed) {
       _textMenuAnimationController.forward();
+      _showSystemUIOverlays();
     } else {
       _textMenuAnimationController.reverse();
+      _hideSystemUIOverlays();
     }
   }
 
   void _shareSurah() {
     _surahWidget.share();
     _toggleSurahContextMenu(_surahWidget);
+  }
+
+  void _showSystemUIOverlays() {
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+  }
+
+  void _hideSystemUIOverlays() {
+    SystemChrome.setEnabledSystemUIOverlays([]);
   }
 }
 

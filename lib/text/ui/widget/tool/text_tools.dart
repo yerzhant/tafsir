@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
@@ -49,6 +50,7 @@ class _TextToolsState extends State<TextTools> {
           IconButton(
             onPressed: () {
               widget.animationController.reverse();
+              SystemChrome.setEnabledSystemUIOverlays([]);
             },
             icon: SvgPicture.asset(
               'assets/icons/close.svg',
