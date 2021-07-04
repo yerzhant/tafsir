@@ -49,6 +49,8 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
   int _calcNumber(double position, BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final number = (position / height * aayaatCount).round();
-    return number == 0 ? 1 : number;
+    if (number < 1) return 1;
+    if (number > aayaatCount) return aayaatCount;
+    return number;
   }
 }
