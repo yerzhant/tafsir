@@ -178,7 +178,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
               _surahContextMenu(),
               _textContextMenu(),
               _tools(),
-              _goToAayahSlider(),
+              if (widget.surah.isSurah()) const GoToAayahSlider(),
               BlocConsumer<GoToAayahBloc, GoToAayahState>(
                 bloc: Modular.get(),
                 listenWhen: (_, state) => state.maybeWhen(
@@ -208,8 +208,6 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       ),
     );
   }
-
-  GoToAayahSlider _goToAayahSlider() => const GoToAayahSlider();
 
   Center _goToAayahNumber(int number, [bool isSemiActive = false]) =>
       Center(child: GoToAayahNumber(number, isSemiActive: isSemiActive));
