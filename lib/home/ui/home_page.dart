@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
           actions: _actions(context),
-          title: _title(context),
+          title: const Text('Тафсир Azan.ru'),
         ),
         body: const TabBarView(
           children: [
@@ -46,19 +46,6 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Row _title(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          'assets/images/logo.png',
-          width: 57,
-          height: 50,
-        ),
-        const Text('Тафсир Azan.ru'),
-      ],
     );
   }
 
