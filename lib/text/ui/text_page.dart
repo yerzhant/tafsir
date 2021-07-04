@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
+import 'package:tafsir/go_to_aayah/ui/go_to_aayah.dart';
+import 'package:tafsir/go_to_aayah/ui/go_to_aayah_number.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
@@ -165,78 +167,17 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       body: BlocBuilder<TextBloc, TextState>(
         bloc: widget.bloc,
         builder: (_, state) => state.when(
-          (items) => SafeArea(
-            child: Stack(
-              children: [
-                GestureDetector(
-                  onLongPress: () {
-                    if (_surahMenuAnimationController.status ==
-                        AnimationStatus.completed) {
-                      _surahMenuAnimationController.reverse();
-                      _hideSystemUIOverlays();
-                    } else if (_textMenuAnimationController.status ==
-                        AnimationStatus.completed) {
-                      _textMenuAnimationController.reverse();
-                      _hideSystemUIOverlays();
-                    }
-
-                    if (_toolsAnimationController.status ==
-                        AnimationStatus.completed) {
-                      _toolsAnimationController.reverse();
-                      _hideSystemUIOverlays();
-                    } else {
-                      _toolsAnimationController.forward();
-                      _showSystemUIOverlays();
-                    }
-                  },
-                  child: _items(items),
-                ),
-                SlideTransition(
-                  position: _headerOffset,
-                  child: TextHeader(widget.surah),
-                ),
-                if (widget.surah.isSurah())
-                  Positioned(
-                    right: 8,
-                    left: 8,
-                    bottom: 14,
-                    child: ProgressWidget(
-                      items.length,
-                      _itemPositionsListener,
-                    ),
-                  ),
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  child: SlideTransition(
-                    position: _surahMenuOffset,
-                    child: SurahContextMenu(widget.surah, _shareSurah),
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  child: SlideTransition(
-                    position: _textMenuOffset,
-                    child: ChangeNotifierProvider(
-                      create: (_) => _selectedTextWidget,
-                      child: TextContextMenu(widget.surah),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  child: SlideTransition(
-                    position: _toolsOffset,
-                    child: TextTools(_toolsAnimationController),
-                  ),
-                ),
-              ],
-            ),
+          (items) => Stack(
+            children: [
+              _itemsGestureDetector(items),
+              _header(),
+              if (widget.surah.isSurah()) _progressBar(items),
+              _surahContextMenu(),
+              _textContextMenu(),
+              _tools(),
+              const GoToAayah(),
+              const Center(child: GoToAayahNumber(23)),
+            ],
           ),
           inProgress: () => const Center(child: CircularProgress()),
           error: (rejection) => RejectionWidget(
@@ -245,6 +186,88 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
           ),
         ),
       ),
+    );
+  }
+
+  Positioned _tools() {
+    return Positioned(
+      right: 0,
+      left: 0,
+      bottom: 0,
+      child: SlideTransition(
+        position: _toolsOffset,
+        child: TextTools(_toolsAnimationController),
+      ),
+    );
+  }
+
+  Positioned _textContextMenu() {
+    return Positioned(
+      right: 0,
+      left: 0,
+      bottom: 0,
+      child: SlideTransition(
+        position: _textMenuOffset,
+        child: ChangeNotifierProvider(
+          create: (_) => _selectedTextWidget,
+          child: TextContextMenu(widget.surah),
+        ),
+      ),
+    );
+  }
+
+  Positioned _surahContextMenu() {
+    return Positioned(
+      right: 0,
+      left: 0,
+      bottom: 0,
+      child: SlideTransition(
+        position: _surahMenuOffset,
+        child: SurahContextMenu(widget.surah, _shareSurah),
+      ),
+    );
+  }
+
+  Positioned _progressBar(List<TextItem> items) {
+    return Positioned(
+      right: 8,
+      left: 8,
+      bottom: 14,
+      child: ProgressWidget(
+        items.length,
+        _itemPositionsListener,
+      ),
+    );
+  }
+
+  SlideTransition _header() {
+    return SlideTransition(
+      position: _headerOffset,
+      child: TextHeader(widget.surah),
+    );
+  }
+
+  GestureDetector _itemsGestureDetector(List<TextItem> items) {
+    return GestureDetector(
+      onLongPress: () {
+        if (_surahMenuAnimationController.status == AnimationStatus.completed) {
+          _surahMenuAnimationController.reverse();
+          _hideSystemUIOverlays();
+        } else if (_textMenuAnimationController.status ==
+            AnimationStatus.completed) {
+          _textMenuAnimationController.reverse();
+          _hideSystemUIOverlays();
+        }
+
+        if (_toolsAnimationController.status == AnimationStatus.completed) {
+          _toolsAnimationController.reverse();
+          _hideSystemUIOverlays();
+        } else {
+          _toolsAnimationController.forward();
+          _showSystemUIOverlays();
+        }
+      },
+      child: _items(items),
     );
   }
 
