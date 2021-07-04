@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
-import 'package:tafsir/go_to_aayah/ui/go_to_aayah.dart';
+import 'package:tafsir/go_to_aayah/bloc/go_to_aayah_bloc.dart';
+import 'package:tafsir/go_to_aayah/ui/go_to_aayah_slider.dart';
 import 'package:tafsir/go_to_aayah/ui/go_to_aayah_number.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
@@ -112,6 +113,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     }
 
     _itemPositionsListener.itemPositions.addListener(_positionsListener);
+
+    Modular.get<GoToAayahBloc>().aayaatCount = widget.surah.ayatsCount ?? 0;
   }
 
   Future<void> _scrollTo(int index) async {
@@ -175,8 +178,25 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
               _surahContextMenu(),
               _textContextMenu(),
               _tools(),
-              const GoToAayah(),
-              const Center(child: GoToAayahNumber(23)),
+              _goToAayahSlider(),
+              BlocConsumer<GoToAayahBloc, GoToAayahState>(
+                bloc: Modular.get(),
+                listenWhen: (_, state) => state.maybeWhen(
+                  goTo: (_) => true,
+                  orElse: () => false,
+                ),
+                listener: (_, state) {
+                  state.maybeWhen(
+                    goTo: _scrollTo,
+                    orElse: () {},
+                  );
+                },
+                builder: (context, state) => state.maybeWhen(
+                  active: (_, number) => _goToAayahNumber(number),
+                  semiActive: (_, number) => _goToAayahNumber(number, true),
+                  orElse: () => const SizedBox.shrink(),
+                ),
+              ),
             ],
           ),
           inProgress: () => const Center(child: CircularProgress()),
@@ -188,6 +208,11 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       ),
     );
   }
+
+  GoToAayahSlider _goToAayahSlider() => const GoToAayahSlider();
+
+  Center _goToAayahNumber(int number, [bool isSemiActive = false]) =>
+      Center(child: GoToAayahNumber(number, isSemiActive: isSemiActive));
 
   Positioned _tools() {
     return Positioned(

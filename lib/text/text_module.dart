@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/go_to_aayah/bloc/go_to_aayah_bloc.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/bloc/text_bloc.dart';
 import 'package:tafsir/text/ui/text_page.dart';
@@ -7,6 +8,7 @@ class TextModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind.singleton((i) => TextBloc(i())),
+        Bind.singleton((i) => GoToAayahBloc()),
       ];
 
   @override
