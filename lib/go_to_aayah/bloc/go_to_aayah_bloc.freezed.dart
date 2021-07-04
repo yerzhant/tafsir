@@ -291,8 +291,10 @@ abstract class _Ended implements GoToAayahEvent {
 class _$GoToAayahStateTearOff {
   const _$GoToAayahStateTearOff();
 
-  _Inactive inactive() {
-    return const _Inactive();
+  _Inactive inactive(int number) {
+    return _Inactive(
+      number,
+    );
   }
 
   _Active active(double position, int number) {
@@ -321,9 +323,11 @@ const $GoToAayahState = _$GoToAayahStateTearOff();
 
 /// @nodoc
 mixin _$GoToAayahState {
+  int get number => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() inactive,
+    required TResult Function(int number) inactive,
     required TResult Function(double position, int number) active,
     required TResult Function(double position, int number) semiActive,
     required TResult Function(int number) goTo,
@@ -331,7 +335,7 @@ mixin _$GoToAayahState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? inactive,
+    TResult Function(int number)? inactive,
     TResult Function(double position, int number)? active,
     TResult Function(double position, int number)? semiActive,
     TResult Function(int number)? goTo,
@@ -355,6 +359,10 @@ mixin _$GoToAayahState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $GoToAayahStateCopyWith<GoToAayahState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -362,6 +370,7 @@ abstract class $GoToAayahStateCopyWith<$Res> {
   factory $GoToAayahStateCopyWith(
           GoToAayahState value, $Res Function(GoToAayahState) then) =
       _$GoToAayahStateCopyWithImpl<$Res>;
+  $Res call({int number});
 }
 
 /// @nodoc
@@ -372,12 +381,27 @@ class _$GoToAayahStateCopyWithImpl<$Res>
   final GoToAayahState _value;
   // ignore: unused_field
   final $Res Function(GoToAayahState) _then;
+
+  @override
+  $Res call({
+    Object? number = freezed,
+  }) {
+    return _then(_value.copyWith(
+      number: number == freezed
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$InactiveCopyWith<$Res> {
+abstract class _$InactiveCopyWith<$Res>
+    implements $GoToAayahStateCopyWith<$Res> {
   factory _$InactiveCopyWith(_Inactive value, $Res Function(_Inactive) then) =
       __$InactiveCopyWithImpl<$Res>;
+  @override
+  $Res call({int number});
 }
 
 /// @nodoc
@@ -388,48 +412,72 @@ class __$InactiveCopyWithImpl<$Res> extends _$GoToAayahStateCopyWithImpl<$Res>
 
   @override
   _Inactive get _value => super._value as _Inactive;
+
+  @override
+  $Res call({
+    Object? number = freezed,
+  }) {
+    return _then(_Inactive(
+      number == freezed
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Inactive implements _Inactive {
-  const _$_Inactive();
+  const _$_Inactive(this.number);
+
+  @override
+  final int number;
 
   @override
   String toString() {
-    return 'GoToAayahState.inactive()';
+    return 'GoToAayahState.inactive(number: $number)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Inactive);
+    return identical(this, other) ||
+        (other is _Inactive &&
+            (identical(other.number, number) ||
+                const DeepCollectionEquality().equals(other.number, number)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(number);
+
+  @JsonKey(ignore: true)
+  @override
+  _$InactiveCopyWith<_Inactive> get copyWith =>
+      __$InactiveCopyWithImpl<_Inactive>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() inactive,
+    required TResult Function(int number) inactive,
     required TResult Function(double position, int number) active,
     required TResult Function(double position, int number) semiActive,
     required TResult Function(int number) goTo,
   }) {
-    return inactive();
+    return inactive(number);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? inactive,
+    TResult Function(int number)? inactive,
     TResult Function(double position, int number)? active,
     TResult Function(double position, int number)? semiActive,
     TResult Function(int number)? goTo,
     required TResult orElse(),
   }) {
     if (inactive != null) {
-      return inactive();
+      return inactive(number);
     }
     return orElse();
   }
@@ -462,13 +510,21 @@ class _$_Inactive implements _Inactive {
 }
 
 abstract class _Inactive implements GoToAayahState {
-  const factory _Inactive() = _$_Inactive;
+  const factory _Inactive(int number) = _$_Inactive;
+
+  @override
+  int get number => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$InactiveCopyWith<_Inactive> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ActiveCopyWith<$Res> {
+abstract class _$ActiveCopyWith<$Res> implements $GoToAayahStateCopyWith<$Res> {
   factory _$ActiveCopyWith(_Active value, $Res Function(_Active) then) =
       __$ActiveCopyWithImpl<$Res>;
+  @override
   $Res call({double position, int number});
 }
 
@@ -539,7 +595,7 @@ class _$_Active implements _Active {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() inactive,
+    required TResult Function(int number) inactive,
     required TResult Function(double position, int number) active,
     required TResult Function(double position, int number) semiActive,
     required TResult Function(int number) goTo,
@@ -550,7 +606,7 @@ class _$_Active implements _Active {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? inactive,
+    TResult Function(int number)? inactive,
     TResult Function(double position, int number)? active,
     TResult Function(double position, int number)? semiActive,
     TResult Function(int number)? goTo,
@@ -593,16 +649,20 @@ abstract class _Active implements GoToAayahState {
   const factory _Active(double position, int number) = _$_Active;
 
   double get position => throw _privateConstructorUsedError;
+  @override
   int get number => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$ActiveCopyWith<_Active> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$SemiActiveCopyWith<$Res> {
+abstract class _$SemiActiveCopyWith<$Res>
+    implements $GoToAayahStateCopyWith<$Res> {
   factory _$SemiActiveCopyWith(
           _SemiActive value, $Res Function(_SemiActive) then) =
       __$SemiActiveCopyWithImpl<$Res>;
+  @override
   $Res call({double position, int number});
 }
 
@@ -674,7 +734,7 @@ class _$_SemiActive implements _SemiActive {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() inactive,
+    required TResult Function(int number) inactive,
     required TResult Function(double position, int number) active,
     required TResult Function(double position, int number) semiActive,
     required TResult Function(int number) goTo,
@@ -685,7 +745,7 @@ class _$_SemiActive implements _SemiActive {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? inactive,
+    TResult Function(int number)? inactive,
     TResult Function(double position, int number)? active,
     TResult Function(double position, int number)? semiActive,
     TResult Function(int number)? goTo,
@@ -728,16 +788,19 @@ abstract class _SemiActive implements GoToAayahState {
   const factory _SemiActive(double position, int number) = _$_SemiActive;
 
   double get position => throw _privateConstructorUsedError;
+  @override
   int get number => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$SemiActiveCopyWith<_SemiActive> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$GoToCopyWith<$Res> {
+abstract class _$GoToCopyWith<$Res> implements $GoToAayahStateCopyWith<$Res> {
   factory _$GoToCopyWith(_GoTo value, $Res Function(_GoTo) then) =
       __$GoToCopyWithImpl<$Res>;
+  @override
   $Res call({int number});
 }
 
@@ -796,7 +859,7 @@ class _$_GoTo implements _GoTo {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() inactive,
+    required TResult Function(int number) inactive,
     required TResult Function(double position, int number) active,
     required TResult Function(double position, int number) semiActive,
     required TResult Function(int number) goTo,
@@ -807,7 +870,7 @@ class _$_GoTo implements _GoTo {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? inactive,
+    TResult Function(int number)? inactive,
     TResult Function(double position, int number)? active,
     TResult Function(double position, int number)? semiActive,
     TResult Function(int number)? goTo,
@@ -849,7 +912,9 @@ class _$_GoTo implements _GoTo {
 abstract class _GoTo implements GoToAayahState {
   const factory _GoTo(int number) = _$_GoTo;
 
+  @override
   int get number => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$GoToCopyWith<_GoTo> get copyWith => throw _privateConstructorUsedError;
 }

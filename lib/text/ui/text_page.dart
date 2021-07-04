@@ -22,6 +22,8 @@ import 'package:tafsir/text/ui/widget/text_header.dart';
 import 'package:tafsir/text/ui/widget/text_widget.dart';
 import 'package:tafsir/text/ui/widget/tool/text_tools.dart';
 
+const _goToAayahOpacityDuration = 300;
+
 class TextPage extends StatefulWidget {
   final TextBloc bloc;
   final Surah surah;
@@ -94,6 +96,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
   late SurahWidget _surahWidget;
   final SelectedTextWidget _selectedTextWidget = SelectedTextWidget();
+
+  var _goToAayahOpacity = 0.0;
 
   @override
   void initState() {
@@ -178,25 +182,10 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
               _surahContextMenu(),
               _textContextMenu(),
               _tools(),
-              if (widget.surah.isSurah()) const GoToAayahSlider(),
-              BlocConsumer<GoToAayahBloc, GoToAayahState>(
-                bloc: Modular.get(),
-                listenWhen: (_, state) => state.maybeWhen(
-                  goTo: (_) => true,
-                  orElse: () => false,
-                ),
-                listener: (_, state) {
-                  state.maybeWhen(
-                    goTo: _scrollTo,
-                    orElse: () {},
-                  );
-                },
-                builder: (context, state) => state.maybeWhen(
-                  active: (_, number) => _goToAayahNumber(number),
-                  semiActive: (_, number) => _goToAayahNumber(number, true),
-                  orElse: () => const SizedBox.shrink(),
-                ),
-              ),
+              if (widget.surah.isSurah()) ...[
+                _goToAayahSlider(),
+                _goToAayahNumberConsumer(),
+              ],
             ],
           ),
           inProgress: () => const Center(child: CircularProgress()),
@@ -209,8 +198,61 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     );
   }
 
-  Center _goToAayahNumber(int number, [bool isSemiActive = false]) =>
-      Center(child: GoToAayahNumber(number, isSemiActive: isSemiActive));
+  Widget _goToAayahSlider() => BlocBuilder<GoToAayahBloc, GoToAayahState>(
+        bloc: Modular.get(),
+        builder: (context, state) {
+          return AnimatedOpacity(
+            opacity: _goToAayahOpacity,
+            duration: const Duration(milliseconds: _goToAayahOpacityDuration),
+            child: GoToAayahSlider(
+              state.maybeWhen(
+                active: (position, _) => position,
+                semiActive: (position, _) => position,
+                orElse: () => null,
+              ),
+            ),
+          );
+        },
+      );
+
+  BlocConsumer<GoToAayahBloc, GoToAayahState> _goToAayahNumberConsumer() {
+    return BlocConsumer<GoToAayahBloc, GoToAayahState>(
+      bloc: Modular.get(),
+      listener: (_, state) {
+        state.when(
+          active: (_, __) {
+            _goToAayahOpacity = 1;
+          },
+          semiActive: (_, __) {
+            _goToAayahOpacity = .5;
+          },
+          goTo: (number) {
+            _goToAayahOpacity = 0;
+            _scrollTo(number);
+          },
+          inactive: (_) {
+            _goToAayahOpacity = 0;
+          },
+        );
+      },
+      builder: (context, state) => _goToAayahNumber(
+        state.when(
+          active: (_, number) => number,
+          semiActive: (_, number) => number,
+          goTo: (number) => number,
+          inactive: (number) => number,
+        ),
+      ),
+    );
+  }
+
+  Center _goToAayahNumber(int number) => Center(
+        child: AnimatedOpacity(
+          opacity: _goToAayahOpacity,
+          duration: const Duration(milliseconds: _goToAayahOpacityDuration),
+          child: GoToAayahNumber(number),
+        ),
+      );
 
   Positioned _tools() {
     return Positioned(

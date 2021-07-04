@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:tafsir/go_to_aayah/ui/go_to_aayah_slider.dart';
 
 part 'go_to_aayah_bloc.freezed.dart';
 part 'go_to_aayah_event.dart';
@@ -14,7 +15,7 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
   late double _lastPositionY;
   late int _lastNumber;
 
-  GoToAayahBloc() : super(const _Inactive());
+  GoToAayahBloc() : super(const _Inactive(1));
 
   @override
   Stream<GoToAayahState> mapEventToState(GoToAayahEvent event) => event.when(
@@ -26,7 +27,7 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
     Offset position,
     BuildContext context,
   ) async* {
-    if (position.dx > 38) {
+    if (position.dx > goToAayahSliderWidth) {
       yield _SemiActive(_lastPositionY, _lastNumber);
     } else {
       _lastNumber = _calcNumber(position.dy, context);
@@ -36,11 +37,13 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
   }
 
   Stream<GoToAayahState> _ended() async* {
-    yield state.maybeWhen(
-      active: (_, number) => _GoTo(number),
-      orElse: () => const _Inactive(),
+    final number = state.maybeWhen(
+      active: (_, number) => number,
+      orElse: () => null,
     );
-    yield const _Inactive();
+    if (number != null) yield _GoTo(number);
+
+    yield _Inactive(number ?? _lastNumber);
   }
 
   int _calcNumber(double position, BuildContext context) {

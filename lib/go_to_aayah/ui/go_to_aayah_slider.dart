@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/go_to_aayah/bloc/go_to_aayah_bloc.dart';
 
+const goToAayahSliderWidth = 38.0;
+
 class GoToAayahSlider extends StatelessWidget {
-  const GoToAayahSlider({Key? key}) : super(key: key);
+  final double? position;
+
+  const GoToAayahSlider(this.position, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        _box(context),
+        if (position != null) _Track(position!),
+      ],
+    );
+  }
+
+  GestureDetector _box(BuildContext context) {
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         Modular.get<GoToAayahBloc>().add(GoToAayahEvent.slidedTo(
@@ -20,28 +33,9 @@ class GoToAayahSlider extends StatelessWidget {
       onVerticalDragEnd: (details) {
         Modular.get<GoToAayahBloc>().add(const GoToAayahEvent.ended());
       },
-      child: BlocBuilder<GoToAayahBloc, GoToAayahState>(
-        bloc: Modular.get(),
-        builder: (context, state) {
-          return Container(
-            width: 38,
-            color: state.maybeWhen(
-              active: (_, __) => primaryColor,
-              semiActive: (_, __) => primaryColor.withAlpha(128),
-              orElse: () => Colors.transparent,
-            ),
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                state.maybeWhen(
-                  active: (position, _) => _Track(position),
-                  semiActive: (position, _) => _Track(position),
-                  orElse: () => Container(),
-                ),
-              ],
-            ),
-          );
-        },
+      child: Container(
+        width: goToAayahSliderWidth,
+        color: primaryColor,
       ),
     );
   }
