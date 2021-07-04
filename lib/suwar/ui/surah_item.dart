@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
@@ -79,7 +80,9 @@ class SurahItem extends StatelessWidget {
         children: <Widget>[
           Text(
             surah.isSurah() ? surah.title : surah.title.toUpperCase(),
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headline5?.copyWith(
+                  color: isActive ? primaryColor : null,
+                ),
           ),
           if (surah.titleInRussian != '')
             Column(
