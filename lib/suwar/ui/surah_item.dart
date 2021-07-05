@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
+import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 
@@ -17,10 +18,7 @@ class SurahItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Modular.to.pushNamed('/text/0/0/0', arguments: surah);
-        Modular.get<SuwarBloc>().add(SuwarEvent.updateActiveSurah(surah));
-      },
+      onTap: () => _open(),
       child: Container(
         color: isActive ? const Color(0x1a0088c7) : null,
         height: 74,
@@ -37,6 +35,22 @@ class SurahItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _open() async {
+    if (isActive) {
+      final settings = Modular.get<SettingsRepo>();
+      final savedPosition = await settings.getSavedTextPosition();
+      if (savedPosition != null) {
+        Modular.to.pushNamed(
+          '/text/0/${savedPosition.index}/${savedPosition.leadingEdge}',
+          arguments: surah,
+        );
+      }
+    } else {
+      Modular.to.pushNamed('/text/0/0/0', arguments: surah);
+      Modular.get<SuwarBloc>().add(SuwarEvent.updateActiveSurah(surah));
+    }
   }
 
   Container _head(BuildContext context) {
