@@ -46,3 +46,23 @@ flutter:
   assets:
     - assets/icons/
     - assets/icons/go-to-aayah/
+
+  fonts:
+    - family: Scheherazade
+      fonts:
+        - asset: fonts/Scheherazade-Regular.ttf
+    - family: KFGQPC-Uthman-Taha-Naskh
+      fonts:
+        - asset: fonts/KFGQPC-Uthman-Taha-Naskh-Regular.ttf
+    - family: me-Quran
+      fonts:
+        - asset: me-Quran.ttf
+    - family: noorehira
+      fonts:
+        - asset: noorehira-Regular.ttf
+    - family: PDMS-Saleem-QuranFont
+      fonts:
+        - asset: PDMS-Saleem-QuranFont-Regular.ttf
+    - family: ShaikhHamdullahMushaf
+      fonts:
+        - asset: ShaikhHamdullahMushaf.ttf
