@@ -178,8 +178,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
             children: [
               _itemsGestureDetector(items),
               _header(),
-              if (widget.surah.isSurah()) _progressBar(items),
               if (widget.surah.isSurah()) ...[
+                _progressBar(items),
                 _goToAayahSlider(),
                 _goToAayahNumberConsumer(),
               ],
