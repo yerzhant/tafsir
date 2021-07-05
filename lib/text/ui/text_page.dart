@@ -7,6 +7,7 @@ import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
 import 'package:tafsir/go_to_aayah/bloc/go_to_aayah_bloc.dart';
+import 'package:tafsir/go_to_aayah/ui/cancel_go_to_aayah.dart';
 import 'package:tafsir/go_to_aayah/ui/go_to_aayah_slider.dart';
 import 'package:tafsir/go_to_aayah/ui/go_to_aayah_number.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
@@ -98,6 +99,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   final SelectedTextWidget _selectedTextWidget = SelectedTextWidget();
 
   var _goToAayahOpacity = 0.0;
+  var _previousIndex = 0;
+  var _previousOffset = 0.0;
 
   @override
   void initState() {
@@ -121,10 +124,11 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     Modular.get<GoToAayahBloc>().aayaatCount = widget.surah.ayatsCount ?? 0;
   }
 
-  Future<void> _scrollTo(int index) async {
+  Future<void> _scrollTo(int index, [double offset = 0]) async {
     await Future.delayed(const Duration(milliseconds: 250));
     await _itemScrollController.scrollTo(
       index: index,
+      alignment: offset,
       duration: const Duration(seconds: 1),
     );
   }
@@ -182,6 +186,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
                 _progressBar(items),
                 _goToAayahSlider(),
                 _goToAayahNumberConsumer(),
+                _cancelGoToAayah(),
               ],
               _surahContextMenu(),
               _textContextMenu(),
@@ -197,6 +202,16 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       ),
     );
   }
+
+  Widget _cancelGoToAayah() => BlocBuilder<GoToAayahBloc, GoToAayahState>(
+        bloc: Modular.get(),
+        builder: (context, state) => state.maybeWhen(
+          goTo: (number) => CancelGoToAayah(number, () {
+            _scrollTo(_previousIndex, _previousOffset);
+          }),
+          orElse: () => const SizedBox.shrink(),
+        ),
+      );
 
   Widget _goToAayahSlider() => BlocBuilder<GoToAayahBloc, GoToAayahState>(
         bloc: Modular.get(),
@@ -226,8 +241,16 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
           semiActive: (_, __) {
             _goToAayahOpacity = .5;
           },
-          goTo: (number) {
+          goTo: (number) async {
             _goToAayahOpacity = 0;
+
+            final settings = Modular.get<SettingsRepo>();
+            final savedPosition = await settings.getSavedTextPosition();
+            if (savedPosition != null) {
+              _previousIndex = savedPosition.index;
+              _previousOffset = savedPosition.leadingEdge;
+            }
+
             _scrollTo(number);
           },
           inactive: (_) {

@@ -41,7 +41,10 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
       active: (_, number) => number,
       orElse: () => null,
     );
-    if (number != null) yield _GoTo(number);
+    if (number != null) {
+      yield _GoTo(number);
+      await Future.delayed(const Duration(seconds: 3));
+    }
 
     yield _Inactive(number ?? _lastNumber);
   }

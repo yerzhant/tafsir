@@ -17,6 +17,8 @@ class ThemeState {
   final Color toolsBackground;
   final Color toolControlsBackground;
   final Color translationBackground;
+  final Color cancelGoToAayahForeground;
+  final Color cancelGoToAayahBackground;
 
   ThemeState({
     required this.brightness,
@@ -35,6 +37,8 @@ class ThemeState {
     required this.toolsBackground,
     required this.toolControlsBackground,
     required this.translationBackground,
+    required this.cancelGoToAayahForeground,
+    required this.cancelGoToAayahBackground,
   });
 
   static final light = ThemeState(
@@ -54,6 +58,8 @@ class ThemeState {
     toolsBackground: const Color(0xffffffff),
     toolControlsBackground: const Color(0x7fe5e5e5),
     translationBackground: const Color(0x33bdbdc2),
+    cancelGoToAayahForeground: primaryColor,
+    cancelGoToAayahBackground: const Color(0xfff2f2f2),
   );
 
   static final dark = ThemeState(
@@ -73,5 +79,7 @@ class ThemeState {
     toolsBackground: const Color(0xff25303a),
     toolControlsBackground: const Color(0xff1a232a),
     translationBackground: const Color(0x1affffff),
+    cancelGoToAayahForeground: Colors.white,
+    cancelGoToAayahBackground: const Color(0xff25303A),
   );
 }

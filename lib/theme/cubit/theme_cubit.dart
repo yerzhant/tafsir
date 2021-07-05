@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 
 part 'theme_state.dart';
