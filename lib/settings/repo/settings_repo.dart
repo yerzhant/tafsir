@@ -1,8 +1,12 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 
+const _defaultAayahFontFamily = 'KFGQPC Uthman Taha Naskh';
+
 const _defaultAayahFontSize = 34.0;
 const _defaultFontSize = 16.0;
+
+const _aayahFontFamilyKey = 'aayah-font-family';
 
 const _aayahFontSizeKey = 'aayah-font-size';
 const _textFontSizeKey = 'text-font-size';
@@ -24,6 +28,9 @@ class SettingsRepo {
   Future<SettingsState> getState() async {
     final prefs = await SharedPreferences.getInstance();
 
+    final aayahFontFamily =
+        prefs.getString(_aayahFontFamilyKey) ?? _defaultAayahFontFamily;
+
     final aayahfontSize =
         prefs.getDouble(_aayahFontSizeKey) ?? _defaultAayahFontSize;
     final textFontSize = prefs.getDouble(_textFontSizeKey) ?? _defaultFontSize;
@@ -38,6 +45,7 @@ class SettingsRepo {
     final isDisplayAlwaysOn = prefs.getBool(_isDisplayAlwaysOnKey) ?? false;
 
     return SettingsState(
+      aayahFontFamily: aayahFontFamily,
       aayahFontSize: aayahfontSize,
       textFontSize: textFontSize,
       tafsirFontSize: tafsirFontSize,
@@ -52,6 +60,7 @@ class SettingsRepo {
   Future<void> saveState(SettingsState state) async {
     final prefs = await SharedPreferences.getInstance();
 
+    await prefs.setString(_aayahFontFamilyKey, state.aayahFontFamily);
     await prefs.setDouble(_aayahFontSizeKey, state.aayahFontSize);
     await prefs.setDouble(_textFontSizeKey, state.textFontSize);
     await prefs.setDouble(_tafsirFontSizeKey, state.tafsirFontSize);

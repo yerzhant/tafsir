@@ -19,7 +19,6 @@ dependencies:
   flutter_widget_from_html_core: ^0.6.1+1
   freezed: ^0.14.2
   freezed_annotation: ^0.14.2
-  google_fonts: ^2.1.0
   http: ^0.13.3
   just_audio: ^0.7.5
   provider: ^5.0.0
@@ -48,21 +47,21 @@ flutter:
     - assets/icons/go-to-aayah/
 
   fonts:
+    - family: KFGQPC Uthman Taha Naskh
+      fonts:
+        - asset: fonts/KFGQPC-Uthman-Taha-Naskh-Regular.ttf
     - family: Scheherazade
       fonts:
         - asset: fonts/Scheherazade-Regular.ttf
-    - family: KFGQPC-Uthman-Taha-Naskh
+    - family: Me Quran
       fonts:
-        - asset: fonts/KFGQPC-Uthman-Taha-Naskh-Regular.ttf
-    - family: me-Quran
+        - asset: fonts/Me-Quran.ttf
+    - family: Noorehira
       fonts:
-        - asset: me-Quran.ttf
-    - family: noorehira
+        - asset: fonts/Noorehira-Regular.ttf
+    - family: PDMS Saleem
       fonts:
-        - asset: noorehira-Regular.ttf
-    - family: PDMS-Saleem-QuranFont
+        - asset: fonts/PDMS-Saleem-QuranFont-Regular.ttf
+    - family: Sheikh Hamdullah
       fonts:
-        - asset: PDMS-Saleem-QuranFont-Regular.ttf
-    - family: ShaikhHamdullahMushaf
-      fonts:
-        - asset: ShaikhHamdullahMushaf.ttf
+        - asset: fonts/Shaikh-Hamdullah-Mushaf.ttf

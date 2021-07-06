@@ -10,46 +10,43 @@ class FontSizeTool extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = Modular.get<SettingsBloc>();
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: BlocBuilder<SettingsBloc, SettingsState>(
-        bloc: settings,
-        builder: (context, state) {
-          return Column(
-            children: [
-              _FontSize(
-                'Коран',
-                min: 30,
-                max: 60,
-                size: state.aayahFontSize,
-                onChanged: (size) => settings.add(
-                  SettingsEvent.setAayahFontSize(size),
-                ),
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      bloc: settings,
+      builder: (context, state) {
+        return Column(
+          children: [
+            _FontSize(
+              'Коран',
+              min: 30,
+              max: 60,
+              size: state.aayahFontSize,
+              onChanged: (size) => settings.add(
+                SettingsEvent.setAayahFontSize(size),
               ),
-              const Divider(height: 1),
-              _FontSize(
-                'Перевод',
-                min: 14,
-                max: 30,
-                size: state.textFontSize,
-                onChanged: (size) => settings.add(
-                  SettingsEvent.setTextFontSize(size),
-                ),
+            ),
+            const Divider(height: 1),
+            _FontSize(
+              'Перевод',
+              min: 14,
+              max: 30,
+              size: state.textFontSize,
+              onChanged: (size) => settings.add(
+                SettingsEvent.setTextFontSize(size),
               ),
-              const Divider(height: 1),
-              _FontSize(
-                'Тафсир',
-                min: 14,
-                max: 30,
-                size: state.tafsirFontSize,
-                onChanged: (size) => settings.add(
-                  SettingsEvent.setTafsirFontSize(size),
-                ),
+            ),
+            const Divider(height: 1),
+            _FontSize(
+              'Тафсир',
+              min: 14,
+              max: 30,
+              size: state.tafsirFontSize,
+              onChanged: (size) => settings.add(
+                SettingsEvent.setTafsirFontSize(size),
               ),
-            ],
-          );
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

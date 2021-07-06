@@ -16,6 +16,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) => event.when(
+        setAayahFontFamily: _setAayahFontFamily,
         setAayahFontSize: _setAayahFontSize,
         setTextFontSize: _setTextFontSize,
         setTafsirFontSize: _setTafsirFontSize,
@@ -26,53 +27,34 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         toggleIsDisplayAlwaysOn: _toggleIsDisplayAlwaysOn,
       );
 
-  Stream<SettingsState> _setAayahFontSize(double size) async* {
-    final newState = state.copyWith(aayahFontSize: size);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _setAayahFontFamily(String family) =>
+      _saveAndYieldState(state.copyWith(aayahFontFamily: family));
 
-  Stream<SettingsState> _setTextFontSize(double size) async* {
-    final newState = state.copyWith(textFontSize: size);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _setAayahFontSize(double size) =>
+      _saveAndYieldState(state.copyWith(aayahFontSize: size));
 
-  Stream<SettingsState> _setTafsirFontSize(double size) async* {
-    final newState = state.copyWith(tafsirFontSize: size);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _setTextFontSize(double size) =>
+      _saveAndYieldState(state.copyWith(textFontSize: size));
 
-  Stream<SettingsState> _toggleShowAayaat() async* {
-    final newState = state.copyWith(showAayaat: !state.showAayaat);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _setTafsirFontSize(double size) =>
+      _saveAndYieldState(state.copyWith(tafsirFontSize: size));
 
-  Stream<SettingsState> _toggleShowTranslation() async* {
-    final newState = state.copyWith(showTranslation: !state.showTranslation);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _toggleShowAayaat() =>
+      _saveAndYieldState(state.copyWith(showAayaat: !state.showAayaat));
 
-  Stream<SettingsState> _toggleShowTafsir() async* {
-    final newState = state.copyWith(showTafsir: !state.showTafsir);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _toggleShowTranslation() => _saveAndYieldState(
+      state.copyWith(showTranslation: !state.showTranslation));
 
-  Stream<SettingsState> _toggleShowFootnotes() async* {
-    final newState = state.copyWith(showFootnotes: !state.showFootnotes);
-    repo.saveState(newState);
-    yield newState;
-  }
+  Stream<SettingsState> _toggleShowTafsir() =>
+      _saveAndYieldState(state.copyWith(showTafsir: !state.showTafsir));
+
+  Stream<SettingsState> _toggleShowFootnotes() =>
+      _saveAndYieldState(state.copyWith(showFootnotes: !state.showFootnotes));
 
   Stream<SettingsState> _toggleIsDisplayAlwaysOn() async* {
     final newState = state.copyWith(
       isDisplayAlwaysOn: !state.isDisplayAlwaysOn,
     );
-    repo.saveState(newState);
 
     if (state.isDisplayAlwaysOn) {
       await Wakelock.enable();
@@ -80,6 +62,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       await Wakelock.disable();
     }
 
+    yield* _saveAndYieldState(newState);
+  }
+
+  Stream<SettingsState> _saveAndYieldState(SettingsState newState) async* {
+    repo.saveState(newState);
     yield newState;
   }
 

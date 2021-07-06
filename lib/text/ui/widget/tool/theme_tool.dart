@@ -9,39 +9,36 @@ class ThemeTool extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 14),
-            child: _Buttons(),
-          ),
-          const Divider(height: 1),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Не выключать экран',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              BlocBuilder<SettingsBloc, SettingsState>(
-                bloc: Modular.get(),
-                builder: (context, state) {
-                  return Switch(
-                    value: state.isDisplayAlwaysOn,
-                    onChanged: (value) {
-                      Modular.get<SettingsBloc>().add(
-                        const SettingsEvent.toggleIsDisplayAlwaysOn(),
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.symmetric(vertical: 14),
+          child: _Buttons(),
+        ),
+        const Divider(height: 1),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Не выключать экран',
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: Modular.get(),
+              builder: (context, state) {
+                return Switch(
+                  value: state.isDisplayAlwaysOn,
+                  onChanged: (value) {
+                    Modular.get<SettingsBloc>().add(
+                      const SettingsEvent.toggleIsDisplayAlwaysOn(),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

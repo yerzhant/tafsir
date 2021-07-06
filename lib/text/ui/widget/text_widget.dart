@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:share/share.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
@@ -52,7 +51,8 @@ class TextWidget extends StatelessWidget {
           textItem.textOrigin.trim(),
           textAlign: TextAlign.start,
           textDirection: TextDirection.rtl,
-          style: GoogleFonts.scheherazade(
+          style: TextStyle(
+            fontFamily: state.aayahFontFamily,
             fontSize: state.aayahFontSize,
             color: Theme.of(context).primaryColor,
             height: 1.3,

@@ -2,41 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tafsir/common/ext/string_ext.dart';
-import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class MoreTextTool extends StatelessWidget {
-  const MoreTextTool({Key? key}) : super(key: key);
+  final Function() onFontFamilyPressed;
+
+  const MoreTextTool(this.onFontFamilyPressed, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        bloc: Modular.get(),
-        builder: (context, theme) {
-          return Column(
-            children: [
-              _arabicFont(context, theme),
-              const Divider(height: 1),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                child: _Buttons(theme),
-              ),
-            ],
-          );
-        },
-      ),
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      bloc: Modular.get(),
+      builder: (context, theme) {
+        return Column(
+          children: [
+            _arabicFont(context, theme),
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 14),
+              child: _Buttons(theme),
+            ),
+          ],
+        );
+      },
     );
   }
 
   InkWell _arabicFont(BuildContext context, ThemeState theme) {
     return InkWell(
-      onTap: () {
-        theFeatureIsPlanned.asSnackBar(context);
-      },
+      onTap: onFontFamilyPressed,
       child: SizedBox(
         height: 45,
         child: Row(
@@ -46,11 +41,16 @@ class MoreTextTool extends StatelessWidget {
               style: Theme.of(context).textTheme.headline5,
             ),
             const Spacer(),
-            Text(
-              'Scheherazade',
-              style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    color: theme.listItemSubtitle,
-                  ),
+            BlocBuilder<SettingsBloc, SettingsState>(
+              bloc: Modular.get(),
+              builder: (context, state) {
+                return Text(
+                  state.aayahFontFamily,
+                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                        color: theme.listItemSubtitle,
+                      ),
+                );
+              },
             ),
             const SizedBox(width: 40),
             SvgPicture.asset(

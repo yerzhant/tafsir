@@ -16,6 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SettingsEventTearOff {
   const _$SettingsEventTearOff();
 
+  _SetAayahFontFamily setAayahFontFamily(String family) {
+    return _SetAayahFontFamily(
+      family,
+    );
+  }
+
   _SetAayahFontSize setAayahFontSize(double size) {
     return _SetAayahFontSize(
       size,
@@ -62,6 +68,7 @@ const $SettingsEvent = _$SettingsEventTearOff();
 mixin _$SettingsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -74,6 +81,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -87,6 +95,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -101,6 +110,7 @@ mixin _$SettingsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -129,6 +139,152 @@ class _$SettingsEventCopyWithImpl<$Res>
   final SettingsEvent _value;
   // ignore: unused_field
   final $Res Function(SettingsEvent) _then;
+}
+
+/// @nodoc
+abstract class _$SetAayahFontFamilyCopyWith<$Res> {
+  factory _$SetAayahFontFamilyCopyWith(
+          _SetAayahFontFamily value, $Res Function(_SetAayahFontFamily) then) =
+      __$SetAayahFontFamilyCopyWithImpl<$Res>;
+  $Res call({String family});
+}
+
+/// @nodoc
+class __$SetAayahFontFamilyCopyWithImpl<$Res>
+    extends _$SettingsEventCopyWithImpl<$Res>
+    implements _$SetAayahFontFamilyCopyWith<$Res> {
+  __$SetAayahFontFamilyCopyWithImpl(
+      _SetAayahFontFamily _value, $Res Function(_SetAayahFontFamily) _then)
+      : super(_value, (v) => _then(v as _SetAayahFontFamily));
+
+  @override
+  _SetAayahFontFamily get _value => super._value as _SetAayahFontFamily;
+
+  @override
+  $Res call({
+    Object? family = freezed,
+  }) {
+    return _then(_SetAayahFontFamily(
+      family == freezed
+          ? _value.family
+          : family // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SetAayahFontFamily implements _SetAayahFontFamily {
+  const _$_SetAayahFontFamily(this.family);
+
+  @override
+  final String family;
+
+  @override
+  String toString() {
+    return 'SettingsEvent.setAayahFontFamily(family: $family)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _SetAayahFontFamily &&
+            (identical(other.family, family) ||
+                const DeepCollectionEquality().equals(other.family, family)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(family);
+
+  @JsonKey(ignore: true)
+  @override
+  _$SetAayahFontFamilyCopyWith<_SetAayahFontFamily> get copyWith =>
+      __$SetAayahFontFamilyCopyWithImpl<_SetAayahFontFamily>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
+    required TResult Function(double size) setAayahFontSize,
+    required TResult Function(double size) setTextFontSize,
+    required TResult Function(double size) setTafsirFontSize,
+    required TResult Function() toggleShowAayaat,
+    required TResult Function() toggleShowTranslation,
+    required TResult Function() toggleShowTafsir,
+    required TResult Function() toggleShowFootnotes,
+    required TResult Function() toggleIsDisplayAlwaysOn,
+  }) {
+    return setAayahFontFamily(family);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
+    TResult Function(double size)? setAayahFontSize,
+    TResult Function(double size)? setTextFontSize,
+    TResult Function(double size)? setTafsirFontSize,
+    TResult Function()? toggleShowAayaat,
+    TResult Function()? toggleShowTranslation,
+    TResult Function()? toggleShowTafsir,
+    TResult Function()? toggleShowFootnotes,
+    TResult Function()? toggleIsDisplayAlwaysOn,
+    required TResult orElse(),
+  }) {
+    if (setAayahFontFamily != null) {
+      return setAayahFontFamily(family);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
+    required TResult Function(_SetAayahFontSize value) setAayahFontSize,
+    required TResult Function(_SetTextFontSize value) setTextFontSize,
+    required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
+    required TResult Function(_ToggleShowAayaat value) toggleShowAayaat,
+    required TResult Function(_ToggleShowTranslation value)
+        toggleShowTranslation,
+    required TResult Function(_ToggleShowTafsir value) toggleShowTafsir,
+    required TResult Function(_ToggleShowFootnotes value) toggleShowFootnotes,
+    required TResult Function(_ToggleIsDisplayAlwaysOn value)
+        toggleIsDisplayAlwaysOn,
+  }) {
+    return setAayahFontFamily(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
+    TResult Function(_SetAayahFontSize value)? setAayahFontSize,
+    TResult Function(_SetTextFontSize value)? setTextFontSize,
+    TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
+    TResult Function(_ToggleShowAayaat value)? toggleShowAayaat,
+    TResult Function(_ToggleShowTranslation value)? toggleShowTranslation,
+    TResult Function(_ToggleShowTafsir value)? toggleShowTafsir,
+    TResult Function(_ToggleShowFootnotes value)? toggleShowFootnotes,
+    TResult Function(_ToggleIsDisplayAlwaysOn value)? toggleIsDisplayAlwaysOn,
+    required TResult orElse(),
+  }) {
+    if (setAayahFontFamily != null) {
+      return setAayahFontFamily(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetAayahFontFamily implements SettingsEvent {
+  const factory _SetAayahFontFamily(String family) = _$_SetAayahFontFamily;
+
+  String get family => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$SetAayahFontFamilyCopyWith<_SetAayahFontFamily> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -196,6 +352,7 @@ class _$_SetAayahFontSize implements _SetAayahFontSize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -211,6 +368,7 @@ class _$_SetAayahFontSize implements _SetAayahFontSize {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -230,6 +388,7 @@ class _$_SetAayahFontSize implements _SetAayahFontSize {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -247,6 +406,7 @@ class _$_SetAayahFontSize implements _SetAayahFontSize {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -338,6 +498,7 @@ class _$_SetTextFontSize implements _SetTextFontSize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -353,6 +514,7 @@ class _$_SetTextFontSize implements _SetTextFontSize {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -372,6 +534,7 @@ class _$_SetTextFontSize implements _SetTextFontSize {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -389,6 +552,7 @@ class _$_SetTextFontSize implements _SetTextFontSize {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -480,6 +644,7 @@ class _$_SetTafsirFontSize implements _SetTafsirFontSize {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -495,6 +660,7 @@ class _$_SetTafsirFontSize implements _SetTafsirFontSize {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -514,6 +680,7 @@ class _$_SetTafsirFontSize implements _SetTafsirFontSize {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -531,6 +698,7 @@ class _$_SetTafsirFontSize implements _SetTafsirFontSize {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -597,6 +765,7 @@ class _$_ToggleShowAayaat implements _ToggleShowAayaat {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -612,6 +781,7 @@ class _$_ToggleShowAayaat implements _ToggleShowAayaat {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -631,6 +801,7 @@ class _$_ToggleShowAayaat implements _ToggleShowAayaat {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -648,6 +819,7 @@ class _$_ToggleShowAayaat implements _ToggleShowAayaat {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -709,6 +881,7 @@ class _$_ToggleShowTranslation implements _ToggleShowTranslation {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -724,6 +897,7 @@ class _$_ToggleShowTranslation implements _ToggleShowTranslation {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -743,6 +917,7 @@ class _$_ToggleShowTranslation implements _ToggleShowTranslation {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -760,6 +935,7 @@ class _$_ToggleShowTranslation implements _ToggleShowTranslation {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -821,6 +997,7 @@ class _$_ToggleShowTafsir implements _ToggleShowTafsir {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -836,6 +1013,7 @@ class _$_ToggleShowTafsir implements _ToggleShowTafsir {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -855,6 +1033,7 @@ class _$_ToggleShowTafsir implements _ToggleShowTafsir {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -872,6 +1051,7 @@ class _$_ToggleShowTafsir implements _ToggleShowTafsir {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -933,6 +1113,7 @@ class _$_ToggleShowFootnotes implements _ToggleShowFootnotes {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -948,6 +1129,7 @@ class _$_ToggleShowFootnotes implements _ToggleShowFootnotes {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -967,6 +1149,7 @@ class _$_ToggleShowFootnotes implements _ToggleShowFootnotes {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -984,6 +1167,7 @@ class _$_ToggleShowFootnotes implements _ToggleShowFootnotes {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -1046,6 +1230,7 @@ class _$_ToggleIsDisplayAlwaysOn implements _ToggleIsDisplayAlwaysOn {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function(String family) setAayahFontFamily,
     required TResult Function(double size) setAayahFontSize,
     required TResult Function(double size) setTextFontSize,
     required TResult Function(double size) setTafsirFontSize,
@@ -1061,6 +1246,7 @@ class _$_ToggleIsDisplayAlwaysOn implements _ToggleIsDisplayAlwaysOn {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String family)? setAayahFontFamily,
     TResult Function(double size)? setAayahFontSize,
     TResult Function(double size)? setTextFontSize,
     TResult Function(double size)? setTafsirFontSize,
@@ -1080,6 +1266,7 @@ class _$_ToggleIsDisplayAlwaysOn implements _ToggleIsDisplayAlwaysOn {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_SetAayahFontFamily value) setAayahFontFamily,
     required TResult Function(_SetAayahFontSize value) setAayahFontSize,
     required TResult Function(_SetTextFontSize value) setTextFontSize,
     required TResult Function(_SetTafsirFontSize value) setTafsirFontSize,
@@ -1097,6 +1284,7 @@ class _$_ToggleIsDisplayAlwaysOn implements _ToggleIsDisplayAlwaysOn {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SetAayahFontFamily value)? setAayahFontFamily,
     TResult Function(_SetAayahFontSize value)? setAayahFontSize,
     TResult Function(_SetTextFontSize value)? setTextFontSize,
     TResult Function(_SetTafsirFontSize value)? setTafsirFontSize,
@@ -1123,7 +1311,8 @@ class _$SettingsStateTearOff {
   const _$SettingsStateTearOff();
 
   _State call(
-      {required double aayahFontSize,
+      {required String aayahFontFamily,
+      required double aayahFontSize,
       required double textFontSize,
       required double tafsirFontSize,
       required bool showAayaat,
@@ -1132,6 +1321,7 @@ class _$SettingsStateTearOff {
       required bool showFootnotes,
       required bool isDisplayAlwaysOn}) {
     return _State(
+      aayahFontFamily: aayahFontFamily,
       aayahFontSize: aayahFontSize,
       textFontSize: textFontSize,
       tafsirFontSize: tafsirFontSize,
@@ -1149,6 +1339,7 @@ const $SettingsState = _$SettingsStateTearOff();
 
 /// @nodoc
 mixin _$SettingsState {
+  String get aayahFontFamily => throw _privateConstructorUsedError;
   double get aayahFontSize => throw _privateConstructorUsedError;
   double get textFontSize => throw _privateConstructorUsedError;
   double get tafsirFontSize => throw _privateConstructorUsedError;
@@ -1169,7 +1360,8 @@ abstract class $SettingsStateCopyWith<$Res> {
           SettingsState value, $Res Function(SettingsState) then) =
       _$SettingsStateCopyWithImpl<$Res>;
   $Res call(
-      {double aayahFontSize,
+      {String aayahFontFamily,
+      double aayahFontSize,
       double textFontSize,
       double tafsirFontSize,
       bool showAayaat,
@@ -1190,6 +1382,7 @@ class _$SettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? aayahFontFamily = freezed,
     Object? aayahFontSize = freezed,
     Object? textFontSize = freezed,
     Object? tafsirFontSize = freezed,
@@ -1200,6 +1393,10 @@ class _$SettingsStateCopyWithImpl<$Res>
     Object? isDisplayAlwaysOn = freezed,
   }) {
     return _then(_value.copyWith(
+      aayahFontFamily: aayahFontFamily == freezed
+          ? _value.aayahFontFamily
+          : aayahFontFamily // ignore: cast_nullable_to_non_nullable
+              as String,
       aayahFontSize: aayahFontSize == freezed
           ? _value.aayahFontSize
           : aayahFontSize // ignore: cast_nullable_to_non_nullable
@@ -1242,7 +1439,8 @@ abstract class _$StateCopyWith<$Res> implements $SettingsStateCopyWith<$Res> {
       __$StateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {double aayahFontSize,
+      {String aayahFontFamily,
+      double aayahFontSize,
       double textFontSize,
       double tafsirFontSize,
       bool showAayaat,
@@ -1263,6 +1461,7 @@ class __$StateCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? aayahFontFamily = freezed,
     Object? aayahFontSize = freezed,
     Object? textFontSize = freezed,
     Object? tafsirFontSize = freezed,
@@ -1273,6 +1472,10 @@ class __$StateCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
     Object? isDisplayAlwaysOn = freezed,
   }) {
     return _then(_State(
+      aayahFontFamily: aayahFontFamily == freezed
+          ? _value.aayahFontFamily
+          : aayahFontFamily // ignore: cast_nullable_to_non_nullable
+              as String,
       aayahFontSize: aayahFontSize == freezed
           ? _value.aayahFontSize
           : aayahFontSize // ignore: cast_nullable_to_non_nullable
@@ -1313,7 +1516,8 @@ class __$StateCopyWithImpl<$Res> extends _$SettingsStateCopyWithImpl<$Res>
 
 class _$_State implements _State {
   const _$_State(
-      {required this.aayahFontSize,
+      {required this.aayahFontFamily,
+      required this.aayahFontSize,
       required this.textFontSize,
       required this.tafsirFontSize,
       required this.showAayaat,
@@ -1322,6 +1526,8 @@ class _$_State implements _State {
       required this.showFootnotes,
       required this.isDisplayAlwaysOn});
 
+  @override
+  final String aayahFontFamily;
   @override
   final double aayahFontSize;
   @override
@@ -1341,13 +1547,16 @@ class _$_State implements _State {
 
   @override
   String toString() {
-    return 'SettingsState(aayahFontSize: $aayahFontSize, textFontSize: $textFontSize, tafsirFontSize: $tafsirFontSize, showAayaat: $showAayaat, showTranslation: $showTranslation, showTafsir: $showTafsir, showFootnotes: $showFootnotes, isDisplayAlwaysOn: $isDisplayAlwaysOn)';
+    return 'SettingsState(aayahFontFamily: $aayahFontFamily, aayahFontSize: $aayahFontSize, textFontSize: $textFontSize, tafsirFontSize: $tafsirFontSize, showAayaat: $showAayaat, showTranslation: $showTranslation, showTafsir: $showTafsir, showFootnotes: $showFootnotes, isDisplayAlwaysOn: $isDisplayAlwaysOn)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _State &&
+            (identical(other.aayahFontFamily, aayahFontFamily) ||
+                const DeepCollectionEquality()
+                    .equals(other.aayahFontFamily, aayahFontFamily)) &&
             (identical(other.aayahFontSize, aayahFontSize) ||
                 const DeepCollectionEquality()
                     .equals(other.aayahFontSize, aayahFontSize)) &&
@@ -1377,6 +1586,7 @@ class _$_State implements _State {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(aayahFontFamily) ^
       const DeepCollectionEquality().hash(aayahFontSize) ^
       const DeepCollectionEquality().hash(textFontSize) ^
       const DeepCollectionEquality().hash(tafsirFontSize) ^
@@ -1394,7 +1604,8 @@ class _$_State implements _State {
 
 abstract class _State implements SettingsState {
   const factory _State(
-      {required double aayahFontSize,
+      {required String aayahFontFamily,
+      required double aayahFontSize,
       required double textFontSize,
       required double tafsirFontSize,
       required bool showAayaat,
@@ -1403,6 +1614,8 @@ abstract class _State implements SettingsState {
       required bool showFootnotes,
       required bool isDisplayAlwaysOn}) = _$_State;
 
+  @override
+  String get aayahFontFamily => throw _privateConstructorUsedError;
   @override
   double get aayahFontSize => throw _privateConstructorUsedError;
   @override
