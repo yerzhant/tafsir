@@ -318,9 +318,9 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
   Positioned _progressBar(List<TextItem> items) {
     return Positioned(
-      right: 8,
-      left: 8,
-      bottom: 14,
+      right: 0,
+      left: 0,
+      bottom: 0,
       child: ProgressWidget(
         items.length,
         _itemPositionsListener,
