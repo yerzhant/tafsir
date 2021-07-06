@@ -56,7 +56,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       isDisplayAlwaysOn: !state.isDisplayAlwaysOn,
     );
 
-    if (state.isDisplayAlwaysOn) {
+    if (newState.isDisplayAlwaysOn) {
       await Wakelock.enable();
     } else {
       await Wakelock.disable();
