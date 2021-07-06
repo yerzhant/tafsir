@@ -22,6 +22,29 @@ class _TextToolsState extends State<TextTools> {
   var _active = _Tools.more;
 
   @override
+  void initState() {
+    super.initState();
+    widget.animationController.addStatusListener(_animationStatusListener);
+  }
+
+  void _animationStatusListener(status) {
+    if (_active == _Tools.fontFamily && status == AnimationStatus.dismissed) {
+      Future.delayed(
+        const Duration(milliseconds: 500),
+        () => setState(() {
+          _active = _Tools.more;
+        }),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.animationController.removeStatusListener(_animationStatusListener);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Material(
       elevation: 16,
