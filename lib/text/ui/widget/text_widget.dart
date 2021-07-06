@@ -83,15 +83,7 @@ class TextWidget extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(width: 9),
-            Text(
-              surah.title,
-              style: Theme.of(context).textTheme.subtitle1?.copyWith(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                  ),
-            ),
-            const SizedBox(width: 9),
+            const SizedBox(width: 8),
             const Expanded(child: Divider(height: 1)),
           ],
         )
