@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -125,7 +126,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   Future<void> _scrollTo(int index, [double offset = 0]) async {
-    await Future.delayed(const Duration(milliseconds: 250));
+    await Future.delayed(const Duration(milliseconds: kDebugMode ? 500 : 100));
     await _itemScrollController.scrollTo(
       index: index,
       alignment: offset,

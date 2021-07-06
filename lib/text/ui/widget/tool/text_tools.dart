@@ -66,7 +66,7 @@ class _TextToolsState extends State<TextTools> {
           if (_active != _Tools.fontFamily) ...[
             IconButton(
               onPressed: () {
-                Modular.to.pop();
+                Modular.to.popUntil((route) => route.isFirst);
               },
               icon: SvgPicture.asset(
                 'assets/icons/home.svg',
