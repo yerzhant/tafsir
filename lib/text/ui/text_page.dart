@@ -179,20 +179,22 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       body: BlocBuilder<TextBloc, TextState>(
         bloc: widget.bloc,
         builder: (_, state) => state.when(
-          (items) => Stack(
-            children: [
-              _itemsGestureDetector(items),
-              _header(),
-              if (widget.surah.isSurah()) ...[
-                _progressBar(items),
-                _goToAayahSlider(),
-                _goToAayahNumberConsumer(),
-                _cancelGoToAayah(),
+          (items) => SafeArea(
+            child: Stack(
+              children: [
+                _itemsGestureDetector(items),
+                _header(),
+                if (widget.surah.isSurah()) ...[
+                  _progressBar(items),
+                  _goToAayahSlider(),
+                  _goToAayahNumberConsumer(),
+                  _cancelGoToAayah(),
+                ],
+                _surahContextMenu(),
+                _textContextMenu(),
+                _tools(),
               ],
-              _surahContextMenu(),
-              _textContextMenu(),
-              _tools(),
-            ],
+            ),
           ),
           inProgress: () => const Center(child: CircularProgress()),
           error: (rejection) => RejectionWidget(
