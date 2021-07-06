@@ -55,7 +55,7 @@ class TextWidget extends StatelessWidget {
             fontFamily: state.aayahFontFamily,
             fontSize: state.aayahFontSize,
             color: Theme.of(context).primaryColor,
-            height: 1.3,
+            height: _getAayahLineHeight(state),
           ),
         )
       ];
@@ -131,5 +131,18 @@ class TextWidget extends StatelessWidget {
     }
 
     Share.share(text, subject: subject);
+  }
+
+  double _getAayahLineHeight(SettingsState state) {
+    switch (state.aayahFontFamily) {
+      case 'Me Quran':
+        return 1.9;
+
+      case 'Scheherazade':
+        return 1.3;
+
+      default:
+        return 1.5;
+    }
   }
 }
