@@ -25,7 +25,12 @@ class ChooseAayaatFont extends StatelessWidget {
               height: 40,
               child: GestureDetector(
                 onTap: onBackPressed,
-                child: SvgPicture.asset('assets/icons/arrow-left.svg'),
+                behavior: HitTestBehavior.opaque,
+                child: Row(
+                  children: [
+                    SvgPicture.asset('assets/icons/arrow-left.svg'),
+                  ],
+                ),
               ),
             ),
             const Divider(height: 1),
