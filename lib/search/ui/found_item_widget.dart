@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/search/model/found_item.dart';
+import 'package:tafsir/search/ui/highlighted_found_word.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 
 class FoundItemWidget extends StatelessWidget {
+  final String phrase;
   final FoundItem foundItem;
 
-  const FoundItemWidget(this.foundItem, {Key? key}) : super(key: key);
+  const FoundItemWidget(
+    this.phrase,
+    this.foundItem, {
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +40,13 @@ class FoundItemWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          foundItem.textItem.text.parseHtml(),
-          style: Theme.of(context).textTheme.headline6?.copyWith(height: 1.29),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 2,
-        ),
+        HighLightedFoundWord(phrase: phrase, textItem: foundItem.textItem),
+        // Text(
+        //   foundItem.textItem.text.parseHtml(),
+        //   style: Theme.of(context).textTheme.headline6?.copyWith(height: 1.29),
+        //   overflow: TextOverflow.ellipsis,
+        //   maxLines: 2,
+        // ),
         const SizedBox(height: 3),
         Text(
           '${foundItem.surah.title}, ${foundItem.textItem.title} аят',

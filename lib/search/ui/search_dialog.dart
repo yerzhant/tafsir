@@ -13,6 +13,7 @@ import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class SearchDialog extends StatefulWidget {
   final SearchBloc bloc;
+
   const SearchDialog(this.bloc, {Key? key}) : super(key: key);
 
   @override
@@ -72,7 +73,7 @@ class _SearchDialogState extends State<SearchDialog> {
         bloc: widget.bloc,
         builder: (context, state) {
           return state.when(
-            results: (_, items) => _items(items),
+            results: (phrase, items) => _items(phrase, items),
             inProgress: () => const CircularProgress(),
             notFound: () => Center(
                 child: Text(
@@ -115,9 +116,9 @@ class _SearchDialogState extends State<SearchDialog> {
     );
   }
 
-  ListView _items(List<FoundItem> items) {
+  ListView _items(String phrase, List<FoundItem> items) {
     return ListView.separated(
-      itemBuilder: (_, i) => FoundItemWidget(items[i]),
+      itemBuilder: (_, i) => FoundItemWidget(phrase, items[i]),
       separatorBuilder: (_, __) => const Divider(height: 1),
       itemCount: items.length,
     );
