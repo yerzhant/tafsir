@@ -23,6 +23,29 @@ class MoreTextTool extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 14),
               child: _Buttons(theme),
             ),
+            const Divider(height: 1),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Коментарии',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+                BlocBuilder<SettingsBloc, SettingsState>(
+                  bloc: Modular.get(),
+                  builder: (context, state) {
+                    return Switch(
+                      value: state.showFootnotes,
+                      onChanged: (value) {
+                        Modular.get<SettingsBloc>().add(
+                          const SettingsEvent.toggleShowFootnotes(),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
           ],
         );
       },
@@ -120,15 +143,6 @@ class _Buttons extends StatelessWidget {
               color: theme.listItemSubtitle,
               onTap: () {
                 settings.add(const SettingsEvent.toggleShowTafsir());
-              },
-            ),
-            const SizedBox(width: 10),
-            _Button(
-              'Сноски',
-              isActive: state.showFootnotes,
-              color: theme.listItemSubtitle,
-              onTap: () {
-                settings.add(const SettingsEvent.toggleShowFootnotes());
               },
             ),
           ],
