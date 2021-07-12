@@ -41,12 +41,6 @@ class FoundItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         HighLightedFoundWord(phrase: phrase, textItem: foundItem.textItem),
-        // Text(
-        //   foundItem.textItem.text.parseHtml(),
-        //   style: Theme.of(context).textTheme.headline6?.copyWith(height: 1.29),
-        //   overflow: TextOverflow.ellipsis,
-        //   maxLines: 2,
-        // ),
         const SizedBox(height: 3),
         Text(
           '${foundItem.surah.title}, ${foundItem.textItem.title} аят',

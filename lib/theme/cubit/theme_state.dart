@@ -19,6 +19,7 @@ class ThemeState {
   final Color translationBackground;
   final Color cancelGoToAayahForeground;
   final Color cancelGoToAayahBackground;
+  final Color foundPhraseBackground;
 
   ThemeState({
     required this.brightness,
@@ -39,6 +40,7 @@ class ThemeState {
     required this.translationBackground,
     required this.cancelGoToAayahForeground,
     required this.cancelGoToAayahBackground,
+    required this.foundPhraseBackground,
   });
 
   static final light = ThemeState(
@@ -60,6 +62,7 @@ class ThemeState {
     translationBackground: const Color(0x33bdbdc2),
     cancelGoToAayahForeground: primaryColor,
     cancelGoToAayahBackground: const Color(0xfff2f2f2),
+    foundPhraseBackground: primaryColor.withAlpha(51),
   );
 
   static final dark = ThemeState(
@@ -81,5 +84,6 @@ class ThemeState {
     translationBackground: const Color(0x1affffff),
     cancelGoToAayahForeground: Colors.white,
     cancelGoToAayahBackground: const Color(0xff25303A),
+    foundPhraseBackground: primaryColor.withAlpha(128),
   );
 }

@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
+import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class HighLightedFoundWord extends StatelessWidget {
   final String phrase;
@@ -30,19 +33,24 @@ class HighLightedFoundWord extends StatelessWidget {
             WidgetSpan(
               child: Transform.translate(
                 offset: const Offset(0, 2),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 2),
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                  child: Text(
-                    parts[1],
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6
-                        ?.copyWith(height: 1.29),
-                  ),
+                child: BlocBuilder<ThemeCubit, ThemeState>(
+                  bloc: Modular.get(),
+                  builder: (context, state) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(vertical: 2),
+                      decoration: BoxDecoration(
+                        color: state.foundPhraseBackground,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                      child: Text(
+                        parts[1],
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6
+                            ?.copyWith(height: 1.29),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
@@ -73,7 +81,7 @@ class HighLightedFoundWord extends StatelessWidget {
 
     final splitedBefore = before.split(' ');
     if (splitedBefore.length > 5) {
-      before = splitedBefore.skip(splitedBefore.length - 5).join(' ');
+      before = '… ${splitedBefore.skip(splitedBefore.length - 5).join(' ')}';
     }
 
     return some([before, word, after]);
