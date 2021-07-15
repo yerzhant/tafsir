@@ -1,21 +1,18 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:share/share.dart';
 import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:tafsir/bookmarks/ui/bookmarks_list.dart';
 import 'package:tafsir/common/ds/tafsir_db.dart';
+import 'package:tafsir/common/global_functions.dart';
 import 'package:tafsir/offline/bloc/offline_bloc.dart';
 import 'package:tafsir/search/ui/search_dialog.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
 import 'package:tafsir/suwar/ui/suwar_list.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key) {
@@ -78,56 +75,9 @@ class HomePage extends StatelessWidget {
             return PopupMenuButton<_Actions>(
               icon: const Icon(Icons.more_vert),
               itemBuilder: (_) => [
-                PopupMenuItem(
-                  value: _Actions.offline,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/offline.svg',
-                        color: state.appMenuIcon,
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        'Offline режим',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: _Actions.share,
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        'assets/icons/share.svg',
-                        color: state.appMenuIcon,
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        'Поделиться',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: _Actions.azanRu,
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/icons/logo.png',
-                        // width: 16.67,
-                        height: 20,
-                        color: state.appMenuIcon,
-                      ),
-                      const SizedBox(width: 16),
-                      Text(
-                        'Azan.ru',
-                        style: Theme.of(context).textTheme.subtitle2,
-                      ),
-                    ],
-                  ),
-                ),
+                _offlineMenuItem(state, context),
+                _shareMenuItem(state, context),
+                _aboutUsMenuItem(state, context),
               ],
               onSelected: (action) {
                 switch (action) {
@@ -138,11 +88,11 @@ class HomePage extends StatelessWidget {
                     break;
 
                   case _Actions.share:
-                    _share();
+                    shareApp();
                     break;
 
-                  case _Actions.azanRu:
-                    launch('https://azan.ru');
+                  case _Actions.aboutUs:
+                    Modular.to.pushNamed('about-us');
                     break;
                 }
               },
@@ -151,15 +101,66 @@ class HomePage extends StatelessWidget {
         ),
       ];
 
-  Future<void> _share() async {
-    var text = 'Тафсир Корана\n\n';
+  PopupMenuItem<_Actions> _aboutUsMenuItem(
+      ThemeState state, BuildContext context) {
+    return PopupMenuItem(
+      value: _Actions.aboutUs,
+      child: Row(
+        children: [
+          Image.asset(
+            'assets/icons/logo.png',
+            height: 20,
+            color: state.appMenuIcon,
+          ),
+          const SizedBox(width: 16),
+          Text(
+            'О нас',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+        ],
+      ),
+    );
+  }
 
-    text += Platform.isIOS
-        ? 'https://apps.apple.com/app/id1542515717'
-        : 'https://play.google.com/store/apps/details?id=ru.azan.tafsir';
+  PopupMenuItem<_Actions> _shareMenuItem(
+      ThemeState state, BuildContext context) {
+    return PopupMenuItem(
+      value: _Actions.share,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            'assets/icons/share.svg',
+            color: state.appMenuIcon,
+          ),
+          const SizedBox(width: 16),
+          Text(
+            'Поделиться',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+        ],
+      ),
+    );
+  }
 
-    await Share.share(text, subject: 'Тафсир Корана');
+  PopupMenuItem<_Actions> _offlineMenuItem(
+      ThemeState state, BuildContext context) {
+    return PopupMenuItem(
+      value: _Actions.offline,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            'assets/icons/offline.svg',
+            color: state.appMenuIcon,
+          ),
+          const SizedBox(width: 16),
+          Text(
+            'Offline режим',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+        ],
+      ),
+    );
   }
 }
 
-enum _Actions { offline, share, azanRu }
+enum _Actions { offline, share, aboutUs }

@@ -43,8 +43,10 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/images/
     - assets/icons/
     - assets/icons/go-to-aayah/
+    - assets/icons/about-us/
 
   fonts:
     - family: KFGQPC Uthman Taha Naskh
