@@ -48,7 +48,7 @@ class AppWidget extends StatelessWidget {
             ),
           ),
       appBarTheme: AppBarTheme(color: theme.appBarBackground),
-      popupMenuTheme: PopupMenuThemeData(color: theme.background),
+      popupMenuTheme: PopupMenuThemeData(color: theme.appMenuBackground),
       tabBarTheme: const TabBarTheme(
         labelStyle: TextStyle(
           fontSize: 16,

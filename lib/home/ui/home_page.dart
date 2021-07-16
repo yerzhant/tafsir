@@ -77,6 +77,8 @@ class HomePage extends StatelessWidget {
               itemBuilder: (_) => [
                 _offlineMenuItem(state, context),
                 _shareMenuItem(state, context),
+                _evaluateMenuItem(state, context),
+                _proposalsMenuItem(state, context),
                 _aboutUsMenuItem(state, context),
               ],
               onSelected: (action) {
@@ -89,6 +91,14 @@ class HomePage extends StatelessWidget {
 
                   case _Actions.share:
                     shareApp();
+                    break;
+
+                  case _Actions.evaluate:
+                    evaluateApp();
+                    break;
+
+                  case _Actions.proposals:
+                    writeToAdmin();
                     break;
 
                   case _Actions.aboutUs:
@@ -107,12 +117,13 @@ class HomePage extends StatelessWidget {
       value: _Actions.aboutUs,
       child: Row(
         children: [
+          const SizedBox(width: 3),
           Image.asset(
             'assets/icons/logo.png',
             height: 20,
             color: state.appMenuIcon,
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 17.33),
           Text(
             'О нас',
             style: Theme.of(context).textTheme.subtitle2,
@@ -132,9 +143,50 @@ class HomePage extends StatelessWidget {
             'assets/icons/share.svg',
             color: state.appMenuIcon,
           ),
+          const SizedBox(width: 17.5),
+          Text(
+            'Поделиться приложением',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  PopupMenuItem<_Actions> _evaluateMenuItem(
+      ThemeState state, BuildContext context) {
+    return PopupMenuItem(
+      value: _Actions.evaluate,
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            'assets/icons/evaluate-app.svg',
+            color: state.appMenuIcon,
+          ),
+          const SizedBox(width: 15.67),
+          Text(
+            'Оценить приложение',
+            style: Theme.of(context).textTheme.subtitle2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  PopupMenuItem<_Actions> _proposalsMenuItem(
+      ThemeState state, BuildContext context) {
+    return PopupMenuItem(
+      value: _Actions.proposals,
+      child: Row(
+        children: [
+          const SizedBox(width: 2),
+          SvgPicture.asset(
+            'assets/icons/proposals.svg',
+            color: state.appMenuIcon,
+          ),
           const SizedBox(width: 16),
           Text(
-            'Поделиться',
+            'Предложения и замечания',
             style: Theme.of(context).textTheme.subtitle2,
           ),
         ],
@@ -152,7 +204,7 @@ class HomePage extends StatelessWidget {
             'assets/icons/offline.svg',
             color: state.appMenuIcon,
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 15.59),
           Text(
             'Offline режим',
             style: Theme.of(context).textTheme.subtitle2,
@@ -163,4 +215,4 @@ class HomePage extends StatelessWidget {
   }
 }
 
-enum _Actions { offline, share, aboutUs }
+enum _Actions { offline, share, evaluate, proposals, aboutUs }

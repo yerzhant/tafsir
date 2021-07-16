@@ -39,24 +39,16 @@ class AboutUsPage extends StatelessWidget {
             action: shareApp,
           ),
           const SizedBox(height: 8),
-          _Action(
+          const _Action(
             title: 'Оценить приложение',
             icon: 'evaluate',
-            action: () {
-              launch(
-                Platform.isIOS
-                    ? 'https://apps.apple.com/us/app/id1542515717'
-                    : 'https://play.google.com/store/apps/details?id=ru.azan.tafsir',
-              );
-            },
+            action: evaluateApp,
           ),
           const SizedBox(height: 8),
-          _Action(
+          const _Action(
             title: 'Предложения и замечания',
             icon: 'proposals',
-            action: () {
-              launch('https://azan.ru/site/write-to-admin');
-            },
+            action: writeToAdmin,
           ),
           const SizedBox(height: 8),
           _Action(
