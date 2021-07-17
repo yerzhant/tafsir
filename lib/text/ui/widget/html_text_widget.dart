@@ -52,7 +52,7 @@ class HtmlTextWidget extends StatelessWidget {
         final styles = <String, String>{};
 
         if (isRightAligned) {
-          styles.addAll({'text-align': 'right'});
+          styles.addAll({'text-align': 'justify'});
         }
 
         if (e.localName == 'blockquote') {
