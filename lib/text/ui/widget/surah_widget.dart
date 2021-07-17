@@ -26,7 +26,6 @@ class SurahWidget extends StatelessWidget {
         children: <Widget>[
           HtmlTextWidget(
             surah.text,
-            isRightAligned: false,
             fontSize: settings.tafsirFontSize,
           ),
           const SizedBox(height: 10),

@@ -8,14 +8,12 @@ import 'package:tafsir/theme/cubit/theme_cubit.dart';
 class HtmlTextWidget extends StatelessWidget {
   final String html;
   final double fontSize;
-  final bool isRightAligned;
   final bool hasFootnotes;
 
   const HtmlTextWidget(
     this.html, {
     Key? key,
     required this.fontSize,
-    this.isRightAligned = true,
     this.hasFootnotes = false,
   }) : super(key: key);
 
@@ -51,9 +49,7 @@ class HtmlTextWidget extends StatelessWidget {
       customStylesBuilder: (e) {
         final styles = <String, String>{};
 
-        if (isRightAligned) {
-          styles.addAll({'text-align': 'justify'});
-        }
+        styles.addAll({'text-align': 'justify'});
 
         if (e.localName == 'blockquote') {
           styles.addAll({
