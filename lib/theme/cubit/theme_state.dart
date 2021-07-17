@@ -85,7 +85,7 @@ class ThemeState {
     appBarBackground: const Color(0xff25303a),
     toolsBackground: const Color(0xff25303a),
     toolControlsBackground: const Color(0xff1a232a),
-    translationBackground: const Color(0x1affffff),
+    translationBackground: Colors.white.withAlpha(7),
     cancelGoToAayahForeground: Colors.white,
     cancelGoToAayahBackground: const Color(0xff25303A),
     foundPhraseBackground: primaryColor.withAlpha(128),
