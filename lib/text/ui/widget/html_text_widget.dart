@@ -55,7 +55,7 @@ class HtmlTextWidget extends StatelessWidget {
           styles.addAll({
             'margin': '0',
             'padding': '10px',
-            'border': '1px solid #ebebee',
+            'border': '1px solid rgba(189, 189, 194, .2)',
             'border-left': '2px solid #0088c7',
           });
         }
