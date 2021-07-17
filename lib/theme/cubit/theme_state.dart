@@ -70,7 +70,7 @@ class ThemeState {
 
   static final dark = ThemeState(
     brightness: Brightness.dark,
-    text: const Color(0xffffffff),
+    text: const Color(0xffA8A8A8),
     primary: const Color(0xff0088c7),
     primaryVariant: const Color(0xffc9e6f3),
     background: const Color(0xff131f29),
