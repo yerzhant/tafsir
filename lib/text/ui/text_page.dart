@@ -103,6 +103,8 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   var _previousIndex = 0;
   var _previousOffset = 0.0;
 
+  var _canSlideOutEverything = false;
+
   @override
   void initState() {
     super.initState();
@@ -112,8 +114,11 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
     _toolsAnimationController.forward();
 
     Future.delayed(
-      const Duration(seconds: 1),
-      () => _toolsAnimationController.reverse(),
+      const Duration(seconds: 2),
+      () {
+        _toolsAnimationController.reverse();
+        _canSlideOutEverything = true;
+      },
     );
 
     if (widget.index != 0) {
@@ -135,7 +140,9 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   void _positionsListener() {
-    _slideOutEverything();
+    if (_canSlideOutEverything) {
+      _slideOutEverything();
+    }
 
     final itemPosition = _itemPositionsListener.itemPositions.value.first;
     final textPosition = SavedTextPosition(
