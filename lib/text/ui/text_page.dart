@@ -131,7 +131,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   Future<void> _scrollTo(int index, [double offset = 0]) async {
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 500));
     await _itemScrollController.scrollTo(
       index: index,
       alignment: offset,
