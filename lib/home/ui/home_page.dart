@@ -86,7 +86,7 @@ class HomePage extends StatelessWidget {
                   case _Actions.offline:
                     Modular.get<OfflineBloc>()
                         .add(const OfflineEvent.download());
-                    // Modular.to.pushNamed('offline');
+                    Modular.to.pushNamed('offline');
                     break;
 
                   case _Actions.share:
