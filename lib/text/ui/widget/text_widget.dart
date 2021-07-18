@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:share/share.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
@@ -68,7 +69,7 @@ class TextWidget extends StatelessWidget {
               width: 30,
               height: 30,
               decoration: BoxDecoration(
-                border: Border.all(color: const Color(0x4dBDBDC2)),
+                border: Border.all(color: greyColor.withOpacity(.3)),
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Center(
@@ -84,7 +85,13 @@ class TextWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 8),
-            const Expanded(child: Divider(height: 1)),
+            Expanded(
+              child: Divider(
+                height: 1,
+                thickness: 1,
+                color: greyColor.withOpacity(.3),
+              ),
+            ),
           ],
         )
       ];
