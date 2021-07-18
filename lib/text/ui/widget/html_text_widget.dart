@@ -38,7 +38,7 @@ class HtmlTextWidget extends StatelessWidget {
     BuildContext context,
   ) {
     return HtmlWidget(
-      html,
+      '<div class="html-content">$html</dev>',
       enableCaching: false,
       textStyle: TextStyle(
         fontSize: fontSize,
@@ -49,10 +49,13 @@ class HtmlTextWidget extends StatelessWidget {
       customStylesBuilder: (e) {
         final styles = <String, String>{};
 
+        if (e.className == 'html-content') {
+          styles.addAll({'text-align': 'justify'});
+        }
+
         styles.addAll({
           'margin': '0',
           'padding': '0',
-          'text-align': 'justify',
         });
 
         if (e.localName == 'blockquote') {
