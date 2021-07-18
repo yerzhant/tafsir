@@ -29,10 +29,10 @@ class SuwarBloc extends Bloc<SuwarEvent, SuwarState> {
     yield const _InProgress();
 
     Surah? surah;
-    final textPosition = await settingsRepo.getSavedTextPosition();
-    if (textPosition != null) {
-      surah = await db.getSurahByWeight(textPosition.surahWeight);
-    }
+    // final textPosition = await settingsRepo.getSavedTextPosition();
+    // if (textPosition != null) {
+    //   surah = await db.getSurahByWeight(textPosition.surahWeight);
+    // }
 
     final result = await repo.getAll();
 
