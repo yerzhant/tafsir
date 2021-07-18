@@ -164,7 +164,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    _showSystemUIOverlays();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
 
     _toolsAnimationController.dispose();
     _surahMenuAnimationController.dispose();
@@ -179,22 +179,20 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
       body: BlocBuilder<TextBloc, TextState>(
         bloc: widget.bloc,
         builder: (_, state) => state.when(
-          (items) => SafeArea(
-            child: Stack(
-              children: [
-                _itemsGestureDetector(items),
-                _header(),
-                if (widget.surah.isSurah()) ...[
-                  _progressBar(items),
-                  _goToAayahSlider(),
-                  _goToAayahNumberConsumer(),
-                  _cancelGoToAayah(),
-                ],
-                _surahContextMenu(),
-                _textContextMenu(),
-                _tools(),
+          (items) => Stack(
+            children: [
+              _itemsGestureDetector(items),
+              _header(),
+              if (widget.surah.isSurah()) ...[
+                _progressBar(items),
+                _goToAayahSlider(),
+                _goToAayahNumberConsumer(),
+                _cancelGoToAayah(),
               ],
-            ),
+              _surahContextMenu(),
+              _textContextMenu(),
+              _tools(),
+            ],
           ),
           inProgress: () => const Center(child: CircularProgress()),
           error: (rejection) => RejectionWidget(
@@ -444,7 +442,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   void _showSystemUIOverlays() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   }
 
   void _hideSystemUIOverlays() {
