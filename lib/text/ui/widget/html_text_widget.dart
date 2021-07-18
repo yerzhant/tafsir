@@ -49,7 +49,11 @@ class HtmlTextWidget extends StatelessWidget {
       customStylesBuilder: (e) {
         final styles = <String, String>{};
 
-        styles.addAll({'text-align': 'justify'});
+        styles.addAll({
+          'margin': '0',
+          'padding': '0',
+          'text-align': 'justify',
+        });
 
         if (e.localName == 'blockquote') {
           styles.addAll({
