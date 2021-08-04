@@ -47,7 +47,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 24, left: 16),
+            padding: const EdgeInsets.only(right: 26, left: 16),
             child: _isPlaying
                 ? SvgPicture.asset('assets/icons/playing.svg')
                 : SvgPicture.asset('assets/icons/play.svg'),

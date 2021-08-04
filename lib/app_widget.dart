@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class AppWidget extends StatelessWidget {
@@ -68,7 +69,7 @@ class AppWidget extends StatelessWidget {
         error: Colors.red,
         onPrimary: Colors.red,
         onSecondary: Colors.red,
-        onSurface: Colors.red,
+        onSurface: primaryColor,
         onBackground: Colors.red,
         onError: Colors.red,
         brightness: theme.brightness,

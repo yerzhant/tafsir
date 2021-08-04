@@ -26,6 +26,12 @@ class _$GoToAayahEventTearOff {
   _Ended ended() {
     return const _Ended();
   }
+
+  _Goto goto(int number) {
+    return _Goto(
+      number,
+    );
+  }
 }
 
 /// @nodoc
@@ -37,12 +43,14 @@ mixin _$GoToAayahEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(Offset position, BuildContext context) slidedTo,
     required TResult Function() ended,
+    required TResult Function(int number) goto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Offset position, BuildContext context)? slidedTo,
     TResult Function()? ended,
+    TResult Function(int number)? goto,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -50,12 +58,14 @@ mixin _$GoToAayahEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_SlidedTo value) slidedTo,
     required TResult Function(_Ended value) ended,
+    required TResult Function(_Goto value) goto,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SlidedTo value)? slidedTo,
     TResult Function(_Ended value)? ended,
+    TResult Function(_Goto value)? goto,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,6 +164,7 @@ class _$_SlidedTo implements _SlidedTo {
   TResult when<TResult extends Object?>({
     required TResult Function(Offset position, BuildContext context) slidedTo,
     required TResult Function() ended,
+    required TResult Function(int number) goto,
   }) {
     return slidedTo(position, context);
   }
@@ -163,6 +174,7 @@ class _$_SlidedTo implements _SlidedTo {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Offset position, BuildContext context)? slidedTo,
     TResult Function()? ended,
+    TResult Function(int number)? goto,
     required TResult orElse(),
   }) {
     if (slidedTo != null) {
@@ -176,6 +188,7 @@ class _$_SlidedTo implements _SlidedTo {
   TResult map<TResult extends Object?>({
     required TResult Function(_SlidedTo value) slidedTo,
     required TResult Function(_Ended value) ended,
+    required TResult Function(_Goto value) goto,
   }) {
     return slidedTo(this);
   }
@@ -185,6 +198,7 @@ class _$_SlidedTo implements _SlidedTo {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SlidedTo value)? slidedTo,
     TResult Function(_Ended value)? ended,
+    TResult Function(_Goto value)? goto,
     required TResult orElse(),
   }) {
     if (slidedTo != null) {
@@ -243,6 +257,7 @@ class _$_Ended implements _Ended {
   TResult when<TResult extends Object?>({
     required TResult Function(Offset position, BuildContext context) slidedTo,
     required TResult Function() ended,
+    required TResult Function(int number) goto,
   }) {
     return ended();
   }
@@ -252,6 +267,7 @@ class _$_Ended implements _Ended {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Offset position, BuildContext context)? slidedTo,
     TResult Function()? ended,
+    TResult Function(int number)? goto,
     required TResult orElse(),
   }) {
     if (ended != null) {
@@ -265,6 +281,7 @@ class _$_Ended implements _Ended {
   TResult map<TResult extends Object?>({
     required TResult Function(_SlidedTo value) slidedTo,
     required TResult Function(_Ended value) ended,
+    required TResult Function(_Goto value) goto,
   }) {
     return ended(this);
   }
@@ -274,6 +291,7 @@ class _$_Ended implements _Ended {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_SlidedTo value)? slidedTo,
     TResult Function(_Ended value)? ended,
+    TResult Function(_Goto value)? goto,
     required TResult orElse(),
   }) {
     if (ended != null) {
@@ -285,6 +303,122 @@ class _$_Ended implements _Ended {
 
 abstract class _Ended implements GoToAayahEvent {
   const factory _Ended() = _$_Ended;
+}
+
+/// @nodoc
+abstract class _$GotoCopyWith<$Res> {
+  factory _$GotoCopyWith(_Goto value, $Res Function(_Goto) then) =
+      __$GotoCopyWithImpl<$Res>;
+  $Res call({int number});
+}
+
+/// @nodoc
+class __$GotoCopyWithImpl<$Res> extends _$GoToAayahEventCopyWithImpl<$Res>
+    implements _$GotoCopyWith<$Res> {
+  __$GotoCopyWithImpl(_Goto _value, $Res Function(_Goto) _then)
+      : super(_value, (v) => _then(v as _Goto));
+
+  @override
+  _Goto get _value => super._value as _Goto;
+
+  @override
+  $Res call({
+    Object? number = freezed,
+  }) {
+    return _then(_Goto(
+      number == freezed
+          ? _value.number
+          : number // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Goto implements _Goto {
+  const _$_Goto(this.number);
+
+  @override
+  final int number;
+
+  @override
+  String toString() {
+    return 'GoToAayahEvent.goto(number: $number)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Goto &&
+            (identical(other.number, number) ||
+                const DeepCollectionEquality().equals(other.number, number)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(number);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GotoCopyWith<_Goto> get copyWith =>
+      __$GotoCopyWithImpl<_Goto>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Offset position, BuildContext context) slidedTo,
+    required TResult Function() ended,
+    required TResult Function(int number) goto,
+  }) {
+    return goto(number);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Offset position, BuildContext context)? slidedTo,
+    TResult Function()? ended,
+    TResult Function(int number)? goto,
+    required TResult orElse(),
+  }) {
+    if (goto != null) {
+      return goto(number);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SlidedTo value) slidedTo,
+    required TResult Function(_Ended value) ended,
+    required TResult Function(_Goto value) goto,
+  }) {
+    return goto(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SlidedTo value)? slidedTo,
+    TResult Function(_Ended value)? ended,
+    TResult Function(_Goto value)? goto,
+    required TResult orElse(),
+  }) {
+    if (goto != null) {
+      return goto(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Goto implements GoToAayahEvent {
+  const factory _Goto(int number) = _$_Goto;
+
+  int get number => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$GotoCopyWith<_Goto> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

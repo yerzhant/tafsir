@@ -21,6 +21,7 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
   Stream<GoToAayahState> mapEventToState(GoToAayahEvent event) => event.when(
         slidedTo: _slidedTo,
         ended: _ended,
+        goto: _goto,
       );
 
   Stream<GoToAayahState> _slidedTo(
@@ -47,6 +48,11 @@ class GoToAayahBloc extends Bloc<GoToAayahEvent, GoToAayahState> {
     }
 
     yield _Inactive(number ?? _lastNumber);
+  }
+
+  Stream<GoToAayahState> _goto(int number) async* {
+    yield _GoTo(number);
+    yield _Inactive(number);
   }
 
   int _calcNumber(double position, BuildContext context) {

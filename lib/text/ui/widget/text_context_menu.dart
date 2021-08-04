@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
 import 'package:tafsir/bookmarks/domain/model/bookmark.dart';
+import 'package:tafsir/go_to_aayah/ui/go_to_aayah_dialog.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/ui/text_page.dart';
 import 'package:tafsir/text/ui/widget/aayah_player.dart';
@@ -35,6 +36,8 @@ class TextContextMenu extends StatelessWidget {
                 _bookmark(context),
                 const Divider(height: 27),
                 _share(context),
+                const Divider(height: 27),
+                const GoToAayahDialog(),
               ],
             ),
           );
@@ -51,7 +54,7 @@ class TextContextMenu extends StatelessWidget {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 24, left: 16),
+            padding: const EdgeInsets.only(right: 23, left: 16),
             child: SvgPicture.asset('assets/icons/share.svg'),
           ),
           Text(
@@ -73,7 +76,7 @@ class TextContextMenu extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right: 24, left: 16),
+                  padding: const EdgeInsets.only(right: 23, left: 16),
                   child: SvgPicture.asset(
                     _isBookmarkedString(
                       state,

@@ -7,4 +7,5 @@ class GoToAayahEvent with _$GoToAayahEvent {
     BuildContext context,
   ) = _SlidedTo;
   const factory GoToAayahEvent.ended() = _Ended;
+  const factory GoToAayahEvent.goto(int number) = _Goto;
 }
