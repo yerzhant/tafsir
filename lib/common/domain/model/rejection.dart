@@ -9,11 +9,12 @@ class Rejection with _$Rejection {
 
   Rejection._();
 
-  String get message =>
-      _messages.entries
-          .firstWhereOrNull((entry) => RegExp(entry.key).hasMatch(reason))
-          ?.value ??
-      reason;
+  String get message => _messages.entries
+      .firstWhere(
+        (entry) => RegExp(entry.key).hasMatch(reason),
+        orElse: () => MapEntry('', reason),
+      )
+      .value;
 }
 
 extension RejectionExt on Exception {
