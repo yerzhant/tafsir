@@ -67,6 +67,8 @@ class AppWidget extends StatelessWidget {
           fontWeight: FontWeight.normal,
         ),
         indicatorSize: TabBarIndicatorSize.tab,
+        indicatorColor: Colors.white,
+        dividerColor: Colors.transparent,
       ),
       colorScheme: ColorScheme(
         primary: theme.primary,
