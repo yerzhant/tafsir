@@ -5,6 +5,8 @@ import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class AppWidget extends StatelessWidget {
+  const AppWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeState>(
@@ -61,9 +63,7 @@ class AppWidget extends StatelessWidget {
       ),
       colorScheme: ColorScheme(
         primary: theme.primary,
-        primaryVariant: theme.primaryVariant,
-        secondary: Colors.red,
-        secondaryVariant: Colors.red,
+        secondary: theme.secondary,
         surface: Colors.red,
         background: Colors.red,
         error: Colors.red,
