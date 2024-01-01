@@ -24,35 +24,41 @@ class AppWidget extends StatelessWidget {
     return ThemeData(
       primaryColor: theme.primary,
       textTheme: Theme.of(context).textTheme.copyWith(
-            headline4: TextStyle(
+            headlineMedium: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w500,
               color: theme.text,
             ),
-            headline5: TextStyle(
+            headlineSmall: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: theme.listItemTitle,
             ),
-            headline6: TextStyle(
+            titleLarge: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
               color: theme.listItemTitle,
             ),
-            subtitle1: TextStyle(
+            titleMedium: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w300,
               color: theme.listItemSubtitle,
             ),
-            subtitle2: TextStyle(
+            titleSmall: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
               color: theme.listItemTitle,
             ),
           ),
-      appBarTheme: AppBarTheme(color: theme.appBarBackground),
+      appBarTheme: AppBarTheme(
+        backgroundColor: theme.appBarBackground,
+        foregroundColor: Colors.white,
+        titleTextStyle: const TextStyle(fontSize: 20),
+      ),
       popupMenuTheme: PopupMenuThemeData(color: theme.appMenuBackground),
       tabBarTheme: const TabBarTheme(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.white,
         labelStyle: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
@@ -60,21 +66,21 @@ class AppWidget extends StatelessWidget {
         unselectedLabelStyle: TextStyle(
           fontWeight: FontWeight.normal,
         ),
+        indicatorSize: TabBarIndicatorSize.tab,
       ),
       colorScheme: ColorScheme(
         primary: theme.primary,
         secondary: theme.secondary,
-        surface: Colors.red,
-        background: Colors.red,
+        surface: primaryColor,
+        background: theme.background,
         error: Colors.red,
         onPrimary: Colors.red,
         onSecondary: Colors.red,
-        onSurface: primaryColor,
-        onBackground: Colors.red,
+        onSurface: Colors.green,
+        onBackground: theme.background,
         onError: Colors.red,
         brightness: theme.brightness,
       ),
-      toggleableActiveColor: theme.primary,
       canvasColor: theme.background,
       dividerColor: theme.divider,
       indicatorColor: Colors.white,
