@@ -38,9 +38,5 @@ class AppModule extends Module {
         ModuleRoute('/text', module: TextModule()),
       ];
 
-  @override
-  void dispose() {
-    super.dispose();
-    db.close();
-  }
+  Future<void> dispose() => db.close();
 }

@@ -8,7 +8,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   final appModule = AppModule();
-  await appModule.init();
+  await appModule.initialize();
 
-  runApp(ModularApp(module: appModule, child: AppWidget()));
+  runApp(ModularApp(module: appModule, child: const AppWidget()));
 }
