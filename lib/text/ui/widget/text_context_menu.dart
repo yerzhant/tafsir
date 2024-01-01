@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart'
+    hide ModularWatchExtension;
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tafsir/bookmarks/bloc/bookmarks_bloc.dart';
