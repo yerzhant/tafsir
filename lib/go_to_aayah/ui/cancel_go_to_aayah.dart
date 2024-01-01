@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class CancelGoToAayah extends StatelessWidget {
@@ -57,6 +58,7 @@ class CancelGoToAayah extends StatelessWidget {
           fontSize: 16,
           decoration: TextDecoration.underline,
           fontWeight: FontWeight.w900,
+          decorationColor: primaryColor,
         ),
       ),
     );

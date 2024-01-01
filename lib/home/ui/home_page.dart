@@ -187,7 +187,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(width: 16),
           Text(
             'Предложения и замечания',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

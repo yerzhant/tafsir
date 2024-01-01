@@ -45,7 +45,7 @@ class AppWidget extends StatelessWidget {
               color: theme.listItemSubtitle,
             ),
             titleSmall: TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
               color: theme.listItemTitle,
             ),
@@ -53,7 +53,10 @@ class AppWidget extends StatelessWidget {
       appBarTheme: AppBarTheme(
         backgroundColor: theme.appBarBackground,
         foregroundColor: Colors.white,
-        titleTextStyle: const TextStyle(fontSize: 20),
+        titleTextStyle: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
       ),
       popupMenuTheme: PopupMenuThemeData(color: theme.appMenuBackground),
       tabBarTheme: const TabBarTheme(
@@ -85,7 +88,6 @@ class AppWidget extends StatelessWidget {
       ),
       canvasColor: theme.background,
       dividerTheme: DividerThemeData(color: theme.divider),
-      // indicatorColor: Colors.red,
       snackBarTheme: SnackBarThemeData(
         backgroundColor: theme.primary,
       ),
