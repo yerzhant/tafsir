@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,16 +8,16 @@ import 'package:tafsir/common/ui/widget/circular_progress.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
 import 'package:tafsir/go_to_aayah/bloc/go_to_aayah_bloc.dart';
 import 'package:tafsir/go_to_aayah/ui/cancel_go_to_aayah.dart';
-import 'package:tafsir/go_to_aayah/ui/go_to_aayah_slider.dart';
 import 'package:tafsir/go_to_aayah/ui/go_to_aayah_number.dart';
+import 'package:tafsir/go_to_aayah/ui/go_to_aayah_slider.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
 import 'package:tafsir/suwar/domain/model/surah.dart';
 import 'package:tafsir/text/bloc/text_bloc.dart';
 import 'package:tafsir/text/domain/model/text_item.dart';
 import 'package:tafsir/text/ui/widget/progress_widget.dart';
-import 'package:tafsir/text/ui/widget/surah_widget.dart';
 import 'package:tafsir/text/ui/widget/surah_context_menu.dart';
+import 'package:tafsir/text/ui/widget/surah_widget.dart';
 import 'package:tafsir/text/ui/widget/text_context_menu.dart';
 import 'package:tafsir/text/ui/widget/text_header.dart';
 import 'package:tafsir/text/ui/widget/text_widget.dart';
@@ -45,7 +44,7 @@ class TextPage extends StatefulWidget {
   }
 
   @override
-  _TextPageState createState() => _TextPageState();
+  State<TextPage> createState() => _TextPageState();
 }
 
 const _duration = Duration(milliseconds: 400);
@@ -171,7 +170,10 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: SystemUiOverlay.values,
+    );
 
     _toolsAnimationController.dispose();
     _surahMenuAnimationController.dispose();
@@ -449,14 +451,12 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   void _showSystemUIOverlays() {
-    SystemChrome.setEnabledSystemUIMode(
-      SystemUiMode.manual,
-      overlays: [SystemUiOverlay.bottom],
-    );
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
   }
 
   void _hideSystemUIOverlays() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 }
 
