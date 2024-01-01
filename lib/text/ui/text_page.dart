@@ -171,7 +171,7 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     _toolsAnimationController.dispose();
     _surahMenuAnimationController.dispose();
@@ -449,11 +449,14 @@ class _TextPageState extends State<TextPage> with TickerProviderStateMixin {
   }
 
   void _showSystemUIOverlays() {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(
+      SystemUiMode.manual,
+      overlays: [SystemUiOverlay.bottom],
+    );
   }
 
   void _hideSystemUIOverlays() {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
 }
 
