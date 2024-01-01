@@ -15,7 +15,7 @@ class TextTools extends StatefulWidget {
   const TextTools(this.animationController, {Key? key}) : super(key: key);
 
   @override
-  _TextToolsState createState() => _TextToolsState();
+  State<TextTools> createState() => _TextToolsState();
 }
 
 class _TextToolsState extends State<TextTools> {
@@ -79,7 +79,7 @@ class _TextToolsState extends State<TextTools> {
           IconButton(
             onPressed: () {
               widget.animationController.reverse();
-              SystemChrome.setEnabledSystemUIOverlays([]);
+              SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
             },
             icon: SvgPicture.asset(
               'assets/icons/close.svg',
