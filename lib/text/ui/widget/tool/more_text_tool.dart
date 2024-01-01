@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
@@ -29,12 +30,13 @@ class MoreTextTool extends StatelessWidget {
               children: [
                 Text(
                   'Коментарии',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 BlocBuilder<SettingsBloc, SettingsState>(
                   bloc: Modular.get(),
                   builder: (context, state) {
                     return Switch(
+                      activeColor: primaryColor,
                       value: state.showFootnotes,
                       onChanged: (value) {
                         Modular.get<SettingsBloc>().add(
