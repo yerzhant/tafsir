@@ -16,7 +16,7 @@ class AppModule extends Module {
   late final ThemeCubit theme;
   late final SettingsBloc settingsBloc;
 
-  Future<void> init() async {
+  Future<void> initialize() async {
     theme = await ThemeCubit.create(settings);
     settingsBloc = await SettingsBloc.create(settings);
     await db.init();
@@ -38,5 +38,9 @@ class AppModule extends Module {
         ModuleRoute('/text', module: TextModule()),
       ];
 
-  Future<void> dispose() async => db.close();
+  @override
+  void dispose() {
+    super.dispose();
+    db.close();
+  }
 }
