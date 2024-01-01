@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:tafsir/common/ext/string_ext.dart';
 import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
