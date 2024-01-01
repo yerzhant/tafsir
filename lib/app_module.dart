@@ -5,6 +5,8 @@ import 'package:tafsir/common/ds/tafsir_db.dart';
 import 'package:tafsir/home/home_module.dart';
 import 'package:tafsir/settings/bloc/settings_bloc.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
+import 'package:tafsir/suwar/bloc/suwar_bloc.dart';
+import 'package:tafsir/suwar/ds/suwar_ds.dart';
 import 'package:tafsir/text/ds/text_ds.dart';
 import 'package:tafsir/text/text_module.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
@@ -30,6 +32,8 @@ class AppModule extends Module {
         Bind.singleton((i) => settingsBloc),
         Bind.singleton((i) => Api(Client())),
         Bind.singleton((i) => TextDataSource(i(), i())),
+        Bind.singleton((i) => SuwarDataSource(i(), i())),
+        Bind.singleton((i) => SuwarBloc(i(), i(), i())),
       ];
 
   @override
