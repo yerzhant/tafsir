@@ -69,7 +69,7 @@ class _Font extends StatelessWidget {
       onTap: () => Modular.get<SettingsBloc>()
           .add(SettingsEvent.setAayahFontFamily(family)),
       child: SizedBox(
-        height: 62,
+        height: 70,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -85,7 +85,7 @@ class _Font extends StatelessWidget {
                         isSelected ? FontWeight.w500 : FontWeight.normal,
                   ),
                 ),
-                const SizedBox(height: 11),
+                const SizedBox(height: 7),
                 Text(
                   'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ',
                   style: TextStyle(
@@ -95,6 +95,7 @@ class _Font extends StatelessWidget {
                     height: 1,
                   ),
                 ),
+                const SizedBox(height: 7),
               ],
             ),
             if (isSelected)
