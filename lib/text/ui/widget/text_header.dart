@@ -38,7 +38,7 @@ class TextHeader extends StatelessWidget {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryVariant,
+                          color: Theme.of(context).colorScheme.primary,
                           borderRadius: const BorderRadius.all(
                             Radius.circular(1),
                           ),
