@@ -45,7 +45,6 @@ class HtmlTextWidget extends StatelessWidget {
         color: theme.text,
         height: 1.5,
       ),
-      hyperlinkColor: Theme.of(context).primaryColor,
       customStylesBuilder: (e) {
         final styles = <String, String>{};
 
