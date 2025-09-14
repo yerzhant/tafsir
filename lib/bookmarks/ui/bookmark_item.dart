@@ -43,14 +43,14 @@ class BookmarkItem extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       bookmark.surahTitle,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Column(
                       children: [
                         const SizedBox(height: 2),
                         Text(
                           '${bookmark.aayah} аят',
-                          style: Theme.of(context).textTheme.subtitle1,
+                          style: Theme.of(context).textTheme.titleMedium,
                         ),
                       ],
                     ),

@@ -30,7 +30,7 @@ class SurahContextMenu extends StatelessWidget {
               children: [
                 Text(
                   surah.title,
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(height: 24),
                 InkWell(
@@ -45,7 +45,7 @@ class SurahContextMenu extends StatelessWidget {
                       ),
                       Text(
                         'Поделиться',
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.titleMedium,
                       ),
                     ],
                   ),

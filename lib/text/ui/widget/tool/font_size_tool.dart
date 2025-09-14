@@ -82,7 +82,7 @@ class __FontSizeState extends State<_FontSize> {
         const SizedBox(height: 14),
         Text(
           widget.label,
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 8),
         Slider(

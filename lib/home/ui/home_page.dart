@@ -126,7 +126,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(width: 17.33),
           Text(
             'О нас',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),
@@ -146,7 +146,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(width: 17.5),
           Text(
             'Поделиться приложением',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),
@@ -166,7 +166,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(width: 15.67),
           Text(
             'Оценить приложение',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),
@@ -207,7 +207,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(width: 15.59),
           Text(
             'Offline режим',
-            style: Theme.of(context).textTheme.subtitle2,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
       ),

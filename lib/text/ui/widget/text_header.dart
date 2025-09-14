@@ -54,7 +54,7 @@ class TextHeader extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     surah.isSurah() ? surah.title : surah.title.toUpperCase(),
-                    style: Theme.of(context).textTheme.headline5?.copyWith(
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                           color: Colors.white,
                         ),
                   ),
@@ -65,7 +65,7 @@ class TextHeader extends StatelessWidget {
                         Text(
                           surah.titleInRussian,
                           style:
-                              Theme.of(context).textTheme.subtitle1?.copyWith(
+                              Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Colors.white54,
                                   ),
                         ),

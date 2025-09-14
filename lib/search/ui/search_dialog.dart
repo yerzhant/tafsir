@@ -78,7 +78,7 @@ class _SearchDialogState extends State<SearchDialog> {
             notFound: () => Center(
                 child: Text(
               'Ничего не найдено.',
-              style: Theme.of(context).textTheme.subtitle1,
+              style: Theme.of(context).textTheme.titleMedium,
             )),
           );
         },
@@ -100,7 +100,7 @@ class _SearchDialogState extends State<SearchDialog> {
               border: InputBorder.none,
               hintText: 'Введите фразу',
             ),
-            style: Theme.of(context).textTheme.headline5?.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.w500,
                 ),
             onChanged: _find,

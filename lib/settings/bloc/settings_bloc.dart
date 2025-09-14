@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tafsir/settings/repo/settings_repo.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 part 'settings_event.dart';
 part 'settings_state.dart';
@@ -57,9 +57,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     );
 
     if (newState.isDisplayAlwaysOn) {
-      await Wakelock.enable();
+      await WakelockPlus.enable();
     } else {
-      await Wakelock.disable();
+      await WakelockPlus.disable();
     }
 
     yield* _saveAndYieldState(newState);
@@ -72,7 +72,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   static Future<SettingsBloc> create(SettingsRepo repo) async {
     final state = await repo.getState();
-    if (state.isDisplayAlwaysOn) await Wakelock.enable();
+    if (state.isDisplayAlwaysOn) await WakelockPlus.enable();
     return SettingsBloc._(state, repo);
   }
 }

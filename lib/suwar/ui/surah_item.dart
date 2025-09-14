@@ -94,7 +94,7 @@ class SurahItem extends StatelessWidget {
         children: <Widget>[
           Text(
             surah.isSurah() ? surah.title : surah.title.toUpperCase(),
-            style: Theme.of(context).textTheme.headline5?.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   color: isActive ? primaryColor : null,
                 ),
           ),
@@ -104,7 +104,7 @@ class SurahItem extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   surah.titleInRussian,
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),
@@ -120,12 +120,12 @@ class SurahItem extends StatelessWidget {
       children: <Widget>[
         Text(
           '${surah.ayatsCount} аятов',
-          style: Theme.of(context).textTheme.subtitle1,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 2),
         Text(
           'Джуз: ${surah.dzhuz}',
-          style: Theme.of(context).textTheme.subtitle1,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

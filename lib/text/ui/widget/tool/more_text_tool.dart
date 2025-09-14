@@ -63,7 +63,7 @@ class MoreTextTool extends StatelessWidget {
           children: [
             Text(
               'Шрифт',
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             const Spacer(),
             BlocBuilder<SettingsBloc, SettingsState>(
@@ -71,7 +71,7 @@ class MoreTextTool extends StatelessWidget {
               builder: (context, state) {
                 return Text(
                   state.aayahFontFamily,
-                  style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         color: theme.listItemSubtitle,
                       ),
                 );
@@ -104,7 +104,7 @@ class _Buttons extends StatelessWidget {
       children: [
         Text(
           'Показать',
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 12),
         _buttons(),

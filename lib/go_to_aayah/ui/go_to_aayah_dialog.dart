@@ -25,7 +25,7 @@ class _GoToAayahDialogState extends State<GoToAayahDialog> {
           ),
           Text(
             'Перейти к аяту',
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       ),
@@ -42,7 +42,7 @@ class _GoToAayahDialogState extends State<GoToAayahDialog> {
           controller: _controller,
           textAlign: TextAlign.center,
           keyboardType: TextInputType.number,
-          style: Theme.of(context).textTheme.headline5?.copyWith(
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.w500,
               ),
         ),

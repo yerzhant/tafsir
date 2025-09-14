@@ -158,8 +158,6 @@ class _TextToolsState extends State<TextTools> {
             _active = _Tools.more;
           }),
         );
-      default:
-        return const SizedBox.shrink();
     }
   }
 }

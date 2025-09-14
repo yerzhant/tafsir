@@ -59,7 +59,7 @@ class AppWidget extends StatelessWidget {
         ),
       ),
       popupMenuTheme: PopupMenuThemeData(color: theme.appMenuBackground),
-      tabBarTheme: const TabBarTheme(
+      tabBarTheme: const TabBarThemeData(
         labelColor: Colors.white,
         unselectedLabelColor: Colors.white,
         labelStyle: TextStyle(
@@ -76,13 +76,11 @@ class AppWidget extends StatelessWidget {
       colorScheme: ColorScheme(
         primary: theme.primary,
         secondary: theme.secondary,
-        surface: primaryColor,
-        background: theme.background,
+        surface: theme.background,
         error: Colors.red,
         onPrimary: Colors.red,
         onSecondary: Colors.red,
-        onSurface: primaryColor,
-        onBackground: theme.lightThemeButtonText,
+        onSurface: theme.lightThemeButtonText,
         onError: Colors.red,
         brightness: theme.brightness,
       ),

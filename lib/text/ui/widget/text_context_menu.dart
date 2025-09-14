@@ -58,7 +58,7 @@ class TextContextMenu extends StatelessWidget {
           ),
           Text(
             'Поделиться',
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       ),
@@ -92,7 +92,7 @@ class TextContextMenu extends StatelessWidget {
                     'Из закладок',
                     'В закладки',
                   ),
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
               ],
             ),
@@ -162,7 +162,7 @@ class TextContextMenu extends StatelessWidget {
       builder: (_, value, __) {
         return Text(
           '${surah.title}: ${value.widget?.textItem.title} аят',
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         );
       },
     );

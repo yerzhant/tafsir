@@ -22,7 +22,7 @@ class ThemeTool extends StatelessWidget {
           children: [
             Text(
               'Не выключать экран',
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
             BlocBuilder<SettingsBloc, SettingsState>(
               bloc: Modular.get(),
@@ -57,7 +57,7 @@ class _Buttons extends StatelessWidget {
       children: [
         Text(
           'Тема',
-          style: Theme.of(context).textTheme.headline5,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         const SizedBox(height: 12),
         BlocBuilder<ThemeCubit, ThemeState>(

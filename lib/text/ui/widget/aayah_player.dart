@@ -54,7 +54,7 @@ class _AayahPlayerState extends State<AayahPlayer> {
           ),
           Text(
             _isPlaying ? 'Остановить' : 'Воспроизвести',
-            style: Theme.of(context).textTheme.subtitle1,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       ),

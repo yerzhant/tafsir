@@ -43,7 +43,7 @@ class CancelGoToAayah extends StatelessWidget {
   Text _text(BuildContext context, ThemeState state) {
     return Text(
       'Вы перешли на $number аят',
-      style: Theme.of(context).textTheme.subtitle2?.copyWith(
+      style: Theme.of(context).textTheme.titleSmall?.copyWith(
             color: state.cancelGoToAayahForeground,
           ),
     );

@@ -28,7 +28,7 @@ class HighLightedFoundWord extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         text: TextSpan(
           text: parts.first,
-          style: Theme.of(context).textTheme.headline6?.copyWith(height: 1.29),
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(height: 1.29),
           children: [
             WidgetSpan(
               child: Transform.translate(
@@ -46,7 +46,7 @@ class HighLightedFoundWord extends StatelessWidget {
                         parts[1],
                         style: Theme.of(context)
                             .textTheme
-                            .headline6
+                            .titleLarge
                             ?.copyWith(height: 1.29),
                       ),
                     );

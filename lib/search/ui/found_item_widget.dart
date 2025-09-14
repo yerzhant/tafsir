@@ -44,7 +44,7 @@ class FoundItemWidget extends StatelessWidget {
         const SizedBox(height: 3),
         Text(
           '${foundItem.surah.title}, ${foundItem.textItem.title} аят',
-          style: Theme.of(context).textTheme.subtitle1,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ],
     );

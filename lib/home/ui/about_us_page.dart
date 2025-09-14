@@ -26,7 +26,7 @@ class AboutUsPage extends StatelessWidget {
               children: [
                 Text(
                   'Cпециальный проект',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 const SizedBox(width: 10),
                 Image.asset('assets/images/logo-blue.png', height: 38),
@@ -65,9 +65,9 @@ class AboutUsPage extends StatelessWidget {
           const SizedBox(height: 10),
           const Divider(indent: 8, endIndent: 8, height: 1),
           const SizedBox(height: 10),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               _Icon('web', 'https://azan.ru'),
               SizedBox(width: 21),
               _Icon('fb', 'https://www.facebook.com/azan.ru'),
@@ -154,7 +154,10 @@ class _Action extends StatelessWidget {
                   const SizedBox(width: 32),
                   SvgPicture.asset('assets/icons/about-us/$icon.svg'),
                   const SizedBox(width: 40),
-                  Text(title, style: Theme.of(context).textTheme.headline4),
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ],
               ),
             ),

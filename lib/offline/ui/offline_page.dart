@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:tafsir/common/ui/widget/rejection_widget.dart';
@@ -29,7 +28,7 @@ class OfflinePage extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     '${progress.toStringAsFixed(2)} %',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],
               ),
