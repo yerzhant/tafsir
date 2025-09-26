@@ -16,7 +16,7 @@ class TextDataSource implements TextRepo {
   Future<Either<Rejection, List<TextItem>>> getItems(Surah surah) async {
     final list = await db.getTextItems(surah);
 
-    if (list.isEmpty) {
+    if (surah.ayatsCount != null && list.isEmpty) {
       final result = await api.getList(
         'aayaat?surah=${surah.id}',
         (map) => TextItem.fromMap(map),

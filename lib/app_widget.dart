@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:tafsir/common/ui/ui_constants.dart';
 import 'package:tafsir/theme/cubit/theme_cubit.dart';
 
 class AppWidget extends StatelessWidget {
@@ -49,6 +48,9 @@ class AppWidget extends StatelessWidget {
               fontWeight: FontWeight.w500,
               color: theme.listItemTitle,
             ),
+            bodyMedium: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: theme.listItemTitle,
+                ),
           ),
       appBarTheme: AppBarTheme(
         backgroundColor: theme.appBarBackground,

@@ -22,5 +22,5 @@ extension RejectionExt on Exception {
 }
 
 const _messages = {
-  '^SocketException: .*': 'Ошибка соединения.',
+  'SocketException: .*': 'Ошибка соединения.',
 };
