@@ -206,7 +206,7 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(width: 15.59),
           Text(
-            'Offline режим',
+            'Скачать/обновить Тафсир',
             style: Theme.of(context).textTheme.titleSmall,
           ),
         ],
