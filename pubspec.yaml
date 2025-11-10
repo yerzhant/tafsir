@@ -3,7 +3,7 @@ description: "Tafsir"
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 2.7.1+35
+version: 2.7.2+36
 
 environment:
   sdk: ">=3.2.3 <4.0.0"
