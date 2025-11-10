@@ -61,17 +61,30 @@ class _AayahPlayerState extends State<AayahPlayer> {
     );
   }
 
-  void _pressed() {
-    setState(() {
-      if (_isPlaying) {
+  void _pressed() async {
+    if (_isPlaying) {
+      setState(() {
         _isPlaying = false;
         _player.stop();
-      } else {
+      });
+    } else {
+      setState(() {
         _isPlaying = true;
-        _setUrl();
-        _player.play();
+      });
+
+      try {
+        await _setUrl();
+        await _player.play();
+      } on Exception catch (e) {
+        setState(() {
+          _isPlaying = false;
+          _player.stop();
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Ошибка воспроизведения: $e.')));
       }
-    });
+    }
   }
 
   Future<void> _setUrl() async {
